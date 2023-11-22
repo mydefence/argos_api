@@ -1,0 +1,8 @@
+{
+    "event": "ecmGetHistory",
+    "message": {
+        "fromTimestamp": "2020-03-27T13:30:00.000Z",
+        "toTimestamp": "2020-03-27T14:30:00.000Z"
+    },
+    "responseId": "988erbn4jktg6ftr"
+}

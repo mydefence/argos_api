@@ -1,0 +1,18 @@
+{
+    "message": {
+        "deviceType": "duo",
+        "deviceVersion": 3,
+        "devices": [
+            {
+                "deviceId": "lma24ijpkb0lopbc",
+                "heading": 45
+            },
+            {
+                "deviceId": "lma24hx1kb0llt6q",
+                "heading": -45
+            }
+        ]
+    },
+    "event": "compositeDeviceAdd",
+    "responseId": "kb675ykg"
+}

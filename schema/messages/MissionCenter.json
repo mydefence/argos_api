@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "MissionCenter",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "latitude": {
+            "type": ["number", "null"],
+            "description": "Defines the geographical latitude with up to 6 decimals. null if not set."
+        },
+        "longitude": {
+            "type": ["number", "null"],
+            "description": "Defines the geographical longitude with up to 6 decimals. null if not set."
+        }
+    },
+    "required": ["latitude", "longitude"]
+}

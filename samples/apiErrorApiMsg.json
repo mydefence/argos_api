@@ -1,0 +1,11 @@
+{
+    "message": {
+        "error": "schemaViolation",
+        "info": "[{\"instancePath\":\"/message/rfGeoThreatIds\",\"schemaPath\":\"./messages/RfGeoThreatIds.json#/properties/rfGeoThreatIds/type\",\"keyword\":\"type\",\"params\":{\"type\":\"array\"},\"message\":\"must be array\"}]",
+        "originalMessage": {
+            "rfGeoThreatIds": "615c10017f43a"
+        },
+        "originalEvent": "rfGeoThreatGetData"
+    },
+    "event": "apiError"
+}

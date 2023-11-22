@@ -1,0 +1,48 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DeviceMiscellaneousFrequencyBands",
+    "type": "object",
+    "properties": {
+        "deviceId": {
+            "type": "string",
+            "description": "The device id"
+        },
+        "deviceMiscellaneousType": {
+            "allOf": [
+                {
+                    "$ref": "./DeviceMiscellaneousType.json#"
+                },
+                {
+                    "const": "frequencyBands"
+                }
+            ]
+        },
+        "deviceMiscellaneousData": {
+            "type": "object",
+            "properties": {
+                "frequencyBands": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../common/FrequencyBand.json#"
+                    },
+                    "description": "The frequency bands supported by the device"
+                },
+                "currentBands": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../common/FrequencyBand.json#"
+                    },
+                    "description": "The currently selected frequency bands"
+                },
+                "numSimultaneusBands": {
+                    "type": "number",
+                    "description": "The number of possible simultaneous frequency bands"
+                }
+            },
+            "additionalProperties": false,
+            "required": ["frequencyBands", "currentBands", "numSimultaneusBands"]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["deviceId", "deviceMiscellaneousType", "deviceMiscellaneousData"]
+}

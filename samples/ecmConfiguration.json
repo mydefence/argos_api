@@ -1,0 +1,8 @@
+{
+    "message": {
+        "autoStart": "off",
+        "autoFreq": "noGnss",
+        "autoTimeout": 300
+    },
+    "event": "ecmConfiguration"
+}

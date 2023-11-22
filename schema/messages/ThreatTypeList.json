@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ThreatTypeList",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "threatName": {
+                "type": "string",
+                "description": "Defines the threat name from the threat library"
+            },
+            "threatType": {
+                "type": "number",
+                "description": "Defines a unique number for the threat type"
+            },
+            "muted": {
+                "type": "boolean",
+                "description": "Defines a marking if the threat type muted or not"
+            }
+        },
+        "additionalProperties": false,
+        "required": ["threatName", "threatType", "muted"]
+    }
+}

@@ -1,0 +1,31 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Feature",
+    "description": "Features of the backend.",
+    "oneOf": [
+        {
+            "const": "radarDevices",
+            "description": "Radar devices are available in the backend"
+        },
+        {
+            "const": "rfGeoThreatCoverageSim",
+            "description": "Coverage simulation for RfGeoThreat is available"
+        },
+        {
+            "const": "frontendTimingGraph",
+            "description": "Timing graph in frontend showing stack traversal time"
+        },
+        {
+            "const": "frontendDevMode",
+            "description": "Generic developer mode for the frontend"
+        },
+        {
+            "const": "sapientIntegration",
+            "description": "Sapient integration is available"
+        },
+        {
+            "const": "vehicleMode",
+            "description": "System is integrated into a vehicle"
+        }
+    ]
+}

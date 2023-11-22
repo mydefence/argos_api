@@ -1,0 +1,6 @@
+{
+    "message": {
+        "errorInfo": "No updateable devices"
+    },
+    "event": "fwuStartError"
+}

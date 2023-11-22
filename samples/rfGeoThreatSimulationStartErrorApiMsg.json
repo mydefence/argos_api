@@ -1,0 +1,7 @@
+{
+    "event": "rfGeoThreatSimulationStartError",
+    "message": {
+        "simulationNumber": 42,
+        "errorInfo": "Invalid input in simulation definition."
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "message": {
+        "autoStart": "all",
+        "autoFreq": "allowGnss",
+        "autoTimeout": 300
+    },
+    "event": "ecmConfigure",
+    "responseId": "988erbn4jktg6ftz"
+}

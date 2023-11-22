@@ -1,0 +1,27 @@
+{
+    "message": {
+        "ofId": "kb675fefef",
+        "color": "#c69540",
+        "name": "Yellow zone",
+        "isActive": true,
+        "polygon": [
+            {
+                "lat": 57.134407,
+                "lon": 9.46319
+            },
+            {
+                "lat": 57.154407,
+                "lon": 9.48319
+            },
+            {
+                "lat": 57.154407,
+                "lon": 8.48319
+            },
+            {
+                "lat": 57.154407,
+                "lon": 8.48319
+            }
+        ]
+    },
+    "event": "originFilterAdded"
+}

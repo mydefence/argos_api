@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "TimeInterval",
+    "type": "object",
+    "properties": {
+        "fromTimestamp": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "toTimestamp": {
+            "type": "string",
+            "format": "date-time"
+        }
+    },
+    "additionalProperties": false,
+    "required": ["fromTimestamp", "toTimestamp"]
+}

@@ -1,0 +1,88 @@
+{
+    "message": [
+        {
+            "color": "#c69540",
+            "name": "Zone 1",
+            "isActive": true,
+            "polygon": [
+                {
+                    "lat": 57.134407,
+                    "lon": 9.46319
+                },
+                {
+                    "lat": 57.154407,
+                    "lon": 9.48319
+                },
+                {
+                    "lat": 57.154407,
+                    "lon": 8.48319
+                },
+                {
+                    "lat": 57.154407,
+                    "lon": 8.48319
+                }
+            ],
+            "ofId": "cvuxhv7zgkdtv2cnb"
+        },
+        {
+            "color": "#c69540",
+            "name": "Zone 2",
+            "isActive": false,
+            "polygon": [
+                {
+                    "lat": 57.134407,
+                    "lon": 9.46319
+                },
+                {
+                    "lat": 57.154407,
+                    "lon": 9.48319
+                },
+                {
+                    "lat": 57.154407,
+                    "lon": 8.48319
+                },
+                {
+                    "lat": 57.154407,
+                    "lon": 8.48319
+                }
+            ],
+            "ofId": "cvuxhvbehkdtwgd2q"
+        },
+        {
+            "color": "#c69540",
+            "name": "Zone 3",
+            "isActive": true,
+            "polygon": [
+                {
+                    "lat": 57.134407,
+                    "lon": 9.46319
+                },
+                {
+                    "lat": 57.154407,
+                    "lon": 9.48319
+                },
+                {
+                    "lat": 57.154407,
+                    "lon": 8.48319
+                },
+                {
+                    "lat": 57.154407,
+                    "lon": 8.48319
+                }
+            ],
+            "ofId": "cvuxhvbehkdtwgevv"
+        },
+        {
+            "color": "#c69540",
+            "name": "Zone 4",
+            "isActive": true,
+            "circle": {
+                "lat": 57.134407,
+                "lon": 9.46319,
+                "radiusInMeters": 300
+            },
+            "ofId": "cvuxhvb12kdtwgevv"
+        }
+    ],
+    "event": "originFilterList"
+}

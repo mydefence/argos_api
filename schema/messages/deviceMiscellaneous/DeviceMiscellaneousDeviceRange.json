@@ -1,0 +1,42 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DeviceMiscellaneousDeviceRange",
+    "type": "object",
+    "properties": {
+        "deviceId": {
+            "type": "string",
+            "description": "The device id"
+        },
+        "deviceMiscellaneousType": {
+            "allOf": [
+                {
+                    "$ref": "./DeviceMiscellaneousType.json#"
+                },
+                {
+                    "const": "deviceRange"
+                }
+            ]
+        },
+        "deviceMiscellaneousData": {
+            "type": "object",
+            "properties": {
+                "deviceRange": {
+                    "type": "number",
+                    "description": "If this miscellaneous data is present, the device may be configured for working range. It should not be added for other devices. Legal values are between deviceRangeMin and deviceRangeMax"
+                },
+                "deviceRangeMin": {
+                    "type": "number",
+                    "description": "Minimum configurable range, read-only."
+                },
+                "deviceRangeMax": {
+                    "type": "number",
+                    "description": "Maximum configurable range, read-only."
+                }
+            },
+            "additionalProperties": false,
+            "required": ["deviceRange"]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["deviceId", "deviceMiscellaneousType", "deviceMiscellaneousData"]
+}

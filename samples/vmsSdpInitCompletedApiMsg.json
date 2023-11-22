@@ -1,0 +1,6 @@
+{
+    "message": {
+        "sdpReply": "o=- 7187794998077521791 1630933724 IN IP4 0.0.0.0\ns=-\nt=0 0"
+    },
+    "event": "vmsSdpInitCompleted"
+}

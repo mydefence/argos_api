@@ -1,0 +1,12 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "OriginFilterAdd",
+    "oneOf": [
+        {
+            "$ref": "./of/OriginFilterAddPolygon.json#"
+        },
+        {
+            "$ref": "./of/OriginFilterAddCircle.json#"
+        }
+    ]
+}

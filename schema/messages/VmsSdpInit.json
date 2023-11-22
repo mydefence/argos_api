@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "VmsSdpInit",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "vmsStreamId": {
+            "type": "string",
+            "title": "Stream identification",
+            "description": "A unique stream identification, generated automatically from the system"
+        },
+        "sdpOffer": {
+            "type": "string",
+            "title": "SDP offer",
+            "description": "SDP offer for WebRTC initialization in unencoded text"
+        }
+    },
+    "required": ["vmsStreamId", "sdpOffer"]
+}

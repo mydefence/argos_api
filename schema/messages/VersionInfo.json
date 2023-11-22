@@ -1,0 +1,34 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "VersionInfo",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "branch": {
+            "type": "string",
+            "title": "Branch name",
+            "description": "The name of the branch"
+        },
+        "commitHash": {
+            "type": "string",
+            "title": "Comitt Hash",
+            "description": "The comitt hash id"
+        },
+        "buildDateTime": {
+            "type": ["string", "null"],
+            "title": "BuildDateTime",
+            "description": "Defines the time of the build"
+        },
+        "version": {
+            "type": ["string", "null"],
+            "title": "Version",
+            "description": "Defines the version"
+        },
+        "versionDateTime": {
+            "type": ["string", "null"],
+            "title": "VersionDateTime",
+            "description": "Defines the time of the version"
+        }
+    },
+    "required": ["branch", "commitHash", "buildDateTime", "version", "versionDateTime"]
+}

@@ -1,0 +1,79 @@
+{
+    "type": "object",
+    "properties": {
+        "deviceId": {
+            "type": "string",
+            "title": "Device identification",
+            "description": "Device ID of a PTZ device"
+        },
+        "subDeviceId": {
+            "type": "number",
+            "title": "Sub-device identification",
+            "description": "ID of a sub device of the PTZ device."
+        },
+        "orientation": {
+            "type": "object",
+            "title": "Target orientation of the PTZ device",
+            "description": "PTZ device will move to the specified orientation [deg]",
+            "properties": {
+                "p": {
+                    "description": "Pan orientation [deg].",
+                    "anyOf": [
+                        {
+                            "type": "number"
+                        },
+                        {
+                            "const": "default",
+                            "description": "Use to reset to installation defaults (from miscellaneous data)"
+                        }
+                    ]
+                },
+                "t": {
+                    "description": "Tilt orientation [deg].",
+                    "anyOf": [
+                        {
+                            "type": "number"
+                        },
+                        {
+                            "const": "default",
+                            "description": "Use to reset to installation defaults (from miscellaneous data)"
+                        }
+                    ]
+                },
+                "z": {
+                    "description": "Zoom position.",
+                    "anyOf": [
+                        {
+                            "type": "number"
+                        },
+                        {
+                            "const": "default",
+                            "description": "Use to reset to installation defaults (from miscellaneous data)"
+                        }
+                    ]
+                },
+                "f": {
+                    "description": "Focus [pct].",
+                    "anyOf": [
+                        {
+                            "type": "number"
+                        },
+                        {
+                            "const": "default",
+                            "description": "Use to reset to installation defaults (from miscellaneous data). Note: Setting \"default\" enables auto-focus if supported."
+                        }
+                    ]
+                },
+                "zUnits": {
+                    "type": "string",
+                    "description": "Unit of zoom e.g. deg FOV or percentage of full range. Supported units are device dependent and both units may not be supported by all devices.",
+                    "enum": ["deg", "pct"]
+                }
+            },
+            "additionalProperties": false,
+            "minProperties": 1
+        }
+    },
+    "additionalProperties": false,
+    "required": ["deviceId", "orientation"]
+}

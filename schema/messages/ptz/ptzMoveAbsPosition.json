@@ -1,0 +1,46 @@
+{
+    "type": "object",
+    "properties": {
+        "deviceId": {
+            "type": "string",
+            "title": "Device identification",
+            "description": "Device ID of a PTZ device"
+        },
+        "position": {
+            "type": "object",
+            "title": "Geographical position PTZ device should point towards",
+            "description": "PTZ device will move to the specified geographical position",
+            "properties": {
+                "latitude": {
+                    "type": "number",
+                    "description": "Defines the geographical latitude with up to 6 decimals."
+                },
+                "longitude": {
+                    "type": "number",
+                    "description": "Defines the geographical longitude with up to 6 decimals."
+                },
+                "height": {
+                    "type": "number",
+                    "description": "Defines the height with up to 6 decimals."
+                },
+                "zoom": {
+                    "type": "number",
+                    "description": "Zoom position."
+                },
+                "focus": {
+                    "type": "number",
+                    "description": "Focus position."
+                },
+                "zUnits": {
+                    "type": "string",
+                    "description": "Unit of zoom e.g. deg FOV or percentage of full range.",
+                    "enum": ["deg", "pct"]
+                }
+            },
+            "additionalProperties": false,
+            "required": ["latitude", "longitude"]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["deviceId", "position"]
+}

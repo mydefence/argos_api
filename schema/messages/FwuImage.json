@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "FwuImage",
+    "type": "object",
+    "properties": {
+        "fwuImageId": {
+            "type": "string",
+            "title": "FWU Image identification",
+            "description": "A unique FWU image identification, generated automatically by the system"
+        },
+        "type": {
+            "type": "string",
+            "title": "FWU Image type",
+            "description": "The type of FWU image",
+            "enum": ["rfSensor", "rfEffector"]
+        },
+        "version": {
+            "type": "string",
+            "title": "FWU image version",
+            "description": "Version of the FWU image"
+        }
+    },
+    "additionalProperties": false,
+    "required": ["fwuImageId", "type", "version"]
+}

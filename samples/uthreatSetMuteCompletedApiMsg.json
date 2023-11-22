@@ -1,0 +1,7 @@
+{
+    "event": "uthreatSetMuteCompleted",
+    "message": {
+        "uthreatId": "ajissyem398rc",
+        "mute": true
+    }
+}

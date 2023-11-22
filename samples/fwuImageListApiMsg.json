@@ -1,0 +1,10 @@
+{
+    "message": [
+        {
+            "fwuImageId": "kfy00tr8",
+            "type": "rfSensor",
+            "version": "2.2.3"
+        }
+    ],
+    "event": "fwuImageList"
+}

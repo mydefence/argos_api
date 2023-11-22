@@ -1,0 +1,13 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "SystemLogId",
+    "type": "object",
+    "properties": {
+        "systemLogId": {
+            "type": "string",
+            "description": "The unique ID of this SystemLog event."
+        }
+    },
+    "additionalProperties": false,
+    "required": ["systemLogId"]
+}

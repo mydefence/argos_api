@@ -1,0 +1,92 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ptzDeviceInfo",
+    "type": "object",
+    "properties": {
+        "deviceId": {
+            "type": "string",
+            "description": "The device id"
+        },
+        "description": {
+            "type": "string"
+        },
+        "p": {
+            "type": "number",
+            "description": "Current pan value in degrees. Absent if device cannot pan."
+        },
+        "t": {
+            "type": "number",
+            "description": "Current tilt value in degrees. Absent if device cannot tilt."
+        },
+        "z": {
+            "type": "object",
+            "properties": {
+                "pct": {
+                    "type": "number",
+                    "description": "Percentage of zoom capability. Range: 0 - 1"
+                },
+                "fov": {
+                    "type": "number",
+                    "description": "Field of view in degrees. Typically measured horizontally."
+                },
+                "vfov": {
+                    "type": "number",
+                    "description": "Vertical field of view in degrees."
+                }
+            },
+            "description": "Current zoom setting. Absent if device cannot zoom.",
+            "additionalProperties": false
+        },
+        "f": {
+            "type": "number",
+            "description": "Current focus value in percent. Absent if the device cannot focus."
+        },
+        "ptUnitsSupported": {
+            "type": "array",
+            "description": "List the supported velocity units for pan and tilt. Absent if velocity cannot be set. If velocity can be set, \"pct\" is always supported. \"pct\" means percent of max joystick movement. It is device dependent how that is translated into velocity, and might e.g. depend on zoom level for cameras. \"deg/s\" is optional.",
+            "items": {
+                "type": "string",
+                "enum": ["deg/s", "pct"]
+            }
+        },
+        "trackingSubDevice": {
+            "type": "number",
+            "description": "If camera tracking can be assigned to sub devices this indicates the chosen sub device."
+        },
+        "tracking": {
+            "type": "string",
+            "description": "Camera tracking state. Absent if tracking is not supported.",
+            "enum": ["disabled", "acquire", "track"]
+        },
+        "resetOrientationTimeout": {
+            "type": ["number", "null"],
+            "description": "After this many seconds with no movement commands, the PTZ device will reset the orientation to the default (if it has been set). This is the same as setting \"default\" in ptzMoveAbs. Note: Setting \"default\" enables auto-focus if supported."
+        },
+        "subDevices": {
+            "type": "array",
+            "description": "If the device contains independent sub-devices (e.g. a camera with multiple tubes with independent zoom and focus), they are listed here with their independent dimensions",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "subDeviceId": { "type": "number" },
+                    "description": { "type": "string" },
+                    "p": { "type": "number" },
+                    "t": { "type": "number" },
+                    "z": {
+                        "type": "object",
+                        "properties": {
+                            "pct": { "type": "number" },
+                            "fov": { "type": "number" },
+                            "vfov": { "type": "number" }
+                        },
+                        "additionalProperties": false
+                    },
+                    "f": { "type": "number" }
+                },
+                "additionalProperties": false
+            }
+        }
+    },
+    "additionalProperties": false,
+    "required": ["deviceId"]
+}

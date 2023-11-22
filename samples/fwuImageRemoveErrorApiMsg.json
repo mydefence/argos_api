@@ -1,0 +1,6 @@
+{
+    "message": {
+        "errorInfo": "Error: Fwu image not found"
+    },
+    "event": "fwuImageRemoveError"
+}

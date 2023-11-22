@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DeviceAdd",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "deviceSerialNumber": {
+            "type": "string",
+            "title": "Device serialnumber",
+            "description": "A unique device serialnumber either received from the device itself if autodetected, if manually created from the input received."
+        },
+        "deviceType": {
+            "$ref": "./common/DeviceType.json"
+        },
+        "deviceVersion": {
+            "type": "integer",
+            "title": "Device version",
+            "description": "Defines the version of the individual devices and the capabilities attached to the specific device type version"
+        },
+        "deviceIP": {
+            "type": ["string"],
+            "title": "Device IP",
+            "description": "Defines the devices IP address either received when the devices was discovered or when the device was manually created."
+        },
+        "deviceMac": {
+            "type": ["string", "null"],
+            "title": "Device MAC",
+            "description": "Defines the devices MAC address either received when the devices was discovered or when the device was manually created."
+        }
+    },
+    "required": ["deviceType", "deviceVersion", "deviceIP", "deviceMac"]
+}

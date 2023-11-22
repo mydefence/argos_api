@@ -1,0 +1,21 @@
+{
+  "name": "argos_types",
+  "version": "1.0.53",
+  "description": "Common types for Argos IPC",
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "json-schema-to-typescript": "^12.0.0",
+    "quicktype": "^23.0.26"
+  },
+  "files": [
+    "lib/auto",
+    "lib/argos-api*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "nodemon -e ts -w  ts_src --exec \"pnpm run build || exit 1\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "tsc --noEmit tests/test.ts && eslint --max-warnings 0 ts_src"
+  }
+}

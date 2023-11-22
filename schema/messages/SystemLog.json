@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "SystemLog",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "systemLogId": {
+            "type": "string",
+            "description": "The unique ID of this SystemLog event."
+        },
+        "deviceId": {
+            "type": "string",
+            "description": "The device id. If omitted the event is regarding the system in general."
+        },
+        "severity": {
+            "type": "string",
+            "description": "Define the severity of this event with regards to the device. 'Error' if the device is not able to function. 'Warning' is if the event is expected to be temporary or with minor impact on performance.",
+            "enum": ["error", "warning", "info", "debug"]
+        },
+        "description": {
+            "type": "string",
+            "description": "Short description of this SystemLog event."
+        },
+        "createdTimeStamp": {
+            "type": "string",
+            "description": "UTC time of creation of this SystemLog event."
+        },
+        "updatedTimeStamp": {
+            "type": "string",
+            "description": "UTC time of updated SystemLog event."
+        },
+        "resolvedTimeStamp": {
+            "type": "string",
+            "description": "UTC time of when the SystemLog event was resolved."
+        }
+    },
+    "required": ["systemLogId", "severity", "description", "createdTimeStamp", "updatedTimeStamp"]
+}

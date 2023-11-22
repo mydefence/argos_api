@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "UthreatGetHistoryData",
+    "type": "object",
+    "properties": {
+        "uthreatIds": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Array og unique uthreat ids."
+        },
+        "fromTimestamp": {
+            "type": "string",
+            "description": "Optional from timestamp to only get history data from this time and onwards. Usefull when response data is limited.",
+            "format": "date-time"
+        }
+    },
+    "additionalProperties": false,
+    "required": ["uthreatIds"]
+}

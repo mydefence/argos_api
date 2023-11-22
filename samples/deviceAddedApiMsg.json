@@ -1,0 +1,29 @@
+{
+    "message": {
+        "deviceId": "eh7bx75ak9v5merz",
+        "deviceSerialNumber": "WD201001",
+        "deviceIP": "192.168.1.50",
+        "deviceMac": "70:b3:d5:3b:e0:63",
+        "deviceType": "wd200",
+        "deviceCategory": "detector",
+        "deviceVersion": 3,
+        "deviceConcept": "direction",
+        "deviceAttributes": {
+            "minAngle": 6,
+            "maxAngle": 60,
+            "maxAngleFallback": 60,
+            "noAngleFallback": 360
+        },
+        "deviceMounted": false,
+        "deviceState": "created",
+        "deviceGroup": true,
+        "deviceParentId": null,
+        "devicesCount": 0,
+        "devices": [],
+        "deviceOrigin": "local",
+        "deviceGPSHardware": true,
+        "createdBy": "system",
+        "deviceSwVersion": "x.x.x"
+    },
+    "event": "deviceAdded"
+}

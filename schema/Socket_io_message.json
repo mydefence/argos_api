@@ -1,0 +1,898 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ARGOS JSON Message Format",
+    "description": "Defines the overall structure for messages exchanged with ARGOS using JSON.",
+    "type": "object",
+    "properties": {
+        "event": {
+            "title": "Event name",
+            "description": "Is the Request/Push/Response name from the table in the service section",
+            "type": "string",
+            "enum": [
+                "apiError",
+                "deviceAdded",
+                "deviceRemoved",
+                "deviceUpdated",
+                "deviceMiscellaneousChanged",
+                "deviceLocationChanged",
+                "deviceGetList",
+                "deviceList",
+                "deviceAdd",
+                "deviceAddCompleted",
+                "deviceAddError",
+                "deviceRemove",
+                "deviceRemoveCompleted",
+                "deviceRemoveError",
+                "deviceMount",
+                "deviceMountCompleted",
+                "deviceMountError",
+                "deviceUnmount",
+                "deviceUnmountCompleted",
+                "deviceUnmountError",
+                "deviceLocationChange",
+                "deviceLocationChangeCompleted",
+                "deviceLocationChangeError",
+                "deviceMiscellaneousChange",
+                "deviceMiscellaneousChangeCompleted",
+                "deviceMiscellaneousChangeError",
+                "deviceGetLocations",
+                "deviceLocations",
+                "deviceGetMiscellaneous",
+                "deviceMiscellaneous",
+                "ecmStart",
+                "ecmStartCompleted",
+                "ecmStartError",
+                "ecmUpdated",
+                "ecmStop",
+                "ecmStopCompleted",
+                "ecmStopError",
+                "ecmGetState",
+                "ecmState",
+                "ecmConfigure",
+                "ecmConfiguration",
+                "ecmConfigureCompleted",
+                "ecmConfigureError",
+                "ecmGetConfiguration",
+                "getSystemState",
+                "systemState",
+                "getTime",
+                "time",
+                "compositeDeviceAdd",
+                "compositeDeviceAddCompleted",
+                "compositeDeviceAddError",
+                "fwuImageGetList",
+                "fwuImageList",
+                "fwuImageAdd",
+                "fwuImageAdded",
+                "fwuImageAddCompleted",
+                "fwuImageAddError",
+                "fwuImageRemove",
+                "fwuImageRemoved",
+                "fwuImageRemoveCompleted",
+                "fwuImageRemoveError",
+                "fwuUpdateableGetList",
+                "fwuUpdateableList",
+                "fwuStart",
+                "fwuStartCompleted",
+                "fwuStartError",
+                "alarmZoneAdd",
+                "alarmZoneAddCompleted",
+                "alarmZoneAddError",
+                "alarmZoneAdded",
+                "alarmZoneRemove",
+                "alarmZoneRemoveCompleted",
+                "alarmZoneRemoveError",
+                "alarmZoneRemoved",
+                "alarmZoneUpdate",
+                "alarmZoneUpdateCompleted",
+                "alarmZoneUpdateError",
+                "alarmZoneUpdated",
+                "alarmZoneGetList",
+                "alarmZoneList",
+                "alarmStarted",
+                "alarmUpdated",
+                "alarmStopped",
+                "rfGeoThreatSimulationStart",
+                "rfGeoThreatSimulationStartCompleted",
+                "rfGeoThreatSimulationStartError",
+                "rfGeoThreatSimulationResult",
+                "ptzFollowStart",
+                "ptzFollowStartCompleted",
+                "ptzFollowStarted",
+                "ptzFollowStartError",
+                "ptzFollowStop",
+                "ptzFollowStopCompleted",
+                "ptzFollowStopped",
+                "ptzFollowStopError",
+                "ptzFollowGetList",
+                "ptzFollowList",
+                "ptzMoveAbs",
+                "ptzMoveAbsCompleted",
+                "ptzMoveAbsError",
+                "ptzSetVelocity",
+                "ptzSetVelocityCompleted",
+                "ptzSetVelocityError",
+                "ecmHistory",
+                "ecmGetHistory",
+                "threatTypeGetList",
+                "threatTypeList",
+                "threatTypeMute",
+                "threatTypeMuteCompleted",
+                "threatTypeMuteError",
+                "threatTypeUnMute",
+                "threatTypeUnMuteCompleted",
+                "threatTypeUnMuteError",
+                "missionCenter",
+                "missionCenterSet",
+                "missionCenterSetCompleted",
+                "missionCenterGet",
+                "vmsStreamGetList",
+                "vmsStreamList",
+                "vmsSdpInit",
+                "vmsSdpInitCompleted",
+                "vmsSdpInitError",
+                "ptzDeviceInfo",
+                "ptzDeviceSet",
+                "ptzDeviceSetCompleted",
+                "ptzDeviceSetError",
+                "ptzGetDeviceList",
+                "ptzDeviceList",
+                "ptzDeviceUpdate",
+                "featureList",
+                "featureGetList",
+                "uthreat",
+                "uthreatConfigure",
+                "uthreatConfiguration",
+                "uthreatConfigureCompleted",
+                "uthreatConfigureError",
+                "uthreatGetConfiguration",
+                "uthreatSetMute",
+                "uthreatSetMuteCompleted",
+                "uthreatSetMuteError",
+                "uthreatGetHistory",
+                "uthreatHistory",
+                "uthreatGetHistoryError",
+                "uthreatGetHistoryData",
+                "uthreatHistoryData",
+                "uthreatGetHistoryDataError",
+                "originFilterAdd",
+                "originFilterAdded",
+                "originFilterAddCompleted",
+                "originFilterAddError",
+                "originFilterUpdate",
+                "originFilterUpdated",
+                "originFilterUpdateCompleted",
+                "originFilterUpdateError",
+                "originFilterRemove",
+                "originFilterRemoved",
+                "originFilterRemoveCompleted",
+                "originFilterRemoveError",
+                "originFilterGetList",
+                "originFilterList",
+                "sapientGetConfiguration",
+                "sapientConfiguration",
+                "sapientConfigure",
+                "sapientConfigureCompleted",
+                "sapientConfigureError",
+                "sapientNodeUpdated",
+                "sapientNodeGetList",
+                "sapientNodeList",
+                "systemLog",
+                "systemLogGetList",
+                "systemLogList"
+            ]
+        },
+        "message": {
+            "title": "Message",
+            "description": "Contains the message payload of the individual event - see each event for more details"
+        },
+        "responseId": {
+            "title": "ResponseId",
+            "description": "Must be set with a unique id when making a Request and the response will be given on the same responseId - only relevant with request/response pattern",
+            "type": ["string", "null"]
+        },
+        "eventPostExtension": {
+            "title": "Event Post Extension",
+            "description": "DEPRECATED, will be removed in the future",
+            "type": ["string", "null"]
+        },
+        "source": {
+            "title": "Source",
+            "description": "DEPRECATED, will be removed in the future",
+            "type": ["string", "null"]
+        },
+        "onlyEvent": {
+            "title": "OnlyEvent",
+            "description": "DEPRECATED, will be removed in the future",
+            "type": ["object", "null"]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["event", "message"],
+    "allOf": [
+        {
+            "if": { "properties": { "event": { "const": "apiError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/ApiError.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceAdded" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Device.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceRemoved" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Device.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceUpdated" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Device.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceMiscellaneousChanged" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceMiscellaneousInfo.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceLocationChanged" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceLocation.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceGetList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceList.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceAdd" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceAdd.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceAddCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceAddError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceSerialNumberError.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceRemove" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceRemoveCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceRemoveError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceDeviceIdError.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceMount" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceMountCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceMountError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceDeviceIdError.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceUnmount" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceUnmountCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceUnmountError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceDeviceIdError.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceLocationChange" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceLocationChange.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceLocationChangeCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceLocationChangeError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceDeviceIdError.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceMiscellaneousChange" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceMiscellaneousInfo.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceMiscellaneousChangeCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceMiscellaneousChangeError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceDeviceIdError.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceGetLocations" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceLocations" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceLocationList.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceGetMiscellaneous" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceMiscellaneous" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceMiscellaneousList.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ecmStart" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ecmStartCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ecmStartError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceDeviceIdError.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ecmUpdated" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/EcmState.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ecmStop" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ecmStopCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ecmStopError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceDeviceIdError.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ecmGetState" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ecmState" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/EcmState.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "systemState" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/SystemState.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "getTime" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "time" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Time.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "getSystemState" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "compositeDeviceAdd" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/CompositeDeviceAdd.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "compositeDeviceAddCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "compositeDeviceAddError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "fwuImageGetList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "fwuImageList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/FwuImageList.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "fwuImageAdd" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/FwuImageAdd.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "fwuImageAdded" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/FwuImage.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "fwuImageAddCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/FwuImage.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "fwuImageAddError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "fwuImageRemove" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/FwuImageId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "fwuImageRemoved" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/FwuImageId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "fwuImageRemoveCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/FwuImageId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "fwuImageRemoveError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "fwuUpdateableGetList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "fwuUpdateableList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/FwuUpdateableList.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "fwuStart" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceIds.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "fwuStartCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceIds.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "fwuStartError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "alarmZoneAdd" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/AlarmZoneAdd.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "alarmZoneAddCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/AlarmZoneId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "alarmZoneAddError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "alarmZoneAdded" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/AlarmZone.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "alarmZoneRemove" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/AlarmZoneId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "alarmZoneRemoveCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/AlarmZoneId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "alarmZoneRemoveError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "alarmZoneRemoved" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/AlarmZoneId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "alarmZoneUpdate" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/AlarmZone.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "alarmZoneUpdateCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/AlarmZoneId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "alarmZoneUpdateError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "alarmZoneUpdated" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/AlarmZone.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "alarmZoneGetList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "alarmZoneList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/AlarmZoneList.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "alarmStarted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Alarm.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "alarmUpdated" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Alarm.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "alarmStopped" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Alarm.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "rfGeoThreatSimulationStart" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/RfGeoThreatSimulationStart.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "rfGeoThreatSimulationStartCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/RfGeoThreatSimulationStartCompleted.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "rfGeoThreatSimulationStartError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/RfGeoThreatSimulationStartError.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "rfGeoThreatSimulationResult" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/RfGeoThreatSimulationResult.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzFollowStart" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PtzFollowStart.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzFollowStartCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PtzFollowId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzFollowStarted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PtzFollow.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzFollowStartError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzFollowGetList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzFollowList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PtzFollowList.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzFollowStop" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PtzFollowId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzFollowStopCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PtzFollowId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzFollowStopped" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PtzFollow.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzFollowStopError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzMoveAbs" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PtzMoveAbs.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzMoveAbsCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzMoveAbsError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzSetVelocity" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PtzSetVelocity.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzSetVelocityCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzSetVelocityError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ecmConfigure" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/EcmConfig.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ecmConfiguration" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/EcmConfig.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ecmConfigureCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/EcmConfig.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ecmConfigureError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ecmGetConfiguration" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ecmGetHistory" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/TimeInterval.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ecmHistory" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/EcmHistory.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "threatTypeGetList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "threatTypeList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/ThreatTypeList.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "threatTypeMute" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/ThreatType.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "threatTypeMuteCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/ThreatType.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "threatTypeMuteError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "threatTypeUnMute" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/ThreatType.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "threatTypeUnMuteCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/ThreatType.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "threatTypeUnMuteError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "missionCenter" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/MissionCenter.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "missionCenterSet" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/MissionCenter.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "missionCenterSetCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "missionCenterGet" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "vmsStreamGetList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "vmsStreamList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/VmsStreamList.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "vmsSdpInit" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/VmsSdpInit.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "vmsSdpInitCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/VmsSdpInitCompleted.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "vmsSdpInitError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzDeviceInfo" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PtzDeviceInfo.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzDeviceUpdate" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PtzDeviceInfo.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzDeviceSet" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PtzDeviceSet.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzDeviceSetCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzDeviceSetError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzGetDeviceList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzDeviceList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PtzDeviceList.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "featureList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/FeatureList.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "featureGetList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "uthreat" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Uthreat.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "uthreatConfigure" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/UthreatConfig.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "uthreatConfiguration" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/UthreatConfig.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "uthreatConfigureCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/UthreatConfig.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "uthreatConfigureError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "uthreatGetConfiguration" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "uthreatSetMute" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/UthreatSetMute.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "uthreatSetMuteCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/UthreatSetMute.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "uthreatSetMuteError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "uthreatGetHistory" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/TimeInterval.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "uthreatHistory" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/UthreatHistory.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "uthreatGetHistoryError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "uthreatGetHistoryData" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/UthreatGetHistoryData.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "uthreatHistoryData" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/UthreatHistoryData.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "uthreatGetHistoryDataError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "originFilterAdd" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/OriginFilterAdd.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "originFilterAdded" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/OriginFilter.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "originFilterAddCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/OriginFilterId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "originFilterAddError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "originFilterUpdate" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/OriginFilter.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "originFilterUpdated" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/OriginFilter.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "originFilterUpdateCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/OriginFilterId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "originFilterUpdateError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "originFilterRemove" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/OriginFilterId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "originFilterRemoved" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/OriginFilterId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "originFilterRemoveCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/OriginFilterId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "originFilterRemoveError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "originFilterGetList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "originFilterList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/OriginFilterList.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "sapientGetConfiguration" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "sapientConfiguration" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/SapientConfiguration.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "sapientConfigure" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/SapientConfigure.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "sapientConfigureCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "sapientConfigureError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "sapientNodeUpdated" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/SapientNode.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "sapientNodeGetList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "sapientNodeList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/SapientNodeList.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "systemLog" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/SystemLog.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "systemLogGetList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "systemLogList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/SystemLogList.json#" } } }
+        }
+    ]
+}

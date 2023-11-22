@@ -1,0 +1,7 @@
+{
+    "message": {
+        "autoStart": ["area1", "area2"]
+    },
+    "event": "ecmConfigure",
+    "responseId": "988erbn4jktg6ftz"
+}

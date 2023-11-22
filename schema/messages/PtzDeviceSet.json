@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ptzDeviceSet",
+    "type": "object",
+    "properties": {
+        "deviceId": {
+            "type": "string",
+            "description": "The device id"
+        },
+        "trackingSubDevice": {
+            "type": "number",
+            "description": "If camera tracking can be assigned to the sub devices this sets chosen sub device."
+        },
+        "tracking": {
+            "type": "string",
+            "description": "Set camera tracking state",
+            "enum": ["disabled", "acquire", "track"]
+        },
+        "resetOrientationTimeout": {
+            "type": ["number", "null"],
+            "description": "Set or disable timeout. See PtzDeviceInfo."
+        }
+    },
+    "additionalProperties": false,
+    "required": ["deviceId"]
+}

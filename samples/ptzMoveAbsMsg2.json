@@ -1,0 +1,14 @@
+{
+    "message": {
+        "deviceId": "kf830ddsdkli",
+        "position": {
+            "latitude": 57.08629627927822,
+            "longitude": 9.963764640301525,
+            "height": 32.12,
+            "zoom": 0.1,
+            "zUnits": "pct"
+        }
+    },
+    "event": "ptzMoveAbs",
+    "responseId": "cj9232j1d4a"
+}

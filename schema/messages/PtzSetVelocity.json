@@ -1,0 +1,42 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ptzSetVelocity",
+    "description": "Velocity of which the PTZ device should be moving",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "deviceId": {
+            "type": "string",
+            "title": "Device identification",
+            "description": "Device ID of a PTZ device"
+        },
+        "subDeviceId": {
+            "type": "number",
+            "title": "Sub-device identification",
+            "description": "ID of a sub device of the PTZ device used for following"
+        },
+        "p": {
+            "type": "number",
+            "description": "Pan velocity."
+        },
+        "t": {
+            "type": "number",
+            "description": "Tilt velocity."
+        },
+        "z": {
+            "type": "number",
+            "description": "Zoom velocity -1 - +1."
+        },
+        "f": {
+            "type": "number",
+            "description": "Focus velocity -1 - +1."
+        },
+        "ptUnits": {
+            "type": "string",
+            "title": "Velocity unit of pan/tilt e.g. deg/s or percentage of full velocity",
+            "description": "Specification of velocity unit for pan/tilt. See description of PtzDeviceInfo",
+            "enum": ["deg/s", "pct"]
+        }
+    },
+    "required": ["deviceId"]
+}

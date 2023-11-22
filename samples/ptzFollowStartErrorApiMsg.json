@@ -1,0 +1,6 @@
+{
+    "message": {
+        "errorInfo": "Device 40710b6pkih4coqj is not a PTZ device"
+    },
+    "event": "ptzFollowStartError"
+}

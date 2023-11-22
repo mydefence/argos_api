@@ -1,0 +1,13 @@
+{
+    "message": {
+        "deviceId": "389h3fbbk2ks",
+        "subDeviceId": 1,
+        "orientation": {
+            "p": -3.288,
+            "t": -3,
+            "z": 0.2
+        }
+    },
+    "event": "ptzMoveAbs",
+    "responseId": "sj921hjcdsf"
+}

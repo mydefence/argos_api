@@ -1,0 +1,6 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Time",
+    "type": ["string", "null"],
+    "description": "The timestamp of the server in ISO8601-format."
+}

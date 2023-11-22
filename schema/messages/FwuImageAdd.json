@@ -1,0 +1,15 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "FwuImageAdd",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "data": {
+            "type": "string",
+            "title": "FWU image data",
+            "description": "Binary data buffer",
+            "contentEncoding": "binary"
+        }
+    },
+    "required": ["data"]
+}

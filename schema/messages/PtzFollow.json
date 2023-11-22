@@ -1,0 +1,29 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ptzFollow",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "ptzFollowId": {
+            "type": "string",
+            "title": "PTZ follow instance identification",
+            "description": "Device ID of a PTZ device"
+        },
+        "deviceId": {
+            "type": "string",
+            "title": "Device identification",
+            "description": "Device ID of a PTZ device used for following"
+        },
+        "followUthreatId": {
+            "type": "string",
+            "title": "uthreat device identification",
+            "description": "uthreat ID of threat to follow"
+        },
+        "followDeviceId": {
+            "type": "string",
+            "title": "Device identification",
+            "description": "Device ID of device to follow (e.g. GPS)"
+        }
+    },
+    "required": ["ptzFollowId", "deviceId"]
+}

@@ -1,0 +1,124 @@
+{
+    "message": {
+        "historyData": [
+            {
+                "uthreatId": "624597c43bd78",
+                "muted": false,
+                "description": "DJI Drone, OcuSync 2.0 (A)",
+                "category": "drone",
+                "location": {
+                    "lat": 57.088560777659815,
+                    "lon": 9.965309973521855,
+                    "x": 100.34,
+                    "y": -23.63,
+                    "z": 50,
+                    "cov": {
+                        "xx": 1.0,
+                        "xy": 0.0,
+                        "xz": 0.0,
+                        "yy": 1.0,
+                        "yz": 0.0,
+                        "zz": 1.0
+                    }
+                },
+                "rfInfo": {
+                    "frequencyBands": ["2G4"],
+                    "possibleBands": ["2G4", "5G8"]
+                },
+                "confidence": 0.96,
+                "uthreatBasis": [
+                    {
+                        "threatId": "1kd86z3al1ey31kg",
+                        "description": "DJI Drone, OcuSync 2.0 (A)",
+                        "category": "drone",
+                        "deviceId": "WPSIM1",
+                        "deviceSerialNumber": "WPSIM1",
+                        "detectionType": "RF",
+                        "direction": {
+                            "az": 95.69920034730508,
+                            "varAz": 4.0,
+                            "origin": {
+                                "lat": 57.08866817501764,
+                                "lon": 9.962299172038568,
+                                "x": 200,
+                                "y": 0,
+                                "z": 0
+                            }
+                        },
+                        "rfInfo": {
+                            "power": -43.55486983128382,
+                            "frequencyBands": ["2G4"],
+                            "possibleBands": ["2G4", "5G8"],
+                            "rfEmitterId": "624597c3b7db5"
+                        },
+                        "confidence": 0.85,
+                        "createdTimeStamp": "2022-03-31T12:00:03.737Z",
+                        "updatedTimeStamp": "2022-03-31T12:01:23.578Z"
+                    },
+                    {
+                        "threatId": "1kd86z3al1ey31ki",
+                        "description": "DJI Drone, OcuSync 2.0 (A)",
+                        "category": "drone",
+                        "deviceId": "WPSIM2",
+                        "deviceSerialNumber": "WPSIM2",
+                        "detectionType": "RF",
+                        "direction": {
+                            "az": -24.35923410348974,
+                            "varAz": 4,
+                            "origin": {
+                                "lat": 57.08688523321908,
+                                "lon": 9.966579745500459,
+                                "x": 0,
+                                "y": 200,
+                                "z": 0
+                            }
+                        },
+                        "rfInfo": {
+                            "power": -43.965041006871886,
+                            "frequencyBands": ["2G4"],
+                            "possibleBands": ["2G4", "5G8"],
+                            "rfEmitterId": "624597c3b7db5"
+                        },
+                        "confidence": 0.85,
+                        "createdTimeStamp": "2022-03-31T12:00:03.737Z",
+                        "updatedTimeStamp": "2022-03-31T12:01:23.577Z"
+                    },
+                    {
+                        "threatId": "1kd86z3al1ey32sq",
+                        "description": "Radar track",
+                        "category": "drone",
+                        "deviceId": "1kd86z65l1ey0ys3",
+                        "deviceSerialNumber": "GA0001",
+                        "detectionType": "Radar",
+                        "location": {
+                            "lat": 57.088560777659815,
+                            "lon": 9.965309973521855,
+                            "x": 100.34,
+                            "y": -23.63,
+                            "z": 50,
+                            "cov": {
+                                "xx": 1.0,
+                                "xy": 0.0,
+                                "xz": 0.0,
+                                "yy": 1.0,
+                                "yz": 0.0,
+                                "zz": 1.0
+                            }
+                        },
+                        "confidence": 0.949999988079071,
+                        "createdTimeStamp": "2022-03-31T12:00:05.328Z",
+                        "updatedTimeStamp": "2022-03-31T12:01:23.340Z"
+                    }
+                ],
+                "createdTimeStamp": "2022-03-31T12:00:05.328Z",
+                "updatedTimeStamp": "2022-03-31T12:01:23.802Z"
+            }
+        ],
+        "limited": false,
+        "timeInterval": {
+            "fromTimestamp": "2022-03-31T12:01:23.802Z",
+            "toTimestamp": "2022-03-31T12:01:23.802Z"
+        }
+    },
+    "event": "uthreatHistoryData"
+}

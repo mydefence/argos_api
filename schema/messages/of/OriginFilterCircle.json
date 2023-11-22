@@ -1,0 +1,57 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "OriginFilterCircle",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "ofId": {
+            "type": "string",
+            "description": "Unique id of the origin filter."
+        },
+        "color": {
+            "type": "string",
+            "description": "Color of the origin filter. Helper property for a frontend, not used in the backend."
+        },
+        "name": {
+            "type": "string",
+            "description": "Name of the origin filter. Helper property for a frontend, not used in the backend."
+        },
+        "isActive": {
+            "type": "boolean",
+            "description": "Switch for (de)activating the origin filter."
+        },
+        "circle": {
+            "type": "object",
+            "description": "Circle defining the origin filter..",
+            "properties": {
+                "lat": {
+                    "type": "number",
+                    "description": "Latitude of the circle center."
+                },
+                "lon": {
+                    "type": "number",
+                    "description": "Longitude of the circle center."
+                },
+                "radiusInMeters": {
+                    "type": "number",
+                    "description": "radius of the circle in meters."
+                }
+            },
+            "required": ["lat", "lon", "radiusInMeters"],
+            "additionalProperties": false
+        },
+        "top": {
+            "type": "number",
+            "description": "Optional upper vertical limit of the filter zone (meters relative to mission center height)"
+        },
+        "bottom": {
+            "type": "number",
+            "description": "Optional lower vertical limit of the filter zone (meters relative to mission center height)"
+        },
+        "filterDistance": {
+            "type": "number",
+            "description": "Set this to keep filtering the threat while it is within this distance (m) of the filter zone. The threat must originate inside the zone."
+        }
+    },
+    "required": ["ofId", "isActive", "circle"]
+}

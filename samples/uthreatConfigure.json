@@ -1,0 +1,8 @@
+{
+    "message": {
+        "fuseLevel": "rf",
+        "droneConfidenceThreshold": 0.9
+    },
+    "event": "uthreatConfigure",
+    "responseId": "988erbn4jktg6ftz"
+}

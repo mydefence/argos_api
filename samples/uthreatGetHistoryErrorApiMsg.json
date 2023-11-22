@@ -1,0 +1,6 @@
+{
+    "message": {
+        "errorInfo": "Invalid time interval."
+    },
+    "event": "uthreatGetHistoryError"
+}

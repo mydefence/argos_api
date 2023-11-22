@@ -1,0 +1,26 @@
+{
+    "message": {
+        "deviceId": "40710b6pkih4coqj",
+        "description": "super camera type 111",
+        "p": 12,
+        "t": 0,
+        "trackingSubDevice": 1,
+        "tracking": "track",
+        "subDevices": [
+            {
+                "subDeviceId": 0,
+                "description": "daylight",
+                "z": { "pct": 48 },
+                "f": 42
+            },
+            {
+                "subDeviceId": 0,
+                "description": "thermal",
+                "z": { "pct": 27 },
+                "f": 33
+            }
+        ],
+        "resetOrientationTimeout": 300
+    },
+    "event": "ptzDeviceInfo"
+}

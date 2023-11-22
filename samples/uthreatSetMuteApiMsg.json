@@ -1,0 +1,8 @@
+{
+    "event": "uthreatSetMute",
+    "message": {
+        "uthreatId": "ajissyem398rc",
+        "mute": true
+    },
+    "responseId": "bhgcrgg0g6q5k7q8nq1s"
+}

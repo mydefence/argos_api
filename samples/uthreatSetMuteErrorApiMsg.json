@@ -1,0 +1,6 @@
+{
+    "event": "uthreatSetMuteError",
+    "message": {
+        "errorInfo": "uthreat does not exist"
+    }
+}

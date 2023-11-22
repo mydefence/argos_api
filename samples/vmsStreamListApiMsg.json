@@ -1,0 +1,98 @@
+{
+    "message": [
+        {
+            "vmsStreamId": "434fk35d262d14fq",
+            "videoDeviceId": "40710b6pkih4coqj",
+            "description": "Camera #1",
+            "vmsType": "daylight",
+            "streamIp": "192.168.1.91",
+            "rawStreamInfo": {
+                "token": "profile.1:0.h264_1",
+                "name": "profile.1:0.h264_1",
+                "snapshot": "http://192.168.1.91:80/services/media.ion?sel=jpeg&source=videoinput_1:0",
+                "stream": {
+                    "udp": "rtsp://192.168.1.91:554/videoinput_1:0/h264_1/onvif.stm",
+                    "http": "http://192.168.1.91:80/services/media.ion?sel=media&source=videoinput_1:0&codec=h264_1",
+                    "rtsp": "rtsp://192.168.1.91:554/videoinput_1:0/h264_1/onvif.stm"
+                },
+                "video": {
+                    "source": {
+                        "token": "videoinput_1:0",
+                        "name": "",
+                        "bounds": {
+                            "width": 1920,
+                            "height": 1080,
+                            "x": 0,
+                            "y": 0
+                        }
+                    },
+                    "encoder": {
+                        "token": "videoinput_1:0.h264_1",
+                        "name": "H264 #1",
+                        "resolution": {
+                            "width": 1920,
+                            "height": 1080
+                        },
+                        "quality": 0,
+                        "framerate": 25,
+                        "bitrate": 4000,
+                        "encoding": "H264"
+                    }
+                },
+                "audio": {
+                    "encoder": null
+                },
+                "ptz": {
+                    "range": {
+                        "x": {
+                            "min": -1,
+                            "max": 1
+                        },
+                        "y": {
+                            "min": -1,
+                            "max": 1
+                        },
+                        "z": {
+                            "min": 0,
+                            "max": 1
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "vmsStreamId": "434kjnkj211kkk12",
+            "videoDeviceId": "kjpo1309801jlksa",
+            "description": "Camera #2",
+            "vmsType": "IR",
+            "streamIp": "192.168.1.235",
+            "rawStreamInfo": {}
+        },
+        {
+            "vmsStreamId": "35d262d14fq3243ks",
+            "videoDeviceId": "b6pkih4coqj33m9",
+            "videoSubDeviceId": 0,
+            "description": "Camera #3 daylight",
+            "vmsType": "daylight",
+            "streamIp": "192.168.1.236",
+            "rawStreamInfo": {}
+        },
+        {
+            "vmsStreamId": "35d262d14fq324897",
+            "videoDeviceId": "b6pkih4coqj33m9",
+            "videoSubDeviceId": 1,
+            "description": "Camera #3 thermal",
+            "vmsType": "thermal",
+            "streamIp": "192.168.1.237",
+            "rawStreamInfo": {}
+        },
+        {
+            "vmsStreamId": "coqjs434fk35d26",
+            "videoDeviceId": "40710b6pkih4coqj",
+            "description": "Camera #4",
+            "streamIp": "192.168.1.240",
+            "rawStreamInfo": {}
+        }
+    ],
+    "event": "vmsStreamList"
+}

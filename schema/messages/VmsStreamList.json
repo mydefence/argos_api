@@ -1,0 +1,45 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "VmsStreamList",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+            "vmsStreamId": {
+                "type": "string",
+                "title": "Stream identification",
+                "description": "A unique system identification, generated automatically from the system"
+            },
+            "videoDeviceId": {
+                "type": "string",
+                "title": "Video Device ID",
+                "description": "Video Device ID"
+            },
+            "videoSubDeviceId": {
+                "type": "number",
+                "title": "Video Sub Device ID",
+                "description": "Sub device ID from ptzDeviceInfo if relevant"
+            },
+            "description": {
+                "type": "string",
+                "title": "Stream Description",
+                "description": "A description of the source of the video"
+            },
+            "vmsType": {
+                "$ref": "./VmsType.json#"
+            },
+            "streamIp": {
+                "type": "string",
+                "title": "IP address",
+                "description": "IP address of camera tube"
+            },
+            "rawStreamInfo": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "All stream info from the camera. Content depends on camera"
+            }
+        },
+        "required": ["vmsStreamId", "videoDeviceId", "description", "streamIp", "rawStreamInfo"]
+    }
+}

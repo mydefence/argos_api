@@ -1,0 +1,6 @@
+{
+    "message": {
+        "errorInfo": "No connection"
+    },
+    "event": "vmsSdpInitError"
+}

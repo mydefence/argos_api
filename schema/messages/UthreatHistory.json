@@ -1,0 +1,77 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "UthreatHistory",
+    "type": "object",
+    "properties": {
+        "history": {
+            "type": "array",
+            "description": "List of uthreat summaries for the given time interval.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "uthreatId": {
+                        "type": "string",
+                        "description": "The unique ID of the uthreat."
+                    },
+                    "category": {
+                        "type": "string",
+                        "description": "The threat category."
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Information about the threat. E.g. the manufacturer of the drone causing the threat."
+                    },
+                    "muted": {
+                        "type": "boolean",
+                        "description": "Has the uthreat been muted in the given time interval."
+                    },
+                    "aboveConfidenceThreshold": {
+                        "type": "boolean",
+                        "description": "Was any uthreat confidence above the UthreatConfig.droneConfidenceThreshold at the time of detection."
+                    },
+                    "detectionType": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "./uthreat/DetectionType.json"
+                        },
+                        "description": "List of the detection types related to this uthreat for the given time interval."
+                    },
+                    "frequencyBands": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "./common/FrequencyBand.json"
+                        },
+                        "description": "List of frequency bands related to this uthreat for the given time interval."
+                    },
+                    "createdTimeStamp": {
+                        "type": "string"
+                    },
+                    "stoppedTimeStamp": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "uthreatId",
+                    "category",
+                    "description",
+                    "muted",
+                    "detectionType",
+                    "createdTimeStamp",
+                    "aboveConfidenceThreshold",
+                    "frequencyBands"
+                ]
+            }
+        },
+        "limited": {
+            "type": "boolean",
+            "description": "True if the request result has been limited. If true more data for the given time interval exists. Use narrower time interval to avoid this."
+        },
+        "timeInterval": {
+            "$ref": "./TimeInterval.json#",
+            "description": "Time interval for the returned data set. If 'limited' is true this time interval is narrower than the requested time interval."
+        }
+    },
+    "additionalProperties": false,
+    "required": ["history", "limited", "timeInterval"]
+}

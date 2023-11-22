@@ -1,0 +1,8 @@
+{
+    "message": {
+        "vmsStreamId": "434fk35d262d14fq",
+        "sdpOffer": "v=0\no=- 8670644699604725802 2 IN IP4 127.0.0.1\ns=-\nt=0 0"
+    },
+    "event": "vmsSdpInit",
+    "responseId": "41jkladf94j"
+}

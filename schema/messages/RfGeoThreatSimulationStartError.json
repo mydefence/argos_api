@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "RfGeoThreatSimulationStartError",
+    "description": "The related rfGeoThreatSimulationStart-message has not been accepted and a simulation is not started.",
+    "type": "object",
+    "properties": {
+        "simulationNumber": {
+            "type": "integer",
+            "description": "Unique simulation number from rfGeoThreatSimulationRequest."
+        },
+        "errorInfo": {
+            "type": "string",
+            "description": "Textual error message."
+        }
+    },
+    "additionalProperties": false,
+    "required": ["simulationNumber", "errorInfo"]
+}

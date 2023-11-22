@@ -1,0 +1,146 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Device",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "deviceId": {
+            "type": "string",
+            "title": "Device identification",
+            "description": "A unique device identification, generated automatically from the system - will change if a device is removed entirely from the system and then added again"
+        },
+        "deviceSerialNumber": {
+            "type": "string",
+            "title": "Device serialnumber",
+            "description": "A unique device serialnumber either received from the device itself if autodetected, if manually created from the input received and on a composite device it's the same as the deviceId."
+        },
+        "deviceMounted": {
+            "type": "boolean",
+            "title": "Device mounted",
+            "description": "Defines if the device should be trying to get a connection with the physical device"
+        },
+        "deviceState": {
+            "type": "string",
+            "title": "Device state",
+            "description": "Defines if the system should be trying to get a connection with the physical device. 'updateable' means device is connected but inactive, e.g. and unmounted child, or obsolete FW.",
+            "enum": ["created", "connecting", "connected", "disconnecting", "disconnected", "updating", "updateable"]
+        },
+        "deviceType": {
+            "$ref": "./common/DeviceType.json"
+        },
+        "deviceVersion": {
+            "type": "integer",
+            "title": "Device version",
+            "description": "Defines the version of the individual devices and the capabilities attached to the specific device type version"
+        },
+        "deviceCategory": {
+            "type": "string",
+            "title": "Device Category",
+            "description": "Defines some high-level categories to define if the device is an effector, detector or combination device",
+            "enum": ["detector", "effector", "composite", "detectorEffector"]
+        },
+        "deviceConcept": {
+            "type": "string",
+            "title": "Device concept",
+            "description": "Defines some high-level categories for the capabilities of the individual device",
+            "enum": ["area", "direction", "track", "group"]
+        },
+        "deviceGroup": {
+            "type": "boolean",
+            "title": "Device group",
+            "description": "Defines if the devices is a part of a group/composite device - if a device is part of a group/composite device the value is set to true"
+        },
+        "deviceParentId": {
+            "type": ["string", "null"],
+            "title": "Device group parrentId",
+            "description": "Is combined with deviceGroup - and if deviceGroup is true the deviceParentId is set to the deviceId of the group/composite device for sub/child devices"
+        },
+        "deviceIP": {
+            "type": ["string", "null"],
+            "title": "Device IP",
+            "description": "Defines the devices IP address either received when the devices was discovered or when the device was manually created. A composite device does not have a device IP"
+        },
+        "deviceMac": {
+            "type": ["string", "null"],
+            "title": "Device MAC",
+            "description": "Defines the devices MAC address either received when the devices was discovered or when the device was manually created. A composite device does not have a device MAC"
+        },
+        "deviceAttributes": {
+            "title": "Device Attributes",
+            "description": "device attributes",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "minAngle": {
+                    "type": "integer"
+                },
+                "maxAngle": {
+                    "type": "integer"
+                },
+                "deviceHeading": {
+                    "type": "number",
+                    "description": "DEPRECATED! Will be removed. Use deviceLocationHeading from deviceLocation* messages instead."
+                },
+                "maxAngleFallback": {
+                    "type": "integer"
+                },
+                "noAngleFallback": {
+                    "type": "integer"
+                }
+            }
+        },
+        "deviceSwVersion": {
+            "title": "Device software version",
+            "description": "Current software version running in device",
+            "type": ["string", "null"]
+        },
+        "deviceOrigin": {
+            "type": "string",
+            "title": "Created Origin",
+            "description": "Defines the origin system to be either the local ARGOS instance or if from another ARGOS instance",
+            "enum": ["local", "external"]
+        },
+        "deviceGPSHardware": {
+            "type": "boolean"
+        },
+        "devicesCount": {
+            "type": "integer",
+            "title": "Device count",
+            "description": "The number of sub/child devices"
+        },
+        "devices": {
+            "type": "array",
+            "title": "Devices",
+            "description": "Defines a list of the devices in a composite devices - see composite device devices schema",
+            "items": {
+                "$ref": "#"
+            }
+        },
+        "createdBy": {
+            "type": ["string"],
+            "title": "Created by field",
+            "description": "Determines wheather the device is created by the system or by the API (or user).",
+            "enum": ["system", "API"]
+        }
+    },
+    "required": [
+        "deviceId",
+        "deviceSerialNumber",
+        "deviceMounted",
+        "deviceState",
+        "deviceType",
+        "deviceVersion",
+        "deviceCategory",
+        "deviceConcept",
+        "deviceGroup",
+        "deviceParentId",
+        "deviceIP",
+        "deviceMac",
+        "deviceAttributes",
+        "deviceOrigin",
+        "deviceGPSHardware",
+        "devicesCount",
+        "devices",
+        "deviceSwVersion"
+    ]
+}

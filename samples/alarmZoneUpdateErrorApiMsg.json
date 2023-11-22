@@ -1,0 +1,6 @@
+{
+    "message": {
+        "errorInfo": "Failed to update alarm zone"
+    },
+    "event": "alarmZoneUpdateError"
+}

@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ThreatId",
+    "type": "object",
+    "properties": {
+        "threatId": {
+            "type": "string",
+            "title": "Threat identification number",
+            "description": "Defines a unique id for the specific threat detection - both the start, all the updates and the stop message will contain the same threatId"
+        }
+    },
+    "required": ["threatId"],
+    "additionalProperties": false
+}

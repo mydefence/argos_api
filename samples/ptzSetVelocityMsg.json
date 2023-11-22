@@ -1,0 +1,12 @@
+{
+    "message": {
+        "deviceId": "ajsdlfajjj322",
+        "subDeviceId": 1,
+        "p": 32,
+        "t": -12.33,
+        "z": -0.62,
+        "ptUnits": "pct"
+    },
+    "event": "ptzSetVelocity",
+    "responseId": "asd2j2u819"
+}

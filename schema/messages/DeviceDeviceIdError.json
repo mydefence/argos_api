@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DeviceDeviceIdError",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "deviceId": {
+            "type": "string",
+            "title": "Device identification",
+            "description": "A unique device identification, generated automatically from the system - will change if a device is removed entirely from the system and then added again"
+        },
+        "errorInfo": {
+            "type": "string",
+            "title": "Error information Device identification",
+            "description": "A description of what error has occurred and e.g. any identification needed in relation to the error."
+        }
+    },
+    "required": ["deviceId", "errorInfo"]
+}

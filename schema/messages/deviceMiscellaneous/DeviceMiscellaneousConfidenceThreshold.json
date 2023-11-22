@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DeviceMiscellaneousConfidenceThreshold",
+    "type": "object",
+    "properties": {
+        "deviceId": {
+            "type": "string",
+            "description": "The device id"
+        },
+        "deviceMiscellaneousType": {
+            "allOf": [
+                {
+                    "$ref": "./DeviceMiscellaneousType.json#"
+                },
+                {
+                    "const": "confidenceThreshold"
+                }
+            ]
+        },
+        "deviceMiscellaneousData": {
+            "type": "object",
+            "properties": {
+                "confidenceThreshold": {
+                    "type": "number",
+                    "description": "Detections with a drone probability below this threshold are discarded and not sent into the stack"
+                },
+                "confidenceThresholdMax": {
+                    "type": "number",
+                    "description": "The maximum possible drone probability value and thus the maximum allowed setting of confidenceThreshold. When integrating a sensor we assess the quality of its detections, and adjust the confidences sent into ARGOS correspondingly. This is reflected in the confidenceThresholdMax value. Read-only."
+                }
+            },
+            "additionalProperties": false,
+            "required": ["confidenceThreshold"]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["deviceId", "deviceMiscellaneousType", "deviceMiscellaneousData"]
+}

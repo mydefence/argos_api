@@ -1,0 +1,10 @@
+{
+    "message": {
+        "deviceId": "eh7bx75ak9v5merz",
+        "deviceParentId": null,
+        "activeFrequencyBands": ["2G4"],
+        "deviceDetails": {},
+        "timestamp": "2021-02-16T13:26:27.067Z"
+    },
+    "event": "ecmState"
+}

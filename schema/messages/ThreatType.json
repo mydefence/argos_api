@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ThreatType",
+    "type": "object",
+    "properties": {
+        "threatName": {
+            "type": "string",
+            "description": "Defines the threat name from the threat library"
+        },
+        "threatType": {
+            "type": "number",
+            "description": "Defines a unique number for the threat type"
+        }
+    },
+    "required": ["threatType"],
+    "additionalProperties": false
+}

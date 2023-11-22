@@ -1,0 +1,12 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DeviceId",
+    "type": "object",
+    "properties": {
+        "deviceId": {
+            "type": "string"
+        }
+    },
+    "additionalProperties": false,
+    "required": ["deviceId"]
+}

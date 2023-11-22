@@ -1,0 +1,13 @@
+{
+    "message": {
+        "alarmId": "40710b6pkih4coqj",
+        "alarmZoneId": "40710b6pkih3xm6u",
+        "audioAlarmLevel": 0,
+        "visualAlarmLevel": 0,
+        "uthreatIds": [],
+        "createdTimeStamp": "2020-12-09T07:56:39.355Z",
+        "updatedTimeStamp": "2020-12-09T07:56:48.239Z",
+        "stoppedTimeStamp": "2020-12-09T07:56:48.239Z"
+    },
+    "event": "alarmStopped"
+}

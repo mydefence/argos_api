@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "EcmState",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "deviceId": {
+            "type": "string"
+        },
+        "deviceParentId": {
+            "type": ["string", "null"],
+            "title": "Device identification"
+        },
+        "activeFrequencyBands": {
+            "type": "array",
+            "items": {
+                "$ref": "common/FrequencyBand.json#"
+            }
+        },
+        "deviceDetails": {
+            "type": "object"
+        },
+        "timestamp": {
+            "type": "string",
+            "description": "UTC time in ISO8601 format"
+        },
+        "timeout": {
+            "type": "integer",
+            "description": "Timeout (seconds) of auto jamming. Set when deviceId ='auto'"
+        }
+    },
+    "required": ["deviceId"]
+}

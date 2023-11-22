@@ -1,0 +1,14 @@
+{
+    "message": [
+        {
+            "nodeId": "01GJMTT6AZEW8JXTY9X273317Z",
+            "nodeState": "connected"
+        },
+        {
+            "nodeId": "01GJMTT9XF8XCBAS1ZZQVZFH09",
+            "nodeState": "connecting"
+        }
+    ],
+    "event": "sapientNodeList",
+    "responseId": "634erdt4jkrv5esz"
+}

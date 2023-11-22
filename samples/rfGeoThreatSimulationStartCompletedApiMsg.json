@@ -1,0 +1,7 @@
+{
+    "event": "rfGeoThreatSimulationStartCompleted",
+    "message": {
+        "simulationNumber": 42,
+        "estTime": 30.0
+    }
+}

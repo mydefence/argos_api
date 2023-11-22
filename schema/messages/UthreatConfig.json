@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "UthreatConfig",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "fuseLevel": {
+            "type": "string",
+            "enum": ["none", "rf", "all"],
+            "description": "Choose level of sensor fusion. None: No fusion; RF: Fusion of RF sensor into RF geolocation; All: Fusion of RF geolocation and radars. Default setting is all."
+        },
+        "droneConfidenceThreshold": {
+            "type": "number",
+            "description": "This can be used by the application to store a threshold for when a uthreat is displayed as a drone. The value is not used in the backend, and will not affect which uthreats are sent on the API. The value will be stored in the uthreat archive for forensics. This schema files provides some example values.",
+            "anyOf": [
+                { "const": 0.1, "description": "Show everything that might be a drone" },
+                { "const": 0.5, "description": "Show all RF and all high confidence radar tracks" },
+                { "const": 0.9, "description": "Show all RF" },
+                { "const": 0.92, "description": "Show all radar and RF fusions" },
+                { "type": "number", "description": "Any value from 0-1 may be set" }
+            ]
+        }
+    }
+}

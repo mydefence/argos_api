@@ -1,0 +1,8 @@
+{
+    "message": {
+        "fwuImageId": "kg0xmnyg",
+        "type": "rfSensor",
+        "version": "2.2.3"
+    },
+    "event": "fwuImageAddCompleted"
+}

@@ -1,0 +1,6 @@
+{
+    "message": {
+        "threatType": 1
+    },
+    "event": "threatTypeMuteCompleted"
+}

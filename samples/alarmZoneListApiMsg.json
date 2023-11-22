@@ -1,0 +1,100 @@
+{
+    "message": [
+        {
+            "color": "#c69540",
+            "name": "Zone 1",
+            "order": 1,
+            "isActive": true,
+            "visualAlarmLevel": 0,
+            "audioAlarmLevel": 0,
+            "polygon": [
+                {
+                    "lat": 57.134407,
+                    "lon": 9.46319
+                },
+                {
+                    "lat": 57.154407,
+                    "lon": 9.48319
+                },
+                {
+                    "lat": 57.154407,
+                    "lon": 8.48319
+                },
+                {
+                    "lat": 57.154407,
+                    "lon": 8.48319
+                }
+            ],
+            "alarmZoneId": "cvuxhv7zgkdtv2cnb"
+        },
+        {
+            "color": "#c69540",
+            "name": "Zone 2",
+            "order": 1,
+            "isActive": true,
+            "visualAlarmLevel": 0,
+            "audioAlarmLevel": 0,
+            "polygon": [
+                {
+                    "lat": 57.134407,
+                    "lon": 9.46319
+                },
+                {
+                    "lat": 57.154407,
+                    "lon": 9.48319
+                },
+                {
+                    "lat": 57.154407,
+                    "lon": 8.48319
+                },
+                {
+                    "lat": 57.154407,
+                    "lon": 8.48319
+                }
+            ],
+            "alarmZoneId": "cvuxhvbehkdtwgd2q"
+        },
+        {
+            "color": "#c69540",
+            "name": "Zone 3",
+            "order": 1,
+            "isActive": true,
+            "visualAlarmLevel": 0,
+            "audioAlarmLevel": 0,
+            "polygon": [
+                {
+                    "lat": 57.134407,
+                    "lon": 9.46319
+                },
+                {
+                    "lat": 57.154407,
+                    "lon": 9.48319
+                },
+                {
+                    "lat": 57.154407,
+                    "lon": 8.48319
+                },
+                {
+                    "lat": 57.154407,
+                    "lon": 8.48319
+                }
+            ],
+            "alarmZoneId": "cvuxhvbehkdtwgevv"
+        },
+        {
+            "color": "#c69540",
+            "name": "Zone 4",
+            "order": 1,
+            "isActive": true,
+            "visualAlarmLevel": 0,
+            "audioAlarmLevel": 0,
+            "circle": {
+                "lat": 57.134407,
+                "lon": 9.46319,
+                "radiusInMeters": 300
+            },
+            "alarmZoneId": "cvuxhvbehkdtwgevv"
+        }
+    ],
+    "event": "alarmZoneList"
+}

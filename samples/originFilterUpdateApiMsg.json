@@ -1,0 +1,14 @@
+{
+    "message": {
+        "ofId": "kb675fefef",
+        "color": "#c69540",
+        "name": "Yellow zone",
+        "isActive": true,
+        "circle": {
+            "lat": 57.134407,
+            "lon": 9.46319,
+            "radiusInMeters": 23
+        }
+    },
+    "event": "originFilterUpdated"
+}

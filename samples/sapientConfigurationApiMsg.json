@@ -1,0 +1,18 @@
+{
+    "message": [
+        {
+            "deviceSerialNumber": "WD201001",
+            "sdaIp": "127.0.0.1",
+            "sdaPort": 14001,
+            "nodeId": "01GJMTT6AZEW8JXTY9X273317Z"
+        },
+        {
+            "deviceSerialNumber": "WD201061",
+            "sdaIp": "127.0.0.2",
+            "sdaPort": 14001,
+            "nodeId": "01GJMTT9XF8XCBAS1ZZQVZFH09"
+        }
+    ],
+    "event": "sapientConfiguration",
+    "responseId": "634erdt4jjfg3keu"
+}

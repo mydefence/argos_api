@@ -1,0 +1,12 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "AlarmZone",
+    "oneOf": [
+        {
+            "$ref": "./alarm/AlarmZonePolygon.json#"
+        },
+        {
+            "$ref": "./alarm/AlarmZoneCircle.json#"
+        }
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "message": {
+        "deviceId": "auto",
+        "deviceParentId": null,
+        "activeFrequencyBands": ["2G4"],
+        "deviceDetails": {},
+        "timestamp": "2021-02-16T13:26:27.067Z",
+        "timeout": 65
+    },
+    "event": "ecmState"
+}

@@ -1,0 +1,140 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "UthreatBasisPresence",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "muted": {
+            "type": "boolean",
+            "description": "True if uthreat has been muted."
+        },
+        "threatId": {
+            "type": "string",
+            "description": "The unique ID of the threat from a system component."
+        },
+        "associatedThreatId": {
+            "type": "string",
+            "description": "Used to link controller and drone."
+        },
+        "macAddress": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{12}$",
+            "description": "Physical MAC address of emitter if known, e.g. WiFi emitters. Lowercase string of hex characters (no `:`)."
+        },
+        "operationalStatus": {
+            "type": "string",
+            "description": "Status of UAV if advertised.",
+            "enum": ["Ground", "Airborne", "Emergency"]
+        },
+        "deviceId": {
+            "type": "string",
+            "description": "The unique ID of the system component sending the threat. For composite devices it is either child or parent device ID."
+        },
+        "deviceSerialNumber": {
+            "type": "string",
+            "description": "The serial number of the system component sending the threat. For composite devices it is either child or parent device ID."
+        },
+        "detectionType": {
+            "$ref": "../uthreat/DetectionType.json",
+            "description": "The type of the system component sending the threat."
+        },
+        "description": {
+            "type": "string",
+            "description": "Information about the threat. E.g. the manufacturer of the drone causing the threat."
+        },
+        "category": {
+            "type": "string",
+            "description": "The threat category.",
+            "enum": ["drone", "controller", "drone/controller", "wifi", "test"]
+        },
+        "presence": {
+            "type": "object",
+            "description": "Presence of a threat detection.",
+            "properties": {
+                "lat": {
+                    "type": "number",
+                    "description": "Latitude of the origo of the presence detection of the threat (geographical coordinate)."
+                },
+                "lon": {
+                    "type": "number",
+                    "description": "Longitude of the origo of the presence detection of the threat (geographical coordinate)."
+                },
+                "x": {
+                    "type": "number",
+                    "description": "East/west relative to mission center of the origo of the presence detection of the threat (cartesian coordinate) [m]."
+                },
+                "y": {
+                    "type": "number",
+                    "description": "North/south relative to mission center of the origo of the presence detection of the threat  (cartesian coordinate) [m]."
+                },
+                "z": {
+                    "type": "number",
+                    "description": "Height above/under mission center of the origo of the presence detection of the threat  (cartesian coordinate) [m]."
+                }
+            },
+            "required": ["lat", "lon", "x", "y", "z"],
+            "additionalProperties": false
+        },
+        "rfInfo": {
+            "type": "object",
+            "description": "Collection of RF information of the threat",
+            "properties": {
+                "frequencyBands": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../common/FrequencyBand.json"
+                    },
+                    "description": "The current frequency bands of the threat."
+                },
+                "possibleBands": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../common/FrequencyBand.json"
+                    },
+                    "description": "The possible frequency bands of the threat. This may contain more frequencies than 'frequencyBands' for threats, that are known to use multiple frequency bands."
+                },
+                "power": {
+                    "type": "number",
+                    "description": "Detected power [dB]."
+                },
+                "rfEmitterId": {
+                    "type": "string",
+                    "description": "Unique ID of the RF source"
+                }
+            },
+            "required": ["frequencyBands", "possibleBands", "power"],
+            "additionalProperties": false
+        },
+        "confidence": {
+            "type": "number",
+            "description": "Confidence in the detection, in 0.0 .. 1.0 ."
+        },
+        "threatType": {
+            "type": "number",
+            "description": "Threat type ID will be set for RF threats. Can be used in a threatTypeMute request."
+        },
+        "createdTimeStamp": {
+            "type": "string",
+            "description": "UTC time of creation of this uthreat."
+        },
+        "updatedTimeStamp": {
+            "type": "string",
+            "description": "UTC time of the last update of this uthreat. For a new threat this will be equal to createdTimeStamp. Stopping a threat counts as an update, and will update this time stamp."
+        },
+        "stoppedTimeStamp": {
+            "type": "string",
+            "description": "UTC time of stop of this uthreat. Only set when threat is stopped. Will be equal to updatedTimeStamp."
+        }
+    },
+    "required": [
+        "threatId",
+        "deviceId",
+        "deviceSerialNumber",
+        "detectionType",
+        "category",
+        "presence",
+        "confidence",
+        "createdTimeStamp",
+        "updatedTimeStamp"
+    ]
+}

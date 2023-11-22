@@ -1,0 +1,77 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DeviceMiscellaneousDroneList",
+    "type": "object",
+    "properties": {
+        "deviceId": {
+            "type": "string",
+            "description": "The device id"
+        },
+        "deviceMiscellaneousType": {
+            "allOf": [
+                {
+                    "$ref": "./DeviceMiscellaneousType.json#"
+                },
+                {
+                    "const": "droneList"
+                }
+            ]
+        },
+        "deviceMiscellaneousData": {
+            "type": "object",
+            "properties": {
+                "droneList": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "number"
+                            },
+                            "vendor_name": {
+                                "type": "string"
+                            },
+                            "vendor_id": {
+                                "type": "number"
+                            },
+                            "type_name": {
+                                "type": "string"
+                            },
+                            "type_id": {
+                                "type": "number"
+                            },
+                            "category": {
+                                "type": "string"
+                            },
+                            "bands": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "../common/FrequencyBand.json#"
+                                }
+                            },
+                            "drone_names": {
+                                "type": "string"
+                            }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                            "id",
+                            "vendor_name",
+                            "vendor_id",
+                            "type_name",
+                            "type_id",
+                            "category",
+                            "bands",
+                            "drone_names"
+                        ]
+                    },
+                    "description": "Array of supported drone/controller systems"
+                }
+            },
+            "additionalProperties": false,
+            "required": ["droneList"]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["deviceId", "deviceMiscellaneousType", "deviceMiscellaneousData"]
+}

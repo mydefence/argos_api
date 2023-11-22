@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "UthreatSetMute",
+    "type": "object",
+    "properties": {
+        "uthreatId": {
+            "type": "string",
+            "description": "The unique ID of the uthreat to mute/unmute. Corresponds to the same field in uthreat messages."
+        },
+        "mute": {
+            "type": "boolean",
+            "description": "Mute-value to set, if true the uthreat will be muted."
+        }
+    },
+    "additionalProperties": false,
+    "required": ["uthreatId", "mute"]
+}

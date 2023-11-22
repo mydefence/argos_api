@@ -1,0 +1,38 @@
+{
+    "message": {
+        "deviceId": "eh7bx75ak9v5merz",
+        "deviceMiscellaneousList": [
+            {
+                "deviceId": "6o7s5zko9sw49c",
+                "deviceMiscellaneousType": "deviceName",
+                "deviceMiscellaneousData": {
+                    "deviceName": "Blackbird"
+                }
+            },
+            {
+                "deviceId": "6o7s5zko9sw49c",
+                "deviceMiscellaneousType": "deviceOrder",
+                "deviceMiscellaneousData": {
+                    "deviceOrder": 99
+                }
+            },
+            {
+                "deviceId": "6o7s5zko9sw49c",
+                "deviceMiscellaneousType": "frequencyBands",
+                "deviceMiscellaneousData": {
+                    "frequencyBands": ["433", "900", "GNSS", "2G4", "5G8"],
+                    "currentBands": ["900"],
+                    "numSimultaneusBands": 5
+                }
+            },
+            {
+                "deviceId": "6o7s5zko9sw49c",
+                "deviceMiscellaneousType": "productName",
+                "deviceMiscellaneousData": {
+                    "productName": "Blackbird"
+                }
+            }
+        ]
+    },
+    "event": "deviceMiscellaneous"
+}

@@ -1,0 +1,44 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DeviceLocationChange",
+    "type": "object",
+    "properties": {
+        "deviceId": {
+            "type": "string",
+            "description": "The device id"
+        },
+        "deviceLocationType": {
+            "const": "deviceGeolocation"
+        },
+        "deviceLocationLatitude": {
+            "type": "number",
+            "description": "Decimal latitude value"
+        },
+        "deviceLocationLongitude": {
+            "type": "number",
+            "description": "Decimal longitude value"
+        },
+        "deviceLocationHeading": {
+            "type": "number",
+            "description": "Heading relative to true north in degrees"
+        },
+        "deviceLocationHeight": {
+            "type": "number",
+            "description": "Height relative to choosen reference in meters"
+        },
+        "deviceLocationPitch": {
+            "type": "number",
+            "description": "Pitch in degrees for which the device is mounted"
+        },
+        "deviceLocationRoll": {
+            "type": "number",
+            "description": "Roll in degrees for which the device is mounted"
+        },
+        "deviceParentId": {
+            "type": ["string", "null"],
+            "description": "Device id of parent if part of a composite device"
+        }
+    },
+    "additionalProperties": false,
+    "required": ["deviceId", "deviceLocationType"]
+}

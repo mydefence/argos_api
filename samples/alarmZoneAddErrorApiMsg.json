@@ -1,0 +1,6 @@
+{
+    "message": {
+        "errorInfo": "Failed to create new alarm zone"
+    },
+    "event": "alarmZoneAddError"
+}

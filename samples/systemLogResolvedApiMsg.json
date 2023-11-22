@@ -1,0 +1,12 @@
+{
+    "message": {
+        "systemLogId": "jsf9329d0fu2j3",
+        "deviceId": "20715b6pkih4co7j",
+        "severity": "warning",
+        "description": "Reduced performance",
+        "createdTimeStamp": "2022-03-31T12:00:05.328Z",
+        "updatedTimeStamp": "2022-03-31T12:00:05.328Z",
+        "resolvedTimeStamp": "2022-03-31T12:00:05.328Z"
+    },
+    "event": "systemLog"
+}

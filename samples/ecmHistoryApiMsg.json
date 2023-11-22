@@ -1,0 +1,13 @@
+{
+    "message": [
+        {
+            "deviceId": "eh7bx75ak9v5merz",
+            "deviceParentId": null,
+            "activeFrequencyBands": ["2G4"],
+            "createdTimeStamp": "2020-03-27T13:33:31.824Z",
+            "stoppedTimeStamp": "2020-03-27T13:33:36.321Z",
+            "auto": false
+        }
+    ],
+    "event": "ecmHistory"
+}

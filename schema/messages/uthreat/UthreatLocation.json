@@ -1,0 +1,150 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "UthreatLocation",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "uthreatId": {
+            "type": "string",
+            "description": "The unique ID of the uthreat from the system."
+        },
+        "muted": {
+            "type": "boolean",
+            "description": "True if uthreat has been muted."
+        },
+        "associatedUthreatId": {
+            "type": "string",
+            "description": "Used to link controller and drone."
+        },
+        "operationalStatus": {
+            "type": "string",
+            "description": "Status of UAV if advertised.",
+            "enum": ["Ground", "Airborne", "Emergency"]
+        },
+        "description": {
+            "type": "string",
+            "description": "Information about the threat. E.g. the manufacturer of the drone causing the threat."
+        },
+        "category": {
+            "type": "string",
+            "description": "The threat category.",
+            "enum": ["drone", "controller", "drone/controller", "wifi", "test"]
+        },
+        "location": {
+            "type": "object",
+            "description": "Location of the threat.",
+            "properties": {
+                "lat": {
+                    "type": "number",
+                    "description": "Latitude of the threat (geographical coordinate)."
+                },
+                "lon": {
+                    "type": "number",
+                    "description": "Longitude of the threat (geographical coordinate)."
+                },
+                "x": {
+                    "type": "number",
+                    "description": "East/west relative to mission center (cartesian coordinate) [m]."
+                },
+                "y": {
+                    "type": "number",
+                    "description": "North/south relative to mission center (cartesian coordinate) [m]."
+                },
+                "z": {
+                    "type": "number",
+                    "description": "Height above/under mission center (cartesian coordinate) [m]."
+                },
+                "cov": {
+                    "type": "object",
+                    "description": "Covariance parameters. Defines the uncertainty of the location.",
+                    "properties": {
+                        "xx": {
+                            "type": "number",
+                            "description": "xx element of the covariance matrix [m^2]."
+                        },
+                        "xy": {
+                            "type": "number",
+                            "description": "xy element of the covariance matrix [m^2]."
+                        },
+                        "xz": {
+                            "type": "number",
+                            "description": "xz element of the covariance matrix [m^2]."
+                        },
+                        "yy": {
+                            "type": "number",
+                            "description": "yy element of the covariance matrix [m^2]."
+                        },
+                        "yz": {
+                            "type": "number",
+                            "description": "yz element of the covariance matrix [m^2]."
+                        },
+                        "zz": {
+                            "type": "number",
+                            "description": "zz element of the covariance matrix [m^2]."
+                        }
+                    },
+                    "required": ["xx", "xy", "yy"],
+                    "additionalProperties": false
+                }
+            },
+            "required": ["lat", "lon", "x", "y", "cov"],
+            "additionalProperties": false
+        },
+        "rfInfo": {
+            "type": "object",
+            "description": "Collection of RF information of the threat",
+            "properties": {
+                "frequencyBands": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../common/FrequencyBand.json"
+                    },
+                    "description": "The current frequency bands of the threat."
+                },
+                "possibleBands": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../common/FrequencyBand.json"
+                    },
+                    "description": "The possible frequency bands of the threat. This may contain more frequencies than 'frequencyBands' for threats, that are known to use multiple frequency bands."
+                }
+            },
+            "required": ["frequencyBands", "possibleBands"],
+            "additionalProperties": false
+        },
+        "confidence": {
+            "type": "number",
+            "description": "Confidence in the detection, in 0.0 .. 1.0 ."
+        },
+        "uthreatBasis": {
+            "type": "array",
+            "description": "Collection of threat detections related to this uthreat",
+            "items": {
+                "$ref": "./UthreatBasis.json#"
+            }
+        },
+        "createdTimeStamp": {
+            "type": "string",
+            "description": "UTC time of creation of this uthreat."
+        },
+        "updatedTimeStamp": {
+            "type": "string",
+            "description": "UTC time of the last update of this uthreat. For a new threat this will be equal to createdTimeStamp. Stopping a threat counts as an update, and will update this time stamp."
+        },
+        "stoppedTimeStamp": {
+            "type": "string",
+            "description": "UTC time of stop of this uthreat. Only set when threat is stopped. Will be equal to updatedTimeStamp."
+        }
+    },
+    "required": [
+        "uthreatId",
+        "muted",
+        "description",
+        "category",
+        "location",
+        "confidence",
+        "uthreatBasis",
+        "createdTimeStamp",
+        "updatedTimeStamp"
+    ]
+}

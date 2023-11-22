@@ -1,0 +1,32 @@
+{
+    "message": [
+        {
+            "deviceId": "1kd86z64kfxv0yej",
+            "deviceSerialNumber": "WD200029",
+            "deviceIP": "192.168.0.164",
+            "deviceMac": "70:b3:d5:3b:e0:fe",
+            "deviceType": "wd200",
+            "deviceCategory": "detector",
+            "deviceVersion": 3,
+            "deviceConcept": "direction",
+            "deviceAttributes": {
+                "deviceHeading": 0,
+                "maxAngle": 60,
+                "minAngle": 6,
+                "noAngleFallback": 360,
+                "maxAngleFallback": 60
+            },
+            "deviceSwVersion": "2.2.3",
+            "deviceMounted": true,
+            "deviceState": "connected",
+            "deviceGroup": true,
+            "deviceParentId": null,
+            "devicesCount": 1,
+            "devices": [],
+            "deviceOrigin": "local",
+            "deviceGPSHardware": true,
+            "createdBy": "system"
+        }
+    ],
+    "event": "fwuUpdateableList"
+}

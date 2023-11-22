@@ -1,0 +1,6 @@
+{
+    "message": {
+        "errorInfo": "Failed to remove alarm zone"
+    },
+    "event": "alarmZoneRemoveError"
+}

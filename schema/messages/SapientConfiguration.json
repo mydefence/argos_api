@@ -1,0 +1,28 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "SapientConfiguration",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "deviceSerialNumber": {
+                "type": "string",
+                "description": "Device serial number"
+            },
+            "sdaIp": {
+                "type": "string",
+                "description": "IP address of the Sapient data agent"
+            },
+            "sdaPort": {
+                "type": "integer",
+                "description": "Port of the Sapient data agent"
+            },
+            "nodeId": {
+                "type": "string",
+                "description": "ULID assigend to this Sapient node"
+            }
+        },
+        "required": ["deviceSerialNumber", "sdaIp", "sdaPort", "nodeId"],
+        "additionalProperties": false
+    }
+}

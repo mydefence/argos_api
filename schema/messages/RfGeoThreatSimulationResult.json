@@ -1,0 +1,87 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "RfGeoThreatSimulationResult",
+    "type": "object",
+    "description": "Contains the results of a deployment simulation. Generally references to the x-dimension or axis is in metres and refers to the west-east direction (east is positive). Similarly for the y-dimension, where the north-direction is positive.",
+    "properties": {
+        "simulationNumber": {
+            "type": "integer",
+            "description": "Unique simulation number from rfGeoThreatSimulationStart which initiated the simulation."
+        },
+        "valid": {
+            "type": "boolean",
+            "description": "True if request simulation completed and results (the rest of this message) is valid."
+        },
+        "errorInfo": { "type": "string", "description": "Textual error message if valid is not true." },
+        "requestMsg": { "$ref": "./RfGeoThreatSimulationStart.json#" },
+        "resultParametrics": {
+            "type": "object",
+            "description": "Contains parametric information about what is simulated.",
+            "properties": {
+                "numXY": {
+                    "type": "array",
+                    "description": "Number of simulation cells in X- and Y-directions.",
+                    "items": { "type": "number" },
+                    "minItems": 2,
+                    "maxItems": 2
+                },
+                "lowerLeftXY": {
+                    "type": "array",
+                    "description": "Center coordinate [m] of lower left simulation cell.",
+                    "items": { "type": "number" },
+                    "minItems": 2,
+                    "maxItems": 2
+                },
+                "upperRightXY": {
+                    "type": "array",
+                    "description": "Center coordinate [m] of upper right simulation cell.",
+                    "items": { "type": "number" },
+                    "minItems": 2,
+                    "maxItems": 2
+                }
+            },
+            "additionalProperties": false,
+            "required": ["numXY", "lowerLeftXY", "upperRightXY"]
+        },
+        "estimatedPrecision": {
+            "type": "array",
+            "description": "List of estimated precision in localization - each element of the list corresponds to a 2D-matrix (x, y). Starting from the top row and proceeding downwards.",
+            "items": {
+                "type": "object",
+                "description": "One row in the 2D-matrix (x variable, y fixed) of estimated precision in localization.",
+                "properties": {
+                    "x0": { "type": "number", "description": "x-coordinate of first element" },
+                    "y0": { "type": "number", "description": "y-coordinate of first element" },
+                    "values": {
+                        "type": "array",
+                        "description": "The estimated precision [m] or null if not able to estimate for that point. The first element has location (x0, y0) and subsequent elements increments the x-coordinate by the simulation resolution.",
+                        "items": {
+                            "type": ["number", "null"]
+                        }
+                    }
+                },
+                "additionalProperties": false,
+                "required": ["x0", "y0", "values"]
+            },
+            "minItems": 0
+        },
+        "maxDetectionRangeBoundary": {
+            "type": "array",
+            "description": "List of directions and the maximum estimated range that the RF-sensors can detect in this direction. Use this to provide a maximum boundary of the deployment. The first value in the list is 0deg direction from origo (East) and continues counter-clockwise with an increment of <>",
+            "items": {
+                "type": ["null", "number"],
+                "description": "Null for no detection in the direction, otherwise a range in [m] from origo."
+            }
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "simulationNumber",
+        "valid",
+        "errorInfo",
+        "requestMsg",
+        "resultParametrics",
+        "estimatedPrecision",
+        "maxDetectionRangeBoundary"
+    ]
+}

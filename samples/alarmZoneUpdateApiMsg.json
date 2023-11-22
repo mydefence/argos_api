@@ -1,0 +1,18 @@
+{
+    "message": {
+        "alarmZoneId": "kb675fefef",
+        "color": "#c69540",
+        "name": "Yellow zone",
+        "order": 1,
+        "isActive": true,
+        "visualAlarmLevel": 0,
+        "audioAlarmLevel": 0,
+        "circle": {
+            "lat": 57.134407,
+            "lon": 9.46319,
+            "radiusInMeters": 23
+        }
+    },
+    "event": "alarmZoneUpdate",
+    "responseId": "kb675yzz"
+}

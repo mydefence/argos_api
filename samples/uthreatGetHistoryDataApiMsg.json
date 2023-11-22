@@ -1,0 +1,7 @@
+{
+    "event": "uthreatGetHistoryData",
+    "message": {
+        "uthreatIds": ["624597c43bd78"]
+    },
+    "responseId": "988erbn4jktg6ftd"
+}

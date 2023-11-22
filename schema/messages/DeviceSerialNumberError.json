@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DeviceSerialNumberError",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "deviceSerialNumber": {
+            "type": "string",
+            "title": "Device serialnumber",
+            "description": "A unique device serialnumber either received from the device itself if autodetected, if manually created from the input received and on a composite device it's the same as the deviceId."
+        },
+        "errorInfo": {
+            "type": "string",
+            "title": "Error information Device identification",
+            "description": "A description of what error has occurred and e.g. any identification needed in relation to the error."
+        }
+    },
+    "required": ["deviceSerialNumber", "errorInfo"]
+}

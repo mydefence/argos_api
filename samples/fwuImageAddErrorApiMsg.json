@@ -1,0 +1,6 @@
+{
+    "message": {
+        "errorInfo": "Error: Image already exist"
+    },
+    "event": "fwuImageAddError"
+}

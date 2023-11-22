@@ -1,0 +1,25 @@
+{
+    "message": [
+        {
+            "ptzFollowId": "434fk35d262d14fq",
+            "deviceId": "40710b6pkih4coqj",
+            "followUthreatId": "40710b6pkih3xm6u"
+        },
+        {
+            "ptzFollowId": "434kjnkj211kkk12",
+            "deviceId": "kjpo1309801jlksa",
+            "followUthreatId": "40710b6pkih3xm6u"
+        },
+        {
+            "ptzFollowId": "35d262d14fq3243ks",
+            "deviceId": "b6pkih4coqj33m9",
+            "followUthreatId": "b6pkih3xm6u23ww1"
+        },
+        {
+            "ptzFollowId": "coqjs434fk35d26",
+            "deviceId": "40710b6pkih4coqj",
+            "followDeviceId": "ih3xm6u40710b6pk"
+        }
+    ],
+    "event": "ptzFollowList"
+}

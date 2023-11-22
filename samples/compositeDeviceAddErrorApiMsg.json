@@ -1,0 +1,6 @@
+{
+    "message": {
+        "errorInfo": "Device already exist."
+    },
+    "event": "compositeDeviceAddError"
+}

@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "UthreatHistoryData",
+    "type": "object",
+    "properties": {
+        "historyData": {
+            "type": "array",
+            "description": "List of uthreats for the given set of uthreatIds.",
+            "items": {
+                "$ref": "./Uthreat.json#"
+            }
+        },
+        "limited": {
+            "type": "boolean",
+            "description": "True if the request result has been limited. If true more data for the given set of uthreatIds exists. To get the remaining data send a new request with the same uthreatIds and set the optional fromTimestamp to the toTimestamp from this reponse."
+        },
+        "timeInterval": {
+            "$ref": "./TimeInterval.json#",
+            "description": "Time interval for the returned data set. If 'limited' is true this time interval is narrower than that of the requested uthreatIds."
+        }
+    },
+    "additionalProperties": false,
+    "required": ["historyData", "limited", "timeInterval"]
+}

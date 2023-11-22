@@ -1,0 +1,14 @@
+{
+    "message": {
+        "deviceId": "40710b6pkih4coqj",
+        "t": 0,
+        "subDevices": [
+            {},
+            {
+                "z": { "pct": 27 },
+                "f": 33
+            }
+        ]
+    },
+    "event": "ptzDeviceUpdate"
+}

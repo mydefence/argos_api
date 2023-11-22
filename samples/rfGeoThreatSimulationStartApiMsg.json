@@ -1,0 +1,34 @@
+{
+    "event": "rfGeoThreatSimulationStart",
+    "message": {
+        "simulationNumber": 42,
+        "origoLatLon": [10.0, 10.0],
+        "resolution": 50.0,
+        "maxLocationError": 200.0,
+        "rfDirErrorStdDev": 5.0,
+        "rfMaxDetectionRange": 1000.0,
+        "rfMaxDetectionRangeBoundaryIncrement": 5.0,
+        "areaSpanXY": [500, 500],
+        "sensors": [
+            {
+                "sensorId": "WP210 0",
+                "posLatLon": [9.999997257655968, 10.00091230617015],
+                "azimuthDir": 0.0,
+                "azimuthOpen": 360.0
+            },
+            {
+                "sensorId": "WD202 0",
+                "posLatLon": [10.00090431872497, 10.000002765373026],
+                "azimuthDir": 0,
+                "azimuthOpen": 90.0
+            },
+            {
+                "sensorId": "WD202 1",
+                "posLatLon": [9.99909568109916, 9.999997234888113],
+                "azimuthDir": 0,
+                "azimuthOpen": 90.0
+            }
+        ]
+    },
+    "responseId": "hesteResponse"
+}

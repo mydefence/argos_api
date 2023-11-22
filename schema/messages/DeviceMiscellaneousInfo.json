@@ -1,0 +1,43 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DeviceMiscellaneousInfo",
+    "type": "object",
+    "oneOf": [
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousDeviceName.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousDeviceOrder.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousDeviceOrientation.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousProductName.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousFrequencyBands.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousDroneList.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousUseGPSLocation.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousPtzLimits.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousDeviceRange.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousConfidenceThreshold.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousRingSettings.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousAssetData.json#"
+        }
+    ]
+}

@@ -1,0 +1,57 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "AlarmZonePolygon",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "alarmZoneId": {
+            "type": "string",
+            "description": "Unique id of the alarm zone."
+        },
+        "color": {
+            "type": "string",
+            "description": "Color of the alarm zone."
+        },
+        "name": {
+            "type": "string",
+            "description": "Name of the alarm zone."
+        },
+        "order": {
+            "type": "number",
+            "description": "Order (layer) of the alarm zone."
+        },
+        "isActive": {
+            "type": "boolean",
+            "description": "Switch for (de)activating the alarm zone."
+        },
+        "visualAlarmLevel": {
+            "type": "integer",
+            "description": "Visual alarm level of the alarm zone."
+        },
+        "audioAlarmLevel": {
+            "type": "integer",
+            "description": "Audio alarm level of the alarm zone."
+        },
+        "polygon": {
+            "type": "array",
+            "description": "Polygon defining the alarm zone.",
+            "items": {
+                "type": "object",
+                "description": "Coordinates of point in polygon.",
+                "properties": {
+                    "lat": {
+                        "type": "number",
+                        "description": "Latitude of point in polygon."
+                    },
+                    "lon": {
+                        "type": "number",
+                        "description": "Longitude of point in polygon."
+                    }
+                },
+                "required": ["lat", "lon"],
+                "additionalProperties": false
+            }
+        }
+    },
+    "required": ["alarmZoneId", "color", "name", "order", "isActive", "visualAlarmLevel", "audioAlarmLevel", "polygon"]
+}

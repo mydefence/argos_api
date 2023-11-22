@@ -1,0 +1,12 @@
+{
+    "message": {
+        "deviceId": "bhgcrgg04gk7q76nbz",
+        "deviceLocationType": "deviceGeolocation",
+        "deviceLocationLatitude": 57.065826,
+        "deviceLocationLongitude": 9.951365,
+        "deviceLocationHeading": 0,
+        "deviceLocationHeight": 0,
+        "deviceParentId": "20x547c9kc1ml65h"
+    },
+    "event": "deviceLocationChanged"
+}

@@ -1,0 +1,52 @@
+{
+    "message": [
+        {
+            "systemLogId": "jsf9329d0fu2j3",
+            "deviceId": "20715b6pkih4co7j",
+            "severity": "error",
+            "description": "Reduced performance",
+            "createdTimeStamp": "2022-03-31T12:00:05.231Z",
+            "updatedTimeStamp": "2022-03-31T12:00:05.231Z"
+        },
+        {
+            "systemLogId": "83d8s9082210ds",
+            "deviceId": "20715b6pkih4co7j",
+            "severity": "error",
+            "description": "High temperature",
+            "createdTimeStamp": "2022-03-31T12:00:31.322Z",
+            "updatedTimeStamp": "2022-03-31T12:00:31.322Z"
+        },
+        {
+            "systemLogId": "39fds0s0a3kj02",
+            "deviceId": "df87skjsk3j29212",
+            "severity": "warning",
+            "description": "High temperature",
+            "createdTimeStamp": "2022-04-01T13:10:31.322Z",
+            "updatedTimeStamp": "2022-04-01T13:10:31.322Z"
+        },
+        {
+            "systemLogId": "89f8s92812jk31",
+            "deviceId": "s4jfi9828d8s9j2d",
+            "severity": "warning",
+            "description": "High interference",
+            "createdTimeStamp": "2022-04-03T15:12:03.443Z",
+            "updatedTimeStamp": "2022-04-03T15:12:03.443Z"
+        },
+        {
+            "systemLogId": "d8s878df6ss7ds",
+            "deviceId": "20715b6pkih4co7j",
+            "severity": "error",
+            "description": "Device disconnected",
+            "createdTimeStamp": "2022-04-08T15:12:03.443Z",
+            "updatedTimeStamp": "2022-04-08T15:12:04.546Z"
+        },
+        {
+            "systemLogId": "9839fdsf8j21kj",
+            "severity": "warning",
+            "description": "High CPU load",
+            "createdTimeStamp": "2022-04-12T12:00:05.573Z",
+            "updatedTimeStamp": "2022-04-12T12:00:05.573Z"
+        }
+    ],
+    "event": "systemLogList"
+}

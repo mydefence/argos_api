@@ -1,0 +1,8 @@
+{
+    "event": "uthreatGetHistory",
+    "message": {
+        "fromTimestamp": "2022-04-01T00:00:00.000Z",
+        "toTimestamp": "2022-04-30T00:00:00.000Z"
+    },
+    "responseId": "988erbn4jktg6ftr"
+}

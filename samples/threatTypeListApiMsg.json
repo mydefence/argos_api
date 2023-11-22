@@ -1,0 +1,265 @@
+{
+    "message": [
+        {
+            "threatType": 1,
+            "threatName": "MyDefence Test, Sparrow 5G8",
+            "muted": false
+        },
+        {
+            "threatType": 2,
+            "threatName": "MyDefence Test, Sparrow 2G4",
+            "muted": false
+        },
+        {
+            "threatType": 3,
+            "threatName": "MyDefence Test, Sparrow 433",
+            "muted": false
+        },
+        {
+            "threatType": 4,
+            "threatName": "MyDefence Test, Sparrow 1G2",
+            "muted": false
+        },
+        {
+            "threatType": 1000100,
+            "threatName": "DJI Drone, Lightbridge",
+            "muted": false
+        },
+        {
+            "threatType": 1000105,
+            "threatName": "DJI Drone, OcuSync",
+            "muted": false
+        },
+        {
+            "threatType": 1000103,
+            "threatName": "DJI Controller, GL300A/GL658",
+            "muted": false
+        },
+        {
+            "threatType": 1000101,
+            "threatName": "DJI Controller, GL300F/GL6D10A",
+            "muted": false
+        },
+        {
+            "threatType": 1000102,
+            "threatName": "DJI Controller, GL300C",
+            "muted": false
+        },
+        {
+            "threatType": 1000104,
+            "threatName": "DJI Controller, GL200A/GL300L/RC1A",
+            "muted": false
+        },
+        {
+            "threatType": 1000106,
+            "threatName": "DJI Controller, GL658",
+            "muted": false
+        },
+        {
+            "threatType": 1000107,
+            "threatName": "DJI Drone, S01A/MR1SD25",
+            "muted": false
+        },
+        {
+            "threatType": 1000108,
+            "threatName": "DJI Controller, NPVT581/PVT581",
+            "muted": false
+        },
+        {
+            "threatType": 1000110,
+            "threatName": "DJI Controller, GL358WA",
+            "muted": false
+        },
+        {
+            "threatType": 1000111,
+            "threatName": "DJI Controller, GLD10A",
+            "muted": false
+        },
+        {
+            "threatType": 1000112,
+            "threatName": "DJI Controller, GL300L/RC1A",
+            "muted": false
+        },
+        {
+            "threatType": 1000113,
+            "threatName": "DJI Controller, DJ6",
+            "muted": false
+        },
+        {
+            "threatType": 1000200,
+            "threatName": "Spektrum Controller, DSMX",
+            "muted": false
+        },
+        {
+            "threatType": 1000300,
+            "threatName": "Futaba Controller, Fasst 7ch F",
+            "muted": false
+        },
+        {
+            "threatType": 1000301,
+            "threatName": "Futaba Controller, Fasst 7ch G",
+            "muted": false
+        },
+        {
+            "threatType": 1000302,
+            "threatName": "Futaba Controller, Fasst Mult F",
+            "muted": false
+        },
+        {
+            "threatType": 1000303,
+            "threatName": "Futaba Controller, Fasst Mult G",
+            "muted": false
+        },
+        {
+            "threatType": 1000305,
+            "threatName": "Futaba Controller, Fasstest 12ch",
+            "muted": false
+        },
+        {
+            "threatType": 1000306,
+            "threatName": "Futaba Controller, Fasstest 14ch/18ch",
+            "muted": false
+        },
+        {
+            "threatType": 1000304,
+            "threatName": "Futaba Controller, S-FHSS",
+            "muted": false
+        },
+        {
+            "threatType": 1000307,
+            "threatName": "Futaba Controller, T-FHSS",
+            "muted": false
+        },
+        {
+            "threatType": 1000400,
+            "threatName": "Parrot WiFi, Parrot",
+            "muted": false
+        },
+        {
+            "threatType": 1000401,
+            "threatName": "3DR WiFi, 3DR",
+            "muted": false
+        },
+        {
+            "threatType": 1000402,
+            "threatName": "DJI WiFi, DJI",
+            "muted": false
+        },
+        {
+            "threatType": 1000403,
+            "threatName": "MyDefence Test, Sparrow WiFi",
+            "muted": false
+        },
+        {
+            "threatType": 1000404,
+            "threatName": "Yuneec WiFi, Yuneec",
+            "muted": false
+        },
+        {
+            "threatType": 1000500,
+            "threatName": "FrSky Drone/Controller, D16",
+            "muted": false
+        },
+        {
+            "threatType": 1000501,
+            "threatName": "FrSky Controller, LR12",
+            "muted": false
+        },
+        {
+            "threatType": 1000502,
+            "threatName": "FrSky Controller, R9",
+            "muted": false
+        },
+        {
+            "threatType": 1000503,
+            "threatName": "FrSky Drone, R9 telemetry",
+            "muted": false
+        },
+        {
+            "threatType": 1000600,
+            "threatName": "Turnigy/FlySky Controller, AHFDS 2A",
+            "muted": false
+        },
+        {
+            "threatType": 1000601,
+            "threatName": "Turnigy/FlySky Drone, AHFDS 2A",
+            "muted": false
+        },
+        {
+            "threatType": 1000700,
+            "threatName": "Graupner Controller, HOTT",
+            "muted": false
+        },
+        {
+            "threatType": 1000701,
+            "threatName": "Graupner Drone, HOTT",
+            "muted": false
+        },
+        {
+            "threatType": 1000800,
+            "threatName": "Eversparkle WiFi, Eversparkle",
+            "muted": false
+        },
+        {
+            "threatType": 1000900,
+            "threatName": "Dragonlink Controller, Dragonlink V3",
+            "muted": false
+        },
+        {
+            "threatType": 1000901,
+            "threatName": "Dragonlink Drone, Dragonlink V3 Telemetry",
+            "muted": false
+        },
+        {
+            "threatType": 1000902,
+            "threatName": "Dragonlink Controller, Dragonlink V2",
+            "muted": false
+        },
+        {
+            "threatType": 1000903,
+            "threatName": "Dragonlink Controller, Dragonlink V1",
+            "muted": false
+        },
+        {
+            "threatType": 1000904,
+            "threatName": "Dragonlink Controller, Dragonlink V4 (V3 slim)",
+            "muted": false
+        },
+        {
+            "threatType": 1000905,
+            "threatName": "Dragonlink Drone, Dragonlink V4 (V3 slim) Telemetry",
+            "muted": false
+        },
+        {
+            "threatType": 1001000,
+            "threatName": "RMILEC Controller, RMILEC",
+            "muted": false
+        },
+        {
+            "threatType": 1001100,
+            "threatName": "HUBSAN Controller, H2000/H906A",
+            "muted": false
+        },
+        {
+            "threatType": 1001101,
+            "threatName": "HUBSAN Drone, H109/H501S",
+            "muted": false
+        },
+        {
+            "threatType": 1001201,
+            "threatName": "Autel Controller, Autel EF7",
+            "muted": false
+        },
+        {
+            "threatType": 1001200,
+            "threatName": "Autel Drone, Autel EVO",
+            "muted": false
+        },
+        {
+            "threatType": 1001300,
+            "threatName": "Custom Drone, Analog RF",
+            "muted": false
+        }
+    ],
+    "event": "threatTypeList"
+}

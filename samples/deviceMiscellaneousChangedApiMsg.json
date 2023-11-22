@@ -1,0 +1,10 @@
+{
+    "message": {
+        "deviceId": "9be37p9cj43k7op53j6",
+        "deviceMiscellaneousType": "deviceOrientation",
+        "deviceMiscellaneousData": {
+            "deviceOrientation": 0
+        }
+    },
+    "event": "deviceMiscellaneousChanged"
+}
