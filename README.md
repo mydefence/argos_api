@@ -7,7 +7,7 @@ the MyDefence C2 system backend. For information on the interface refer to the
 The interface is specified using [JSON Schema](https://json-schema.org), and the
 specification  of the messages to/from Argos are placed in the [schema](schema)
 folder. Sample messages containing real data is provided in in the
-[samples](samples).
+[samples](samples) folder.
 
 ### Validation
 Messages can be validated against the schema using the validator in
