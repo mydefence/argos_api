@@ -42,7 +42,8 @@ Client with [Socket.io](https://socket.io/) connection to Argos in
   and build instructions.
 
 ## Argos Types (Typescript)
-Typescript types are provided along side of the example client in the
+Typescript types derived from the schema specifications are provided along side
+of the example client in the
 [interface_examples/argos_types](interface_examples/argos_types) folder. The
 client example uses them, and they can be included in any Typescript project.
 For more information refer to the
