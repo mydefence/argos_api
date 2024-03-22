@@ -11,10 +11,7 @@
             "deviceConcept": "direction",
             "deviceAttributes": {
                 "deviceHeading": 0,
-                "maxAngle": 60,
-                "minAngle": 6,
-                "noAngleFallback": 360,
-                "maxAngleFallback": 60
+                "maxAngle": 60
             },
             "deviceSwVersion": "2.2.3",
             "deviceMounted": true,

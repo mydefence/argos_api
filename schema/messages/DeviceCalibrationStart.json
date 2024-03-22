@@ -1,0 +1,16 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DeviceCalibrationStart",
+    "type": "object",
+    "properties": {
+        "deviceId": {
+            "type": "string"
+        },
+        "calibrationType": {
+            "type": "string",
+            "enum": ["compass"]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["deviceId", "calibrationType"]
+}

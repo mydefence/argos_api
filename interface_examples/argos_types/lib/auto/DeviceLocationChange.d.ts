@@ -18,7 +18,7 @@ export type DeviceLocationChange = {
      */
     deviceLocationLongitude?: number;
     /**
-     * Heading relative to true north in degrees
+     * Heading relative to true north in degrees. For child devices in composites the heading is relative to the parent device.
      */
     deviceLocationHeading?: number;
     /**

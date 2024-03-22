@@ -6,13 +6,13 @@
 /**
  * Device types tells what kind of device it is and with that what kind of attributes and abilities is available - must always be used in combination with deviceVersion and if composite with the sub/composite devices found under the devices list
  */
-export type DeviceType = "duo" | "trio" | "quad" | "penta" | "hexa" | "hepta" | "echoguardQuad" | "groundawareTrio" | "echoshieldQuad";
+export type DeviceType = "composite" | "duo" | "trio" | "quad" | "penta" | "hexa" | "hepta" | "echoguardQuad" | "groundawareTrio" | "echoshieldQuad";
 /**
- * Defines the version of the individual devices and the capabilities attached to the specific device type version
+ * The version of the composite template will typically be the version of the devices used to create the composite. If deviceType is "composite" deviceVersion is ignored.
  */
 export type DeviceVersion = number;
 /**
- * A unique device serialnumber either received from the device itself if autodetected, if manually created from the input received.
+ * A unique device serialnumber. Will be auto-generated if not supplied.
  */
 export type DeviceSerialnumber = string | null;
 /**
@@ -21,6 +21,10 @@ export type DeviceSerialnumber = string | null;
 export type CompositeDeviceAdd = {
     deviceType: DeviceType;
     deviceVersion: DeviceVersion;
+    /**
+     * Only used with deviceType=composite: Used for miscellaneous data fields productName and deviceName.
+     */
+    productName?: string;
     devices: {
         deviceId: string;
         heading: number;

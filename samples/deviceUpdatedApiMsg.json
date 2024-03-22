@@ -9,10 +9,7 @@
         "deviceVersion": 3,
         "deviceConcept": "direction",
         "deviceAttributes": {
-            "minAngle": 6,
-            "maxAngle": 60,
-            "maxAngleFallback": 60,
-            "noAngleFallback": 360
+            "maxAngle": 60
         },
         "deviceMounted": true,
         "deviceState": "connected",
@@ -22,7 +19,8 @@
         "devices": [],
         "deviceOrigin": "local",
         "deviceGPSHardware": true,
-        "deviceSwVersion": "2.2.0"
+        "deviceSwVersion": "2.2.0",
+        "createdBy": "system"
     },
     "event": "deviceUpdated"
 }

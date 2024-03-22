@@ -1,0 +1,37 @@
+{
+    "$comment": "This file is auto-generated. Do not edit.",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DeviceMiscellaneousFrequencyBands",
+    "type": "object",
+    "properties": {
+        "deviceId": {
+            "type": "string",
+            "description": "The device id"
+        },
+        "deviceMiscellaneousType": {
+            "allOf": [
+                {
+                    "$ref": "./DeviceMiscellaneousType.json#"
+                },
+                {
+                    "const": "frequencyBands"
+                }
+            ]
+        },
+        "deviceMiscellaneousData": {
+            "type": "object",
+            "properties": {
+                "currentBands": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../common/FrequencyBand.json#"
+                    },
+                    "description": "The currently selected frequency bands. Set this to change the ECM frequency bands. List must contain between 1 and `numSimultaneusBands` values taken from `frequencyBands`"
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false,
+    "required": ["deviceId", "deviceMiscellaneousType", "deviceMiscellaneousData"]
+}

@@ -12,7 +12,7 @@
         "deviceSerialNumber": {
             "type": "string",
             "title": "Device serialnumber",
-            "description": "A unique device serialnumber either received from the device itself if autodetected, if manually created from the input received and on a composite device it's the same as the deviceId."
+            "description": "A unique device serialnumber either received from the device itself if auto-detected, if manually created from the input received and on a composite device it's the same as the deviceId."
         },
         "deviceMounted": {
             "type": "boolean",
@@ -22,7 +22,7 @@
         "deviceState": {
             "type": "string",
             "title": "Device state",
-            "description": "Defines if the system should be trying to get a connection with the physical device. 'updateable' means device is connected but inactive, e.g. and unmounted child, or obsolete FW.",
+            "description": "State of the connection to the physical device. 'updateable' means device is connected but inactive, e.g. and unmounted child, or obsolete FW. \"created\" is DEPRECATED and will never be used",
             "enum": ["created", "connecting", "connected", "disconnecting", "disconnected", "updating", "updateable"]
         },
         "deviceType": {
@@ -48,12 +48,12 @@
         "deviceGroup": {
             "type": "boolean",
             "title": "Device group",
-            "description": "Defines if the devices is a part of a group/composite device - if a device is part of a group/composite device the value is set to true"
+            "description": "Defines if the device is a part of a group/composite device - if a device is part of a group/composite device the value is set to true"
         },
         "deviceParentId": {
             "type": ["string", "null"],
-            "title": "Device group parrentId",
-            "description": "Is combined with deviceGroup - and if deviceGroup is true the deviceParentId is set to the deviceId of the group/composite device for sub/child devices"
+            "title": "Device parent id",
+            "description": "If the device is a child in a composite device, this will be the parent device id."
         },
         "deviceIP": {
             "type": ["string", "null"],
@@ -71,21 +71,12 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "minAngle": {
-                    "type": "integer"
-                },
                 "maxAngle": {
                     "type": "integer"
                 },
                 "deviceHeading": {
                     "type": "number",
-                    "description": "DEPRECATED! Will be removed. Use deviceLocationHeading from deviceLocation* messages instead."
-                },
-                "maxAngleFallback": {
-                    "type": "integer"
-                },
-                "noAngleFallback": {
-                    "type": "integer"
+                    "description": "Set for child devices and indicates the child's heading relative to the parent composite device. This is a mirror of deviceLocationHeading from deviceLocation* messages. Use deviceLocationChange to change it."
                 }
             }
         },
@@ -111,7 +102,7 @@
         "devices": {
             "type": "array",
             "title": "Devices",
-            "description": "Defines a list of the devices in a composite devices - see composite device devices schema",
+            "description": "Defines a list of the child devices in a composite devices",
             "items": {
                 "$ref": "#"
             }
@@ -119,8 +110,25 @@
         "createdBy": {
             "type": ["string"],
             "title": "Created by field",
-            "description": "Determines wheather the device is created by the system or by the API (or user).",
+            "description": "Indicates if the device is created by the system or by the API (or user).",
             "enum": ["system", "API"]
+        },
+        "deviceCalibration": {
+            "title": "Device Calibration",
+            "description": "If present, it indicates that the device supports calibration, which may be initiated with `deviceCalibrationStart`. For composite devices this property can only be present in child devices. The property name indicates the calibration type, which must be used in `deviceCalibrationStart`.",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "compass": { "$ref": "#/$defs/deviceCalibration" }
+            }
+        }
+    },
+    "$defs": {
+        "deviceCalibration": {
+            "title": "Calibration state",
+            "description": "Current calibration state. 'recalibrate' indicates that the device is calibrated but needs to be recalibrated. Note: 'failed' is overwritten on next update.",
+            "type": ["string"],
+            "enum": ["uncalibrated", "calibrating", "calibrated", "recalibrate", "failed"]
         }
     },
     "required": [
@@ -141,6 +149,7 @@
         "deviceGPSHardware",
         "devicesCount",
         "devices",
-        "deviceSwVersion"
+        "deviceSwVersion",
+        "createdBy"
     ]
 }

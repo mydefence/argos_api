@@ -26,15 +26,17 @@
                 },
                 "deviceRangeMin": {
                     "type": "number",
-                    "description": "Minimum configurable range, read-only."
+                    "description": "Minimum configurable range. Device specific constant.",
+                    "$comment": "read-only"
                 },
                 "deviceRangeMax": {
                     "type": "number",
-                    "description": "Maximum configurable range, read-only."
+                    "description": "Maximum configurable range. Device specific constant.",
+                    "$comment": "read-only"
                 }
             },
             "additionalProperties": false,
-            "required": ["deviceRange"]
+            "required": ["deviceRange", "deviceRangeMin", "deviceRangeMax"]
         }
     },
     "additionalProperties": false,

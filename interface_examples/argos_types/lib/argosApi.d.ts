@@ -33,18 +33,22 @@ import { DeviceSerialNumberError } from './auto/DeviceSerialNumberError';
 export { DeviceSerialNumberError } from './auto/DeviceSerialNumberError';
 import { Device } from './auto/Device';
 export { Device } from './auto/Device';
+import { DeviceCalibrationStart } from './auto/DeviceCalibrationStart';
+export { DeviceCalibrationStart } from './auto/DeviceCalibrationStart';
+import { DeviceDeviceIdError } from './auto/DeviceDeviceIdError';
+export { DeviceDeviceIdError } from './auto/DeviceDeviceIdError';
 import { DeviceList } from './auto/DeviceList';
 export { DeviceList } from './auto/DeviceList';
 import { DeviceLocationChange } from './auto/DeviceLocationChange';
 export { DeviceLocationChange } from './auto/DeviceLocationChange';
-import { DeviceDeviceIdError } from './auto/DeviceDeviceIdError';
-export { DeviceDeviceIdError } from './auto/DeviceDeviceIdError';
 import { DeviceLocation } from './auto/DeviceLocation';
 export { DeviceLocation } from './auto/DeviceLocation';
 import { DeviceLocationList } from './auto/DeviceLocationList';
 export { DeviceLocationList } from './auto/DeviceLocationList';
 import { DeviceMiscellaneousList } from './auto/DeviceMiscellaneousList';
 export { DeviceMiscellaneousList } from './auto/DeviceMiscellaneousList';
+import { DeviceMiscellaneousChange } from './auto/DeviceMiscellaneousChange';
+export { DeviceMiscellaneousChange } from './auto/DeviceMiscellaneousChange';
 import { DeviceMiscellaneousInfo } from './auto/DeviceMiscellaneousInfo';
 export { DeviceMiscellaneousInfo } from './auto/DeviceMiscellaneousInfo';
 import { EcmConfig } from './auto/EcmConfig';
@@ -163,6 +167,8 @@ export type CompositeDeviceAddError = Error;
 export type DeviceAddCompleted = DeviceId;
 export type DeviceAddError = DeviceSerialNumberError;
 export type DeviceAdded = Device;
+export type DeviceCalibrationStartCompleted = DeviceId;
+export type DeviceCalibrationStartError = DeviceDeviceIdError;
 export type DeviceGetList = Empty;
 export type DeviceGetLocations = DeviceId;
 export type DeviceGetMiscellaneous = DeviceId;
@@ -171,7 +177,6 @@ export type DeviceLocationChangeError = DeviceDeviceIdError;
 export type DeviceLocationChanged = DeviceLocation;
 export type DeviceLocations = DeviceLocationList;
 export type DeviceMiscellaneous = DeviceMiscellaneousList;
-export type DeviceMiscellaneousChange = DeviceMiscellaneousInfo;
 export type DeviceMiscellaneousChangeCompleted = DeviceId;
 export type DeviceMiscellaneousChangeError = DeviceDeviceIdError;
 export type DeviceMiscellaneousChanged = DeviceMiscellaneousInfo;
@@ -259,6 +264,7 @@ export type ThreatTypeMuteError = Error;
 export type ThreatTypeUnMute = ThreatType;
 export type ThreatTypeUnMuteCompleted = ThreatType;
 export type ThreatTypeUnMuteError = Error;
+export type Timeout = Empty;
 export type UthreatConfiguration = UthreatConfig;
 export type UthreatConfigure = UthreatConfig;
 export type UthreatConfigureCompleted = UthreatConfig;
@@ -272,7 +278,7 @@ export type UthreatSetMuteError = Error;
 export type VmsSdpInitError = Error;
 export type VmsStreamGetList = Empty;
 export type Empty = {};
-export * from './argos-api-manual';
+export * from './argosApiManual';
 export declare enum API {
     ALARM_STARTED = "alarmStarted",
     ALARM_STOPPED = "alarmStopped",
@@ -299,6 +305,9 @@ export declare enum API {
     DEVICE_ADD_COMPLETED = "deviceAddCompleted",
     DEVICE_ADD_ERROR = "deviceAddError",
     DEVICE_ADDED = "deviceAdded",
+    DEVICE_CALIBRATION_START = "deviceCalibrationStart",
+    DEVICE_CALIBRATION_START_COMPLETED = "deviceCalibrationStartCompleted",
+    DEVICE_CALIBRATION_START_ERROR = "deviceCalibrationStartError",
     DEVICE_GET_LIST = "deviceGetList",
     DEVICE_GET_LOCATIONS = "deviceGetLocations",
     DEVICE_GET_MISCELLANEOUS = "deviceGetMiscellaneous",
@@ -425,6 +434,7 @@ export declare enum API {
     THREAT_TYPE_UN_MUTE_COMPLETED = "threatTypeUnMuteCompleted",
     THREAT_TYPE_UN_MUTE_ERROR = "threatTypeUnMuteError",
     TIME = "time",
+    TIMEOUT = "timeout",
     UTHREAT = "uthreat",
     UTHREAT_CONFIGURATION = "uthreatConfiguration",
     UTHREAT_CONFIGURE = "uthreatConfigure",
@@ -472,6 +482,9 @@ export type ArgosTypesMap = {
     [API.DEVICE_ADD_COMPLETED]: DeviceAddCompleted;
     [API.DEVICE_ADD_ERROR]: DeviceAddError;
     [API.DEVICE_ADDED]: DeviceAdded;
+    [API.DEVICE_CALIBRATION_START]: DeviceCalibrationStart;
+    [API.DEVICE_CALIBRATION_START_COMPLETED]: DeviceCalibrationStartCompleted;
+    [API.DEVICE_CALIBRATION_START_ERROR]: DeviceCalibrationStartError;
     [API.DEVICE_GET_LIST]: DeviceGetList;
     [API.DEVICE_GET_LOCATIONS]: DeviceGetLocations;
     [API.DEVICE_GET_MISCELLANEOUS]: DeviceGetMiscellaneous;
@@ -598,6 +611,7 @@ export type ArgosTypesMap = {
     [API.THREAT_TYPE_UN_MUTE_COMPLETED]: ThreatTypeUnMuteCompleted;
     [API.THREAT_TYPE_UN_MUTE_ERROR]: ThreatTypeUnMuteError;
     [API.TIME]: Time;
+    [API.TIMEOUT]: Timeout;
     [API.UTHREAT]: Uthreat;
     [API.UTHREAT_CONFIGURATION]: UthreatConfiguration;
     [API.UTHREAT_CONFIGURE]: UthreatConfigure;

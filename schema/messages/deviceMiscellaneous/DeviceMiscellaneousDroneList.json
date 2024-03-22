@@ -65,7 +65,8 @@
                             "drone_names"
                         ]
                     },
-                    "description": "Array of supported drone/controller systems"
+                    "description": "Array of supported drone/controller systems.",
+                    "$comment": "read-only"
                 }
             },
             "additionalProperties": false,

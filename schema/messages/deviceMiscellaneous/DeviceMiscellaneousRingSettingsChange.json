@@ -1,0 +1,112 @@
+{
+    "$comment": "This file is auto-generated. Do not edit.",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DeviceMiscellaneousRingSettings",
+    "type": "object",
+    "properties": {
+        "deviceId": {
+            "type": "string",
+            "description": "The device id"
+        },
+        "deviceMiscellaneousType": {
+            "allOf": [
+                {
+                    "$ref": "./DeviceMiscellaneousType.json#"
+                },
+                {
+                    "const": "ringSettings"
+                }
+            ]
+        },
+        "deviceMiscellaneousData": {
+            "type": "object",
+            "properties": {
+                "range": {
+                    "type": "number",
+                    "description": "Range of Ring device. Mapped to TX gain setting."
+                },
+                "holdRadius": {
+                    "type": "number",
+                    "description": "Radius of the ring generated when activating the 'holdingPattern' interception mode"
+                },
+                "mode": {
+                    "type": "string",
+                    "enum": ["holdingPattern", "static", "pushBack"],
+                    "description": "Name of the interception mode"
+                },
+                "pushBackHeading": {
+                    "type": "number",
+                    "description": "The heading the target will be pushed when activating the 'pushBack' interception mode"
+                },
+                "targetLocation": {
+                    "type": ["object", "null"],
+                    "description": "Coordinates to use when Ring device is manually activated in either 'holdingPattern' or 'pushBack' mode. If null, the location of the Ring device is used.",
+                    "properties": {
+                        "lat": {
+                            "type": "number",
+                            "description": "Latitude used in the activated interception mode"
+                        },
+                        "lon": {
+                            "type": "number",
+                            "description": "Longitude used in the activated interception mode"
+                        },
+                        "height": {
+                            "type": "number",
+                            "description": "Height relative to installation plane used in the activated interception mode"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": ["lat", "lon"]
+                },
+                "staticLocation": {
+                    "type": ["object", "null"],
+                    "description": "Coordinates to use when Ring device is manually activated in 'static' mode. If null, the location of the Ring device is used.",
+                    "properties": {
+                        "lat": {
+                            "type": "number",
+                            "description": "Latitude used in the activated interception mode"
+                        },
+                        "lon": {
+                            "type": "number",
+                            "description": "Longitude used in the activated interception mode"
+                        },
+                        "height": {
+                            "type": "number",
+                            "description": "Height relative to installation plane used in the activated interception mode"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": ["lat", "lon"]
+                },
+                "autoEcmMode": {
+                    "type": "string",
+                    "enum": ["holdingPattern", "static"],
+                    "description": "Name of the interception mode when Ring device is activated by automatic ECM"
+                },
+                "autoEcmLocation": {
+                    "type": ["object", "null"],
+                    "description": "Coordinates to use when Ring device is activated by automatic ECM. If null, the location of the Ring device is used.",
+                    "properties": {
+                        "lat": {
+                            "type": "number",
+                            "description": "Latitude used when Ring device is activated by automatic ECM"
+                        },
+                        "lon": {
+                            "type": "number",
+                            "description": "Longitude used when Ring device is activated by automatic ECM"
+                        },
+                        "height": {
+                            "type": "number",
+                            "description": "Height relative to installation plane used when Ring device is activated by automatic ECM"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": ["lat", "lon"]
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false,
+    "required": ["deviceId", "deviceMiscellaneousType", "deviceMiscellaneousData"]
+}

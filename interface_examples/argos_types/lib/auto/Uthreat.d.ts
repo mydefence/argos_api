@@ -12,19 +12,19 @@ export type UthreatBasis = UthreatBasisPresence | UthreatBasisZone | UthreatBasi
 /**
  * The type of the system component sending the threat.
  */
-export type DetectionType = "RF" | "Radar" | "Drone ID" | "Demodulated";
+export type DetectionType = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio";
 /**
  * The type of the system component sending the threat.
  */
-export type DetectionType1 = "RF" | "Radar" | "Drone ID" | "Demodulated";
+export type DetectionType1 = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio";
 /**
  * The type of the system component sending the threat.
  */
-export type DetectionType2 = "RF" | "Radar" | "Drone ID" | "Demodulated";
+export type DetectionType2 = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio";
 /**
  * The type of the system component sending the threat.
  */
-export type DetectionType3 = "RF" | "Radar" | "Drone ID" | "Demodulated";
+export type DetectionType3 = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio";
 export type UthreatPresence = {
     /**
      * The unique ID of the uthreat from the system.

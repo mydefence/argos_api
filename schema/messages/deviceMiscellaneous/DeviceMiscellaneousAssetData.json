@@ -23,7 +23,8 @@
                 "assetData": {
                     "type": "object",
                     "description": "Various data for internal asset service. Not intended for usage by 3rd party integrators.",
-                    "additionalProperties": true
+                    "additionalProperties": true,
+                    "$comment": "read-only"
                 }
             },
             "additionalProperties": false,

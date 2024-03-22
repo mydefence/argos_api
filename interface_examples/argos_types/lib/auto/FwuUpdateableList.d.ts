@@ -8,7 +8,7 @@
  */
 export type DeviceIdentification = string;
 /**
- * A unique device serialnumber either received from the device itself if autodetected, if manually created from the input received and on a composite device it's the same as the deviceId.
+ * A unique device serialnumber either received from the device itself if auto-detected, if manually created from the input received and on a composite device it's the same as the deviceId.
  */
 export type DeviceSerialnumber = string;
 /**
@@ -16,13 +16,13 @@ export type DeviceSerialnumber = string;
  */
 export type DeviceMounted = boolean;
 /**
- * Defines if the system should be trying to get a connection with the physical device. 'updateable' means device is connected but inactive, e.g. and unmounted child, or obsolete FW.
+ * State of the connection to the physical device. 'updateable' means device is connected but inactive, e.g. and unmounted child, or obsolete FW. "created" is DEPRECATED and will never be used
  */
 export type DeviceState = "created" | "connecting" | "connected" | "disconnecting" | "disconnected" | "updating" | "updateable";
 /**
  * Device types tells what kind of device it is and with that what kind of attributes and abilities is available - must always be used in combination with deviceVersion and if composite with the sub/composite devices found under the devices list
  */
-export type DeviceType = "blackbird" | "jaegar" | "dobermann" | "dobermann360" | "dobermann_dual" | "duo" | "echoguard" | "gps" | "groundaware" | "hepta" | "hexa" | "penta" | "pentaDM1xx" | "pentaWD2xx" | "quad" | "quadWD2xx" | "trio" | "wd200" | "wingman" | "wl1" | "wm200" | "wolfpack" | "onvif" | "skyeye" | "blackbird5k" | "echoguardQuad" | "groundawareTrio" | "aps" | "ring" | "xenta" | "echoshield" | "echoshieldQuad" | "visionflex";
+export type DeviceType = "blackbird" | "jaegar" | "dobermann" | "dobermann360" | "dobermann_dual" | "duo" | "echoguard" | "gps" | "groundaware" | "hepta" | "hexa" | "penta" | "pentaDM1xx" | "pentaWD2xx" | "quad" | "quadWD2xx" | "trio" | "wd200" | "wingman" | "wl1" | "wm200" | "wolfpack" | "onvif" | "skyeye" | "blackbird5k" | "echoguardQuad" | "groundawareTrio" | "aps" | "ring" | "xenta" | "echoshield" | "echoshieldQuad" | "visionflex" | "composite" | "lizardEar";
 /**
  * Defines the version of the individual devices and the capabilities attached to the specific device type version
  */
@@ -36,13 +36,13 @@ export type DeviceCategory = "detector" | "effector" | "composite" | "detectorEf
  */
 export type DeviceConcept = "area" | "direction" | "track" | "group";
 /**
- * Defines if the devices is a part of a group/composite device - if a device is part of a group/composite device the value is set to true
+ * Defines if the device is a part of a group/composite device - if a device is part of a group/composite device the value is set to true
  */
 export type DeviceGroup = boolean;
 /**
- * Is combined with deviceGroup - and if deviceGroup is true the deviceParentId is set to the deviceId of the group/composite device for sub/child devices
+ * If the device is a child in a composite device, this will be the parent device id.
  */
-export type DeviceGroupParrentId = string | null;
+export type DeviceParentId = string | null;
 /**
  * Defines the devices IP address either received when the devices was discovered or when the device was manually created. A composite device does not have a device IP
  */
@@ -64,13 +64,17 @@ export type CreatedOrigin = "local" | "external";
  */
 export type DeviceCount = number;
 /**
- * Defines a list of the devices in a composite devices - see composite device devices schema
+ * Defines a list of the child devices in a composite devices
  */
 export type Devices = Device[];
 /**
- * Determines wheather the device is created by the system or by the API (or user).
+ * Indicates if the device is created by the system or by the API (or user).
  */
 export type CreatedByField = "system" | "API";
+/**
+ * Current calibration state. 'recalibrate' indicates that the device is calibrated but needs to be recalibrated. Note: 'failed' is overwritten on next update.
+ */
+export type CalibrationState = "uncalibrated" | "calibrating" | "calibrated" | "recalibrate" | "failed";
 export type FwuUpdateableList = Device[];
 export type Device = {
     deviceId: DeviceIdentification;
@@ -82,7 +86,7 @@ export type Device = {
     deviceCategory: DeviceCategory;
     deviceConcept: DeviceConcept;
     deviceGroup: DeviceGroup;
-    deviceParentId: DeviceGroupParrentId;
+    deviceParentId: DeviceParentId;
     deviceIP: DeviceIP;
     deviceMac: DeviceMAC;
     deviceAttributes: DeviceAttributes;
@@ -91,18 +95,22 @@ export type Device = {
     deviceGPSHardware: boolean;
     devicesCount: DeviceCount;
     devices: Devices;
-    createdBy?: CreatedByField;
+    createdBy: CreatedByField;
+    deviceCalibration?: DeviceCalibration;
 };
 /**
  * device attributes
  */
 export type DeviceAttributes = {
-    minAngle?: number;
     maxAngle?: number;
     /**
-     * DEPRECATED! Will be removed. Use deviceLocationHeading from deviceLocation* messages instead.
+     * Set for child devices and indicates the child's heading relative to the parent composite device. This is a mirror of deviceLocationHeading from deviceLocation* messages. Use deviceLocationChange to change it.
      */
     deviceHeading?: number;
-    maxAngleFallback?: number;
-    noAngleFallback?: number;
+};
+/**
+ * If present, it indicates that the device supports calibration, which may be initiated with `deviceCalibrationStart`. For composite devices this property can only be present in child devices. The property name indicates the calibration type, which must be used in `deviceCalibrationStart`.
+ */
+export type DeviceCalibration = {
+    compass?: CalibrationState;
 };

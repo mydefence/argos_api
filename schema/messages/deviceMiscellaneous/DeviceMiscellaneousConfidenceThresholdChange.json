@@ -1,0 +1,34 @@
+{
+    "$comment": "This file is auto-generated. Do not edit.",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DeviceMiscellaneousConfidenceThreshold",
+    "type": "object",
+    "properties": {
+        "deviceId": {
+            "type": "string",
+            "description": "The device id"
+        },
+        "deviceMiscellaneousType": {
+            "allOf": [
+                {
+                    "$ref": "./DeviceMiscellaneousType.json#"
+                },
+                {
+                    "const": "confidenceThreshold"
+                }
+            ]
+        },
+        "deviceMiscellaneousData": {
+            "type": "object",
+            "properties": {
+                "confidenceThreshold": {
+                    "type": "number",
+                    "description": "Detections with a drone probability below this threshold are discarded and not sent into the stack"
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false,
+    "required": ["deviceId", "deviceMiscellaneousType", "deviceMiscellaneousData"]
+}

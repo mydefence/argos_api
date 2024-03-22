@@ -1,0 +1,34 @@
+{
+    "$comment": "This file is auto-generated. Do not edit.",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DeviceMiscellaneousUseGPSLocation",
+    "type": "object",
+    "properties": {
+        "deviceId": {
+            "type": "string",
+            "description": "The device id"
+        },
+        "deviceMiscellaneousType": {
+            "allOf": [
+                {
+                    "$ref": "./DeviceMiscellaneousType.json#"
+                },
+                {
+                    "const": "useGPSLocation"
+                }
+            ]
+        },
+        "deviceMiscellaneousData": {
+            "type": "object",
+            "properties": {
+                "useGPSLocation": {
+                    "type": "boolean",
+                    "description": "Boolean value that allows the location of a device to be updated based on GPS position from the device"
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false,
+    "required": ["deviceId", "deviceMiscellaneousType", "deviceMiscellaneousData"]
+}

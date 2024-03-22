@@ -26,11 +26,13 @@
                 },
                 "rangeMin": {
                     "type": "number",
-                    "description": "Minimum range of Ring device, read-only"
+                    "description": "Minimum range of Ring device. Device specific constant.",
+                    "$comment": "read-only"
                 },
                 "rangeMax": {
                     "type": "number",
-                    "description": "Maximum range of Ring device, read-only"
+                    "description": "Maximum range of Ring device. Device specific constant.",
+                    "$comment": "read-only"
                 },
                 "holdRadius": {
                     "type": "number",
@@ -38,11 +40,13 @@
                 },
                 "holdRadiusMin": {
                     "type": "number",
-                    "description": "Minimum radius of the ring generated when activating the 'holdingPattern' interception mode, read-only"
+                    "description": "Minimum radius of the ring generated when activating the 'holdingPattern' interception mode. Device specific constant.",
+                    "$comment": "read-only"
                 },
                 "holdRadiusMax": {
                     "type": "number",
-                    "description": "Maximum radius of the ring generated when activating the 'holdingPattern' interception mode, read-only"
+                    "description": "Maximum radius of the ring generated when activating the 'holdingPattern' interception mode. Device specific constant.",
+                    "$comment": "read-only"
                 },
                 "mode": {
                     "type": "string",
@@ -119,6 +123,20 @@
                     "required": ["lat", "lon"]
                 }
             },
+            "required": [
+                "range",
+                "rangeMin",
+                "rangeMax",
+                "holdRadius",
+                "holdRadiusMin",
+                "holdRadiusMax",
+                "mode",
+                "pushBackHeading",
+                "targetLocation",
+                "staticLocation",
+                "autoEcmMode",
+                "autoEcmLocation"
+            ],
             "additionalProperties": false
         }
     },

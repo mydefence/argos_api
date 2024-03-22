@@ -26,7 +26,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.API = void 0;
-__exportStar(require("./argos-api-manual"), exports);
+__exportStar(require("./argosApiManual"), exports);
 var API;
 (function (API) {
     API["ALARM_STARTED"] = "alarmStarted";
@@ -54,6 +54,9 @@ var API;
     API["DEVICE_ADD_COMPLETED"] = "deviceAddCompleted";
     API["DEVICE_ADD_ERROR"] = "deviceAddError";
     API["DEVICE_ADDED"] = "deviceAdded";
+    API["DEVICE_CALIBRATION_START"] = "deviceCalibrationStart";
+    API["DEVICE_CALIBRATION_START_COMPLETED"] = "deviceCalibrationStartCompleted";
+    API["DEVICE_CALIBRATION_START_ERROR"] = "deviceCalibrationStartError";
     API["DEVICE_GET_LIST"] = "deviceGetList";
     API["DEVICE_GET_LOCATIONS"] = "deviceGetLocations";
     API["DEVICE_GET_MISCELLANEOUS"] = "deviceGetMiscellaneous";
@@ -180,6 +183,7 @@ var API;
     API["THREAT_TYPE_UN_MUTE_COMPLETED"] = "threatTypeUnMuteCompleted";
     API["THREAT_TYPE_UN_MUTE_ERROR"] = "threatTypeUnMuteError";
     API["TIME"] = "time";
+    API["TIMEOUT"] = "timeout";
     API["UTHREAT"] = "uthreat";
     API["UTHREAT_CONFIGURATION"] = "uthreatConfiguration";
     API["UTHREAT_CONFIGURE"] = "uthreatConfigure";
@@ -200,5 +204,5 @@ var API;
     API["VMS_SDP_INIT_ERROR"] = "vmsSdpInitError";
     API["VMS_STREAM_GET_LIST"] = "vmsStreamGetList";
     API["VMS_STREAM_LIST"] = "vmsStreamList";
-})(API = exports.API || (exports.API = {}));
-//# sourceMappingURL=argos-api.js.map
+})(API || (exports.API = API = {}));
+//# sourceMappingURL=argosApi.js.map

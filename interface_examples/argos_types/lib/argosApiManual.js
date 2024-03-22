@@ -1,6 +1,15 @@
 "use strict";
+/*******************************************************************************
+ *
+ * Copyright (C) 2020 MyDefence Communication A/S. All rights reserved.
+ *
+ * These computer program listings and specifications, are the property of
+ * MyDefence Communication A/S and shall not be reproduced or copied or used in
+ * whole or in part without written permission from MyDefence Communication A/S.
+ *
+ *******************************************************************************/
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isPtz = exports.isPtzMoveAbsPosition = exports.isPtzMoveAbsOrientation = exports.isDeviceMiscellaneousRingSettings = exports.isDeviceMiscellaneousConfidenceThreshold = exports.isDeviceMiscellaneousDeviceRange = exports.isDeviceMiscellaneousPtzLimits = exports.isDeviceMiscellaneousUseGPSLocation = exports.isDeviceMiscellaneousDroneList = exports.isDeviceMiscellaneousFrequencyBands = exports.isDeviceMiscellaneousProductName = exports.isDeviceMiscellaneousDeviceOrientation = exports.isDeviceMiscellaneousDeviceOrder = exports.isDeviceMiscellaneousDeviceName = exports.uthreatType = exports.isUthreatBasisLocation = exports.isUthreatBasisDirection = exports.isUthreatBasisZone = exports.isUthreatBasisPresence = exports.isUthreatLocation = exports.isUthreatDirection = exports.isUthreatZone = exports.isUthreatPresence = exports.isOriginFilterPolygon = exports.isOriginFilterCircle = exports.isAlarmZonePolygon = exports.isAlarmZoneCircle = exports.isAlarmZoneAddPolygon = exports.isAlarmZoneAddCircle = void 0;
+exports.isPtz = exports.isPtzMoveAbsPosition = exports.isPtzMoveAbsOrientation = exports.miscellaneousDataFind = exports.isDeviceMiscellaneousRingSettings = exports.isDeviceMiscellaneousConfidenceThreshold = exports.isDeviceMiscellaneousDeviceRange = exports.isDeviceMiscellaneousPtzLimits = exports.isDeviceMiscellaneousUseGPSLocation = exports.isDeviceMiscellaneousDroneList = exports.isDeviceMiscellaneousFrequencyBands = exports.isDeviceMiscellaneousProductName = exports.isDeviceMiscellaneousDeviceOrientation = exports.isDeviceMiscellaneousDeviceOrder = exports.isDeviceMiscellaneousDeviceName = exports.uthreatType = exports.isUthreatBasisLocation = exports.isUthreatBasisDirection = exports.isUthreatBasisZone = exports.isUthreatBasisPresence = exports.isUthreatLocation = exports.isUthreatDirection = exports.isUthreatZone = exports.isUthreatPresence = exports.isOriginFilterPolygon = exports.isOriginFilterCircle = exports.isAlarmZonePolygon = exports.isAlarmZoneCircle = exports.isAlarmZoneAddPolygon = exports.isAlarmZoneAddCircle = void 0;
 function isAlarmZoneAddCircle(alarmZoneAdd) {
     return alarmZoneAdd.circle !== undefined;
 }
@@ -113,6 +122,13 @@ function isDeviceMiscellaneousRingSettings(misc) {
     return misc.deviceMiscellaneousType == 'ringSettings';
 }
 exports.isDeviceMiscellaneousRingSettings = isDeviceMiscellaneousRingSettings;
+/** Search miscellaneous data list and narrow to the requested type. */
+function miscellaneousDataFind(deviceMiscellaneousList, miscType) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return deviceMiscellaneousList.find((misc) => misc.deviceMiscellaneousType == miscType);
+}
+exports.miscellaneousDataFind = miscellaneousDataFind;
 function isPtzMoveAbsOrientation(p) {
     return p.orientation !== undefined;
 }
@@ -133,9 +149,11 @@ function isPtz(device) {
         case 'jaegar':
         case 'onvif':
             return true;
+        case 'composite':
+            return device.devices.some(isPtz);
         default:
             return false;
     }
 }
 exports.isPtz = isPtz;
-//# sourceMappingURL=argos-api-manual.js.map
+//# sourceMappingURL=argosApiManual.js.map

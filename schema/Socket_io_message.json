@@ -179,7 +179,11 @@
                 "sapientNodeList",
                 "systemLog",
                 "systemLogGetList",
-                "systemLogList"
+                "systemLogList",
+                "timeout",
+                "deviceCalibrationStart",
+                "deviceCalibrationStartCompleted",
+                "deviceCalibrationStartError"
             ]
         },
         "message": {
@@ -304,7 +308,7 @@
         },
         {
             "if": { "properties": { "event": { "const": "deviceMiscellaneousChange" } } },
-            "then": { "properties": { "message": { "$ref": "./messages/DeviceMiscellaneousInfo.json#" } } }
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceMiscellaneousChange.json#" } } }
         },
         {
             "if": { "properties": { "event": { "const": "deviceMiscellaneousChangeCompleted" } } },
@@ -893,6 +897,22 @@
         {
             "if": { "properties": { "event": { "const": "systemLogList" } } },
             "then": { "properties": { "message": { "$ref": "./messages/SystemLogList.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "timeout" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceCalibrationStart" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceCalibrationStart.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceCalibrationStartCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "deviceCalibrationStartError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceDeviceIdError.json#" } } }
         }
     ]
 }

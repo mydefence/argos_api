@@ -7,6 +7,10 @@
  * whole or in part without written permission from MyDefence Communication A/S.
  *
  *******************************************************************************/
+/**
+ * Note: Everything in here is re-exported from argosApi.ts, so you never need
+ * to import this file.
+ * */
 import { Device } from './auto/Device';
 export { FrequencyBand } from './auto/DeviceMiscellaneousInfo';
 import { AlarmZoneAdd, AlarmZoneAddCircle, AlarmZoneAddPolygon } from './auto/AlarmZoneAdd';
@@ -35,7 +39,7 @@ export declare function isUthreatBasisDirection(utb: UthreatBasis): utb is Uthre
 export declare function isUthreatBasisLocation(utb: UthreatBasis): utb is UthreatBasisLocation;
 /** Return string representation of Uthreat/UthreatBasis type */
 export declare function uthreatType(ut: Uthreat | UthreatBasis): 'presence' | 'zone' | 'direction' | 'location';
-import { DeviceMiscellaneousInfo, DeviceMiscellaneousDeviceName, DeviceMiscellaneousDeviceOrder, DeviceMiscellaneousDeviceOrientation, DeviceMiscellaneousProductName, DeviceMiscellaneousFrequencyBands, DeviceMiscellaneousDroneList, DeviceMiscellaneousUseGPSLocation, DeviceMiscellaneousPtzLimits, DeviceMiscellaneousDeviceRange, DeviceMiscellaneousConfidenceThreshold, DeviceMiscellaneousRingSettings } from './auto/DeviceMiscellaneousInfo';
+import { DeviceMiscellaneousInfo, DeviceMiscellaneousDeviceName, DeviceMiscellaneousDeviceOrder, DeviceMiscellaneousDeviceOrientation, DeviceMiscellaneousProductName, DeviceMiscellaneousFrequencyBands, DeviceMiscellaneousDroneList, DeviceMiscellaneousUseGPSLocation, DeviceMiscellaneousPtzLimits, DeviceMiscellaneousDeviceRange, DeviceMiscellaneousConfidenceThreshold, DeviceMiscellaneousRingSettings, DeviceMiscellaneousType } from './auto/DeviceMiscellaneousInfo';
 export { DeviceMiscellaneousInfo, DeviceMiscellaneousType, DeviceMiscellaneousDeviceName, DeviceMiscellaneousDeviceOrder, DeviceMiscellaneousDeviceOrientation, DeviceMiscellaneousProductName, DeviceMiscellaneousFrequencyBands, DeviceMiscellaneousDroneList, DeviceMiscellaneousUseGPSLocation, DeviceMiscellaneousPtzLimits, DeviceMiscellaneousDeviceRange, DeviceMiscellaneousConfidenceThreshold, DeviceMiscellaneousRingSettings, } from './auto/DeviceMiscellaneousInfo';
 export declare function isDeviceMiscellaneousDeviceName(misc: DeviceMiscellaneousInfo): misc is DeviceMiscellaneousDeviceName;
 export declare function isDeviceMiscellaneousDeviceOrder(misc: DeviceMiscellaneousInfo): misc is DeviceMiscellaneousDeviceOrder;
@@ -48,6 +52,10 @@ export declare function isDeviceMiscellaneousPtzLimits(misc: DeviceMiscellaneous
 export declare function isDeviceMiscellaneousDeviceRange(misc: DeviceMiscellaneousInfo): misc is DeviceMiscellaneousDeviceRange;
 export declare function isDeviceMiscellaneousConfidenceThreshold(misc: DeviceMiscellaneousInfo): misc is DeviceMiscellaneousConfidenceThreshold;
 export declare function isDeviceMiscellaneousRingSettings(misc: DeviceMiscellaneousInfo): misc is DeviceMiscellaneousRingSettings;
+/** Search miscellaneous data list and narrow to the requested type. */
+export declare function miscellaneousDataFind<T extends DeviceMiscellaneousType>(deviceMiscellaneousList: DeviceMiscellaneousInfo[], miscType: T): (DeviceMiscellaneousInfo & {
+    deviceMiscellaneousType: T;
+}) | undefined;
 export type DeviceMiscellaneousTypeMap = {
     deviceName: DeviceMiscellaneousDeviceName;
     productName: DeviceMiscellaneousDeviceOrder;
@@ -62,6 +70,7 @@ export type DeviceMiscellaneousTypeMap = {
     ringSettings: DeviceMiscellaneousRingSettings;
 };
 import { PtzMoveAbs, PtzMoveAbsOrientation, PtzMoveAbsPosition } from './auto/PtzMoveAbs';
+import { ArgosTypesMap } from './argosApi';
 export { PtzMoveAbsOrientation, PtzMoveAbsPosition } from './auto/PtzMoveAbs';
 export declare function isPtzMoveAbsOrientation(p: PtzMoveAbs): p is PtzMoveAbsOrientation;
 export declare function isPtzMoveAbsPosition(p: PtzMoveAbs): p is PtzMoveAbsPosition;
@@ -71,3 +80,14 @@ export declare function isPtzMoveAbsPosition(p: PtzMoveAbs): p is PtzMoveAbsPosi
  * @returns true if device is a PTZ device, false otherwise
  */
 export declare function isPtz(device: Device): boolean;
+/** Messages to ARGOS (socket.io request) */
+export type ArgosReq = {
+    message: ArgosTypesMap[keyof ArgosTypesMap];
+    responseId: string;
+};
+/** Messages from ARGOS (socket.io response or push) */
+type ArgosResMap<T extends ArgosTypesMap> = {
+    event: keyof T;
+    message: T;
+};
+export type ArgosRes = ArgosResMap<ArgosTypesMap>;

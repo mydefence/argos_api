@@ -25,18 +25,20 @@
                     "items": {
                         "$ref": "../common/FrequencyBand.json#"
                     },
-                    "description": "The frequency bands supported by the device"
+                    "description": "The frequency bands supported by the device. Device specific constant.",
+                    "$comment": "read-only"
                 },
                 "currentBands": {
                     "type": "array",
                     "items": {
                         "$ref": "../common/FrequencyBand.json#"
                     },
-                    "description": "The currently selected frequency bands"
+                    "description": "The currently selected frequency bands. Set this to change the ECM frequency bands. List must contain between 1 and `numSimultaneusBands` values taken from `frequencyBands`"
                 },
                 "numSimultaneusBands": {
                     "type": "number",
-                    "description": "The number of possible simultaneous frequency bands"
+                    "description": "The number of possible simultaneous frequency bands. Device specific constant.",
+                    "$comment": "read-only"
                 }
             },
             "additionalProperties": false,

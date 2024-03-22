@@ -71,7 +71,8 @@
                     },
                     "additionalProperties": false,
                     "required": ["fov"],
-                    "description": "Maximum and minimum zoom values"
+                    "description": "Maximum and minimum zoom values",
+                    "$comment": "read-only"
                 }
             },
             "additionalProperties": false

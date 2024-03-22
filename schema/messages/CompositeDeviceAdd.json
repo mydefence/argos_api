@@ -7,12 +7,27 @@
             "type": "string",
             "title": "Device type",
             "description": "Device types tells what kind of device it is and with that what kind of attributes and abilities is available - must always be used in combination with deviceVersion and if composite with the sub/composite devices found under the devices list",
-            "enum": ["duo", "trio", "quad", "penta", "hexa", "hepta", "echoguardQuad", "groundawareTrio", "echoshieldQuad"]
+            "enum": [
+                "composite",
+                "duo",
+                "trio",
+                "quad",
+                "penta",
+                "hexa",
+                "hepta",
+                "echoguardQuad",
+                "groundawareTrio",
+                "echoshieldQuad"
+            ]
         },
         "deviceVersion": {
             "type": "integer",
             "title": "Device version",
-            "description": "Defines the version of the individual devices and the capabilities attached to the specific device type version"
+            "description": "The version of the composite template will typically be the version of the devices used to create the composite. If deviceType is \"composite\" deviceVersion is ignored."
+        },
+        "productName": {
+            "type": "string",
+            "description": "Only used with deviceType=composite: Used for miscellaneous data fields productName and deviceName."
         },
         "devices": {
             "type": "array",
@@ -45,7 +60,7 @@
         "deviceSerialNumber": {
             "type": ["string", "null"],
             "title": "Device serialnumber",
-            "description": "A unique device serialnumber either received from the device itself if autodetected, if manually created from the input received."
+            "description": "A unique device serialnumber. Will be auto-generated if not supplied."
         }
     },
     "additionalProperties": false,

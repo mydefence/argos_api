@@ -1,5 +1,65 @@
 # Release Notes ARGOS
 
+## 5.0.0
+
+### Attention
+
+-   API **BREAKING CHANGE**: DeviceMiscellaneousInfo and
+    DeviceMiscellaneousChange has been split into separate schemas, so it is
+    clear
+
+    -   which properties are always present in Info messages, and
+    -   which properties cannot be set form the client
+        > In particular this affects `deviceMiscellaneousType`
+        > "frequencyBands". Properties `frequencyBands` and
+        > `numSimultaneusBands` used to be required, but are now disallowed
+        > in DeviceMiscellaneousChange.
+
+-   API: Device schema updates
+    -   `minAngle`, `maxAngleFallback` and `noAngleFallback` removed from
+        `deviceAttributes`.
+    -   `maxAngle` is now set for all leaf devices to represent their coverage
+        area.
+    -   `createdBy` is now mandatory.
+    -   Deprecation notice removed from `deviceAttributes.deviceHeading`
+    -   Deprecation notice added to `deviceState` "created". "disconnected" will
+        be used in its place.
+    -   Added optional `deviceCalibration` property.
+-   API: deviceLocationChange no longer allows setting `deviceLocationLatitude`
+    or `deviceLocationLongitude` on child devices. It never had any effect.
+-   Auto-generated typescript types are now placed in a file named `argosApi.ts`
+    instead of `argos-api.ts`.
+-   RF Sensor SW version 2.15.x is not supported due to an API change. Both
+    older and newer versions may be used. The release is tested with 2.16.0.
+
+### Improvements
+
+-   API: compositeDeviceAdd can be used to group any devices into a generic
+    composite when using the new `deviceType` "composite". This includes making
+    composites of composites.
+-   When deleting a composite device, children will be restored in unmounted
+    state. The exception is auto-discoverable children, which will be deleted,
+    but reappear shortly after if still present (unchanged behavior).
+-   Improve zone selection in Wolfpack / Watchdog composite device. This
+    improves some scenarios where threat direction would flicker between the
+    internal zones.
+-   API: deviceCalibrationStart can be used to initiate calibration. Currently
+    it is possible to calibrate compass of WolfPack and WD150 devices.
+-   node.js API interface example code rewritten.
+
+## 4.4.1
+
+### Bugs
+
+-   Fix issue with Jaegar camera intitialization.
+
+## 4.4.0
+
+### Bugs
+
+-   User modified threat confidence threshold for composite radar devices were
+    not used after ARGOS restart.
+
 ## 4.4.0
 
 ### Attention
@@ -39,9 +99,6 @@
     will be removed in the future.
 -   The DeviceMiscellaneousInfo type `trackThresholds` has been removed. It has
     not been used since release 4.0.0.
--   Property `deviceHeading` in Device.deviceAttributes has been deprecated! It
-    will be removed in the future. Use `deviceLocationHeading` from
-    DeviceLocation/DeviceLocationChange instead.
 
 ### Improvements
 

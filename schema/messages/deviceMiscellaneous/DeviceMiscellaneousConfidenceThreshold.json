@@ -26,11 +26,12 @@
                 },
                 "confidenceThresholdMax": {
                     "type": "number",
-                    "description": "The maximum possible drone probability value and thus the maximum allowed setting of confidenceThreshold. When integrating a sensor we assess the quality of its detections, and adjust the confidences sent into ARGOS correspondingly. This is reflected in the confidenceThresholdMax value. Read-only."
+                    "description": "The maximum possible drone probability value and thus the maximum allowed setting of confidenceThreshold. When integrating a sensor we assess the quality of its detections, and adjust the confidences sent into ARGOS correspondingly. This is reflected in the confidenceThresholdMax value.",
+                    "$comment": "read-only"
                 }
             },
             "additionalProperties": false,
-            "required": ["confidenceThreshold"]
+            "required": ["confidenceThreshold", "confidenceThresholdMax"]
         }
     },
     "additionalProperties": false,

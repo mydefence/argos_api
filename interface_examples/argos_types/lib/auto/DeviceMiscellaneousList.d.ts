@@ -73,15 +73,15 @@ export type DeviceMiscellaneousFrequencyBands = {
     deviceMiscellaneousType: DeviceMiscellaneousType & "frequencyBands";
     deviceMiscellaneousData: {
         /**
-         * The frequency bands supported by the device
+         * The frequency bands supported by the device. Device specific constant.
          */
         frequencyBands: FrequencyBand[];
         /**
-         * The currently selected frequency bands
+         * The currently selected frequency bands. Set this to change the ECM frequency bands. List must contain between 1 and `numSimultaneusBands` values taken from `frequencyBands`
          */
         currentBands: FrequencyBand[];
         /**
-         * The number of possible simultaneous frequency bands
+         * The number of possible simultaneous frequency bands. Device specific constant.
          */
         numSimultaneusBands: number;
     };
@@ -94,7 +94,7 @@ export type DeviceMiscellaneousDroneList = {
     deviceMiscellaneousType: DeviceMiscellaneousType & "droneList";
     deviceMiscellaneousData: {
         /**
-         * Array of supported drone/controller systems
+         * Array of supported drone/controller systems.
          */
         droneList: {
             id: number;
@@ -186,13 +186,13 @@ export type DeviceMiscellaneousDeviceRange = {
          */
         deviceRange: number;
         /**
-         * Minimum configurable range, read-only.
+         * Minimum configurable range. Device specific constant.
          */
-        deviceRangeMin?: number;
+        deviceRangeMin: number;
         /**
-         * Maximum configurable range, read-only.
+         * Maximum configurable range. Device specific constant.
          */
-        deviceRangeMax?: number;
+        deviceRangeMax: number;
     };
 };
 export type DeviceMiscellaneousConfidenceThreshold = {
@@ -207,9 +207,9 @@ export type DeviceMiscellaneousConfidenceThreshold = {
          */
         confidenceThreshold: number;
         /**
-         * The maximum possible drone probability value and thus the maximum allowed setting of confidenceThreshold. When integrating a sensor we assess the quality of its detections, and adjust the confidences sent into ARGOS correspondingly. This is reflected in the confidenceThresholdMax value. Read-only.
+         * The maximum possible drone probability value and thus the maximum allowed setting of confidenceThreshold. When integrating a sensor we assess the quality of its detections, and adjust the confidences sent into ARGOS correspondingly. This is reflected in the confidenceThresholdMax value.
          */
-        confidenceThresholdMax?: number;
+        confidenceThresholdMax: number;
     };
 };
 export type DeviceMiscellaneousRingSettings = {
@@ -222,39 +222,39 @@ export type DeviceMiscellaneousRingSettings = {
         /**
          * Range of Ring device. Mapped to TX gain setting.
          */
-        range?: number;
+        range: number;
         /**
-         * Minimum range of Ring device, read-only
+         * Minimum range of Ring device. Device specific constant.
          */
-        rangeMin?: number;
+        rangeMin: number;
         /**
-         * Maximum range of Ring device, read-only
+         * Maximum range of Ring device. Device specific constant.
          */
-        rangeMax?: number;
+        rangeMax: number;
         /**
          * Radius of the ring generated when activating the 'holdingPattern' interception mode
          */
-        holdRadius?: number;
+        holdRadius: number;
         /**
-         * Minimum radius of the ring generated when activating the 'holdingPattern' interception mode, read-only
+         * Minimum radius of the ring generated when activating the 'holdingPattern' interception mode. Device specific constant.
          */
-        holdRadiusMin?: number;
+        holdRadiusMin: number;
         /**
-         * Maximum radius of the ring generated when activating the 'holdingPattern' interception mode, read-only
+         * Maximum radius of the ring generated when activating the 'holdingPattern' interception mode. Device specific constant.
          */
-        holdRadiusMax?: number;
+        holdRadiusMax: number;
         /**
          * Name of the interception mode
          */
-        mode?: "holdingPattern" | "static" | "pushBack";
+        mode: "holdingPattern" | "static" | "pushBack";
         /**
          * The heading the target will be pushed when activating the 'pushBack' interception mode
          */
-        pushBackHeading?: number;
+        pushBackHeading: number;
         /**
          * Coordinates to use when Ring device is manually activated in either 'holdingPattern' or 'pushBack' mode. If null, the location of the Ring device is used.
          */
-        targetLocation?: {
+        targetLocation: {
             /**
              * Latitude used in the activated interception mode
              */
@@ -271,7 +271,7 @@ export type DeviceMiscellaneousRingSettings = {
         /**
          * Coordinates to use when Ring device is manually activated in 'static' mode. If null, the location of the Ring device is used.
          */
-        staticLocation?: {
+        staticLocation: {
             /**
              * Latitude used in the activated interception mode
              */
@@ -288,11 +288,11 @@ export type DeviceMiscellaneousRingSettings = {
         /**
          * Name of the interception mode when Ring device is activated by automatic ECM
          */
-        autoEcmMode?: "holdingPattern" | "static";
+        autoEcmMode: "holdingPattern" | "static";
         /**
          * Coordinates to use when Ring device is activated by automatic ECM. If null, the location of the Ring device is used.
          */
-        autoEcmLocation?: {
+        autoEcmLocation: {
             /**
              * Latitude used when Ring device is activated by automatic ECM
              */

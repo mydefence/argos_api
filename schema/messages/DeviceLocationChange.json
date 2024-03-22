@@ -20,7 +20,7 @@
         },
         "deviceLocationHeading": {
             "type": "number",
-            "description": "Heading relative to true north in degrees"
+            "description": "Heading relative to true north in degrees. For child devices in composites the heading is relative to the parent device."
         },
         "deviceLocationHeight": {
             "type": "number",

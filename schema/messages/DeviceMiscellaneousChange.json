@@ -1,0 +1,38 @@
+{
+    "$comment": "This file is auto-generated. Do not edit.",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DeviceMiscellaneousChange",
+    "type": "object",
+    "oneOf": [
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousConfidenceThresholdChange.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousDeviceNameChange.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousDeviceOrderChange.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousDeviceOrientationChange.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousDeviceRangeChange.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousFrequencyBandsChange.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousProductNameChange.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousPtzLimitsChange.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousRingSettingsChange.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousUseGPSLocationChange.json#"
+        }
+    ]
+}

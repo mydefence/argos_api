@@ -543,7 +543,7 @@ var require_codegen = __commonJS({
     var Else = class extends BlockNode {
     };
     Else.kind = "else";
-    var If = class extends BlockNode {
+    var If = class _If extends BlockNode {
       constructor(condition, nodes) {
         super(nodes);
         this.condition = condition;
@@ -566,10 +566,10 @@ var require_codegen = __commonJS({
         }
         if (e) {
           if (cond === false)
-            return e instanceof If ? e : e.nodes;
+            return e instanceof _If ? e : e.nodes;
           if (this.nodes.length)
             return this;
-          return new If(not(cond), e instanceof If ? [e] : e.nodes);
+          return new _If(not(cond), e instanceof _If ? [e] : e.nodes);
         }
         if (cond === false || !this.nodes.length)
           return void 0;
@@ -7246,7 +7246,11 @@ var Socket_io_message_default = {
         "sapientNodeList",
         "systemLog",
         "systemLogGetList",
-        "systemLogList"
+        "systemLogList",
+        "timeout",
+        "deviceCalibrationStart",
+        "deviceCalibrationStartCompleted",
+        "deviceCalibrationStartError"
       ]
     },
     message: {
@@ -7371,7 +7375,7 @@ var Socket_io_message_default = {
     },
     {
       if: { properties: { event: { const: "deviceMiscellaneousChange" } } },
-      then: { properties: { message: { $ref: "./messages/DeviceMiscellaneousInfo.json#" } } }
+      then: { properties: { message: { $ref: "./messages/DeviceMiscellaneousChange.json#" } } }
     },
     {
       if: { properties: { event: { const: "deviceMiscellaneousChangeCompleted" } } },
@@ -7960,6 +7964,22 @@ var Socket_io_message_default = {
     {
       if: { properties: { event: { const: "systemLogList" } } },
       then: { properties: { message: { $ref: "./messages/SystemLogList.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "timeout" } } },
+      then: { properties: { message: { $ref: "./messages/Empty.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "deviceCalibrationStart" } } },
+      then: { properties: { message: { $ref: "./messages/DeviceCalibrationStart.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "deviceCalibrationStartCompleted" } } },
+      then: { properties: { message: { $ref: "./messages/DeviceId.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "deviceCalibrationStartError" } } },
+      then: { properties: { message: { $ref: "./messages/DeviceDeviceIdError.json#" } } }
     }
   ]
 };

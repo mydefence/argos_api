@@ -6,7 +6,7 @@
 /**
  * Description of the API error
  */
-export type Error = "invalidEvent" | "invalidResponseId" | "schemaViolation";
+export type Error = "invalidEvent" | "invalidResponseId" | "schemaViolation" | "timeout";
 export type ApiError = {
     error: Error;
     originalMessage: OriginalMessage;

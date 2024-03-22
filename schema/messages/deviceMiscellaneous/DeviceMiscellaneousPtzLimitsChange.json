@@ -1,0 +1,60 @@
+{
+    "$comment": "This file is auto-generated. Do not edit.",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DeviceMiscellaneousPtzLimits",
+    "type": "object",
+    "properties": {
+        "deviceId": {
+            "type": "string",
+            "description": "The device id"
+        },
+        "deviceMiscellaneousType": {
+            "allOf": [
+                {
+                    "$ref": "./DeviceMiscellaneousType.json#"
+                },
+                {
+                    "const": "ptzLimits"
+                }
+            ]
+        },
+        "deviceMiscellaneousData": {
+            "type": "object",
+            "properties": {
+                "pan": {
+                    "type": "object",
+                    "properties": {
+                        "min": {
+                            "type": ["number", "null"],
+                            "description": "Minimum pan value in degrees"
+                        },
+                        "max": {
+                            "type": ["number", "null"],
+                            "description": "Maximum pan value in degrees"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "description": "Maximum and minimum pan values in degrees"
+                },
+                "tilt": {
+                    "type": "object",
+                    "properties": {
+                        "min": {
+                            "type": ["number", "null"],
+                            "description": "Minimum tilt value in degrees"
+                        },
+                        "max": {
+                            "type": ["number", "null"],
+                            "description": "Maximum tilt value in degrees"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "description": "Maximum and minimum tilt values in degrees"
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false,
+    "required": ["deviceId", "deviceMiscellaneousType", "deviceMiscellaneousData"]
+}
