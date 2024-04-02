@@ -1,12 +1,12 @@
 {
   "name": "argos_types",
-  "version": "5.0.0-lizardear.0",
+  "version": "5.1.0",
   "description": "Common types for Argos IPC",
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "json-schema-to-typescript": "^13.1.1",
-    "quicktype": "^23.0.76"
+    "json-schema-to-typescript": "^13.1.2",
+    "quicktype": "^23.0.107"
   },
   "files": [
     "lib/auto",
@@ -14,7 +14,7 @@
     "lib/argosClient*"
   ],
   "dependencies": {
-    "socket.io-client": "^4.7.2"
+    "socket.io-client": "^4.7.5"
   },
   "scripts": {
     "build": "tsc",

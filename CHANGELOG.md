@@ -1,5 +1,11 @@
 # Release Notes ARGOS
 
+## 5.0.1
+
+### Bugs
+-   Interface example fixes. Some package dependencies were not at correct
+    version, and description of install procedure was incomplete.
+
 ## 5.0.0
 
 ### Attention
