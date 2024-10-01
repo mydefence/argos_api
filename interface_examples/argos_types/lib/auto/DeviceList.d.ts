@@ -22,7 +22,7 @@ export type DeviceState = "created" | "connecting" | "connected" | "disconnectin
 /**
  * Device types tells what kind of device it is and with that what kind of attributes and abilities is available - must always be used in combination with deviceVersion and if composite with the sub/composite devices found under the devices list
  */
-export type DeviceType = "blackbird" | "jaegar" | "dobermann" | "dobermann360" | "dobermann_dual" | "duo" | "echoguard" | "gps" | "groundaware" | "hepta" | "hexa" | "penta" | "pentaDM1xx" | "pentaWD2xx" | "quad" | "quadWD2xx" | "trio" | "wd200" | "wingman" | "wl1" | "wm200" | "wolfpack" | "onvif" | "skyeye" | "blackbird5k" | "echoguardQuad" | "groundawareTrio" | "aps" | "ring" | "xenta" | "echoshield" | "echoshieldQuad" | "visionflex" | "composite" | "lizardEar";
+export type DeviceType = "blackbird" | "jaegar" | "dobermann" | "dobermann360" | "dobermann_dual" | "duo" | "echoguard" | "gps" | "groundaware" | "hepta" | "hexa" | "penta" | "pentaDM1xx" | "pentaWD2xx" | "quad" | "quadWD2xx" | "trio" | "wd200" | "wingman" | "wl1" | "wm200" | "wolfpack" | "onvif" | "skyeye" | "blackbird5k" | "echoguardQuad" | "groundawareTrio" | "aps" | "ring" | "xenta" | "echoshield" | "echoshieldQuad" | "visionflex" | "composite" | "lizardEar" | "circleScope";
 /**
  * Defines the version of the individual devices and the capabilities attached to the specific device type version
  */
@@ -44,7 +44,7 @@ export type DeviceGroup = boolean;
  */
 export type DeviceParentId = string | null;
 /**
- * Defines the devices IP address either received when the devices was discovered or when the device was manually created. A composite device does not have a device IP
+ * Defines the devices IP address either received when the devices was discovered or when the device was manually created. A composite device does not have a device IP. If a composite device has discovered some, but not all of its children, the IP in the missing children will be set to null.
  */
 export type DeviceIP = string | null;
 /**

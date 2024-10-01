@@ -38,6 +38,9 @@
         },
         {
             "$ref": "./deviceMiscellaneous/DeviceMiscellaneousAssetData.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousProfiles.json#"
         }
     ]
 }

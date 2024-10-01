@@ -3,8 +3,8 @@
  * DO NOT MODIFY IT BY HAND. Instead, modify the source JSONSchema file,
  * and run json-schema-to-typescript to regenerate this file.
  */
-export type DeviceMiscellaneousChange = DeviceMiscellaneousConfidenceThreshold | DeviceMiscellaneousDeviceName | DeviceMiscellaneousDeviceOrder | DeviceMiscellaneousDeviceOrientation | DeviceMiscellaneousDeviceRange | DeviceMiscellaneousFrequencyBands | DeviceMiscellaneousProductName | DeviceMiscellaneousPtzLimits | DeviceMiscellaneousRingSettings | DeviceMiscellaneousUseGPSLocation;
-export type DeviceMiscellaneousType = "deviceName" | "productName" | "deviceOrientation" | "deviceOrder" | "frequencyBands" | "droneList" | "useGPSLocation" | "ptzLimits" | "deviceRange" | "confidenceThreshold" | "ringSettings" | "assetData";
+export type DeviceMiscellaneousChange = DeviceMiscellaneousConfidenceThreshold | DeviceMiscellaneousDeviceName | DeviceMiscellaneousDeviceOrder | DeviceMiscellaneousDeviceOrientation | DeviceMiscellaneousDeviceRange | DeviceMiscellaneousFrequencyBands | DeviceMiscellaneousProductName | DeviceMiscellaneousProfiles | DeviceMiscellaneousPtzLimits | DeviceMiscellaneousRingSettings | DeviceMiscellaneousUseGPSLocation;
+export type DeviceMiscellaneousType = "deviceName" | "productName" | "deviceOrientation" | "deviceOrder" | "frequencyBands" | "droneList" | "useGPSLocation" | "ptzLimits" | "deviceRange" | "confidenceThreshold" | "ringSettings" | "assetData" | "profiles";
 /**
  * Information about the frequency of an effector/detector.
  */
@@ -98,6 +98,19 @@ export type DeviceMiscellaneousProductName = {
          * The product name of the device
          */
         productName?: string;
+    };
+};
+export type DeviceMiscellaneousProfiles = {
+    /**
+     * The device id
+     */
+    deviceId: string;
+    deviceMiscellaneousType: DeviceMiscellaneousType & "profiles";
+    deviceMiscellaneousData: {
+        /**
+         * The index (in `profileGroup.profiles`) of the active/wanted profile.
+         */
+        profileIndex?: number;
     };
 };
 export type DeviceMiscellaneousPtzLimits = {

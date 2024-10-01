@@ -6,6 +6,7 @@
             "description": "Camera #1",
             "vmsType": "daylight",
             "streamIp": "192.168.1.91",
+            "streamProtocol": "WebRTC",
             "rawStreamInfo": {
                 "token": "profile.1:0.h264_1",
                 "name": "profile.1:0.h264_1",
@@ -66,6 +67,7 @@
             "description": "Camera #2",
             "vmsType": "IR",
             "streamIp": "192.168.1.235",
+            "streamProtocol": "WebRTC",
             "rawStreamInfo": {}
         },
         {
@@ -75,6 +77,7 @@
             "description": "Camera #3 daylight",
             "vmsType": "daylight",
             "streamIp": "192.168.1.236",
+            "streamProtocol": "WebRTC",
             "rawStreamInfo": {}
         },
         {
@@ -84,6 +87,7 @@
             "description": "Camera #3 thermal",
             "vmsType": "thermal",
             "streamIp": "192.168.1.237",
+            "streamProtocol": "WebRTC",
             "rawStreamInfo": {}
         },
         {
@@ -91,6 +95,7 @@
             "videoDeviceId": "40710b6pkih4coqj",
             "description": "Camera #4",
             "streamIp": "192.168.1.240",
+            "streamProtocol": "WebRTC",
             "rawStreamInfo": {}
         }
     ],

@@ -52,7 +52,7 @@ class ArgosClient extends events_1.EventEmitter {
             secure: https,
             rejectUnauthorized: false,
         });
-        this.connectedPromise = (0, events_1.once)(this.sc, 'connect').then();
+        this.connectedPromise = new Promise((resolve) => this.sc.once('connect', resolve));
         this.sc.onAny((event, res) => {
             if ('message' in res) {
                 this.msg_logger(res.event, res.message, '→');
@@ -82,7 +82,7 @@ class ArgosClient extends events_1.EventEmitter {
     async close() {
         this.sc.disconnect();
         if (this.sc.connected) {
-            await (0, events_1.once)(this.sc, 'disconnect');
+            await new Promise((resolve) => this.sc.once('disconnect', () => resolve()));
         }
     }
     responseId() {

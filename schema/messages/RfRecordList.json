@@ -1,0 +1,29 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "RfRecordList",
+    "type": "array",
+    "description": "List of RF segment recording. MyDefence internal and subject to change without notice.",
+    "items": {
+        "type": "object",
+        "properties": {
+            "recType": {
+                "description": "Type of recording",
+                "enum": ["threat", "snapshot"]
+            },
+            "threatType": {
+                "type": "number",
+                "description": "Type of threat that triggered the recording. Set for recType `threat`. Number refers to `id` in DeviceMiscellaneous:droneList."
+            },
+            "createdTimeStamp": {
+                "type": "string",
+                "description": "Timestamp of when recording was created"
+            },
+            "filePath": {
+                "type": "string",
+                "description": "Path to the recording data. Can be fetched from http://<argos-ip:28230>/<filePath>"
+            }
+        },
+        "additionalProperties": false,
+        "required": ["recType", "createdTimeStamp", "filePath"]
+    }
+}

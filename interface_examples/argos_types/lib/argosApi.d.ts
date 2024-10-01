@@ -109,6 +109,10 @@ import { RfGeoThreatSimulationStartCompleted } from './auto/RfGeoThreatSimulatio
 export { RfGeoThreatSimulationStartCompleted } from './auto/RfGeoThreatSimulationStartCompleted';
 import { RfGeoThreatSimulationStartError } from './auto/RfGeoThreatSimulationStartError';
 export { RfGeoThreatSimulationStartError } from './auto/RfGeoThreatSimulationStartError';
+import { RfRecordList } from './auto/RfRecordList';
+export { RfRecordList } from './auto/RfRecordList';
+import { RfRecordThreatsConfig } from './auto/RfRecordThreatsConfig';
+export { RfRecordThreatsConfig } from './auto/RfRecordThreatsConfig';
 import { SapientConfiguration } from './auto/SapientConfiguration';
 export { SapientConfiguration } from './auto/SapientConfiguration';
 import { SapientConfigure } from './auto/SapientConfigure';
@@ -251,6 +255,16 @@ export type PtzMoveAbsCompleted = DeviceId;
 export type PtzMoveAbsError = Error;
 export type PtzSetVelocityCompleted = DeviceId;
 export type PtzSetVelocityError = Error;
+export type RfRecordClearList = Empty;
+export type RfRecordClearListCompleted = Empty;
+export type RfRecordGetList = Empty;
+export type RfRecordSnapshotStart = DeviceId;
+export type RfRecordSnapshotStartCompleted = DeviceId;
+export type RfRecordSnapshotStartError = DeviceDeviceIdError;
+export type RfRecordThreatsConfigure = RfRecordThreatsConfig;
+export type RfRecordThreatsConfigureCompleted = Empty;
+export type RfRecordThreatsConfigureError = Error;
+export type RfRecordThreatsGetConfig = Empty;
 export type SapientConfigureCompleted = Empty;
 export type SapientConfigureError = Error;
 export type SapientGetConfiguration = Empty;
@@ -277,7 +291,10 @@ export type UthreatSetMuteCompleted = UthreatSetMute;
 export type UthreatSetMuteError = Error;
 export type VmsSdpInitError = Error;
 export type VmsStreamGetList = Empty;
-export type Empty = {};
+declare const emptyObjectSymbol: unique symbol;
+export type Empty = {
+    [emptyObjectSymbol]?: never;
+};
 export * from './argosApiManual';
 export declare enum API {
     ALARM_STARTED = "alarmStarted",
@@ -413,6 +430,18 @@ export declare enum API {
     RF_GEO_THREAT_SIMULATION_START = "rfGeoThreatSimulationStart",
     RF_GEO_THREAT_SIMULATION_START_COMPLETED = "rfGeoThreatSimulationStartCompleted",
     RF_GEO_THREAT_SIMULATION_START_ERROR = "rfGeoThreatSimulationStartError",
+    RF_RECORD_CLEAR_LIST = "rfRecordClearList",
+    RF_RECORD_CLEAR_LIST_COMPLETED = "rfRecordClearListCompleted",
+    RF_RECORD_GET_LIST = "rfRecordGetList",
+    RF_RECORD_LIST = "rfRecordList",
+    RF_RECORD_SNAPSHOT_START = "rfRecordSnapshotStart",
+    RF_RECORD_SNAPSHOT_START_COMPLETED = "rfRecordSnapshotStartCompleted",
+    RF_RECORD_SNAPSHOT_START_ERROR = "rfRecordSnapshotStartError",
+    RF_RECORD_THREATS_CONFIG = "rfRecordThreatsConfig",
+    RF_RECORD_THREATS_CONFIGURE = "rfRecordThreatsConfigure",
+    RF_RECORD_THREATS_CONFIGURE_COMPLETED = "rfRecordThreatsConfigureCompleted",
+    RF_RECORD_THREATS_CONFIGURE_ERROR = "rfRecordThreatsConfigureError",
+    RF_RECORD_THREATS_GET_CONFIG = "rfRecordThreatsGetConfig",
     SAPIENT_CONFIGURATION = "sapientConfiguration",
     SAPIENT_CONFIGURE = "sapientConfigure",
     SAPIENT_CONFIGURE_COMPLETED = "sapientConfigureCompleted",
@@ -590,6 +619,18 @@ export type ArgosTypesMap = {
     [API.RF_GEO_THREAT_SIMULATION_START]: RfGeoThreatSimulationStart;
     [API.RF_GEO_THREAT_SIMULATION_START_COMPLETED]: RfGeoThreatSimulationStartCompleted;
     [API.RF_GEO_THREAT_SIMULATION_START_ERROR]: RfGeoThreatSimulationStartError;
+    [API.RF_RECORD_CLEAR_LIST]: RfRecordClearList;
+    [API.RF_RECORD_CLEAR_LIST_COMPLETED]: RfRecordClearListCompleted;
+    [API.RF_RECORD_GET_LIST]: RfRecordGetList;
+    [API.RF_RECORD_LIST]: RfRecordList;
+    [API.RF_RECORD_SNAPSHOT_START]: RfRecordSnapshotStart;
+    [API.RF_RECORD_SNAPSHOT_START_COMPLETED]: RfRecordSnapshotStartCompleted;
+    [API.RF_RECORD_SNAPSHOT_START_ERROR]: RfRecordSnapshotStartError;
+    [API.RF_RECORD_THREATS_CONFIG]: RfRecordThreatsConfig;
+    [API.RF_RECORD_THREATS_CONFIGURE]: RfRecordThreatsConfigure;
+    [API.RF_RECORD_THREATS_CONFIGURE_COMPLETED]: RfRecordThreatsConfigureCompleted;
+    [API.RF_RECORD_THREATS_CONFIGURE_ERROR]: RfRecordThreatsConfigureError;
+    [API.RF_RECORD_THREATS_GET_CONFIG]: RfRecordThreatsGetConfig;
     [API.SAPIENT_CONFIGURATION]: SapientConfiguration;
     [API.SAPIENT_CONFIGURE]: SapientConfigure;
     [API.SAPIENT_CONFIGURE_COMPLETED]: SapientConfigureCompleted;

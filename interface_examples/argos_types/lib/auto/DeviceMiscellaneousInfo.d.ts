@@ -3,12 +3,16 @@
  * DO NOT MODIFY IT BY HAND. Instead, modify the source JSONSchema file,
  * and run json-schema-to-typescript to regenerate this file.
  */
-export type DeviceMiscellaneousInfo = DeviceMiscellaneousDeviceName | DeviceMiscellaneousDeviceOrder | DeviceMiscellaneousDeviceOrientation | DeviceMiscellaneousProductName | DeviceMiscellaneousFrequencyBands | DeviceMiscellaneousDroneList | DeviceMiscellaneousUseGPSLocation | DeviceMiscellaneousPtzLimits | DeviceMiscellaneousDeviceRange | DeviceMiscellaneousConfidenceThreshold | DeviceMiscellaneousRingSettings | DeviceMiscellaneousAssetData;
-export type DeviceMiscellaneousType = "deviceName" | "productName" | "deviceOrientation" | "deviceOrder" | "frequencyBands" | "droneList" | "useGPSLocation" | "ptzLimits" | "deviceRange" | "confidenceThreshold" | "ringSettings" | "assetData";
+export type DeviceMiscellaneousInfo = DeviceMiscellaneousDeviceName | DeviceMiscellaneousDeviceOrder | DeviceMiscellaneousDeviceOrientation | DeviceMiscellaneousProductName | DeviceMiscellaneousFrequencyBands | DeviceMiscellaneousDroneList | DeviceMiscellaneousUseGPSLocation | DeviceMiscellaneousPtzLimits | DeviceMiscellaneousDeviceRange | DeviceMiscellaneousConfidenceThreshold | DeviceMiscellaneousRingSettings | DeviceMiscellaneousAssetData | DeviceMiscellaneousProfiles;
+export type DeviceMiscellaneousType = "deviceName" | "productName" | "deviceOrientation" | "deviceOrder" | "frequencyBands" | "droneList" | "useGPSLocation" | "ptzLimits" | "deviceRange" | "confidenceThreshold" | "ringSettings" | "assetData" | "profiles";
 /**
  * Information about the frequency of an effector/detector.
  */
 export type FrequencyBand = "433" | "900" | "1G2" | "2G4" | "5G2" | "5G8" | "GNSS";
+/**
+ * Profiles supported by the Xenta radar
+ */
+export type XentaRadarProfile = "EarlyWarning" | "MultiPurpose" | "CUavMediumRange" | "CUavCloseRange";
 export type DeviceMiscellaneousDeviceName = {
     /**
      * The device id
@@ -318,4 +322,31 @@ export type DeviceMiscellaneousAssetData = {
             [k: string]: unknown;
         };
     };
+};
+export type DeviceMiscellaneousProfiles = {
+    /**
+     * The device id
+     */
+    deviceId: string;
+    deviceMiscellaneousType: DeviceMiscellaneousType & "profiles";
+    deviceMiscellaneousData: {
+        /**
+         * The profile group of the device. Device specific constant.
+         */
+        profileGroup: ProfileGroupXentaRadar;
+        /**
+         * The index (in `profileGroup.profiles`) of the active/wanted profile.
+         */
+        profileIndex: number;
+    };
+};
+export type ProfileGroupXentaRadar = {
+    /**
+     * The name of the profile group.
+     */
+    name: "xentaRadar";
+    /**
+     * The profiles in the profile group.
+     */
+    profiles: XentaRadarProfile[];
 };

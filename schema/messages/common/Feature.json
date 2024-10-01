@@ -26,6 +26,10 @@
         {
             "const": "vehicleMode",
             "description": "System is integrated into a vehicle"
+        },
+        {
+            "const": "segmentRecording",
+            "description": "RF segment recording supported"
         }
     ]
 }

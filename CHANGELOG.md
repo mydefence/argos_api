@@ -1,8 +1,68 @@
 # Release Notes ARGOS
 
+## 5.2.0
+
+### Attention
+
+-   API
+    -   Optional field `startTime` removed from `systemState`
+-   Support for OpenWorks Vision Flex camera V1 API removed
+
+### Improvements
+
+-   Support for CircleScope tracker
+-   Support for OpenWorks Vision Flex camera V2 API
+-   Discover composite devices even if some child is not working. Wolfpack and
+    Dobermann Dual/360 devices will be added to the device list after discovery
+    of the first child (used to be after discovery of all children). This makes
+    it possible to use and debug partially functioning composites.
+    -   There are no schema changes related to this, but expect child device to
+        have `deviceIP`=`null` and `deviceSerialNumber`=`""`, which did not
+        happen previously.
+-   API
+    -   New `deviceMiscellaneousType` for setting profile of a device:
+        `deviceMiscellaneousProfiles`. If a device supports profiles - e.g.
+        "longRange" or "shortRange" - then these can be read and the active
+        profile set through this miscellaneous object.
+    -   New `streamDetails` in `vmsStreamList` elements, with properties
+        describing e.g. resolution, frames per second, etc.
+    -   New `detectionType` "Vision" in `uthreat` schema to be used in uthreats
+        from cameras capable of detection/classification.
+-   EchoShield: Add warning if configured tilt/roll differs significantly from
+    the values reported from internal INS.
+-   Sapient ASM support version BSI Flex 335 v2.0 / NATO STANREC 4869 draft 6.
+    TIE-24 interoperability tested. Sapient is not enabled per default, contact
+    MyDefence for information on how to enable.
+
+### Bugs
+
+-   GroundAware radar service was reset causing tracks to disappear at irregular
+    interval. Issue introduced in v5.0.0.
+-   Fix VMS streams handling for composite devices with a camera.
+-   EchoShield: If useGPSLocation was enabled when radar did not have GPS fix,
+    latitude/longitude could be set to the string `nan`, which violates the API,
+    and caused several critical issues.
+-   Jaegar and VisionFlex camera PtzDeviceInfo fixed. Zoom `pct` = 1 is maximum
+    zoom (low field-of-view) and `pct` = 0 is minimum zoom (high field-of-view).
+-   EchoShield: Various bug fixes (merged from 4.4.3)
+
+## 5.1.0
+
+### Improvements
+
+-   Recording of RF sensor data. For providing data to MyDefence to improve
+    existing detectors or aid implementation of new ones. Contact Mydefence for
+    instructions on how to enable the feature.
+-   Auto-remove of unused auto-discovered devices.
+
+### Bugs
+
+-   Fix FWU of devices in `updateable` state.
+
 ## 5.0.1
 
 ### Bugs
+
 -   Interface example fixes. Some package dependencies were not at correct
     version, and description of install procedure was incomplete.
 
@@ -40,6 +100,9 @@
 
 ### Improvements
 
+-   API: New `deviceType` "lizardEar" in `device` schema.
+-   API: New `detectionType` "Audio" in `uthreat` schema to be used in uthreats
+    from audio sensors like LizardEar.
 -   API: compositeDeviceAdd can be used to group any devices into a generic
     composite when using the new `deviceType` "composite". This includes making
     composites of composites.
@@ -52,6 +115,27 @@
 -   API: deviceCalibrationStart can be used to initiate calibration. Currently
     it is possible to calibrate compass of WolfPack and WD150 devices.
 -   node.js API interface example code rewritten.
+
+## 4.4.3
+
+### Bugs
+
+-   EchoShield: Fix bug in handling of heading.
+
+### Attention
+
+-   EchoShield: The radar should be configured with correct height. This implies
+    that all Argos devices should use EGM96 height, if an EchoShield device is
+    used. EchoShield devices now also reports their GPS height (EGM96) in device
+    location when useGPS is enabled.
+
+## 4.4.2
+
+### Bugs
+
+-   EchoShield: If useGPSLocation was enabled when radar did not have GPS fix,
+    latitude/longitude could be set to the string `nan`, which violates the API,
+    and caused several critical issues.
 
 ## 4.4.1
 

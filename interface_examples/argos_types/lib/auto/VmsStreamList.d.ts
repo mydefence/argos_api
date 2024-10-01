@@ -8,7 +8,7 @@
  */
 export type StreamIdentification = string;
 /**
- * Video Device ID
+ * Video Device ID. If the camera is part of a composite device, this will be the child device ID.
  */
 export type VideoDeviceID = string;
 /**
@@ -24,6 +24,42 @@ export type VmsType = "daylight" | "IR" | "thermal";
  * IP address of camera tube
  */
 export type IPAddress = string;
+/**
+ * URI of the stream
+ */
+export type StreamURI = string;
+/**
+ * The protocol used to stream the video.
+ */
+export type StreamProtocol = "WebRTC" | "LLHLS";
+/**
+ * Width of the video stream in pixels
+ */
+export type Width = number;
+/**
+ * Height of the video stream in pixels
+ */
+export type Height = number;
+/**
+ * Frames per second of the video stream
+ */
+export type VideoFramesPerSecond = number;
+/**
+ * Bitrate of the video stream
+ */
+export type VideoBitrate = number;
+/**
+ * Encoder of the video stream
+ */
+export type VideoCodec = string;
+/**
+ * Encoder of the audio stream
+ */
+export type AudioCodec = string;
+/**
+ * Bitrate of the audio stream
+ */
+export type AudioBitrate = number;
 export type VmsStreamList = {
     vmsStreamId: StreamIdentification;
     videoDeviceId: VideoDeviceID;
@@ -31,6 +67,9 @@ export type VmsStreamList = {
     description: StreamDescription;
     vmsType?: VmsType;
     streamIp: IPAddress;
+    streamUri?: StreamURI;
+    streamProtocol: StreamProtocol;
+    streamDetails?: StreamDetails;
     /**
      * All stream info from the camera. Content depends on camera
      */
@@ -38,3 +77,18 @@ export type VmsStreamList = {
         [k: string]: unknown;
     };
 }[];
+/**
+ * Details of the stream
+ */
+export type StreamDetails = {
+    videoResolution?: VideoResolution;
+    videoFps?: VideoFramesPerSecond;
+    videoBitrate?: VideoBitrate;
+    videoCodec?: VideoCodec;
+    audioCodec?: AudioCodec;
+    audioBitrate?: AudioBitrate;
+};
+export type VideoResolution = {
+    width: Width;
+    height: Height;
+};

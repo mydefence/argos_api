@@ -11,21 +11,21 @@
         },
         "commitHash": {
             "type": "string",
-            "title": "Comitt Hash",
+            "title": "Commit Hash",
             "description": "The comitt hash id"
         },
         "buildDateTime": {
-            "type": ["string", "null"],
+            "type": "string",
             "title": "BuildDateTime",
             "description": "Defines the time of the build"
         },
         "version": {
-            "type": ["string", "null"],
+            "type": "string",
             "title": "Version",
             "description": "Defines the version"
         },
         "versionDateTime": {
-            "type": ["string", "null"],
+            "type": "string",
             "title": "VersionDateTime",
             "description": "Defines the time of the version"
         }

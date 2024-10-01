@@ -58,7 +58,7 @@
         "deviceIP": {
             "type": ["string", "null"],
             "title": "Device IP",
-            "description": "Defines the devices IP address either received when the devices was discovered or when the device was manually created. A composite device does not have a device IP"
+            "description": "Defines the devices IP address either received when the devices was discovered or when the device was manually created. A composite device does not have a device IP. If a composite device has discovered some, but not all of its children, the IP in the missing children will be set to null."
         },
         "deviceMac": {
             "type": ["string", "null"],

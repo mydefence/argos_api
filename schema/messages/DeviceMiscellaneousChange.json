@@ -26,6 +26,9 @@
             "$ref": "./deviceMiscellaneous/DeviceMiscellaneousProductNameChange.json#"
         },
         {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousProfilesChange.json#"
+        },
+        {
             "$ref": "./deviceMiscellaneous/DeviceMiscellaneousPtzLimitsChange.json#"
         },
         {

@@ -6,7 +6,7 @@
 /**
  * The type of the system component sending the threat.
  */
-export type DetectionType = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio";
+export type DetectionType = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio" | "Vision";
 /**
  * Information about the frequency of an effector/detector.
  */

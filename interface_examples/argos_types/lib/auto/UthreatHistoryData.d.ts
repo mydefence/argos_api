@@ -12,19 +12,19 @@ export type UthreatBasis = UthreatBasisPresence | UthreatBasisZone | UthreatBasi
 /**
  * The type of the system component sending the threat.
  */
-export type DetectionType = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio";
+export type DetectionType = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio" | "Vision";
 /**
  * The type of the system component sending the threat.
  */
-export type DetectionType1 = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio";
+export type DetectionType1 = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio" | "Vision";
 /**
  * The type of the system component sending the threat.
  */
-export type DetectionType2 = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio";
+export type DetectionType2 = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio" | "Vision";
 /**
  * The type of the system component sending the threat.
  */
-export type DetectionType3 = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio";
+export type DetectionType3 = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio" | "Vision";
 export type UthreatHistoryData = {
     /**
      * List of uthreats for the given set of uthreatIds.
@@ -109,7 +109,7 @@ export type UthreatPresence = {
      */
     createdTimeStamp: string;
     /**
-     * UTC time of the last update of this uthreat. For a new threat this will be equal to createdTimeStamp. Stopping a threat counts as an update, and will update this time stamp.
+     * UTC time of the last update of this uthreat. For a new threat this will be equal to createdTimeStamp. Stopping a uthreat counts as an update, and will update this time stamp. UthreatBasis time stamps are not updated when stopped.
      */
     updatedTimeStamp: string;
     /**
@@ -214,7 +214,7 @@ export type UthreatBasisPresence = {
      */
     createdTimeStamp: string;
     /**
-     * UTC time of the last update of this uthreat. For a new threat this will be equal to createdTimeStamp. Stopping a threat counts as an update, and will update this time stamp.
+     * UTC time of the last update of this uthreat. For a new threat this will be equal to createdTimeStamp. Stopping a uthreat counts as an update, and will update this time stamp. UthreatBasis time stamps are not updated when stopped.
      */
     updatedTimeStamp: string;
     /**
@@ -329,7 +329,7 @@ export type UthreatBasisZone = {
      */
     createdTimeStamp: string;
     /**
-     * UTC time of the last update of this uthreat. For a new threat this will be equal to createdTimeStamp. Stopping a threat counts as an update, and will update this time stamp.
+     * UTC time of the last update of this uthreat. For a new threat this will be equal to createdTimeStamp. Stopping a uthreat counts as an update, and will update this time stamp. UthreatBasis time stamps are not updated when stopped.
      */
     updatedTimeStamp: string;
     /**
@@ -452,7 +452,7 @@ export type UthreatBasisDirection = {
      */
     createdTimeStamp: string;
     /**
-     * UTC time of the last update of this uthreat. For a new threat this will be equal to createdTimeStamp. Stopping a threat counts as an update, and will update this time stamp.
+     * UTC time of the last update of this uthreat. For a new threat this will be equal to createdTimeStamp. Stopping a uthreat counts as an update, and will update this time stamp. UthreatBasis time stamps are not updated when stopped.
      */
     updatedTimeStamp: string;
     /**
@@ -565,7 +565,7 @@ export type UthreatBasisLocation = {
      */
     createdTimeStamp: string;
     /**
-     * UTC time of the last update of this uthreat. For a new threat this will be equal to createdTimeStamp. Stopping a threat counts as an update, and will update this time stamp.
+     * UTC time of the last update of this uthreat. For a new threat this will be equal to createdTimeStamp. Stopping a uthreat counts as an update, and will update this time stamp. UthreatBasis time stamps are not updated when stopped.
      */
     updatedTimeStamp: string;
     /**
@@ -656,7 +656,7 @@ export type UthreatZone = {
      */
     createdTimeStamp: string;
     /**
-     * UTC time of the last update of this uthreat. For a new threat this will be equal to createdTimeStamp. Stopping a threat counts as an update, and will update this time stamp.
+     * UTC time of the last update of this uthreat. For a new threat this will be equal to createdTimeStamp. Stopping a uthreat counts as an update, and will update this time stamp. UthreatBasis time stamps are not updated when stopped.
      */
     updatedTimeStamp: string;
     /**
@@ -755,7 +755,7 @@ export type UthreatDirection = {
      */
     createdTimeStamp: string;
     /**
-     * UTC time of the last update of this uthreat. For a new threat this will be equal to createdTimeStamp. Stopping a threat counts as an update, and will update this time stamp.
+     * UTC time of the last update of this uthreat. For a new threat this will be equal to createdTimeStamp. Stopping a uthreat counts as an update, and will update this time stamp. UthreatBasis time stamps are not updated when stopped.
      */
     updatedTimeStamp: string;
     /**
@@ -868,7 +868,7 @@ export type UthreatLocation = {
      */
     createdTimeStamp: string;
     /**
-     * UTC time of the last update of this uthreat. For a new threat this will be equal to createdTimeStamp. Stopping a threat counts as an update, and will update this time stamp.
+     * UTC time of the last update of this uthreat. For a new threat this will be equal to createdTimeStamp. Stopping a uthreat counts as an update, and will update this time stamp. UthreatBasis time stamps are not updated when stopped.
      */
     updatedTimeStamp: string;
     /**

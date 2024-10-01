@@ -183,7 +183,19 @@
                 "timeout",
                 "deviceCalibrationStart",
                 "deviceCalibrationStartCompleted",
-                "deviceCalibrationStartError"
+                "deviceCalibrationStartError",
+                "rfRecordThreatsConfigure",
+                "rfRecordThreatsConfigureCompleted",
+                "rfRecordThreatsConfigureError",
+                "rfRecordSnapshotStart",
+                "rfRecordSnapshotStartCompleted",
+                "rfRecordSnapshotStartError",
+                "rfRecordList",
+                "rfRecordGetList",
+                "rfRecordClearList",
+                "rfRecordClearListCompleted",
+                "rfRecordThreatsGetConfig",
+                "rfRecordThreatsConfig"
             ]
         },
         "message": {
@@ -913,6 +925,54 @@
         {
             "if": { "properties": { "event": { "const": "deviceCalibrationStartError" } } },
             "then": { "properties": { "message": { "$ref": "./messages/DeviceDeviceIdError.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "rfRecordThreatsConfigure" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/RfRecordThreatsConfig.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "rfRecordThreatsConfigureCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "rfRecordThreatsConfigureError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "rfRecordSnapshotStart" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "rfRecordSnapshotStartCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "rfRecordSnapshotStartError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceDeviceIdError.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "rfRecordList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/RfRecordList.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "rfRecordGetList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "rfRecordClearList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "rfRecordClearListCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "rfRecordThreatsGetConfig" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "rfRecordThreatsConfig" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/RfRecordThreatsConfig.json#" } } }
         }
     ]
 }

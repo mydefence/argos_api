@@ -1,0 +1,29 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "RfRecordThreatsConfig",
+    "type": "object",
+    "description": "Configure recording of RF segment information for threats. MyDefence internal and subject to change without notice.",
+    "properties": {
+        "devices": {
+            "type": "array",
+            "description": "List of devices (deviceIds) used for recording. Empty list means disable recording.",
+            "items": {
+                "type": "string"
+            }
+        },
+        "threatTypes": {
+            "type": "array",
+            "description": "Types of threats to trigger a recording. If empty any threat will trigger. Number refers to `id` in DeviceMiscellaneous:droneList.",
+            "items": {
+                "type": "number"
+            }
+        },
+        "timeout": {
+            "type": "integer",
+            "description": "If set, triggering of recordings will be disabled after this many seconds. Otherwise recordings will be triggered until explicitly reconfigured.",
+            "minimum": 1
+        }
+    },
+    "additionalProperties": false,
+    "required": ["devices", "threatTypes"]
+}

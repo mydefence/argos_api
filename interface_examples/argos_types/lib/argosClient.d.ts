@@ -8,7 +8,7 @@
  * whole or in part without written permission from MyDefence Communication A/S.
  *
  *******************************************************************************/
-import { io } from 'socket.io-client';
+import { Socket } from 'socket.io-client';
 import { EventEmitter } from 'events';
 import { ArgosTypesMap } from './argosApi';
 /** The default logger used. Implements same interface as `util.format()`.
@@ -25,7 +25,7 @@ export declare class ArgosClient extends EventEmitter {
     /** Wait for this before sending requests. */
     connectedPromise: Promise<void>;
     /** The socket.io connection to ARGOS. Normally not needed. */
-    sc: ReturnType<typeof io>;
+    sc: Socket;
     private responseCnt;
     private logger;
     private msg_logger;

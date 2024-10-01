@@ -39,8 +39,8 @@ export declare function isUthreatBasisDirection(utb: UthreatBasis): utb is Uthre
 export declare function isUthreatBasisLocation(utb: UthreatBasis): utb is UthreatBasisLocation;
 /** Return string representation of Uthreat/UthreatBasis type */
 export declare function uthreatType(ut: Uthreat | UthreatBasis): 'presence' | 'zone' | 'direction' | 'location';
-import { DeviceMiscellaneousInfo, DeviceMiscellaneousDeviceName, DeviceMiscellaneousDeviceOrder, DeviceMiscellaneousDeviceOrientation, DeviceMiscellaneousProductName, DeviceMiscellaneousFrequencyBands, DeviceMiscellaneousDroneList, DeviceMiscellaneousUseGPSLocation, DeviceMiscellaneousPtzLimits, DeviceMiscellaneousDeviceRange, DeviceMiscellaneousConfidenceThreshold, DeviceMiscellaneousRingSettings, DeviceMiscellaneousType } from './auto/DeviceMiscellaneousInfo';
-export { DeviceMiscellaneousInfo, DeviceMiscellaneousType, DeviceMiscellaneousDeviceName, DeviceMiscellaneousDeviceOrder, DeviceMiscellaneousDeviceOrientation, DeviceMiscellaneousProductName, DeviceMiscellaneousFrequencyBands, DeviceMiscellaneousDroneList, DeviceMiscellaneousUseGPSLocation, DeviceMiscellaneousPtzLimits, DeviceMiscellaneousDeviceRange, DeviceMiscellaneousConfidenceThreshold, DeviceMiscellaneousRingSettings, } from './auto/DeviceMiscellaneousInfo';
+import { DeviceMiscellaneousInfo, DeviceMiscellaneousDeviceName, DeviceMiscellaneousDeviceOrder, DeviceMiscellaneousDeviceOrientation, DeviceMiscellaneousProductName, DeviceMiscellaneousFrequencyBands, DeviceMiscellaneousDroneList, DeviceMiscellaneousUseGPSLocation, DeviceMiscellaneousPtzLimits, DeviceMiscellaneousDeviceRange, DeviceMiscellaneousConfidenceThreshold, DeviceMiscellaneousRingSettings, DeviceMiscellaneousType, DeviceMiscellaneousProfiles } from './auto/DeviceMiscellaneousInfo';
+export { DeviceMiscellaneousInfo, DeviceMiscellaneousType, DeviceMiscellaneousDeviceName, DeviceMiscellaneousDeviceOrder, DeviceMiscellaneousDeviceOrientation, DeviceMiscellaneousProductName, DeviceMiscellaneousFrequencyBands, DeviceMiscellaneousDroneList, DeviceMiscellaneousUseGPSLocation, DeviceMiscellaneousPtzLimits, DeviceMiscellaneousDeviceRange, DeviceMiscellaneousConfidenceThreshold, DeviceMiscellaneousRingSettings, DeviceMiscellaneousProfiles, } from './auto/DeviceMiscellaneousInfo';
 export declare function isDeviceMiscellaneousDeviceName(misc: DeviceMiscellaneousInfo): misc is DeviceMiscellaneousDeviceName;
 export declare function isDeviceMiscellaneousDeviceOrder(misc: DeviceMiscellaneousInfo): misc is DeviceMiscellaneousDeviceOrder;
 export declare function isDeviceMiscellaneousDeviceOrientation(misc: DeviceMiscellaneousInfo): misc is DeviceMiscellaneousDeviceOrientation;
@@ -52,6 +52,7 @@ export declare function isDeviceMiscellaneousPtzLimits(misc: DeviceMiscellaneous
 export declare function isDeviceMiscellaneousDeviceRange(misc: DeviceMiscellaneousInfo): misc is DeviceMiscellaneousDeviceRange;
 export declare function isDeviceMiscellaneousConfidenceThreshold(misc: DeviceMiscellaneousInfo): misc is DeviceMiscellaneousConfidenceThreshold;
 export declare function isDeviceMiscellaneousRingSettings(misc: DeviceMiscellaneousInfo): misc is DeviceMiscellaneousRingSettings;
+export declare function isDeviceMiscellaneousProfiles(misc: DeviceMiscellaneousInfo): misc is DeviceMiscellaneousProfiles;
 /** Search miscellaneous data list and narrow to the requested type. */
 export declare function miscellaneousDataFind<T extends DeviceMiscellaneousType>(deviceMiscellaneousList: DeviceMiscellaneousInfo[], miscType: T): (DeviceMiscellaneousInfo & {
     deviceMiscellaneousType: T;
@@ -68,6 +69,7 @@ export type DeviceMiscellaneousTypeMap = {
     deviceRange: DeviceMiscellaneousDeviceRange;
     confidenceThreshold: DeviceMiscellaneousConfidenceThreshold;
     ringSettings: DeviceMiscellaneousRingSettings;
+    profiles: DeviceMiscellaneousProfiles;
 };
 import { PtzMoveAbs, PtzMoveAbsOrientation, PtzMoveAbsPosition } from './auto/PtzMoveAbs';
 import { ArgosTypesMap } from './argosApi';
@@ -85,9 +87,15 @@ export type ArgosReq = {
     message: ArgosTypesMap[keyof ArgosTypesMap];
     responseId: string;
 };
+/** Helper to convert message map type to argos message types */
+type ArgosResMap<T> = {
+    [K in keyof T]: {
+        event: K;
+        message: T[K];
+    };
+}[keyof T];
 /** Messages from ARGOS (socket.io response or push) */
-type ArgosResMap<T extends ArgosTypesMap> = {
-    event: keyof T;
-    message: T;
-};
 export type ArgosRes = ArgosResMap<ArgosTypesMap>;
+/** Returns list of all leaf devices, i.e. children of a composite, or the
+ * device itself for single devices. */
+export declare function leafDevices(device: Device): Device[];

@@ -14,7 +14,7 @@
             "videoDeviceId": {
                 "type": "string",
                 "title": "Video Device ID",
-                "description": "Video Device ID"
+                "description": "Video Device ID. If the camera is part of a composite device, this will be the child device ID."
             },
             "videoSubDeviceId": {
                 "type": "number",
@@ -34,12 +34,71 @@
                 "title": "IP address",
                 "description": "IP address of camera tube"
             },
+            "streamUri": {
+                "type": "string",
+                "title": "Stream URI",
+                "description": "URI of the stream"
+            },
+            "streamProtocol": {
+                "$ref": "./StreamProtocol.json#"
+            },
+            "streamDetails": {
+                "type": "object",
+                "title": "Stream Details",
+                "additionalProperties": false,
+                "description": "Details of the stream",
+                "properties": {
+                    "videoResolution": {
+                        "type": "object",
+                        "title": "Video Resolution",
+                        "additionalProperties": false,
+                        "properties": {
+                            "width": {
+                                "type": "number",
+                                "title": "Width",
+                                "description": "Width of the video stream in pixels"
+                            },
+                            "height": {
+                                "type": "number",
+                                "title": "Height",
+                                "description": "Height of the video stream in pixels"
+                            }
+                        },
+                        "required": ["width", "height"]
+                    },
+                    "videoFps": {
+                        "type": "number",
+                        "title": "Video Frames per second",
+                        "description": "Frames per second of the video stream"
+                    },
+                    "videoBitrate": {
+                        "type": "number",
+                        "title": "Video Bitrate",
+                        "description": "Bitrate of the video stream"
+                    },
+                    "videoCodec": {
+                        "type": "string",
+                        "title": "Video Codec",
+                        "description": "Encoder of the video stream"
+                    },
+                    "audioCodec": {
+                        "type": "string",
+                        "title": "Audio Codec",
+                        "description": "Encoder of the audio stream"
+                    },
+                    "audioBitrate": {
+                        "type": "number",
+                        "title": "Audio Bitrate",
+                        "description": "Bitrate of the audio stream"
+                    }
+                }
+            },
             "rawStreamInfo": {
                 "type": "object",
                 "additionalProperties": true,
                 "description": "All stream info from the camera. Content depends on camera"
             }
         },
-        "required": ["vmsStreamId", "videoDeviceId", "description", "streamIp", "rawStreamInfo"]
+        "required": ["vmsStreamId", "videoDeviceId", "description", "streamIp", "streamProtocol", "rawStreamInfo"]
     }
 }

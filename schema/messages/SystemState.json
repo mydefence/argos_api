@@ -2,6 +2,7 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "SystemState",
     "type": "object",
+    "description": "The system state object. Provides detailed about system components. Also contains a meta component (key: ARGOS) describing the system in its entirety.",
     "additionalProperties": {
         "type": "object",
         "properties": {
@@ -18,34 +19,29 @@
             "versionInfo": {
                 "type": "object",
                 "title": "Version info",
-                "description": "The version object",
+                "description": "The version object. Only available in the meta component.",
                 "$ref": "VersionInfo.json#"
             },
             "timestamp": {
                 "type": ["string", "null"],
-                "title": "Timestamp",
+                "title": "Timestamp. Only available in actual system components.",
                 "description": "Timestamp"
-            },
-            "startTime": {
-                "type": ["string", "null"],
-                "title": "Start timestamp",
-                "description": "Start timestamp"
             },
             "currentState": {
                 "type": "string",
                 "title": "Current State",
-                "description": "The current state",
+                "description": "The current state. Only available in actual system components.",
                 "enum": ["running", "closed"]
             },
             "upTime": {
                 "type": "integer",
                 "title": "Uptime",
-                "description": "The uptime of the specific service"
+                "description": "The uptime of the specific service. Only available in actual system components."
             },
             "interval": {
                 "type": ["integer", "null"],
                 "title": "Interval",
-                "description": "The update interval"
+                "description": "The update interval. Only available in actual system components."
             }
         },
         "additionalProperties": false,

@@ -9,7 +9,7 @@
  *
  *******************************************************************************/
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isPtz = exports.isPtzMoveAbsPosition = exports.isPtzMoveAbsOrientation = exports.miscellaneousDataFind = exports.isDeviceMiscellaneousRingSettings = exports.isDeviceMiscellaneousConfidenceThreshold = exports.isDeviceMiscellaneousDeviceRange = exports.isDeviceMiscellaneousPtzLimits = exports.isDeviceMiscellaneousUseGPSLocation = exports.isDeviceMiscellaneousDroneList = exports.isDeviceMiscellaneousFrequencyBands = exports.isDeviceMiscellaneousProductName = exports.isDeviceMiscellaneousDeviceOrientation = exports.isDeviceMiscellaneousDeviceOrder = exports.isDeviceMiscellaneousDeviceName = exports.uthreatType = exports.isUthreatBasisLocation = exports.isUthreatBasisDirection = exports.isUthreatBasisZone = exports.isUthreatBasisPresence = exports.isUthreatLocation = exports.isUthreatDirection = exports.isUthreatZone = exports.isUthreatPresence = exports.isOriginFilterPolygon = exports.isOriginFilterCircle = exports.isAlarmZonePolygon = exports.isAlarmZoneCircle = exports.isAlarmZoneAddPolygon = exports.isAlarmZoneAddCircle = void 0;
+exports.leafDevices = exports.isPtz = exports.isPtzMoveAbsPosition = exports.isPtzMoveAbsOrientation = exports.miscellaneousDataFind = exports.isDeviceMiscellaneousProfiles = exports.isDeviceMiscellaneousRingSettings = exports.isDeviceMiscellaneousConfidenceThreshold = exports.isDeviceMiscellaneousDeviceRange = exports.isDeviceMiscellaneousPtzLimits = exports.isDeviceMiscellaneousUseGPSLocation = exports.isDeviceMiscellaneousDroneList = exports.isDeviceMiscellaneousFrequencyBands = exports.isDeviceMiscellaneousProductName = exports.isDeviceMiscellaneousDeviceOrientation = exports.isDeviceMiscellaneousDeviceOrder = exports.isDeviceMiscellaneousDeviceName = exports.uthreatType = exports.isUthreatBasisLocation = exports.isUthreatBasisDirection = exports.isUthreatBasisZone = exports.isUthreatBasisPresence = exports.isUthreatLocation = exports.isUthreatDirection = exports.isUthreatZone = exports.isUthreatPresence = exports.isOriginFilterPolygon = exports.isOriginFilterCircle = exports.isAlarmZonePolygon = exports.isAlarmZoneCircle = exports.isAlarmZoneAddPolygon = exports.isAlarmZoneAddCircle = void 0;
 function isAlarmZoneAddCircle(alarmZoneAdd) {
     return alarmZoneAdd.circle !== undefined;
 }
@@ -122,6 +122,10 @@ function isDeviceMiscellaneousRingSettings(misc) {
     return misc.deviceMiscellaneousType == 'ringSettings';
 }
 exports.isDeviceMiscellaneousRingSettings = isDeviceMiscellaneousRingSettings;
+function isDeviceMiscellaneousProfiles(misc) {
+    return misc.deviceMiscellaneousType == 'profiles';
+}
+exports.isDeviceMiscellaneousProfiles = isDeviceMiscellaneousProfiles;
 /** Search miscellaneous data list and narrow to the requested type. */
 function miscellaneousDataFind(deviceMiscellaneousList, miscType) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -148,6 +152,8 @@ function isPtz(device) {
         case 'blackbird5k':
         case 'jaegar':
         case 'onvif':
+        case 'visionflex':
+        case 'circleScope':
             return true;
         case 'composite':
             return device.devices.some(isPtz);
@@ -156,4 +162,10 @@ function isPtz(device) {
     }
 }
 exports.isPtz = isPtz;
+/** Returns list of all leaf devices, i.e. children of a composite, or the
+ * device itself for single devices. */
+function leafDevices(device) {
+    return device.devices.length ? device.devices : [device];
+}
+exports.leafDevices = leafDevices;
 //# sourceMappingURL=argosApiManual.js.map

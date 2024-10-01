@@ -18,57 +18,55 @@ export type BranchName = string;
 /**
  * The comitt hash id
  */
-export type ComittHash = string;
+export type CommitHash = string;
 /**
  * Defines the time of the build
  */
-export type BuildDateTime = string | null;
+export type BuildDateTime = string;
 /**
  * Defines the version
  */
-export type Version = string | null;
+export type Version = string;
 /**
  * Defines the time of the version
  */
-export type VersionDateTime = string | null;
+export type VersionDateTime = string;
 /**
  * Timestamp
  */
-export type Timestamp = string | null;
+export type TimestampOnlyAvailableInActualSystemComponents = string | null;
 /**
- * Start timestamp
- */
-export type StartTimestamp = string | null;
-/**
- * The current state
+ * The current state. Only available in actual system components.
  */
 export type CurrentState = "running" | "closed";
 /**
- * The uptime of the specific service
+ * The uptime of the specific service. Only available in actual system components.
  */
 export type Uptime = number;
 /**
- * The update interval
+ * The update interval. Only available in actual system components.
  */
 export type Interval = number | null;
+/**
+ * The system state object. Provides detailed about system components. Also contains a meta component (key: ARGOS) describing the system in its entirety.
+ */
 export type SystemState = {
     [k: string]: {
         serialNumber: Serialnumber;
         moduleName: ModuleName;
         versionInfo?: VersionInfo;
-        timestamp?: Timestamp;
-        startTime?: StartTimestamp;
+        timestamp?: TimestampOnlyAvailableInActualSystemComponents;
         currentState?: CurrentState;
         upTime?: Uptime;
         interval?: Interval;
     };
 };
 /**
- * The version object
+ * The version object. Only available in the meta component.
  */
 export type VersionInfo = {
     branch: BranchName;
-    commitHash: ComittHash;
+    commitHash: CommitHash;
     buildDateTime: BuildDateTime;
     version: Version;
     versionDateTime: VersionDateTime;

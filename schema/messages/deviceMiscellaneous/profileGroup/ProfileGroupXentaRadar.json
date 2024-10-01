@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ProfileGroupXentaRadar",
+    "type": "object",
+    "properties": {
+        "name": {
+            "const": "xentaRadar",
+            "description": "The name of the profile group."
+        },
+        "profiles": {
+            "type": "array",
+            "items": {
+                "$ref": "XentaRadarProfile.json#"
+            },
+            "description": "The profiles in the profile group."
+        }
+    },
+    "additionalProperties": false,
+    "required": ["name", "profiles"]
+}
