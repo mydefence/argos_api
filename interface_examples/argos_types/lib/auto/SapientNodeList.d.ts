@@ -6,7 +6,7 @@
 export type SapientNodeList = SapientNode[];
 export type SapientNode = {
     /**
-     * ULID of this node
+     * Unique ID of this node
      */
     nodeId: string;
     /**

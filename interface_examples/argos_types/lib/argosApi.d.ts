@@ -127,6 +127,14 @@ import { SystemLogList } from './auto/SystemLogList';
 export { SystemLogList } from './auto/SystemLogList';
 import { SystemState } from './auto/SystemState';
 export { SystemState } from './auto/SystemState';
+import { TakConfiguration } from './auto/TakConfiguration';
+export { TakConfiguration } from './auto/TakConfiguration';
+import { TakConfigure } from './auto/TakConfigure';
+export { TakConfigure } from './auto/TakConfigure';
+import { TakTransportList } from './auto/TakTransportList';
+export { TakTransportList } from './auto/TakTransportList';
+import { TakTransport } from './auto/TakTransport';
+export { TakTransport } from './auto/TakTransport';
 import { ThreatTypeList } from './auto/ThreatTypeList';
 export { ThreatTypeList } from './auto/ThreatTypeList';
 import { ThreatType } from './auto/ThreatType';
@@ -271,6 +279,11 @@ export type SapientGetConfiguration = Empty;
 export type SapientNodeGetList = Empty;
 export type SapientNodeUpdated = SapientNode;
 export type SystemLogGetList = Empty;
+export type TakConfigureCompleted = Empty;
+export type TakConfigureError = Error;
+export type TakGetConfiguration = Empty;
+export type TakTransportGetList = Empty;
+export type TakTransportUpdated = TakTransport;
 export type ThreatTypeGetList = Empty;
 export type ThreatTypeMute = ThreatType;
 export type ThreatTypeMuteCompleted = ThreatType;
@@ -454,6 +467,14 @@ export declare enum API {
     SYSTEM_LOG_GET_LIST = "systemLogGetList",
     SYSTEM_LOG_LIST = "systemLogList",
     SYSTEM_STATE = "systemState",
+    TAK_CONFIGURATION = "takConfiguration",
+    TAK_CONFIGURE = "takConfigure",
+    TAK_CONFIGURE_COMPLETED = "takConfigureCompleted",
+    TAK_CONFIGURE_ERROR = "takConfigureError",
+    TAK_GET_CONFIGURATION = "takGetConfiguration",
+    TAK_TRANSPORT_GET_LIST = "takTransportGetList",
+    TAK_TRANSPORT_LIST = "takTransportList",
+    TAK_TRANSPORT_UPDATED = "takTransportUpdated",
     THREAT_TYPE_GET_LIST = "threatTypeGetList",
     THREAT_TYPE_LIST = "threatTypeList",
     THREAT_TYPE_MUTE = "threatTypeMute",
@@ -643,6 +664,14 @@ export type ArgosTypesMap = {
     [API.SYSTEM_LOG_GET_LIST]: SystemLogGetList;
     [API.SYSTEM_LOG_LIST]: SystemLogList;
     [API.SYSTEM_STATE]: SystemState;
+    [API.TAK_CONFIGURATION]: TakConfiguration;
+    [API.TAK_CONFIGURE]: TakConfigure;
+    [API.TAK_CONFIGURE_COMPLETED]: TakConfigureCompleted;
+    [API.TAK_CONFIGURE_ERROR]: TakConfigureError;
+    [API.TAK_GET_CONFIGURATION]: TakGetConfiguration;
+    [API.TAK_TRANSPORT_GET_LIST]: TakTransportGetList;
+    [API.TAK_TRANSPORT_LIST]: TakTransportList;
+    [API.TAK_TRANSPORT_UPDATED]: TakTransportUpdated;
     [API.THREAT_TYPE_GET_LIST]: ThreatTypeGetList;
     [API.THREAT_TYPE_LIST]: ThreatTypeList;
     [API.THREAT_TYPE_MUTE]: ThreatTypeMute;

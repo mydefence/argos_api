@@ -1,0 +1,10 @@
+{
+    "event": "takTransportList",
+    "message": [
+        {
+            "transportId": "01JB1Q3V6E7GFP80H9FKRS1X0A",
+            "transportState": "connected"
+        }
+    ],
+    "responseId": "dt5t95cm"
+}

@@ -1,0 +1,125 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "TakConfigure",
+    "type": "object",
+    "properties": {
+        "callsign": {
+            "type": "string",
+            "description": "Callsign used CoT messages."
+        },
+        "locationDeviceId": {
+            "type": "string",
+            "description": "When this is set, use the location of the specified device to broadcast Argos' location (using CoT event type a-f-G-U-C). The device should probably have useGpsLocation enabled. If not set Argos location will not be broadcast. Primarily relevant with vehicle systems."
+        },
+        "transports": {
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": { "const": "multicast" },
+                            "name": { "type": "string", "description": "Name of transport"},
+                            "localIpAddress": { "type": "string", "description": "IP address of the Argos server" },
+                            "multicastIpAddress": {
+                                "type": "string",
+                                "default": "239.2.3.1",
+                                "description": "Multicast IP address"
+                            },
+                            "port": { "type": "number", "default": 6969, "description": "Multicast port number" },
+                            "options": { "$ref": "./TakTransportOptionsConfigure.json#" }
+                        },
+                        "required": ["type", "localIpAddress"],
+                        "additionalProperties": false
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": { "const": "tcp" },
+                            "name": { "type": "string", "description": "Name of transport"},
+                            "address": { "type": "string", "description": "TAK server IP address" },
+                            "port": { "type": "number", "default": 8088, "description": "TAK server TCP port" },
+                            "options": { "$ref": "./TakTransportOptionsConfigure.json#" }
+                        },
+                        "required": ["type", "address"],
+                        "additionalProperties": false
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": { "const": "tls" },
+                            "name": { "type": "string", "description": "Name of transport"},
+                            "address": { "type": "string", "description": "TAK server IP address" },
+                            "port": { "type": "number", "default": 8089, "description": "TAK server TLS port" },
+                            "credentials": {
+                                "oneOf": [
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "credentialId": {
+                                                "type": "string",
+                                                "description": "Credential ID. Use when modifying an existing transport. Credentials can't be modified"
+                                            }
+                                        },
+                                        "required": ["credentialId"],
+                                        "additionalProperties": false
+                                    },
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "cert": {
+                                                "type": "string",
+                                                "description": "Certificate corresponding to private key in PEM format"
+                                            },
+                                            "key": { "type": "string", "description": "Private key in PEM format" },
+                                            "ca": { "type": "string", "description": "CA certificate in PEM format" }
+                                        },
+                                        "required": ["cert", "key"],
+                                        "additionalProperties": false
+                                    },
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "p12": {
+                                                "type": "string",
+                                                "contentEncoding": "base64",
+                                                "description": "PKCS12 file containing private key and corresponding certificate(s)"
+                                            },
+                                            "passphrase": {
+                                                "type": "string",
+                                                "description": "Passphrase for the PKCS12 file"
+                                            }
+                                        },
+                                        "required": ["p12", "passphrase"],
+                                        "additionalProperties": false
+                                    }
+                                ]
+                            },
+                            "verifyServer": {
+                                "type": "boolean",
+                                "default": true,
+                                "description": "Verify server certificate"
+                            },
+                            "options": { "$ref": "./TakTransportOptionsConfigure.json#" }
+                        },
+                        "required": ["type", "address", "credentials"],
+                        "additionalProperties": false
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": { "const": "tcpServer" },
+                            "name": { "type": "string", "description": "Name of transport"},
+                            "port": { "type": "number", "default": 8088, "description": "TAK server TCP port" },
+                            "options": { "$ref": "./TakTransportOptionsConfigure.json#" }
+                        },
+                        "required": ["type"],
+                        "additionalProperties": false
+                    }
+                ]
+            }
+        }
+    },
+    "required": ["callsign", "transports"],
+    "additionalProperties": false
+}

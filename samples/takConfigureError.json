@@ -1,0 +1,7 @@
+{
+    "event": "takConfigureError",
+    "message": {
+        "errorInfo": "Import of PKCS12 failed."
+    },
+    "responseId": "kn3t95md"
+}

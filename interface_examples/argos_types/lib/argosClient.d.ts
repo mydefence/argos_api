@@ -1,4 +1,3 @@
-/// <reference types="node" />
 /*******************************************************************************
  *
  * Copyright (C) 2020 MyDefence Communication A/S. All rights reserved.

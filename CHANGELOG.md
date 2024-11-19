@@ -1,5 +1,31 @@
 # Release Notes ARGOS
 
+## 5.3.0
+
+### Attention
+
+-   API: Added `CoT` to uthreat and uthreatBasis property `detectionType` for
+    Cursor-on-Target originated threats.
+-   API: Added deviceType `tak` TAK device, e.g. ATAK (Android Tactical
+    Awareness Kit). Also added new createdBy `extern` currently only used with
+    TAK devices.
+-   API: UthreatBasisLocation may now also contain `rfInfo` property
+-   API: Added deviceMiscellaneousType `takInfo`.
+
+### Improvements
+
+-   (A)TAK/CoT support. Support sending and receiving drone-related CoT
+    messages. Support for broadcast, TCP, and TLS as CoT transports. See new API
+    events `takConfig*` and `takTransport*`.
+-   SkyEye update to support 5.2GHz jamming (6 channel jammer). All jamming
+    frequencies are now considered independent. The earliest SkyCope effectors
+    had some hardware constraints, that were modelled in the SW, this is now
+    removed. The required SkyEye API version is 4.2. Tested with SkyEye SW
+    V4.3.2.3114.
+
+### Bugs
+-   fix missing followUthreatId in ptzFollowStarted message
+
 ## 5.2.0
 
 ### Attention
@@ -32,7 +58,7 @@
     the values reported from internal INS.
 -   Sapient ASM support version BSI Flex 335 v2.0 / NATO STANREC 4869 draft 6.
     TIE-24 interoperability tested. Sapient is not enabled per default, contact
-    MyDefence for information on how to enable.
+    MyDefence for information on how to enable.ptyp
 
 ### Bugs
 
@@ -115,6 +141,16 @@
 -   API: deviceCalibrationStart can be used to initiate calibration. Currently
     it is possible to calibrate compass of WolfPack and WD150 devices.
 -   node.js API interface example code rewritten.
+
+## 4.4.4
+
+### Improvements
+
+-   SkyEye update to support 5.2GHz jamming (6 channel jammer). All jamming
+    frequencies are now considered independent. The earliest SkyCope effectors
+    had some hardware contraints, that were modelled in the SW, this is now
+    removed. The required SkyEye API version is 4.2. Tested with SkyEye SW
+    V4.3.2.3114.
 
 ## 4.4.3
 

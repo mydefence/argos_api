@@ -124,7 +124,7 @@
         },
         "stoppedTimeStamp": {
             "type": "string",
-            "description": "UTC time of stop of this uthreat. Only set when threat is stopped. Will be equal to updatedTimeStamp."
+            "description": "UTC time of stop of this uthreat. Only set when threat is stopped. Also see updatedTimeStamp."
         }
     },
     "required": [

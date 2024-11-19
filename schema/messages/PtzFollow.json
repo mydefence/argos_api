@@ -6,23 +6,19 @@
     "properties": {
         "ptzFollowId": {
             "type": "string",
-            "title": "PTZ follow instance identification",
-            "description": "Device ID of a PTZ device"
+            "description": "ID of the PTZ follow instance"
         },
         "deviceId": {
             "type": "string",
-            "title": "Device identification",
-            "description": "Device ID of a PTZ device used for following"
+            "description": "Device ID of the PTZ device used for following"
         },
         "followUthreatId": {
             "type": "string",
-            "title": "uthreat device identification",
-            "description": "uthreat ID of threat to follow"
+            "description": "uthreat ID of the threat that is followed. Present when following a threat"
         },
         "followDeviceId": {
             "type": "string",
-            "title": "Device identification",
-            "description": "Device ID of device to follow (e.g. GPS)"
+            "description": "Device ID of device that is followed (e.g. GPS). Present when following a device"
         }
     },
     "required": ["ptzFollowId", "deviceId"]

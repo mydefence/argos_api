@@ -25,9 +25,9 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/codegen/code.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/codegen/code.js
 var require_code = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/codegen/code.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/codegen/code.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.regexpCode = exports2.getEsmExportName = exports2.getProperty = exports2.safeStringify = exports2.stringify = exports2.strConcat = exports2.addCodeArg = exports2.str = exports2._ = exports2.nil = exports2._Code = exports2.Name = exports2.IDENTIFIER = exports2._CodeOrName = void 0;
@@ -179,9 +179,9 @@ var require_code = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/codegen/scope.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/codegen/scope.js
 var require_scope = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/codegen/scope.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/codegen/scope.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.ValueScope = exports2.ValueScopeName = exports2.Scope = exports2.varKinds = exports2.UsedValueState = void 0;
@@ -196,7 +196,7 @@ var require_scope = __commonJS({
     (function(UsedValueState2) {
       UsedValueState2[UsedValueState2["Started"] = 0] = "Started";
       UsedValueState2[UsedValueState2["Completed"] = 1] = "Completed";
-    })(UsedValueState = exports2.UsedValueState || (exports2.UsedValueState = {}));
+    })(UsedValueState || (exports2.UsedValueState = UsedValueState = {}));
     exports2.varKinds = {
       const: new code_1.Name("const"),
       let: new code_1.Name("let"),
@@ -324,9 +324,9 @@ var require_scope = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/codegen/index.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/codegen/index.js
 var require_codegen = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/codegen/index.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/codegen/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.or = exports2.and = exports2.not = exports2.CodeGen = exports2.operators = exports2.varKinds = exports2.ValueScopeName = exports2.ValueScope = exports2.Scope = exports2.Name = exports2.regexpCode = exports2.stringify = exports2.getProperty = exports2.nil = exports2.strConcat = exports2.str = exports2._ = void 0;
@@ -1044,9 +1044,9 @@ var require_codegen = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/util.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/util.js
 var require_util = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/util.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/util.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.checkStrictMode = exports2.getErrorPath = exports2.Type = exports2.useFunc = exports2.setEvaluated = exports2.evaluatedPropsToName = exports2.mergeEvaluated = exports2.eachItem = exports2.unescapeJsonPointer = exports2.escapeJsonPointer = exports2.escapeFragment = exports2.unescapeFragment = exports2.schemaRefOrVal = exports2.schemaHasRulesButRef = exports2.schemaHasRules = exports2.checkUnknownRules = exports2.alwaysValidSchema = exports2.toHash = void 0;
@@ -1190,7 +1190,7 @@ var require_util = __commonJS({
     (function(Type2) {
       Type2[Type2["Num"] = 0] = "Num";
       Type2[Type2["Str"] = 1] = "Str";
-    })(Type = exports2.Type || (exports2.Type = {}));
+    })(Type || (exports2.Type = Type = {}));
     function getErrorPath(dataProp, dataPropType, jsPropertySyntax) {
       if (dataProp instanceof codegen_1.Name) {
         const isNumber = dataPropType === Type.Num;
@@ -1211,25 +1211,31 @@ var require_util = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/names.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/names.js
 var require_names = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/names.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/names.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
     var names = {
       // validation function arguments
       data: new codegen_1.Name("data"),
+      // data passed to validation function
       // args passed from referencing schema
       valCxt: new codegen_1.Name("valCxt"),
+      // validation/data context - should not be used directly, it is destructured to the names below
       instancePath: new codegen_1.Name("instancePath"),
       parentData: new codegen_1.Name("parentData"),
       parentDataProperty: new codegen_1.Name("parentDataProperty"),
       rootData: new codegen_1.Name("rootData"),
+      // root data - same as the data passed to the first/top validation function
       dynamicAnchors: new codegen_1.Name("dynamicAnchors"),
+      // used to support recursiveRef and dynamicRef
       // function scoped variables
       vErrors: new codegen_1.Name("vErrors"),
+      // null or array of validation errors
       errors: new codegen_1.Name("errors"),
+      // counter of validation errors
       this: new codegen_1.Name("this"),
       // "globals"
       self: new codegen_1.Name("self"),
@@ -1244,9 +1250,9 @@ var require_names = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/errors.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/errors.js
 var require_errors = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/errors.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/errors.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.extendErrors = exports2.resetErrorsCount = exports2.reportExtraError = exports2.reportError = exports2.keyword$DataError = exports2.keywordError = void 0;
@@ -1317,6 +1323,7 @@ var require_errors = __commonJS({
     var E = {
       keyword: new codegen_1.Name("keyword"),
       schemaPath: new codegen_1.Name("schemaPath"),
+      // also used in JTD errors
       params: new codegen_1.Name("params"),
       propertyName: new codegen_1.Name("propertyName"),
       message: new codegen_1.Name("message"),
@@ -1365,9 +1372,9 @@ var require_errors = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/validate/boolSchema.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/validate/boolSchema.js
 var require_boolSchema = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/validate/boolSchema.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/validate/boolSchema.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.boolOrEmptySchema = exports2.topBoolOrEmptySchema = void 0;
@@ -1416,9 +1423,9 @@ var require_boolSchema = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/rules.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/rules.js
 var require_rules = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/rules.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/rules.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getRules = exports2.isJSONType = void 0;
@@ -1447,9 +1454,9 @@ var require_rules = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/validate/applicability.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/validate/applicability.js
 var require_applicability = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/validate/applicability.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/validate/applicability.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.shouldUseRule = exports2.shouldUseGroup = exports2.schemaHasRulesForType = void 0;
@@ -1470,9 +1477,9 @@ var require_applicability = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/validate/dataType.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/validate/dataType.js
 var require_dataType = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/validate/dataType.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/validate/dataType.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.reportTypeError = exports2.checkDataTypes = exports2.checkDataType = exports2.coerceAndCheckDataType = exports2.getJSONTypes = exports2.getSchemaTypes = exports2.DataType = void 0;
@@ -1485,7 +1492,7 @@ var require_dataType = __commonJS({
     (function(DataType2) {
       DataType2[DataType2["Correct"] = 0] = "Correct";
       DataType2[DataType2["Wrong"] = 1] = "Wrong";
-    })(DataType = exports2.DataType || (exports2.DataType = {}));
+    })(DataType || (exports2.DataType = DataType = {}));
     function getSchemaTypes(schema) {
       const types = getJSONTypes(schema.type);
       const hasNull = types.includes("null");
@@ -1654,9 +1661,9 @@ var require_dataType = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/validate/defaults.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/validate/defaults.js
 var require_defaults = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/validate/defaults.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/validate/defaults.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.assignDefaults = void 0;
@@ -1691,9 +1698,9 @@ var require_defaults = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/code.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/code.js
 var require_code2 = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/code.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/code.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateUnion = exports2.validateArray = exports2.usePattern = exports2.callValidateCode = exports2.schemaProperties = exports2.allSchemaProperties = exports2.noPropertyInData = exports2.propertyInData = exports2.isOwnProperty = exports2.hasPropFunc = exports2.reportMissingProp = exports2.checkMissingProp = exports2.checkReportMissingProp = void 0;
@@ -1824,9 +1831,9 @@ var require_code2 = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/validate/keyword.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/validate/keyword.js
 var require_keyword = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/validate/keyword.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/validate/keyword.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateKeywordUsage = exports2.validSchemaType = exports2.funcKeywordCode = exports2.macroKeywordCode = void 0;
@@ -1942,9 +1949,9 @@ var require_keyword = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/validate/subschema.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/validate/subschema.js
 var require_subschema = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/validate/subschema.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/validate/subschema.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.extendSubschemaMode = exports2.extendSubschemaData = exports2.getSubschema = void 0;
@@ -2148,9 +2155,9 @@ var require_json_schema_traverse = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/resolve.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/resolve.js
 var require_resolve = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/resolve.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/resolve.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getSchemaRefs = exports2.resolveUrl = exports2.normalizeId = exports2._getFullPath = exports2.getFullPath = exports2.inlineRef = void 0;
@@ -2256,15 +2263,15 @@ var require_resolve = __commonJS({
         if (parentJsonPtr === void 0)
           return;
         const fullPath = pathPrefix + jsonPtr;
-        let baseId2 = baseIds[parentJsonPtr];
+        let innerBaseId = baseIds[parentJsonPtr];
         if (typeof sch[schemaId] == "string")
-          baseId2 = addRef.call(this, sch[schemaId]);
+          innerBaseId = addRef.call(this, sch[schemaId]);
         addAnchor.call(this, sch.$anchor);
         addAnchor.call(this, sch.$dynamicAnchor);
-        baseIds[jsonPtr] = baseId2;
+        baseIds[jsonPtr] = innerBaseId;
         function addRef(ref) {
           const _resolve = this.opts.uriResolver.resolve;
-          ref = normalizeId(baseId2 ? _resolve(baseId2, ref) : ref);
+          ref = normalizeId(innerBaseId ? _resolve(innerBaseId, ref) : ref);
           if (schemaRefs.has(ref))
             throw ambiguos(ref);
           schemaRefs.add(ref);
@@ -2304,9 +2311,9 @@ var require_resolve = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/validate/index.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/validate/index.js
 var require_validate = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/validate/index.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/validate/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getData = exports2.KeywordCxt = exports2.validateFunctionCode = void 0;
@@ -2812,9 +2819,9 @@ var require_validate = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/runtime/validation_error.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/runtime/validation_error.js
 var require_validation_error = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/runtime/validation_error.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/runtime/validation_error.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var ValidationError = class extends Error {
@@ -2828,9 +2835,9 @@ var require_validation_error = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/ref_error.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/ref_error.js
 var require_ref_error = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/ref_error.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/ref_error.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var resolve_1 = require_resolve();
@@ -2845,9 +2852,9 @@ var require_ref_error = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/index.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/index.js
 var require_compile = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/compile/index.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/compile/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.resolveSchema = exports2.getCompilingSchema = exports2.resolveRef = exports2.compileSchema = exports2.SchemaEnv = void 0;
@@ -2902,6 +2909,7 @@ var require_compile = __commonJS({
         parentDataProperty: names_1.default.parentDataProperty,
         dataNames: [names_1.default.data],
         dataPathArr: [codegen_1.nil],
+        // TODO can its length be used as dataLevel if nil is removed?
         dataLevel: 0,
         dataTypes: [],
         definedProperties: /* @__PURE__ */ new Set(),
@@ -3068,9 +3076,9 @@ var require_compile = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/refs/data.json
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/refs/data.json
 var require_data = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/refs/data.json"(exports2, module2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/refs/data.json"(exports2, module2) {
     module2.exports = {
       $id: "https://raw.githubusercontent.com/ajv-validator/ajv/master/lib/refs/data.json#",
       description: "Meta-schema for $data reference (JSON AnySchema extension proposal)",
@@ -3087,1037 +3095,687 @@ var require_data = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/uri-js@4.4.1/node_modules/uri-js/dist/es5/uri.all.js
-var require_uri_all = __commonJS({
-  "../../../node_modules/.pnpm/uri-js@4.4.1/node_modules/uri-js/dist/es5/uri.all.js"(exports2, module2) {
-    (function(global, factory) {
-      typeof exports2 === "object" && typeof module2 !== "undefined" ? factory(exports2) : typeof define === "function" && define.amd ? define(["exports"], factory) : factory(global.URI = global.URI || {});
-    })(exports2, function(exports3) {
-      "use strict";
-      function merge() {
-        for (var _len = arguments.length, sets = Array(_len), _key = 0; _key < _len; _key++) {
-          sets[_key] = arguments[_key];
-        }
-        if (sets.length > 1) {
-          sets[0] = sets[0].slice(0, -1);
-          var xl = sets.length - 1;
-          for (var x = 1; x < xl; ++x) {
-            sets[x] = sets[x].slice(1, -1);
-          }
-          sets[xl] = sets[xl].slice(1);
-          return sets.join("");
-        } else {
-          return sets[0];
-        }
+// ../../../node_modules/.pnpm/fast-uri@3.0.2/node_modules/fast-uri/lib/scopedChars.js
+var require_scopedChars = __commonJS({
+  "../../../node_modules/.pnpm/fast-uri@3.0.2/node_modules/fast-uri/lib/scopedChars.js"(exports2, module2) {
+    "use strict";
+    var HEX = {
+      0: 0,
+      1: 1,
+      2: 2,
+      3: 3,
+      4: 4,
+      5: 5,
+      6: 6,
+      7: 7,
+      8: 8,
+      9: 9,
+      a: 10,
+      A: 10,
+      b: 11,
+      B: 11,
+      c: 12,
+      C: 12,
+      d: 13,
+      D: 13,
+      e: 14,
+      E: 14,
+      f: 15,
+      F: 15
+    };
+    module2.exports = {
+      HEX
+    };
+  }
+});
+
+// ../../../node_modules/.pnpm/fast-uri@3.0.2/node_modules/fast-uri/lib/utils.js
+var require_utils = __commonJS({
+  "../../../node_modules/.pnpm/fast-uri@3.0.2/node_modules/fast-uri/lib/utils.js"(exports2, module2) {
+    "use strict";
+    var { HEX } = require_scopedChars();
+    function normalizeIPv4(host) {
+      if (findToken(host, ".") < 3) {
+        return { host, isIPV4: false };
       }
-      function subexp(str) {
-        return "(?:" + str + ")";
+      const matches = host.match(/^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])$/u) || [];
+      const [address] = matches;
+      if (address) {
+        return { host: stripLeadingZeros(address, "."), isIPV4: true };
+      } else {
+        return { host, isIPV4: false };
       }
-      function typeOf(o) {
-        return o === void 0 ? "undefined" : o === null ? "null" : Object.prototype.toString.call(o).split(" ").pop().split("]").shift().toLowerCase();
+    }
+    function stringArrayToHexStripped(input, keepZero = false) {
+      let acc = "";
+      let strip = true;
+      for (const c of input) {
+        if (HEX[c] === void 0) return void 0;
+        if (c !== "0" && strip === true) strip = false;
+        if (!strip) acc += c;
       }
-      function toUpperCase(str) {
-        return str.toUpperCase();
-      }
-      function toArray(obj) {
-        return obj !== void 0 && obj !== null ? obj instanceof Array ? obj : typeof obj.length !== "number" || obj.split || obj.setInterval || obj.call ? [obj] : Array.prototype.slice.call(obj) : [];
-      }
-      function assign(target, source) {
-        var obj = target;
-        if (source) {
-          for (var key in source) {
-            obj[key] = source[key];
-          }
-        }
-        return obj;
-      }
-      function buildExps(isIRI2) {
-        var ALPHA$$ = "[A-Za-z]", CR$ = "[\\x0D]", DIGIT$$ = "[0-9]", DQUOTE$$ = "[\\x22]", HEXDIG$$2 = merge(DIGIT$$, "[A-Fa-f]"), LF$$ = "[\\x0A]", SP$$ = "[\\x20]", PCT_ENCODED$2 = subexp(subexp("%[EFef]" + HEXDIG$$2 + "%" + HEXDIG$$2 + HEXDIG$$2 + "%" + HEXDIG$$2 + HEXDIG$$2) + "|" + subexp("%[89A-Fa-f]" + HEXDIG$$2 + "%" + HEXDIG$$2 + HEXDIG$$2) + "|" + subexp("%" + HEXDIG$$2 + HEXDIG$$2)), GEN_DELIMS$$ = "[\\:\\/\\?\\#\\[\\]\\@]", SUB_DELIMS$$ = "[\\!\\$\\&\\'\\(\\)\\*\\+\\,\\;\\=]", RESERVED$$ = merge(GEN_DELIMS$$, SUB_DELIMS$$), UCSCHAR$$ = isIRI2 ? "[\\xA0-\\u200D\\u2010-\\u2029\\u202F-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF]" : "[]", IPRIVATE$$ = isIRI2 ? "[\\uE000-\\uF8FF]" : "[]", UNRESERVED$$2 = merge(ALPHA$$, DIGIT$$, "[\\-\\.\\_\\~]", UCSCHAR$$), SCHEME$ = subexp(ALPHA$$ + merge(ALPHA$$, DIGIT$$, "[\\+\\-\\.]") + "*"), USERINFO$ = subexp(subexp(PCT_ENCODED$2 + "|" + merge(UNRESERVED$$2, SUB_DELIMS$$, "[\\:]")) + "*"), DEC_OCTET$ = subexp(subexp("25[0-5]") + "|" + subexp("2[0-4]" + DIGIT$$) + "|" + subexp("1" + DIGIT$$ + DIGIT$$) + "|" + subexp("[1-9]" + DIGIT$$) + "|" + DIGIT$$), DEC_OCTET_RELAXED$ = subexp(subexp("25[0-5]") + "|" + subexp("2[0-4]" + DIGIT$$) + "|" + subexp("1" + DIGIT$$ + DIGIT$$) + "|" + subexp("0?[1-9]" + DIGIT$$) + "|0?0?" + DIGIT$$), IPV4ADDRESS$ = subexp(DEC_OCTET_RELAXED$ + "\\." + DEC_OCTET_RELAXED$ + "\\." + DEC_OCTET_RELAXED$ + "\\." + DEC_OCTET_RELAXED$), H16$ = subexp(HEXDIG$$2 + "{1,4}"), LS32$ = subexp(subexp(H16$ + "\\:" + H16$) + "|" + IPV4ADDRESS$), IPV6ADDRESS1$ = subexp(subexp(H16$ + "\\:") + "{6}" + LS32$), IPV6ADDRESS2$ = subexp("\\:\\:" + subexp(H16$ + "\\:") + "{5}" + LS32$), IPV6ADDRESS3$ = subexp(subexp(H16$) + "?\\:\\:" + subexp(H16$ + "\\:") + "{4}" + LS32$), IPV6ADDRESS4$ = subexp(subexp(subexp(H16$ + "\\:") + "{0,1}" + H16$) + "?\\:\\:" + subexp(H16$ + "\\:") + "{3}" + LS32$), IPV6ADDRESS5$ = subexp(subexp(subexp(H16$ + "\\:") + "{0,2}" + H16$) + "?\\:\\:" + subexp(H16$ + "\\:") + "{2}" + LS32$), IPV6ADDRESS6$ = subexp(subexp(subexp(H16$ + "\\:") + "{0,3}" + H16$) + "?\\:\\:" + H16$ + "\\:" + LS32$), IPV6ADDRESS7$ = subexp(subexp(subexp(H16$ + "\\:") + "{0,4}" + H16$) + "?\\:\\:" + LS32$), IPV6ADDRESS8$ = subexp(subexp(subexp(H16$ + "\\:") + "{0,5}" + H16$) + "?\\:\\:" + H16$), IPV6ADDRESS9$ = subexp(subexp(subexp(H16$ + "\\:") + "{0,6}" + H16$) + "?\\:\\:"), IPV6ADDRESS$ = subexp([IPV6ADDRESS1$, IPV6ADDRESS2$, IPV6ADDRESS3$, IPV6ADDRESS4$, IPV6ADDRESS5$, IPV6ADDRESS6$, IPV6ADDRESS7$, IPV6ADDRESS8$, IPV6ADDRESS9$].join("|")), ZONEID$ = subexp(subexp(UNRESERVED$$2 + "|" + PCT_ENCODED$2) + "+"), IPV6ADDRZ$ = subexp(IPV6ADDRESS$ + "\\%25" + ZONEID$), IPV6ADDRZ_RELAXED$ = subexp(IPV6ADDRESS$ + subexp("\\%25|\\%(?!" + HEXDIG$$2 + "{2})") + ZONEID$), IPVFUTURE$ = subexp("[vV]" + HEXDIG$$2 + "+\\." + merge(UNRESERVED$$2, SUB_DELIMS$$, "[\\:]") + "+"), IP_LITERAL$ = subexp("\\[" + subexp(IPV6ADDRZ_RELAXED$ + "|" + IPV6ADDRESS$ + "|" + IPVFUTURE$) + "\\]"), REG_NAME$ = subexp(subexp(PCT_ENCODED$2 + "|" + merge(UNRESERVED$$2, SUB_DELIMS$$)) + "*"), HOST$ = subexp(IP_LITERAL$ + "|" + IPV4ADDRESS$ + "(?!" + REG_NAME$ + ")|" + REG_NAME$), PORT$ = subexp(DIGIT$$ + "*"), AUTHORITY$ = subexp(subexp(USERINFO$ + "@") + "?" + HOST$ + subexp("\\:" + PORT$) + "?"), PCHAR$ = subexp(PCT_ENCODED$2 + "|" + merge(UNRESERVED$$2, SUB_DELIMS$$, "[\\:\\@]")), SEGMENT$ = subexp(PCHAR$ + "*"), SEGMENT_NZ$ = subexp(PCHAR$ + "+"), SEGMENT_NZ_NC$ = subexp(subexp(PCT_ENCODED$2 + "|" + merge(UNRESERVED$$2, SUB_DELIMS$$, "[\\@]")) + "+"), PATH_ABEMPTY$ = subexp(subexp("\\/" + SEGMENT$) + "*"), PATH_ABSOLUTE$ = subexp("\\/" + subexp(SEGMENT_NZ$ + PATH_ABEMPTY$) + "?"), PATH_NOSCHEME$ = subexp(SEGMENT_NZ_NC$ + PATH_ABEMPTY$), PATH_ROOTLESS$ = subexp(SEGMENT_NZ$ + PATH_ABEMPTY$), PATH_EMPTY$ = "(?!" + PCHAR$ + ")", PATH$ = subexp(PATH_ABEMPTY$ + "|" + PATH_ABSOLUTE$ + "|" + PATH_NOSCHEME$ + "|" + PATH_ROOTLESS$ + "|" + PATH_EMPTY$), QUERY$ = subexp(subexp(PCHAR$ + "|" + merge("[\\/\\?]", IPRIVATE$$)) + "*"), FRAGMENT$ = subexp(subexp(PCHAR$ + "|[\\/\\?]") + "*"), HIER_PART$ = subexp(subexp("\\/\\/" + AUTHORITY$ + PATH_ABEMPTY$) + "|" + PATH_ABSOLUTE$ + "|" + PATH_ROOTLESS$ + "|" + PATH_EMPTY$), URI$ = subexp(SCHEME$ + "\\:" + HIER_PART$ + subexp("\\?" + QUERY$) + "?" + subexp("\\#" + FRAGMENT$) + "?"), RELATIVE_PART$ = subexp(subexp("\\/\\/" + AUTHORITY$ + PATH_ABEMPTY$) + "|" + PATH_ABSOLUTE$ + "|" + PATH_NOSCHEME$ + "|" + PATH_EMPTY$), RELATIVE$ = subexp(RELATIVE_PART$ + subexp("\\?" + QUERY$) + "?" + subexp("\\#" + FRAGMENT$) + "?"), URI_REFERENCE$ = subexp(URI$ + "|" + RELATIVE$), ABSOLUTE_URI$ = subexp(SCHEME$ + "\\:" + HIER_PART$ + subexp("\\?" + QUERY$) + "?"), GENERIC_REF$ = "^(" + SCHEME$ + ")\\:" + subexp(subexp("\\/\\/(" + subexp("(" + USERINFO$ + ")@") + "?(" + HOST$ + ")" + subexp("\\:(" + PORT$ + ")") + "?)") + "?(" + PATH_ABEMPTY$ + "|" + PATH_ABSOLUTE$ + "|" + PATH_ROOTLESS$ + "|" + PATH_EMPTY$ + ")") + subexp("\\?(" + QUERY$ + ")") + "?" + subexp("\\#(" + FRAGMENT$ + ")") + "?$", RELATIVE_REF$ = "^(){0}" + subexp(subexp("\\/\\/(" + subexp("(" + USERINFO$ + ")@") + "?(" + HOST$ + ")" + subexp("\\:(" + PORT$ + ")") + "?)") + "?(" + PATH_ABEMPTY$ + "|" + PATH_ABSOLUTE$ + "|" + PATH_NOSCHEME$ + "|" + PATH_EMPTY$ + ")") + subexp("\\?(" + QUERY$ + ")") + "?" + subexp("\\#(" + FRAGMENT$ + ")") + "?$", ABSOLUTE_REF$ = "^(" + SCHEME$ + ")\\:" + subexp(subexp("\\/\\/(" + subexp("(" + USERINFO$ + ")@") + "?(" + HOST$ + ")" + subexp("\\:(" + PORT$ + ")") + "?)") + "?(" + PATH_ABEMPTY$ + "|" + PATH_ABSOLUTE$ + "|" + PATH_ROOTLESS$ + "|" + PATH_EMPTY$ + ")") + subexp("\\?(" + QUERY$ + ")") + "?$", SAMEDOC_REF$ = "^" + subexp("\\#(" + FRAGMENT$ + ")") + "?$", AUTHORITY_REF$ = "^" + subexp("(" + USERINFO$ + ")@") + "?(" + HOST$ + ")" + subexp("\\:(" + PORT$ + ")") + "?$";
-        return {
-          NOT_SCHEME: new RegExp(merge("[^]", ALPHA$$, DIGIT$$, "[\\+\\-\\.]"), "g"),
-          NOT_USERINFO: new RegExp(merge("[^\\%\\:]", UNRESERVED$$2, SUB_DELIMS$$), "g"),
-          NOT_HOST: new RegExp(merge("[^\\%\\[\\]\\:]", UNRESERVED$$2, SUB_DELIMS$$), "g"),
-          NOT_PATH: new RegExp(merge("[^\\%\\/\\:\\@]", UNRESERVED$$2, SUB_DELIMS$$), "g"),
-          NOT_PATH_NOSCHEME: new RegExp(merge("[^\\%\\/\\@]", UNRESERVED$$2, SUB_DELIMS$$), "g"),
-          NOT_QUERY: new RegExp(merge("[^\\%]", UNRESERVED$$2, SUB_DELIMS$$, "[\\:\\@\\/\\?]", IPRIVATE$$), "g"),
-          NOT_FRAGMENT: new RegExp(merge("[^\\%]", UNRESERVED$$2, SUB_DELIMS$$, "[\\:\\@\\/\\?]"), "g"),
-          ESCAPE: new RegExp(merge("[^]", UNRESERVED$$2, SUB_DELIMS$$), "g"),
-          UNRESERVED: new RegExp(UNRESERVED$$2, "g"),
-          OTHER_CHARS: new RegExp(merge("[^\\%]", UNRESERVED$$2, RESERVED$$), "g"),
-          PCT_ENCODED: new RegExp(PCT_ENCODED$2, "g"),
-          IPV4ADDRESS: new RegExp("^(" + IPV4ADDRESS$ + ")$"),
-          IPV6ADDRESS: new RegExp("^\\[?(" + IPV6ADDRESS$ + ")" + subexp(subexp("\\%25|\\%(?!" + HEXDIG$$2 + "{2})") + "(" + ZONEID$ + ")") + "?\\]?$")
-          //RFC 6874, with relaxed parsing rules
-        };
-      }
-      var URI_PROTOCOL = buildExps(false);
-      var IRI_PROTOCOL = buildExps(true);
-      var slicedToArray = /* @__PURE__ */ function() {
-        function sliceIterator(arr, i) {
-          var _arr = [];
-          var _n = true;
-          var _d = false;
-          var _e = void 0;
-          try {
-            for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-              _arr.push(_s.value);
-              if (i && _arr.length === i) break;
-            }
-          } catch (err) {
-            _d = true;
-            _e = err;
-          } finally {
-            try {
-              if (!_n && _i["return"]) _i["return"]();
-            } finally {
-              if (_d) throw _e;
-            }
-          }
-          return _arr;
-        }
-        return function(arr, i) {
-          if (Array.isArray(arr)) {
-            return arr;
-          } else if (Symbol.iterator in Object(arr)) {
-            return sliceIterator(arr, i);
-          } else {
-            throw new TypeError("Invalid attempt to destructure non-iterable instance");
-          }
-        };
-      }();
-      var toConsumableArray = function(arr) {
-        if (Array.isArray(arr)) {
-          for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
-          return arr2;
-        } else {
-          return Array.from(arr);
-        }
-      };
-      var maxInt = 2147483647;
-      var base = 36;
-      var tMin = 1;
-      var tMax = 26;
-      var skew = 38;
-      var damp = 700;
-      var initialBias = 72;
-      var initialN = 128;
-      var delimiter = "-";
-      var regexPunycode = /^xn--/;
-      var regexNonASCII = /[^\0-\x7E]/;
-      var regexSeparators = /[\x2E\u3002\uFF0E\uFF61]/g;
-      var errors = {
-        "overflow": "Overflow: input needs wider integers to process",
-        "not-basic": "Illegal input >= 0x80 (not a basic code point)",
-        "invalid-input": "Invalid input"
-      };
-      var baseMinusTMin = base - tMin;
-      var floor = Math.floor;
-      var stringFromCharCode = String.fromCharCode;
-      function error$1(type) {
-        throw new RangeError(errors[type]);
-      }
-      function map(array, fn) {
-        var result = [];
-        var length = array.length;
-        while (length--) {
-          result[length] = fn(array[length]);
-        }
-        return result;
-      }
-      function mapDomain(string, fn) {
-        var parts = string.split("@");
-        var result = "";
-        if (parts.length > 1) {
-          result = parts[0] + "@";
-          string = parts[1];
-        }
-        string = string.replace(regexSeparators, ".");
-        var labels = string.split(".");
-        var encoded = map(labels, fn).join(".");
-        return result + encoded;
-      }
-      function ucs2decode(string) {
-        var output = [];
-        var counter = 0;
-        var length = string.length;
-        while (counter < length) {
-          var value = string.charCodeAt(counter++);
-          if (value >= 55296 && value <= 56319 && counter < length) {
-            var extra = string.charCodeAt(counter++);
-            if ((extra & 64512) == 56320) {
-              output.push(((value & 1023) << 10) + (extra & 1023) + 65536);
+      if (keepZero && acc.length === 0) acc = "0";
+      return acc;
+    }
+    function getIPV6(input) {
+      let tokenCount = 0;
+      const output = { error: false, address: "", zone: "" };
+      const address = [];
+      const buffer = [];
+      let isZone = false;
+      let endipv6Encountered = false;
+      let endIpv6 = false;
+      function consume() {
+        if (buffer.length) {
+          if (isZone === false) {
+            const hex = stringArrayToHexStripped(buffer);
+            if (hex !== void 0) {
+              address.push(hex);
             } else {
-              output.push(value);
-              counter--;
+              output.error = true;
+              return false;
             }
-          } else {
-            output.push(value);
           }
+          buffer.length = 0;
         }
-        return output;
+        return true;
       }
-      var ucs2encode = function ucs2encode2(array) {
-        return String.fromCodePoint.apply(String, toConsumableArray(array));
-      };
-      var basicToDigit = function basicToDigit2(codePoint) {
-        if (codePoint - 48 < 10) {
-          return codePoint - 22;
+      for (let i = 0; i < input.length; i++) {
+        const cursor = input[i];
+        if (cursor === "[" || cursor === "]") {
+          continue;
         }
-        if (codePoint - 65 < 26) {
-          return codePoint - 65;
-        }
-        if (codePoint - 97 < 26) {
-          return codePoint - 97;
-        }
-        return base;
-      };
-      var digitToBasic = function digitToBasic2(digit, flag) {
-        return digit + 22 + 75 * (digit < 26) - ((flag != 0) << 5);
-      };
-      var adapt = function adapt2(delta, numPoints, firstTime) {
-        var k = 0;
-        delta = firstTime ? floor(delta / damp) : delta >> 1;
-        delta += floor(delta / numPoints);
-        for (
-          ;
-          /* no initialization */
-          delta > baseMinusTMin * tMax >> 1;
-          k += base
-        ) {
-          delta = floor(delta / baseMinusTMin);
-        }
-        return floor(k + (baseMinusTMin + 1) * delta / (delta + skew));
-      };
-      var decode = function decode2(input) {
-        var output = [];
-        var inputLength = input.length;
-        var i = 0;
-        var n = initialN;
-        var bias = initialBias;
-        var basic = input.lastIndexOf(delimiter);
-        if (basic < 0) {
-          basic = 0;
-        }
-        for (var j = 0; j < basic; ++j) {
-          if (input.charCodeAt(j) >= 128) {
-            error$1("not-basic");
+        if (cursor === ":") {
+          if (endipv6Encountered === true) {
+            endIpv6 = true;
           }
-          output.push(input.charCodeAt(j));
-        }
-        for (var index = basic > 0 ? basic + 1 : 0; index < inputLength; ) {
-          var oldi = i;
-          for (
-            var w = 1, k = base;
-            ;
-            /* no condition */
-            k += base
-          ) {
-            if (index >= inputLength) {
-              error$1("invalid-input");
-            }
-            var digit = basicToDigit(input.charCodeAt(index++));
-            if (digit >= base || digit > floor((maxInt - i) / w)) {
-              error$1("overflow");
-            }
-            i += digit * w;
-            var t = k <= bias ? tMin : k >= bias + tMax ? tMax : k - bias;
-            if (digit < t) {
-              break;
-            }
-            var baseMinusT = base - t;
-            if (w > floor(maxInt / baseMinusT)) {
-              error$1("overflow");
-            }
-            w *= baseMinusT;
+          if (!consume()) {
+            break;
           }
-          var out = output.length + 1;
-          bias = adapt(i - oldi, out, oldi == 0);
-          if (floor(i / out) > maxInt - n) {
-            error$1("overflow");
+          tokenCount++;
+          address.push(":");
+          if (tokenCount > 7) {
+            output.error = true;
+            break;
           }
-          n += floor(i / out);
-          i %= out;
-          output.splice(i++, 0, n);
-        }
-        return String.fromCodePoint.apply(String, output);
-      };
-      var encode = function encode2(input) {
-        var output = [];
-        input = ucs2decode(input);
-        var inputLength = input.length;
-        var n = initialN;
-        var delta = 0;
-        var bias = initialBias;
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = void 0;
-        try {
-          for (var _iterator = input[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var _currentValue2 = _step.value;
-            if (_currentValue2 < 128) {
-              output.push(stringFromCharCode(_currentValue2));
-            }
+          if (i - 1 >= 0 && input[i - 1] === ":") {
+            endipv6Encountered = true;
           }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
+          continue;
+        } else if (cursor === "%") {
+          if (!consume()) {
+            break;
           }
-        }
-        var basicLength = output.length;
-        var handledCPCount = basicLength;
-        if (basicLength) {
-          output.push(delimiter);
-        }
-        while (handledCPCount < inputLength) {
-          var m = maxInt;
-          var _iteratorNormalCompletion2 = true;
-          var _didIteratorError2 = false;
-          var _iteratorError2 = void 0;
-          try {
-            for (var _iterator2 = input[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-              var currentValue = _step2.value;
-              if (currentValue >= n && currentValue < m) {
-                m = currentValue;
-              }
-            }
-          } catch (err) {
-            _didIteratorError2 = true;
-            _iteratorError2 = err;
-          } finally {
-            try {
-              if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                _iterator2.return();
-              }
-            } finally {
-              if (_didIteratorError2) {
-                throw _iteratorError2;
-              }
-            }
-          }
-          var handledCPCountPlusOne = handledCPCount + 1;
-          if (m - n > floor((maxInt - delta) / handledCPCountPlusOne)) {
-            error$1("overflow");
-          }
-          delta += (m - n) * handledCPCountPlusOne;
-          n = m;
-          var _iteratorNormalCompletion3 = true;
-          var _didIteratorError3 = false;
-          var _iteratorError3 = void 0;
-          try {
-            for (var _iterator3 = input[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-              var _currentValue = _step3.value;
-              if (_currentValue < n && ++delta > maxInt) {
-                error$1("overflow");
-              }
-              if (_currentValue == n) {
-                var q = delta;
-                for (
-                  var k = base;
-                  ;
-                  /* no condition */
-                  k += base
-                ) {
-                  var t = k <= bias ? tMin : k >= bias + tMax ? tMax : k - bias;
-                  if (q < t) {
-                    break;
-                  }
-                  var qMinusT = q - t;
-                  var baseMinusT = base - t;
-                  output.push(stringFromCharCode(digitToBasic(t + qMinusT % baseMinusT, 0)));
-                  q = floor(qMinusT / baseMinusT);
-                }
-                output.push(stringFromCharCode(digitToBasic(q, 0)));
-                bias = adapt(delta, handledCPCountPlusOne, handledCPCount == basicLength);
-                delta = 0;
-                ++handledCPCount;
-              }
-            }
-          } catch (err) {
-            _didIteratorError3 = true;
-            _iteratorError3 = err;
-          } finally {
-            try {
-              if (!_iteratorNormalCompletion3 && _iterator3.return) {
-                _iterator3.return();
-              }
-            } finally {
-              if (_didIteratorError3) {
-                throw _iteratorError3;
-              }
-            }
-          }
-          ++delta;
-          ++n;
-        }
-        return output.join("");
-      };
-      var toUnicode = function toUnicode2(input) {
-        return mapDomain(input, function(string) {
-          return regexPunycode.test(string) ? decode(string.slice(4).toLowerCase()) : string;
-        });
-      };
-      var toASCII = function toASCII2(input) {
-        return mapDomain(input, function(string) {
-          return regexNonASCII.test(string) ? "xn--" + encode(string) : string;
-        });
-      };
-      var punycode = {
-        /**
-         * A string representing the current Punycode.js version number.
-         * @memberOf punycode
-         * @type String
-         */
-        "version": "2.1.0",
-        /**
-         * An object of methods to convert from JavaScript's internal character
-         * representation (UCS-2) to Unicode code points, and back.
-         * @see <https://mathiasbynens.be/notes/javascript-encoding>
-         * @memberOf punycode
-         * @type Object
-         */
-        "ucs2": {
-          "decode": ucs2decode,
-          "encode": ucs2encode
-        },
-        "decode": decode,
-        "encode": encode,
-        "toASCII": toASCII,
-        "toUnicode": toUnicode
-      };
-      var SCHEMES = {};
-      function pctEncChar(chr) {
-        var c = chr.charCodeAt(0);
-        var e = void 0;
-        if (c < 16) e = "%0" + c.toString(16).toUpperCase();
-        else if (c < 128) e = "%" + c.toString(16).toUpperCase();
-        else if (c < 2048) e = "%" + (c >> 6 | 192).toString(16).toUpperCase() + "%" + (c & 63 | 128).toString(16).toUpperCase();
-        else e = "%" + (c >> 12 | 224).toString(16).toUpperCase() + "%" + (c >> 6 & 63 | 128).toString(16).toUpperCase() + "%" + (c & 63 | 128).toString(16).toUpperCase();
-        return e;
-      }
-      function pctDecChars(str) {
-        var newStr = "";
-        var i = 0;
-        var il = str.length;
-        while (i < il) {
-          var c = parseInt(str.substr(i + 1, 2), 16);
-          if (c < 128) {
-            newStr += String.fromCharCode(c);
-            i += 3;
-          } else if (c >= 194 && c < 224) {
-            if (il - i >= 6) {
-              var c2 = parseInt(str.substr(i + 4, 2), 16);
-              newStr += String.fromCharCode((c & 31) << 6 | c2 & 63);
-            } else {
-              newStr += str.substr(i, 6);
-            }
-            i += 6;
-          } else if (c >= 224) {
-            if (il - i >= 9) {
-              var _c = parseInt(str.substr(i + 4, 2), 16);
-              var c3 = parseInt(str.substr(i + 7, 2), 16);
-              newStr += String.fromCharCode((c & 15) << 12 | (_c & 63) << 6 | c3 & 63);
-            } else {
-              newStr += str.substr(i, 9);
-            }
-            i += 9;
-          } else {
-            newStr += str.substr(i, 3);
-            i += 3;
-          }
-        }
-        return newStr;
-      }
-      function _normalizeComponentEncoding(components, protocol) {
-        function decodeUnreserved2(str) {
-          var decStr = pctDecChars(str);
-          return !decStr.match(protocol.UNRESERVED) ? str : decStr;
-        }
-        if (components.scheme) components.scheme = String(components.scheme).replace(protocol.PCT_ENCODED, decodeUnreserved2).toLowerCase().replace(protocol.NOT_SCHEME, "");
-        if (components.userinfo !== void 0) components.userinfo = String(components.userinfo).replace(protocol.PCT_ENCODED, decodeUnreserved2).replace(protocol.NOT_USERINFO, pctEncChar).replace(protocol.PCT_ENCODED, toUpperCase);
-        if (components.host !== void 0) components.host = String(components.host).replace(protocol.PCT_ENCODED, decodeUnreserved2).toLowerCase().replace(protocol.NOT_HOST, pctEncChar).replace(protocol.PCT_ENCODED, toUpperCase);
-        if (components.path !== void 0) components.path = String(components.path).replace(protocol.PCT_ENCODED, decodeUnreserved2).replace(components.scheme ? protocol.NOT_PATH : protocol.NOT_PATH_NOSCHEME, pctEncChar).replace(protocol.PCT_ENCODED, toUpperCase);
-        if (components.query !== void 0) components.query = String(components.query).replace(protocol.PCT_ENCODED, decodeUnreserved2).replace(protocol.NOT_QUERY, pctEncChar).replace(protocol.PCT_ENCODED, toUpperCase);
-        if (components.fragment !== void 0) components.fragment = String(components.fragment).replace(protocol.PCT_ENCODED, decodeUnreserved2).replace(protocol.NOT_FRAGMENT, pctEncChar).replace(protocol.PCT_ENCODED, toUpperCase);
-        return components;
-      }
-      function _stripLeadingZeros(str) {
-        return str.replace(/^0*(.*)/, "$1") || "0";
-      }
-      function _normalizeIPv4(host, protocol) {
-        var matches = host.match(protocol.IPV4ADDRESS) || [];
-        var _matches = slicedToArray(matches, 2), address = _matches[1];
-        if (address) {
-          return address.split(".").map(_stripLeadingZeros).join(".");
+          isZone = true;
         } else {
-          return host;
+          buffer.push(cursor);
+          continue;
         }
       }
-      function _normalizeIPv6(host, protocol) {
-        var matches = host.match(protocol.IPV6ADDRESS) || [];
-        var _matches2 = slicedToArray(matches, 3), address = _matches2[1], zone = _matches2[2];
-        if (address) {
-          var _address$toLowerCase$ = address.toLowerCase().split("::").reverse(), _address$toLowerCase$2 = slicedToArray(_address$toLowerCase$, 2), last = _address$toLowerCase$2[0], first = _address$toLowerCase$2[1];
-          var firstFields = first ? first.split(":").map(_stripLeadingZeros) : [];
-          var lastFields = last.split(":").map(_stripLeadingZeros);
-          var isLastFieldIPv4Address = protocol.IPV4ADDRESS.test(lastFields[lastFields.length - 1]);
-          var fieldCount = isLastFieldIPv4Address ? 7 : 8;
-          var lastFieldsStart = lastFields.length - fieldCount;
-          var fields = Array(fieldCount);
-          for (var x = 0; x < fieldCount; ++x) {
-            fields[x] = firstFields[x] || lastFields[lastFieldsStart + x] || "";
-          }
-          if (isLastFieldIPv4Address) {
-            fields[fieldCount - 1] = _normalizeIPv4(fields[fieldCount - 1], protocol);
-          }
-          var allZeroFields = fields.reduce(function(acc, field, index) {
-            if (!field || field === "0") {
-              var lastLongest = acc[acc.length - 1];
-              if (lastLongest && lastLongest.index + lastLongest.length === index) {
-                lastLongest.length++;
-              } else {
-                acc.push({ index, length: 1 });
-              }
-            }
-            return acc;
-          }, []);
-          var longestZeroFields = allZeroFields.sort(function(a, b) {
-            return b.length - a.length;
-          })[0];
-          var newHost = void 0;
-          if (longestZeroFields && longestZeroFields.length > 1) {
-            var newFirst = fields.slice(0, longestZeroFields.index);
-            var newLast = fields.slice(longestZeroFields.index + longestZeroFields.length);
-            newHost = newFirst.join(":") + "::" + newLast.join(":");
-          } else {
-            newHost = fields.join(":");
-          }
-          if (zone) {
-            newHost += "%" + zone;
-          }
-          return newHost;
+      if (buffer.length) {
+        if (isZone) {
+          output.zone = buffer.join("");
+        } else if (endIpv6) {
+          address.push(buffer.join(""));
         } else {
-          return host;
+          address.push(stringArrayToHexStripped(buffer));
         }
       }
-      var URI_PARSE = /^(?:([^:\/?#]+):)?(?:\/\/((?:([^\/?#@]*)@)?(\[[^\/?#\]]+\]|[^\/?#:]*)(?:\:(\d*))?))?([^?#]*)(?:\?([^#]*))?(?:#((?:.|\n|\r)*))?/i;
-      var NO_MATCH_IS_UNDEFINED = "".match(/(){0}/)[1] === void 0;
-      function parse(uriString) {
-        var options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
-        var components = {};
-        var protocol = options.iri !== false ? IRI_PROTOCOL : URI_PROTOCOL;
-        if (options.reference === "suffix") uriString = (options.scheme ? options.scheme + ":" : "") + "//" + uriString;
-        var matches = uriString.match(URI_PARSE);
-        if (matches) {
-          if (NO_MATCH_IS_UNDEFINED) {
-            components.scheme = matches[1];
-            components.userinfo = matches[3];
-            components.host = matches[4];
-            components.port = parseInt(matches[5], 10);
-            components.path = matches[6] || "";
-            components.query = matches[7];
-            components.fragment = matches[8];
-            if (isNaN(components.port)) {
-              components.port = matches[5];
-            }
-          } else {
-            components.scheme = matches[1] || void 0;
-            components.userinfo = uriString.indexOf("@") !== -1 ? matches[3] : void 0;
-            components.host = uriString.indexOf("//") !== -1 ? matches[4] : void 0;
-            components.port = parseInt(matches[5], 10);
-            components.path = matches[6] || "";
-            components.query = uriString.indexOf("?") !== -1 ? matches[7] : void 0;
-            components.fragment = uriString.indexOf("#") !== -1 ? matches[8] : void 0;
-            if (isNaN(components.port)) {
-              components.port = uriString.match(/\/\/(?:.|\n)*\:(?:\/|\?|\#|$)/) ? matches[4] : void 0;
-            }
-          }
-          if (components.host) {
-            components.host = _normalizeIPv6(_normalizeIPv4(components.host, protocol), protocol);
-          }
-          if (components.scheme === void 0 && components.userinfo === void 0 && components.host === void 0 && components.port === void 0 && !components.path && components.query === void 0) {
-            components.reference = "same-document";
-          } else if (components.scheme === void 0) {
-            components.reference = "relative";
-          } else if (components.fragment === void 0) {
-            components.reference = "absolute";
-          } else {
-            components.reference = "uri";
-          }
-          if (options.reference && options.reference !== "suffix" && options.reference !== components.reference) {
-            components.error = components.error || "URI is not a " + options.reference + " reference.";
-          }
-          var schemeHandler = SCHEMES[(options.scheme || components.scheme || "").toLowerCase()];
-          if (!options.unicodeSupport && (!schemeHandler || !schemeHandler.unicodeSupport)) {
-            if (components.host && (options.domainHost || schemeHandler && schemeHandler.domainHost)) {
-              try {
-                components.host = punycode.toASCII(components.host.replace(protocol.PCT_ENCODED, pctDecChars).toLowerCase());
-              } catch (e) {
-                components.error = components.error || "Host's domain name can not be converted to ASCII via punycode: " + e;
-              }
-            }
-            _normalizeComponentEncoding(components, URI_PROTOCOL);
-          } else {
-            _normalizeComponentEncoding(components, protocol);
-          }
-          if (schemeHandler && schemeHandler.parse) {
-            schemeHandler.parse(components, options);
+      output.address = address.join("");
+      return output;
+    }
+    function normalizeIPv6(host, opts = {}) {
+      if (findToken(host, ":") < 2) {
+        return { host, isIPV6: false };
+      }
+      const ipv6 = getIPV6(host);
+      if (!ipv6.error) {
+        let newHost = ipv6.address;
+        let escapedHost = ipv6.address;
+        if (ipv6.zone) {
+          newHost += "%" + ipv6.zone;
+          escapedHost += "%25" + ipv6.zone;
+        }
+        return { host: newHost, escapedHost, isIPV6: true };
+      } else {
+        return { host, isIPV6: false };
+      }
+    }
+    function stripLeadingZeros(str, token) {
+      let out = "";
+      let skip = true;
+      const l = str.length;
+      for (let i = 0; i < l; i++) {
+        const c = str[i];
+        if (c === "0" && skip) {
+          if (i + 1 <= l && str[i + 1] === token || i + 1 === l) {
+            out += c;
+            skip = false;
           }
         } else {
-          components.error = components.error || "URI can not be parsed.";
-        }
-        return components;
-      }
-      function _recomposeAuthority(components, options) {
-        var protocol = options.iri !== false ? IRI_PROTOCOL : URI_PROTOCOL;
-        var uriTokens = [];
-        if (components.userinfo !== void 0) {
-          uriTokens.push(components.userinfo);
-          uriTokens.push("@");
-        }
-        if (components.host !== void 0) {
-          uriTokens.push(_normalizeIPv6(_normalizeIPv4(String(components.host), protocol), protocol).replace(protocol.IPV6ADDRESS, function(_, $1, $2) {
-            return "[" + $1 + ($2 ? "%25" + $2 : "") + "]";
-          }));
-        }
-        if (typeof components.port === "number" || typeof components.port === "string") {
-          uriTokens.push(":");
-          uriTokens.push(String(components.port));
-        }
-        return uriTokens.length ? uriTokens.join("") : void 0;
-      }
-      var RDS1 = /^\.\.?\//;
-      var RDS2 = /^\/\.(\/|$)/;
-      var RDS3 = /^\/\.\.(\/|$)/;
-      var RDS5 = /^\/?(?:.|\n)*?(?=\/|$)/;
-      function removeDotSegments(input) {
-        var output = [];
-        while (input.length) {
-          if (input.match(RDS1)) {
-            input = input.replace(RDS1, "");
-          } else if (input.match(RDS2)) {
-            input = input.replace(RDS2, "/");
-          } else if (input.match(RDS3)) {
-            input = input.replace(RDS3, "/");
-            output.pop();
-          } else if (input === "." || input === "..") {
-            input = "";
+          if (c === token) {
+            skip = true;
           } else {
-            var im = input.match(RDS5);
-            if (im) {
-              var s = im[0];
-              input = input.slice(s.length);
-              output.push(s);
-            } else {
-              throw new Error("Unexpected dot segment condition");
-            }
+            skip = false;
           }
+          out += c;
         }
-        return output.join("");
       }
-      function serialize(components) {
-        var options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
-        var protocol = options.iri ? IRI_PROTOCOL : URI_PROTOCOL;
-        var uriTokens = [];
-        var schemeHandler = SCHEMES[(options.scheme || components.scheme || "").toLowerCase()];
-        if (schemeHandler && schemeHandler.serialize) schemeHandler.serialize(components, options);
-        if (components.host) {
-          if (protocol.IPV6ADDRESS.test(components.host)) {
-          } else if (options.domainHost || schemeHandler && schemeHandler.domainHost) {
-            try {
-              components.host = !options.iri ? punycode.toASCII(components.host.replace(protocol.PCT_ENCODED, pctDecChars).toLowerCase()) : punycode.toUnicode(components.host);
-            } catch (e) {
-              components.error = components.error || "Host's domain name can not be converted to " + (!options.iri ? "ASCII" : "Unicode") + " via punycode: " + e;
-            }
-          }
-        }
-        _normalizeComponentEncoding(components, protocol);
-        if (options.reference !== "suffix" && components.scheme) {
-          uriTokens.push(components.scheme);
-          uriTokens.push(":");
-        }
-        var authority = _recomposeAuthority(components, options);
-        if (authority !== void 0) {
-          if (options.reference !== "suffix") {
-            uriTokens.push("//");
-          }
-          uriTokens.push(authority);
-          if (components.path && components.path.charAt(0) !== "/") {
-            uriTokens.push("/");
-          }
-        }
-        if (components.path !== void 0) {
-          var s = components.path;
-          if (!options.absolutePath && (!schemeHandler || !schemeHandler.absolutePath)) {
-            s = removeDotSegments(s);
-          }
-          if (authority === void 0) {
-            s = s.replace(/^\/\//, "/%2F");
-          }
-          uriTokens.push(s);
-        }
-        if (components.query !== void 0) {
-          uriTokens.push("?");
-          uriTokens.push(components.query);
-        }
-        if (components.fragment !== void 0) {
-          uriTokens.push("#");
-          uriTokens.push(components.fragment);
-        }
-        return uriTokens.join("");
+      return out;
+    }
+    function findToken(str, token) {
+      let ind = 0;
+      for (let i = 0; i < str.length; i++) {
+        if (str[i] === token) ind++;
       }
-      function resolveComponents(base2, relative) {
-        var options = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
-        var skipNormalization = arguments[3];
-        var target = {};
-        if (!skipNormalization) {
-          base2 = parse(serialize(base2, options), options);
-          relative = parse(serialize(relative, options), options);
+      return ind;
+    }
+    var RDS1 = /^\.\.?\//u;
+    var RDS2 = /^\/\.(?:\/|$)/u;
+    var RDS3 = /^\/\.\.(?:\/|$)/u;
+    var RDS5 = /^\/?(?:.|\n)*?(?=\/|$)/u;
+    function removeDotSegments(input) {
+      const output = [];
+      while (input.length) {
+        if (input.match(RDS1)) {
+          input = input.replace(RDS1, "");
+        } else if (input.match(RDS2)) {
+          input = input.replace(RDS2, "/");
+        } else if (input.match(RDS3)) {
+          input = input.replace(RDS3, "/");
+          output.pop();
+        } else if (input === "." || input === "..") {
+          input = "";
+        } else {
+          const im = input.match(RDS5);
+          if (im) {
+            const s = im[0];
+            input = input.slice(s.length);
+            output.push(s);
+          } else {
+            throw new Error("Unexpected dot segment condition");
+          }
         }
-        options = options || {};
-        if (!options.tolerant && relative.scheme) {
-          target.scheme = relative.scheme;
+      }
+      return output.join("");
+    }
+    function normalizeComponentEncoding(components, esc) {
+      const func = esc !== true ? escape : unescape;
+      if (components.scheme !== void 0) {
+        components.scheme = func(components.scheme);
+      }
+      if (components.userinfo !== void 0) {
+        components.userinfo = func(components.userinfo);
+      }
+      if (components.host !== void 0) {
+        components.host = func(components.host);
+      }
+      if (components.path !== void 0) {
+        components.path = func(components.path);
+      }
+      if (components.query !== void 0) {
+        components.query = func(components.query);
+      }
+      if (components.fragment !== void 0) {
+        components.fragment = func(components.fragment);
+      }
+      return components;
+    }
+    function recomposeAuthority(components, options) {
+      const uriTokens = [];
+      if (components.userinfo !== void 0) {
+        uriTokens.push(components.userinfo);
+        uriTokens.push("@");
+      }
+      if (components.host !== void 0) {
+        let host = unescape(components.host);
+        const ipV4res = normalizeIPv4(host);
+        if (ipV4res.isIPV4) {
+          host = ipV4res.host;
+        } else {
+          const ipV6res = normalizeIPv6(ipV4res.host, { isIPV4: false });
+          if (ipV6res.isIPV6 === true) {
+            host = `[${ipV6res.escapedHost}]`;
+          } else {
+            host = components.host;
+          }
+        }
+        uriTokens.push(host);
+      }
+      if (typeof components.port === "number" || typeof components.port === "string") {
+        uriTokens.push(":");
+        uriTokens.push(String(components.port));
+      }
+      return uriTokens.length ? uriTokens.join("") : void 0;
+    }
+    module2.exports = {
+      recomposeAuthority,
+      normalizeComponentEncoding,
+      removeDotSegments,
+      normalizeIPv4,
+      normalizeIPv6,
+      stringArrayToHexStripped
+    };
+  }
+});
+
+// ../../../node_modules/.pnpm/fast-uri@3.0.2/node_modules/fast-uri/lib/schemes.js
+var require_schemes = __commonJS({
+  "../../../node_modules/.pnpm/fast-uri@3.0.2/node_modules/fast-uri/lib/schemes.js"(exports2, module2) {
+    "use strict";
+    var UUID_REG = /^[\da-f]{8}\b-[\da-f]{4}\b-[\da-f]{4}\b-[\da-f]{4}\b-[\da-f]{12}$/iu;
+    var URN_REG = /([\da-z][\d\-a-z]{0,31}):((?:[\w!$'()*+,\-.:;=@]|%[\da-f]{2})+)/iu;
+    function isSecure(wsComponents) {
+      return typeof wsComponents.secure === "boolean" ? wsComponents.secure : String(wsComponents.scheme).toLowerCase() === "wss";
+    }
+    function httpParse(components) {
+      if (!components.host) {
+        components.error = components.error || "HTTP URIs must have a host.";
+      }
+      return components;
+    }
+    function httpSerialize(components) {
+      const secure = String(components.scheme).toLowerCase() === "https";
+      if (components.port === (secure ? 443 : 80) || components.port === "") {
+        components.port = void 0;
+      }
+      if (!components.path) {
+        components.path = "/";
+      }
+      return components;
+    }
+    function wsParse(wsComponents) {
+      wsComponents.secure = isSecure(wsComponents);
+      wsComponents.resourceName = (wsComponents.path || "/") + (wsComponents.query ? "?" + wsComponents.query : "");
+      wsComponents.path = void 0;
+      wsComponents.query = void 0;
+      return wsComponents;
+    }
+    function wsSerialize(wsComponents) {
+      if (wsComponents.port === (isSecure(wsComponents) ? 443 : 80) || wsComponents.port === "") {
+        wsComponents.port = void 0;
+      }
+      if (typeof wsComponents.secure === "boolean") {
+        wsComponents.scheme = wsComponents.secure ? "wss" : "ws";
+        wsComponents.secure = void 0;
+      }
+      if (wsComponents.resourceName) {
+        const [path2, query] = wsComponents.resourceName.split("?");
+        wsComponents.path = path2 && path2 !== "/" ? path2 : void 0;
+        wsComponents.query = query;
+        wsComponents.resourceName = void 0;
+      }
+      wsComponents.fragment = void 0;
+      return wsComponents;
+    }
+    function urnParse(urnComponents, options) {
+      if (!urnComponents.path) {
+        urnComponents.error = "URN can not be parsed";
+        return urnComponents;
+      }
+      const matches = urnComponents.path.match(URN_REG);
+      if (matches) {
+        const scheme = options.scheme || urnComponents.scheme || "urn";
+        urnComponents.nid = matches[1].toLowerCase();
+        urnComponents.nss = matches[2];
+        const urnScheme = `${scheme}:${options.nid || urnComponents.nid}`;
+        const schemeHandler = SCHEMES[urnScheme];
+        urnComponents.path = void 0;
+        if (schemeHandler) {
+          urnComponents = schemeHandler.parse(urnComponents, options);
+        }
+      } else {
+        urnComponents.error = urnComponents.error || "URN can not be parsed.";
+      }
+      return urnComponents;
+    }
+    function urnSerialize(urnComponents, options) {
+      const scheme = options.scheme || urnComponents.scheme || "urn";
+      const nid = urnComponents.nid.toLowerCase();
+      const urnScheme = `${scheme}:${options.nid || nid}`;
+      const schemeHandler = SCHEMES[urnScheme];
+      if (schemeHandler) {
+        urnComponents = schemeHandler.serialize(urnComponents, options);
+      }
+      const uriComponents = urnComponents;
+      const nss = urnComponents.nss;
+      uriComponents.path = `${nid || options.nid}:${nss}`;
+      options.skipEscape = true;
+      return uriComponents;
+    }
+    function urnuuidParse(urnComponents, options) {
+      const uuidComponents = urnComponents;
+      uuidComponents.uuid = uuidComponents.nss;
+      uuidComponents.nss = void 0;
+      if (!options.tolerant && (!uuidComponents.uuid || !UUID_REG.test(uuidComponents.uuid))) {
+        uuidComponents.error = uuidComponents.error || "UUID is not valid.";
+      }
+      return uuidComponents;
+    }
+    function urnuuidSerialize(uuidComponents) {
+      const urnComponents = uuidComponents;
+      urnComponents.nss = (uuidComponents.uuid || "").toLowerCase();
+      return urnComponents;
+    }
+    var http = {
+      scheme: "http",
+      domainHost: true,
+      parse: httpParse,
+      serialize: httpSerialize
+    };
+    var https = {
+      scheme: "https",
+      domainHost: http.domainHost,
+      parse: httpParse,
+      serialize: httpSerialize
+    };
+    var ws = {
+      scheme: "ws",
+      domainHost: true,
+      parse: wsParse,
+      serialize: wsSerialize
+    };
+    var wss = {
+      scheme: "wss",
+      domainHost: ws.domainHost,
+      parse: ws.parse,
+      serialize: ws.serialize
+    };
+    var urn = {
+      scheme: "urn",
+      parse: urnParse,
+      serialize: urnSerialize,
+      skipNormalize: true
+    };
+    var urnuuid = {
+      scheme: "urn:uuid",
+      parse: urnuuidParse,
+      serialize: urnuuidSerialize,
+      skipNormalize: true
+    };
+    var SCHEMES = {
+      http,
+      https,
+      ws,
+      wss,
+      urn,
+      "urn:uuid": urnuuid
+    };
+    module2.exports = SCHEMES;
+  }
+});
+
+// ../../../node_modules/.pnpm/fast-uri@3.0.2/node_modules/fast-uri/index.js
+var require_fast_uri = __commonJS({
+  "../../../node_modules/.pnpm/fast-uri@3.0.2/node_modules/fast-uri/index.js"(exports2, module2) {
+    "use strict";
+    var { normalizeIPv6, normalizeIPv4, removeDotSegments, recomposeAuthority, normalizeComponentEncoding } = require_utils();
+    var SCHEMES = require_schemes();
+    function normalize(uri, options) {
+      if (typeof uri === "string") {
+        uri = serialize(parse(uri, options), options);
+      } else if (typeof uri === "object") {
+        uri = parse(serialize(uri, options), options);
+      }
+      return uri;
+    }
+    function resolve(baseURI, relativeURI, options) {
+      const schemelessOptions = Object.assign({ scheme: "null" }, options);
+      const resolved = resolveComponents(parse(baseURI, schemelessOptions), parse(relativeURI, schemelessOptions), schemelessOptions, true);
+      return serialize(resolved, { ...schemelessOptions, skipEscape: true });
+    }
+    function resolveComponents(base, relative, options, skipNormalization) {
+      const target = {};
+      if (!skipNormalization) {
+        base = parse(serialize(base, options), options);
+        relative = parse(serialize(relative, options), options);
+      }
+      options = options || {};
+      if (!options.tolerant && relative.scheme) {
+        target.scheme = relative.scheme;
+        target.userinfo = relative.userinfo;
+        target.host = relative.host;
+        target.port = relative.port;
+        target.path = removeDotSegments(relative.path || "");
+        target.query = relative.query;
+      } else {
+        if (relative.userinfo !== void 0 || relative.host !== void 0 || relative.port !== void 0) {
           target.userinfo = relative.userinfo;
           target.host = relative.host;
           target.port = relative.port;
           target.path = removeDotSegments(relative.path || "");
           target.query = relative.query;
         } else {
-          if (relative.userinfo !== void 0 || relative.host !== void 0 || relative.port !== void 0) {
-            target.userinfo = relative.userinfo;
-            target.host = relative.host;
-            target.port = relative.port;
-            target.path = removeDotSegments(relative.path || "");
-            target.query = relative.query;
-          } else {
-            if (!relative.path) {
-              target.path = base2.path;
-              if (relative.query !== void 0) {
-                target.query = relative.query;
-              } else {
-                target.query = base2.query;
-              }
-            } else {
-              if (relative.path.charAt(0) === "/") {
-                target.path = removeDotSegments(relative.path);
-              } else {
-                if ((base2.userinfo !== void 0 || base2.host !== void 0 || base2.port !== void 0) && !base2.path) {
-                  target.path = "/" + relative.path;
-                } else if (!base2.path) {
-                  target.path = relative.path;
-                } else {
-                  target.path = base2.path.slice(0, base2.path.lastIndexOf("/") + 1) + relative.path;
-                }
-                target.path = removeDotSegments(target.path);
-              }
+          if (!relative.path) {
+            target.path = base.path;
+            if (relative.query !== void 0) {
               target.query = relative.query;
-            }
-            target.userinfo = base2.userinfo;
-            target.host = base2.host;
-            target.port = base2.port;
-          }
-          target.scheme = base2.scheme;
-        }
-        target.fragment = relative.fragment;
-        return target;
-      }
-      function resolve(baseURI, relativeURI, options) {
-        var schemelessOptions = assign({ scheme: "null" }, options);
-        return serialize(resolveComponents(parse(baseURI, schemelessOptions), parse(relativeURI, schemelessOptions), schemelessOptions, true), schemelessOptions);
-      }
-      function normalize(uri, options) {
-        if (typeof uri === "string") {
-          uri = serialize(parse(uri, options), options);
-        } else if (typeOf(uri) === "object") {
-          uri = parse(serialize(uri, options), options);
-        }
-        return uri;
-      }
-      function equal(uriA, uriB, options) {
-        if (typeof uriA === "string") {
-          uriA = serialize(parse(uriA, options), options);
-        } else if (typeOf(uriA) === "object") {
-          uriA = serialize(uriA, options);
-        }
-        if (typeof uriB === "string") {
-          uriB = serialize(parse(uriB, options), options);
-        } else if (typeOf(uriB) === "object") {
-          uriB = serialize(uriB, options);
-        }
-        return uriA === uriB;
-      }
-      function escapeComponent(str, options) {
-        return str && str.toString().replace(!options || !options.iri ? URI_PROTOCOL.ESCAPE : IRI_PROTOCOL.ESCAPE, pctEncChar);
-      }
-      function unescapeComponent(str, options) {
-        return str && str.toString().replace(!options || !options.iri ? URI_PROTOCOL.PCT_ENCODED : IRI_PROTOCOL.PCT_ENCODED, pctDecChars);
-      }
-      var handler = {
-        scheme: "http",
-        domainHost: true,
-        parse: function parse2(components, options) {
-          if (!components.host) {
-            components.error = components.error || "HTTP URIs must have a host.";
-          }
-          return components;
-        },
-        serialize: function serialize2(components, options) {
-          var secure = String(components.scheme).toLowerCase() === "https";
-          if (components.port === (secure ? 443 : 80) || components.port === "") {
-            components.port = void 0;
-          }
-          if (!components.path) {
-            components.path = "/";
-          }
-          return components;
-        }
-      };
-      var handler$1 = {
-        scheme: "https",
-        domainHost: handler.domainHost,
-        parse: handler.parse,
-        serialize: handler.serialize
-      };
-      function isSecure(wsComponents) {
-        return typeof wsComponents.secure === "boolean" ? wsComponents.secure : String(wsComponents.scheme).toLowerCase() === "wss";
-      }
-      var handler$2 = {
-        scheme: "ws",
-        domainHost: true,
-        parse: function parse2(components, options) {
-          var wsComponents = components;
-          wsComponents.secure = isSecure(wsComponents);
-          wsComponents.resourceName = (wsComponents.path || "/") + (wsComponents.query ? "?" + wsComponents.query : "");
-          wsComponents.path = void 0;
-          wsComponents.query = void 0;
-          return wsComponents;
-        },
-        serialize: function serialize2(wsComponents, options) {
-          if (wsComponents.port === (isSecure(wsComponents) ? 443 : 80) || wsComponents.port === "") {
-            wsComponents.port = void 0;
-          }
-          if (typeof wsComponents.secure === "boolean") {
-            wsComponents.scheme = wsComponents.secure ? "wss" : "ws";
-            wsComponents.secure = void 0;
-          }
-          if (wsComponents.resourceName) {
-            var _wsComponents$resourc = wsComponents.resourceName.split("?"), _wsComponents$resourc2 = slicedToArray(_wsComponents$resourc, 2), path2 = _wsComponents$resourc2[0], query = _wsComponents$resourc2[1];
-            wsComponents.path = path2 && path2 !== "/" ? path2 : void 0;
-            wsComponents.query = query;
-            wsComponents.resourceName = void 0;
-          }
-          wsComponents.fragment = void 0;
-          return wsComponents;
-        }
-      };
-      var handler$3 = {
-        scheme: "wss",
-        domainHost: handler$2.domainHost,
-        parse: handler$2.parse,
-        serialize: handler$2.serialize
-      };
-      var O = {};
-      var isIRI = true;
-      var UNRESERVED$$ = "[A-Za-z0-9\\-\\.\\_\\~" + (isIRI ? "\\xA0-\\u200D\\u2010-\\u2029\\u202F-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF" : "") + "]";
-      var HEXDIG$$ = "[0-9A-Fa-f]";
-      var PCT_ENCODED$ = subexp(subexp("%[EFef]" + HEXDIG$$ + "%" + HEXDIG$$ + HEXDIG$$ + "%" + HEXDIG$$ + HEXDIG$$) + "|" + subexp("%[89A-Fa-f]" + HEXDIG$$ + "%" + HEXDIG$$ + HEXDIG$$) + "|" + subexp("%" + HEXDIG$$ + HEXDIG$$));
-      var ATEXT$$ = "[A-Za-z0-9\\!\\$\\%\\'\\*\\+\\-\\^\\_\\`\\{\\|\\}\\~]";
-      var QTEXT$$ = "[\\!\\$\\%\\'\\(\\)\\*\\+\\,\\-\\.0-9\\<\\>A-Z\\x5E-\\x7E]";
-      var VCHAR$$ = merge(QTEXT$$, '[\\"\\\\]');
-      var SOME_DELIMS$$ = "[\\!\\$\\'\\(\\)\\*\\+\\,\\;\\:\\@]";
-      var UNRESERVED = new RegExp(UNRESERVED$$, "g");
-      var PCT_ENCODED = new RegExp(PCT_ENCODED$, "g");
-      var NOT_LOCAL_PART = new RegExp(merge("[^]", ATEXT$$, "[\\.]", '[\\"]', VCHAR$$), "g");
-      var NOT_HFNAME = new RegExp(merge("[^]", UNRESERVED$$, SOME_DELIMS$$), "g");
-      var NOT_HFVALUE = NOT_HFNAME;
-      function decodeUnreserved(str) {
-        var decStr = pctDecChars(str);
-        return !decStr.match(UNRESERVED) ? str : decStr;
-      }
-      var handler$4 = {
-        scheme: "mailto",
-        parse: function parse$$1(components, options) {
-          var mailtoComponents = components;
-          var to = mailtoComponents.to = mailtoComponents.path ? mailtoComponents.path.split(",") : [];
-          mailtoComponents.path = void 0;
-          if (mailtoComponents.query) {
-            var unknownHeaders = false;
-            var headers = {};
-            var hfields = mailtoComponents.query.split("&");
-            for (var x = 0, xl = hfields.length; x < xl; ++x) {
-              var hfield = hfields[x].split("=");
-              switch (hfield[0]) {
-                case "to":
-                  var toAddrs = hfield[1].split(",");
-                  for (var _x = 0, _xl = toAddrs.length; _x < _xl; ++_x) {
-                    to.push(toAddrs[_x]);
-                  }
-                  break;
-                case "subject":
-                  mailtoComponents.subject = unescapeComponent(hfield[1], options);
-                  break;
-                case "body":
-                  mailtoComponents.body = unescapeComponent(hfield[1], options);
-                  break;
-                default:
-                  unknownHeaders = true;
-                  headers[unescapeComponent(hfield[0], options)] = unescapeComponent(hfield[1], options);
-                  break;
-              }
-            }
-            if (unknownHeaders) mailtoComponents.headers = headers;
-          }
-          mailtoComponents.query = void 0;
-          for (var _x2 = 0, _xl2 = to.length; _x2 < _xl2; ++_x2) {
-            var addr = to[_x2].split("@");
-            addr[0] = unescapeComponent(addr[0]);
-            if (!options.unicodeSupport) {
-              try {
-                addr[1] = punycode.toASCII(unescapeComponent(addr[1], options).toLowerCase());
-              } catch (e) {
-                mailtoComponents.error = mailtoComponents.error || "Email address's domain name can not be converted to ASCII via punycode: " + e;
-              }
             } else {
-              addr[1] = unescapeComponent(addr[1], options).toLowerCase();
-            }
-            to[_x2] = addr.join("@");
-          }
-          return mailtoComponents;
-        },
-        serialize: function serialize$$1(mailtoComponents, options) {
-          var components = mailtoComponents;
-          var to = toArray(mailtoComponents.to);
-          if (to) {
-            for (var x = 0, xl = to.length; x < xl; ++x) {
-              var toAddr = String(to[x]);
-              var atIdx = toAddr.lastIndexOf("@");
-              var localPart = toAddr.slice(0, atIdx).replace(PCT_ENCODED, decodeUnreserved).replace(PCT_ENCODED, toUpperCase).replace(NOT_LOCAL_PART, pctEncChar);
-              var domain = toAddr.slice(atIdx + 1);
-              try {
-                domain = !options.iri ? punycode.toASCII(unescapeComponent(domain, options).toLowerCase()) : punycode.toUnicode(domain);
-              } catch (e) {
-                components.error = components.error || "Email address's domain name can not be converted to " + (!options.iri ? "ASCII" : "Unicode") + " via punycode: " + e;
-              }
-              to[x] = localPart + "@" + domain;
-            }
-            components.path = to.join(",");
-          }
-          var headers = mailtoComponents.headers = mailtoComponents.headers || {};
-          if (mailtoComponents.subject) headers["subject"] = mailtoComponents.subject;
-          if (mailtoComponents.body) headers["body"] = mailtoComponents.body;
-          var fields = [];
-          for (var name in headers) {
-            if (headers[name] !== O[name]) {
-              fields.push(name.replace(PCT_ENCODED, decodeUnreserved).replace(PCT_ENCODED, toUpperCase).replace(NOT_HFNAME, pctEncChar) + "=" + headers[name].replace(PCT_ENCODED, decodeUnreserved).replace(PCT_ENCODED, toUpperCase).replace(NOT_HFVALUE, pctEncChar));
-            }
-          }
-          if (fields.length) {
-            components.query = fields.join("&");
-          }
-          return components;
-        }
-      };
-      var URN_PARSE = /^([^\:]+)\:(.*)/;
-      var handler$5 = {
-        scheme: "urn",
-        parse: function parse$$1(components, options) {
-          var matches = components.path && components.path.match(URN_PARSE);
-          var urnComponents = components;
-          if (matches) {
-            var scheme = options.scheme || urnComponents.scheme || "urn";
-            var nid = matches[1].toLowerCase();
-            var nss = matches[2];
-            var urnScheme = scheme + ":" + (options.nid || nid);
-            var schemeHandler = SCHEMES[urnScheme];
-            urnComponents.nid = nid;
-            urnComponents.nss = nss;
-            urnComponents.path = void 0;
-            if (schemeHandler) {
-              urnComponents = schemeHandler.parse(urnComponents, options);
+              target.query = base.query;
             }
           } else {
-            urnComponents.error = urnComponents.error || "URN can not be parsed.";
+            if (relative.path.charAt(0) === "/") {
+              target.path = removeDotSegments(relative.path);
+            } else {
+              if ((base.userinfo !== void 0 || base.host !== void 0 || base.port !== void 0) && !base.path) {
+                target.path = "/" + relative.path;
+              } else if (!base.path) {
+                target.path = relative.path;
+              } else {
+                target.path = base.path.slice(0, base.path.lastIndexOf("/") + 1) + relative.path;
+              }
+              target.path = removeDotSegments(target.path);
+            }
+            target.query = relative.query;
           }
-          return urnComponents;
-        },
-        serialize: function serialize$$1(urnComponents, options) {
-          var scheme = options.scheme || urnComponents.scheme || "urn";
-          var nid = urnComponents.nid;
-          var urnScheme = scheme + ":" + (options.nid || nid);
-          var schemeHandler = SCHEMES[urnScheme];
-          if (schemeHandler) {
-            urnComponents = schemeHandler.serialize(urnComponents, options);
-          }
-          var uriComponents = urnComponents;
-          var nss = urnComponents.nss;
-          uriComponents.path = (nid || options.nid) + ":" + nss;
-          return uriComponents;
+          target.userinfo = base.userinfo;
+          target.host = base.host;
+          target.port = base.port;
         }
+        target.scheme = base.scheme;
+      }
+      target.fragment = relative.fragment;
+      return target;
+    }
+    function equal(uriA, uriB, options) {
+      if (typeof uriA === "string") {
+        uriA = unescape(uriA);
+        uriA = serialize(normalizeComponentEncoding(parse(uriA, options), true), { ...options, skipEscape: true });
+      } else if (typeof uriA === "object") {
+        uriA = serialize(normalizeComponentEncoding(uriA, true), { ...options, skipEscape: true });
+      }
+      if (typeof uriB === "string") {
+        uriB = unescape(uriB);
+        uriB = serialize(normalizeComponentEncoding(parse(uriB, options), true), { ...options, skipEscape: true });
+      } else if (typeof uriB === "object") {
+        uriB = serialize(normalizeComponentEncoding(uriB, true), { ...options, skipEscape: true });
+      }
+      return uriA.toLowerCase() === uriB.toLowerCase();
+    }
+    function serialize(cmpts, opts) {
+      const components = {
+        host: cmpts.host,
+        scheme: cmpts.scheme,
+        userinfo: cmpts.userinfo,
+        port: cmpts.port,
+        path: cmpts.path,
+        query: cmpts.query,
+        nid: cmpts.nid,
+        nss: cmpts.nss,
+        uuid: cmpts.uuid,
+        fragment: cmpts.fragment,
+        reference: cmpts.reference,
+        resourceName: cmpts.resourceName,
+        secure: cmpts.secure,
+        error: ""
       };
-      var UUID = /^[0-9A-Fa-f]{8}(?:\-[0-9A-Fa-f]{4}){3}\-[0-9A-Fa-f]{12}$/;
-      var handler$6 = {
-        scheme: "urn:uuid",
-        parse: function parse2(urnComponents, options) {
-          var uuidComponents = urnComponents;
-          uuidComponents.uuid = uuidComponents.nss;
-          uuidComponents.nss = void 0;
-          if (!options.tolerant && (!uuidComponents.uuid || !uuidComponents.uuid.match(UUID))) {
-            uuidComponents.error = uuidComponents.error || "UUID is not valid.";
+      const options = Object.assign({}, opts);
+      const uriTokens = [];
+      const schemeHandler = SCHEMES[(options.scheme || components.scheme || "").toLowerCase()];
+      if (schemeHandler && schemeHandler.serialize) schemeHandler.serialize(components, options);
+      if (components.path !== void 0) {
+        if (!options.skipEscape) {
+          components.path = escape(components.path);
+          if (components.scheme !== void 0) {
+            components.path = components.path.split("%3A").join(":");
           }
-          return uuidComponents;
-        },
-        serialize: function serialize2(uuidComponents, options) {
-          var urnComponents = uuidComponents;
-          urnComponents.nss = (uuidComponents.uuid || "").toLowerCase();
-          return urnComponents;
+        } else {
+          components.path = unescape(components.path);
         }
+      }
+      if (options.reference !== "suffix" && components.scheme) {
+        uriTokens.push(components.scheme, ":");
+      }
+      const authority = recomposeAuthority(components, options);
+      if (authority !== void 0) {
+        if (options.reference !== "suffix") {
+          uriTokens.push("//");
+        }
+        uriTokens.push(authority);
+        if (components.path && components.path.charAt(0) !== "/") {
+          uriTokens.push("/");
+        }
+      }
+      if (components.path !== void 0) {
+        let s = components.path;
+        if (!options.absolutePath && (!schemeHandler || !schemeHandler.absolutePath)) {
+          s = removeDotSegments(s);
+        }
+        if (authority === void 0) {
+          s = s.replace(/^\/\//u, "/%2F");
+        }
+        uriTokens.push(s);
+      }
+      if (components.query !== void 0) {
+        uriTokens.push("?", components.query);
+      }
+      if (components.fragment !== void 0) {
+        uriTokens.push("#", components.fragment);
+      }
+      return uriTokens.join("");
+    }
+    var hexLookUp = Array.from({ length: 127 }, (v, k) => /[^!"$&'()*+,\-.;=_`a-z{}~]/u.test(String.fromCharCode(k)));
+    function nonSimpleDomain(value) {
+      let code = 0;
+      for (let i = 0, len = value.length; i < len; ++i) {
+        code = value.charCodeAt(i);
+        if (code > 126 || hexLookUp[code]) {
+          return true;
+        }
+      }
+      return false;
+    }
+    var URI_PARSE = /^(?:([^#/:?]+):)?(?:\/\/((?:([^#/?@]*)@)?(\[[^#/?\]]+\]|[^#/:?]*)(?::(\d*))?))?([^#?]*)(?:\?([^#]*))?(?:#((?:.|[\n\r])*))?/u;
+    function parse(uri, opts) {
+      const options = Object.assign({}, opts);
+      const parsed = {
+        scheme: void 0,
+        userinfo: void 0,
+        host: "",
+        port: void 0,
+        path: "",
+        query: void 0,
+        fragment: void 0
       };
-      SCHEMES[handler.scheme] = handler;
-      SCHEMES[handler$1.scheme] = handler$1;
-      SCHEMES[handler$2.scheme] = handler$2;
-      SCHEMES[handler$3.scheme] = handler$3;
-      SCHEMES[handler$4.scheme] = handler$4;
-      SCHEMES[handler$5.scheme] = handler$5;
-      SCHEMES[handler$6.scheme] = handler$6;
-      exports3.SCHEMES = SCHEMES;
-      exports3.pctEncChar = pctEncChar;
-      exports3.pctDecChars = pctDecChars;
-      exports3.parse = parse;
-      exports3.removeDotSegments = removeDotSegments;
-      exports3.serialize = serialize;
-      exports3.resolveComponents = resolveComponents;
-      exports3.resolve = resolve;
-      exports3.normalize = normalize;
-      exports3.equal = equal;
-      exports3.escapeComponent = escapeComponent;
-      exports3.unescapeComponent = unescapeComponent;
-      Object.defineProperty(exports3, "__esModule", { value: true });
-    });
+      const gotEncoding = uri.indexOf("%") !== -1;
+      let isIP = false;
+      if (options.reference === "suffix") uri = (options.scheme ? options.scheme + ":" : "") + "//" + uri;
+      const matches = uri.match(URI_PARSE);
+      if (matches) {
+        parsed.scheme = matches[1];
+        parsed.userinfo = matches[3];
+        parsed.host = matches[4];
+        parsed.port = parseInt(matches[5], 10);
+        parsed.path = matches[6] || "";
+        parsed.query = matches[7];
+        parsed.fragment = matches[8];
+        if (isNaN(parsed.port)) {
+          parsed.port = matches[5];
+        }
+        if (parsed.host) {
+          const ipv4result = normalizeIPv4(parsed.host);
+          if (ipv4result.isIPV4 === false) {
+            const ipv6result = normalizeIPv6(ipv4result.host, { isIPV4: false });
+            parsed.host = ipv6result.host.toLowerCase();
+            isIP = ipv6result.isIPV6;
+          } else {
+            parsed.host = ipv4result.host;
+            isIP = true;
+          }
+        }
+        if (parsed.scheme === void 0 && parsed.userinfo === void 0 && parsed.host === void 0 && parsed.port === void 0 && !parsed.path && parsed.query === void 0) {
+          parsed.reference = "same-document";
+        } else if (parsed.scheme === void 0) {
+          parsed.reference = "relative";
+        } else if (parsed.fragment === void 0) {
+          parsed.reference = "absolute";
+        } else {
+          parsed.reference = "uri";
+        }
+        if (options.reference && options.reference !== "suffix" && options.reference !== parsed.reference) {
+          parsed.error = parsed.error || "URI is not a " + options.reference + " reference.";
+        }
+        const schemeHandler = SCHEMES[(options.scheme || parsed.scheme || "").toLowerCase()];
+        if (!options.unicodeSupport && (!schemeHandler || !schemeHandler.unicodeSupport)) {
+          if (parsed.host && (options.domainHost || schemeHandler && schemeHandler.domainHost) && isIP === false && nonSimpleDomain(parsed.host)) {
+            try {
+              parsed.host = URL.domainToASCII(parsed.host.toLowerCase());
+            } catch (e) {
+              parsed.error = parsed.error || "Host's domain name can not be converted to ASCII: " + e;
+            }
+          }
+        }
+        if (!schemeHandler || schemeHandler && !schemeHandler.skipNormalize) {
+          if (gotEncoding && parsed.scheme !== void 0) {
+            parsed.scheme = unescape(parsed.scheme);
+          }
+          if (gotEncoding && parsed.host !== void 0) {
+            parsed.host = unescape(parsed.host);
+          }
+          if (parsed.path !== void 0 && parsed.path.length) {
+            parsed.path = escape(unescape(parsed.path));
+          }
+          if (parsed.fragment !== void 0 && parsed.fragment.length) {
+            parsed.fragment = encodeURI(decodeURIComponent(parsed.fragment));
+          }
+        }
+        if (schemeHandler && schemeHandler.parse) {
+          schemeHandler.parse(parsed, options);
+        }
+      } else {
+        parsed.error = parsed.error || "URI can not be parsed.";
+      }
+      return parsed;
+    }
+    var fastUri = {
+      SCHEMES,
+      normalize,
+      resolve,
+      resolveComponents,
+      equal,
+      serialize,
+      parse
+    };
+    module2.exports = fastUri;
+    module2.exports.default = fastUri;
+    module2.exports.fastUri = fastUri;
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/runtime/uri.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/runtime/uri.js
 var require_uri = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/runtime/uri.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/runtime/uri.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var uri = require_uri_all();
+    var uri = require_fast_uri();
     uri.code = 'require("ajv/dist/runtime/uri").default';
     exports2.default = uri;
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/core.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/core.js
 var require_core = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/core.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/core.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.CodeGen = exports2.Name = exports2.nil = exports2.stringify = exports2.str = exports2._ = exports2.KeywordCxt = void 0;
@@ -4593,9 +4251,9 @@ var require_core = __commonJS({
         }
       }
     };
-    exports2.default = Ajv2;
     Ajv2.ValidationError = validation_error_1.default;
     Ajv2.MissingRefError = ref_error_1.default;
+    exports2.default = Ajv2;
     function checkOptions(checkOpts, options, msg, log = "error") {
       for (const key in checkOpts) {
         const opt = key;
@@ -4726,9 +4384,9 @@ var require_core = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/core/id.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/core/id.js
 var require_id = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/core/id.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/core/id.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var def = {
@@ -4741,9 +4399,9 @@ var require_id = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/core/ref.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/core/ref.js
 var require_ref = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/core/ref.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/core/ref.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.callRef = exports2.getValidate = void 0;
@@ -4863,9 +4521,9 @@ var require_ref = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/core/index.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/core/index.js
 var require_core2 = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/core/index.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/core/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var id_1 = require_id();
@@ -4884,9 +4542,9 @@ var require_core2 = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/validation/limitNumber.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/validation/limitNumber.js
 var require_limitNumber = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/validation/limitNumber.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/validation/limitNumber.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -4916,9 +4574,9 @@ var require_limitNumber = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/validation/multipleOf.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/validation/multipleOf.js
 var require_multipleOf = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/validation/multipleOf.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/validation/multipleOf.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -4944,9 +4602,9 @@ var require_multipleOf = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/runtime/ucs2length.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/runtime/ucs2length.js
 var require_ucs2length = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/runtime/ucs2length.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/runtime/ucs2length.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     function ucs2length(str) {
@@ -4970,9 +4628,9 @@ var require_ucs2length = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/validation/limitLength.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/validation/limitLength.js
 var require_limitLength = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/validation/limitLength.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/validation/limitLength.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5002,9 +4660,9 @@ var require_limitLength = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/validation/pattern.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/validation/pattern.js
 var require_pattern = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/validation/pattern.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/validation/pattern.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -5030,9 +4688,9 @@ var require_pattern = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/validation/limitProperties.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/validation/limitProperties.js
 var require_limitProperties = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/validation/limitProperties.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/validation/limitProperties.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5059,9 +4717,9 @@ var require_limitProperties = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/validation/required.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/validation/required.js
 var require_required = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/validation/required.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/validation/required.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -5141,9 +4799,9 @@ var require_required = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/validation/limitItems.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/validation/limitItems.js
 var require_limitItems = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/validation/limitItems.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/validation/limitItems.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5170,9 +4828,9 @@ var require_limitItems = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/runtime/equal.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/runtime/equal.js
 var require_equal = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/runtime/equal.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/runtime/equal.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var equal = require_fast_deep_equal();
@@ -5181,9 +4839,9 @@ var require_equal = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/validation/uniqueItems.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/validation/uniqueItems.js
 var require_uniqueItems = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/validation/uniqueItems.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/validation/uniqueItems.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var dataType_1 = require_dataType();
@@ -5248,9 +4906,9 @@ var require_uniqueItems = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/validation/const.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/validation/const.js
 var require_const = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/validation/const.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/validation/const.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5277,9 +4935,9 @@ var require_const = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/validation/enum.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/validation/enum.js
 var require_enum = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/validation/enum.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/validation/enum.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5326,9 +4984,9 @@ var require_enum = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/validation/index.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/validation/index.js
 var require_validation = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/validation/index.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/validation/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var limitNumber_1 = require_limitNumber();
@@ -5364,9 +5022,9 @@ var require_validation = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/additionalItems.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/additionalItems.js
 var require_additionalItems = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/additionalItems.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/additionalItems.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateAdditionalItems = void 0;
@@ -5417,9 +5075,9 @@ var require_additionalItems = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/items.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/items.js
 var require_items = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/items.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/items.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateTuple = void 0;
@@ -5474,9 +5132,9 @@ var require_items = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/prefixItems.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/prefixItems.js
 var require_prefixItems = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/prefixItems.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/prefixItems.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var items_1 = require_items();
@@ -5491,9 +5149,9 @@ var require_prefixItems = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/items2020.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/items2020.js
 var require_items2020 = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/items2020.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/items2020.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5526,9 +5184,9 @@ var require_items2020 = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/contains.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/contains.js
 var require_contains = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/contains.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/contains.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5620,9 +5278,9 @@ var require_contains = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/dependencies.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/dependencies.js
 var require_dependencies = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/dependencies.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/dependencies.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateSchemaDeps = exports2.validatePropertyDeps = exports2.error = void 0;
@@ -5714,9 +5372,9 @@ var require_dependencies = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/propertyNames.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/propertyNames.js
 var require_propertyNames = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/propertyNames.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/propertyNames.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5757,9 +5415,9 @@ var require_propertyNames = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js
 var require_additionalProperties = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -5863,9 +5521,9 @@ var require_additionalProperties = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/properties.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/properties.js
 var require_properties = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/properties.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/properties.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var validate_1 = require_validate();
@@ -5921,9 +5579,9 @@ var require_properties = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/patternProperties.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/patternProperties.js
 var require_patternProperties = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/patternProperties.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/patternProperties.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -5995,9 +5653,9 @@ var require_patternProperties = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/not.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/not.js
 var require_not = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/not.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/not.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var util_1 = require_util();
@@ -6026,9 +5684,9 @@ var require_not = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/anyOf.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/anyOf.js
 var require_anyOf = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/anyOf.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/anyOf.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -6043,9 +5701,9 @@ var require_anyOf = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/oneOf.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/oneOf.js
 var require_oneOf = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/oneOf.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/oneOf.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -6101,9 +5759,9 @@ var require_oneOf = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/allOf.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/allOf.js
 var require_allOf = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/allOf.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/allOf.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var util_1 = require_util();
@@ -6128,9 +5786,9 @@ var require_allOf = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/if.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/if.js
 var require_if = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/if.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/if.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -6197,9 +5855,9 @@ var require_if = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/thenElse.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/thenElse.js
 var require_thenElse = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/thenElse.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/thenElse.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var util_1 = require_util();
@@ -6215,9 +5873,9 @@ var require_thenElse = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/index.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/index.js
 var require_applicator = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/applicator/index.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/applicator/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var additionalItems_1 = require_additionalItems();
@@ -6263,9 +5921,9 @@ var require_applicator = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/format/format.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/format/format.js
 var require_format = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/format/format.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/format/format.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -6353,9 +6011,9 @@ var require_format = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/format/index.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/format/index.js
 var require_format2 = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/format/index.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/format/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var format_1 = require_format();
@@ -6364,9 +6022,9 @@ var require_format2 = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/metadata.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/metadata.js
 var require_metadata = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/metadata.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/metadata.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.contentVocabulary = exports2.metadataVocabulary = void 0;
@@ -6387,9 +6045,9 @@ var require_metadata = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/draft7.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/draft7.js
 var require_draft7 = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/draft7.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/draft7.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var core_1 = require_core2();
@@ -6409,9 +6067,9 @@ var require_draft7 = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/discriminator/types.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/discriminator/types.js
 var require_types = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/discriminator/types.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/discriminator/types.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.DiscrError = void 0;
@@ -6419,18 +6077,19 @@ var require_types = __commonJS({
     (function(DiscrError2) {
       DiscrError2["Tag"] = "tag";
       DiscrError2["Mapping"] = "mapping";
-    })(DiscrError = exports2.DiscrError || (exports2.DiscrError = {}));
+    })(DiscrError || (exports2.DiscrError = DiscrError = {}));
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/discriminator/index.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/discriminator/index.js
 var require_discriminator = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/vocabularies/discriminator/index.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/vocabularies/discriminator/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
     var types_1 = require_types();
     var compile_1 = require_compile();
+    var ref_error_1 = require_ref_error();
     var util_1 = require_util();
     var error = {
       message: ({ params: { discrError, tagName } }) => discrError === types_1.DiscrError.Tag ? `tag "${tagName}" must be string` : `value of tag "${tagName}" must be in oneOf`,
@@ -6483,9 +6142,12 @@ var require_discriminator = __commonJS({
           for (let i = 0; i < oneOf.length; i++) {
             let sch = oneOf[i];
             if ((sch === null || sch === void 0 ? void 0 : sch.$ref) && !(0, util_1.schemaHasRulesButRef)(sch, it.self.RULES)) {
-              sch = compile_1.resolveRef.call(it.self, it.schemaEnv.root, it.baseId, sch === null || sch === void 0 ? void 0 : sch.$ref);
+              const ref = sch.$ref;
+              sch = compile_1.resolveRef.call(it.self, it.schemaEnv.root, it.baseId, ref);
               if (sch instanceof compile_1.SchemaEnv)
                 sch = sch.schema;
+              if (sch === void 0)
+                throw new ref_error_1.default(it.opts.uriResolver, it.baseId, ref);
             }
             const propSch = (_a = sch === null || sch === void 0 ? void 0 : sch.properties) === null || _a === void 0 ? void 0 : _a[tagName];
             if (typeof propSch != "object") {
@@ -6524,9 +6186,9 @@ var require_discriminator = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/refs/json-schema-draft-07.json
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/refs/json-schema-draft-07.json
 var require_json_schema_draft_07 = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/refs/json-schema-draft-07.json"(exports2, module2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/refs/json-schema-draft-07.json"(exports2, module2) {
     module2.exports = {
       $schema: "http://json-schema.org/draft-07/schema#",
       $id: "http://json-schema.org/draft-07/schema#",
@@ -6681,12 +6343,12 @@ var require_json_schema_draft_07 = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/ajv.js
+// ../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/ajv.js
 var require_ajv = __commonJS({
-  "../../../node_modules/.pnpm/ajv@8.12.0/node_modules/ajv/dist/ajv.js"(exports2, module2) {
+  "../../../node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/ajv.js"(exports2, module2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.MissingRefError = exports2.ValidationError = exports2.CodeGen = exports2.Name = exports2.nil = exports2.stringify = exports2.str = exports2._ = exports2.KeywordCxt = void 0;
+    exports2.MissingRefError = exports2.ValidationError = exports2.CodeGen = exports2.Name = exports2.nil = exports2.stringify = exports2.str = exports2._ = exports2.KeywordCxt = exports2.Ajv = void 0;
     var core_1 = require_core();
     var draft7_1 = require_draft7();
     var discriminator_1 = require_discriminator();
@@ -6712,7 +6374,9 @@ var require_ajv = __commonJS({
         return this.opts.defaultMeta = super.defaultMeta() || (this.getSchema(META_SCHEMA_ID) ? META_SCHEMA_ID : void 0);
       }
     };
+    exports2.Ajv = Ajv2;
     module2.exports = exports2 = Ajv2;
+    module2.exports.Ajv = Ajv2;
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.default = Ajv2;
     var validate_1 = require_validate();
@@ -6749,9 +6413,9 @@ var require_ajv = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv-formats@2.1.1_ajv@8.12.0/node_modules/ajv-formats/dist/formats.js
+// ../../../node_modules/.pnpm/ajv-formats@3.0.1_ajv@8.17.1/node_modules/ajv-formats/dist/formats.js
 var require_formats = __commonJS({
-  "../../../node_modules/.pnpm/ajv-formats@2.1.1_ajv@8.12.0/node_modules/ajv-formats/dist/formats.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv-formats@3.0.1_ajv@8.17.1/node_modules/ajv-formats/dist/formats.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.formatNames = exports2.fastFormats = exports2.fullFormats = void 0;
@@ -6762,8 +6426,10 @@ var require_formats = __commonJS({
       // date: http://tools.ietf.org/html/rfc3339#section-5.6
       date: fmtDef(date, compareDate),
       // date-time: http://tools.ietf.org/html/rfc3339#section-5.6
-      time: fmtDef(time, compareTime),
-      "date-time": fmtDef(date_time, compareDateTime),
+      time: fmtDef(getTime(true), compareTime),
+      "date-time": fmtDef(getDateTime(true), compareDateTime),
+      "iso-time": fmtDef(getTime(), compareIsoTime),
+      "iso-date-time": fmtDef(getDateTime(), compareIsoDateTime),
       // duration: https://tools.ietf.org/html/rfc3339#appendix-A
       duration: /^P(?!$)((\d+Y)?(\d+M)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+S)?)?|(\d+W)?)$/,
       uri,
@@ -6776,7 +6442,7 @@ var require_formats = __commonJS({
       email: /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i,
       hostname: /^(?=.{1,253}\.?$)[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[-0-9a-z]{0,61}[0-9a-z])?)*\.?$/i,
       // optimized https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9780596802837/ch07s16.html
-      ipv4: /^(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d?)$/,
+      ipv4: /^(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)$/,
       ipv6: /^((([0-9a-f]{1,4}:){7}([0-9a-f]{1,4}|:))|(([0-9a-f]{1,4}:){6}(:[0-9a-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9a-f]{1,4}:){5}(((:[0-9a-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9a-f]{1,4}:){4}(((:[0-9a-f]{1,4}){1,3})|((:[0-9a-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9a-f]{1,4}:){3}(((:[0-9a-f]{1,4}){1,4})|((:[0-9a-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9a-f]{1,4}:){2}(((:[0-9a-f]{1,4}){1,5})|((:[0-9a-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9a-f]{1,4}:){1}(((:[0-9a-f]{1,4}){1,6})|((:[0-9a-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9a-f]{1,4}){1,7})|((:[0-9a-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))$/i,
       regex,
       // uuid: http://tools.ietf.org/html/rfc4122
@@ -6806,8 +6472,10 @@ var require_formats = __commonJS({
     exports2.fastFormats = {
       ...exports2.fullFormats,
       date: fmtDef(/^\d\d\d\d-[0-1]\d-[0-3]\d$/, compareDate),
-      time: fmtDef(/^(?:[0-2]\d:[0-5]\d:[0-5]\d|23:59:60)(?:\.\d+)?(?:z|[+-]\d\d(?::?\d\d)?)?$/i, compareTime),
-      "date-time": fmtDef(/^\d\d\d\d-[0-1]\d-[0-3]\d[t\s](?:[0-2]\d:[0-5]\d:[0-5]\d|23:59:60)(?:\.\d+)?(?:z|[+-]\d\d(?::?\d\d)?)$/i, compareDateTime),
+      time: fmtDef(/^(?:[0-2]\d:[0-5]\d:[0-5]\d|23:59:60)(?:\.\d+)?(?:z|[+-]\d\d(?::?\d\d)?)$/i, compareTime),
+      "date-time": fmtDef(/^\d\d\d\d-[0-1]\d-[0-3]\dt(?:[0-2]\d:[0-5]\d:[0-5]\d|23:59:60)(?:\.\d+)?(?:z|[+-]\d\d(?::?\d\d)?)$/i, compareDateTime),
+      "iso-time": fmtDef(/^(?:[0-2]\d:[0-5]\d:[0-5]\d|23:59:60)(?:\.\d+)?(?:z|[+-]\d\d(?::?\d\d)?)?$/i, compareIsoTime),
+      "iso-date-time": fmtDef(/^\d\d\d\d-[0-1]\d-[0-3]\d[t\s](?:[0-2]\d:[0-5]\d:[0-5]\d|23:59:60)(?:\.\d+)?(?:z|[+-]\d\d(?::?\d\d)?)?$/i, compareIsoDateTime),
       // uri: https://github.com/mafintosh/is-my-json-valid/blob/master/formats.js
       uri: /^(?:[a-z][a-z0-9+\-.]*:)(?:\/?\/)?[^\s]*$/i,
       "uri-reference": /^(?:(?:[a-z][a-z0-9+\-.]*:)?\/?\/)?(?:[^\\\s#][^\s#]*)?(?:#[^\\\s]*)?$/i,
@@ -6840,26 +6508,46 @@ var require_formats = __commonJS({
         return -1;
       return 0;
     }
-    var TIME = /^(\d\d):(\d\d):(\d\d)(\.\d+)?(z|[+-]\d\d(?::?\d\d)?)?$/i;
-    function time(str, withTimeZone) {
-      const matches = TIME.exec(str);
-      if (!matches)
-        return false;
-      const hour = +matches[1];
-      const minute = +matches[2];
-      const second = +matches[3];
-      const timeZone = matches[5];
-      return (hour <= 23 && minute <= 59 && second <= 59 || hour === 23 && minute === 59 && second === 60) && (!withTimeZone || timeZone !== "");
+    var TIME = /^(\d\d):(\d\d):(\d\d(?:\.\d+)?)(z|([+-])(\d\d)(?::?(\d\d))?)?$/i;
+    function getTime(strictTimeZone) {
+      return function time(str) {
+        const matches = TIME.exec(str);
+        if (!matches)
+          return false;
+        const hr = +matches[1];
+        const min = +matches[2];
+        const sec = +matches[3];
+        const tz = matches[4];
+        const tzSign = matches[5] === "-" ? -1 : 1;
+        const tzH = +(matches[6] || 0);
+        const tzM = +(matches[7] || 0);
+        if (tzH > 23 || tzM > 59 || strictTimeZone && !tz)
+          return false;
+        if (hr <= 23 && min <= 59 && sec < 60)
+          return true;
+        const utcMin = min - tzM * tzSign;
+        const utcHr = hr - tzH * tzSign - (utcMin < 0 ? 1 : 0);
+        return (utcHr === 23 || utcHr === -1) && (utcMin === 59 || utcMin === -1) && sec < 61;
+      };
     }
-    function compareTime(t1, t2) {
+    function compareTime(s1, s2) {
+      if (!(s1 && s2))
+        return void 0;
+      const t1 = (/* @__PURE__ */ new Date("2020-01-01T" + s1)).valueOf();
+      const t2 = (/* @__PURE__ */ new Date("2020-01-01T" + s2)).valueOf();
+      if (!(t1 && t2))
+        return void 0;
+      return t1 - t2;
+    }
+    function compareIsoTime(t1, t2) {
       if (!(t1 && t2))
         return void 0;
       const a1 = TIME.exec(t1);
       const a2 = TIME.exec(t2);
       if (!(a1 && a2))
         return void 0;
-      t1 = a1[1] + a1[2] + a1[3] + (a1[4] || "");
-      t2 = a2[1] + a2[2] + a2[3] + (a2[4] || "");
+      t1 = a1[1] + a1[2] + a1[3];
+      t2 = a2[1] + a2[2] + a2[3];
       if (t1 > t2)
         return 1;
       if (t1 < t2)
@@ -6867,11 +6555,23 @@ var require_formats = __commonJS({
       return 0;
     }
     var DATE_TIME_SEPARATOR = /t|\s/i;
-    function date_time(str) {
-      const dateTime = str.split(DATE_TIME_SEPARATOR);
-      return dateTime.length === 2 && date(dateTime[0]) && time(dateTime[1], true);
+    function getDateTime(strictTimeZone) {
+      const time = getTime(strictTimeZone);
+      return function date_time(str) {
+        const dateTime = str.split(DATE_TIME_SEPARATOR);
+        return dateTime.length === 2 && date(dateTime[0]) && time(dateTime[1]);
+      };
     }
     function compareDateTime(dt1, dt2) {
+      if (!(dt1 && dt2))
+        return void 0;
+      const d1 = new Date(dt1).valueOf();
+      const d2 = new Date(dt2).valueOf();
+      if (!(d1 && d2))
+        return void 0;
+      return d1 - d2;
+    }
+    function compareIsoDateTime(dt1, dt2) {
       if (!(dt1 && dt2))
         return void 0;
       const [d1, t1] = dt1.split(DATE_TIME_SEPARATOR);
@@ -6916,9 +6616,9 @@ var require_formats = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv-formats@2.1.1_ajv@8.12.0/node_modules/ajv-formats/dist/limit.js
+// ../../../node_modules/.pnpm/ajv-formats@3.0.1_ajv@8.17.1/node_modules/ajv-formats/dist/limit.js
 var require_limit = __commonJS({
-  "../../../node_modules/.pnpm/ajv-formats@2.1.1_ajv@8.12.0/node_modules/ajv-formats/dist/limit.js"(exports2) {
+  "../../../node_modules/.pnpm/ajv-formats@3.0.1_ajv@8.17.1/node_modules/ajv-formats/dist/limit.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.formatLimitDefinition = void 0;
@@ -6932,8 +6632,8 @@ var require_limit = __commonJS({
       formatExclusiveMinimum: { okStr: ">", ok: ops.GT, fail: ops.LTE }
     };
     var error = {
-      message: ({ keyword, schemaCode }) => codegen_1.str`should be ${KWDs[keyword].okStr} ${schemaCode}`,
-      params: ({ keyword, schemaCode }) => codegen_1._`{comparison: ${KWDs[keyword].okStr}, limit: ${schemaCode}}`
+      message: ({ keyword, schemaCode }) => (0, codegen_1.str)`should be ${KWDs[keyword].okStr} ${schemaCode}`,
+      params: ({ keyword, schemaCode }) => (0, codegen_1._)`{comparison: ${KWDs[keyword].okStr}, limit: ${schemaCode}}`
     };
     exports2.formatLimitDefinition = {
       keyword: Object.keys(KWDs),
@@ -6956,8 +6656,8 @@ var require_limit = __commonJS({
             ref: self.formats,
             code: opts.code.formats
           });
-          const fmt = gen.const("fmt", codegen_1._`${fmts}[${fCxt.schemaCode}]`);
-          cxt.fail$data(codegen_1.or(codegen_1._`typeof ${fmt} != "object"`, codegen_1._`${fmt} instanceof RegExp`, codegen_1._`typeof ${fmt}.compare != "function"`, compareCode(fmt)));
+          const fmt = gen.const("fmt", (0, codegen_1._)`${fmts}[${fCxt.schemaCode}]`);
+          cxt.fail$data((0, codegen_1.or)((0, codegen_1._)`typeof ${fmt} != "object"`, (0, codegen_1._)`${fmt} instanceof RegExp`, (0, codegen_1._)`typeof ${fmt}.compare != "function"`, compareCode(fmt)));
         }
         function validateFormat() {
           const format = fCxt.schema;
@@ -6970,12 +6670,12 @@ var require_limit = __commonJS({
           const fmt = gen.scopeValue("formats", {
             key: format,
             ref: fmtDef,
-            code: opts.code.formats ? codegen_1._`${opts.code.formats}${codegen_1.getProperty(format)}` : void 0
+            code: opts.code.formats ? (0, codegen_1._)`${opts.code.formats}${(0, codegen_1.getProperty)(format)}` : void 0
           });
           cxt.fail$data(compareCode(fmt));
         }
         function compareCode(fmt) {
-          return codegen_1._`${fmt}.compare(${data}, ${schemaCode}) ${KWDs[keyword].fail} 0`;
+          return (0, codegen_1._)`${fmt}.compare(${data}, ${schemaCode}) ${KWDs[keyword].fail} 0`;
         }
       },
       dependencies: ["format"]
@@ -6988,9 +6688,9 @@ var require_limit = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/ajv-formats@2.1.1_ajv@8.12.0/node_modules/ajv-formats/dist/index.js
+// ../../../node_modules/.pnpm/ajv-formats@3.0.1_ajv@8.17.1/node_modules/ajv-formats/dist/index.js
 var require_dist = __commonJS({
-  "../../../node_modules/.pnpm/ajv-formats@2.1.1_ajv@8.12.0/node_modules/ajv-formats/dist/index.js"(exports2, module2) {
+  "../../../node_modules/.pnpm/ajv-formats@3.0.1_ajv@8.17.1/node_modules/ajv-formats/dist/index.js"(exports2, module2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var formats_1 = require_formats();
@@ -7007,7 +6707,7 @@ var require_dist = __commonJS({
       const list = opts.formats || formats_1.formatNames;
       addFormats2(ajv2, list, formats, exportName);
       if (opts.keywords)
-        limit_1.default(ajv2);
+        (0, limit_1.default)(ajv2);
       return ajv2;
     };
     formatsPlugin.get = (name, mode = "full") => {
@@ -7020,7 +6720,7 @@ var require_dist = __commonJS({
     function addFormats2(ajv2, list, fs2, exportName) {
       var _a;
       var _b;
-      (_a = (_b = ajv2.opts.code).formats) !== null && _a !== void 0 ? _a : _b.formats = codegen_1._`require("ajv-formats/dist/formats").${exportName}`;
+      (_a = (_b = ajv2.opts.code).formats) !== null && _a !== void 0 ? _a : _b.formats = (0, codegen_1._)`require("ajv-formats/dist/formats").${exportName}`;
       for (const f of list)
         ajv2.addFormat(f, fs2[f]);
     }
@@ -7233,7 +6933,15 @@ var Socket_io_message_default = {
         "rfRecordClearList",
         "rfRecordClearListCompleted",
         "rfRecordThreatsGetConfig",
-        "rfRecordThreatsConfig"
+        "rfRecordThreatsConfig",
+        "takGetConfiguration",
+        "takConfiguration",
+        "takConfigure",
+        "takConfigureCompleted",
+        "takConfigureError",
+        "takTransportGetList",
+        "takTransportList",
+        "takTransportUpdated"
       ]
     },
     message: {
@@ -8011,6 +7719,38 @@ var Socket_io_message_default = {
     {
       if: { properties: { event: { const: "rfRecordThreatsConfig" } } },
       then: { properties: { message: { $ref: "./messages/RfRecordThreatsConfig.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "takGetConfiguration" } } },
+      then: { properties: { message: { $ref: "./messages/Empty.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "takConfiguration" } } },
+      then: { properties: { message: { $ref: "./messages/TakConfiguration.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "takConfigure" } } },
+      then: { properties: { message: { $ref: "./messages/TakConfigure.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "takConfigureCompleted" } } },
+      then: { properties: { message: { $ref: "./messages/Empty.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "takConfigureError" } } },
+      then: { properties: { message: { $ref: "./messages/Error.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "takTransportGetList" } } },
+      then: { properties: { message: { $ref: "./messages/Empty.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "takTransportList" } } },
+      then: { properties: { message: { $ref: "./messages/TakTransportList.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "takTransportUpdated" } } },
+      then: { properties: { message: { $ref: "./messages/TakTransport.json#" } } }
     }
   ]
 };
@@ -8094,8 +7834,3 @@ readSchemaDir("../schema/messages/").then(() => {
     readMessages("../samples/");
   }
 });
-/*! Bundled license information:
-
-uri-js/dist/es5/uri.all.js:
-  (** @license URI.js v4.4.1 (c) 2011 Gary Court. License: http://github.com/garycourt/uri-js *)
-*/

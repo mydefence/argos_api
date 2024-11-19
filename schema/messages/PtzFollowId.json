@@ -6,8 +6,7 @@
     "properties": {
         "ptzFollowId": {
             "type": "string",
-            "title": "PTZ follow instance identication",
-            "description": "Device ID of a PTZ device"
+            "description": "ID of the PTZ follow instance"
         }
     },
     "required": ["ptzFollowId"]

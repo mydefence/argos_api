@@ -3,8 +3,8 @@
  * DO NOT MODIFY IT BY HAND. Instead, modify the source JSONSchema file,
  * and run json-schema-to-typescript to regenerate this file.
  */
-export type DeviceMiscellaneousChange = DeviceMiscellaneousConfidenceThreshold | DeviceMiscellaneousDeviceName | DeviceMiscellaneousDeviceOrder | DeviceMiscellaneousDeviceOrientation | DeviceMiscellaneousDeviceRange | DeviceMiscellaneousFrequencyBands | DeviceMiscellaneousProductName | DeviceMiscellaneousProfiles | DeviceMiscellaneousPtzLimits | DeviceMiscellaneousRingSettings | DeviceMiscellaneousUseGPSLocation;
-export type DeviceMiscellaneousType = "deviceName" | "productName" | "deviceOrientation" | "deviceOrder" | "frequencyBands" | "droneList" | "useGPSLocation" | "ptzLimits" | "deviceRange" | "confidenceThreshold" | "ringSettings" | "assetData" | "profiles";
+export type DeviceMiscellaneousChange = DeviceMiscellaneousConfidenceThreshold | DeviceMiscellaneousDeviceName | DeviceMiscellaneousDeviceOrder | DeviceMiscellaneousDeviceOrientation | DeviceMiscellaneousDeviceRange | DeviceMiscellaneousFrequencyBands | DeviceMiscellaneousProductName | DeviceMiscellaneousProfiles | DeviceMiscellaneousPtzLimits | DeviceMiscellaneousRingSettings | DeviceMiscellaneousTakInfo | DeviceMiscellaneousUseGPSLocation;
+export type DeviceMiscellaneousType = "deviceName" | "productName" | "deviceOrientation" | "deviceOrder" | "frequencyBands" | "droneList" | "useGPSLocation" | "ptzLimits" | "deviceRange" | "confidenceThreshold" | "ringSettings" | "assetData" | "profiles" | "takInfo";
 /**
  * Information about the frequency of an effector/detector.
  */
@@ -226,6 +226,34 @@ export type DeviceMiscellaneousRingSettings = {
              */
             height?: number;
         } | null;
+    };
+};
+/**
+ * The device miscellaneous data for (A)TAK devices provides additional information about the TAK user. Note that the callsign can be found in deviceMiscellaneous type "deviceName". All fields should be considered read-only.
+ */
+export type DeviceMiscellaneousTakInfo = {
+    /**
+     * The device ID of the TAK device
+     */
+    deviceId: string;
+    deviceMiscellaneousType: DeviceMiscellaneousType & "takInfo";
+    deviceMiscellaneousData: {
+        /**
+         * The team of the TAK user. Typically a color.
+         */
+        team?: string;
+        /**
+         * The role of the TAK user, e.g. "Team Member".
+         */
+        role?: string;
+        /**
+         * The type of the TAK user. Format is according to CoT standard, e.g. "a-f-G-U-C".
+         */
+        typeCot?: string;
+        /**
+         * The type of the TAK user. Human readable version of typeCot.
+         */
+        typeStr?: string;
     };
 };
 export type DeviceMiscellaneousUseGPSLocation = {

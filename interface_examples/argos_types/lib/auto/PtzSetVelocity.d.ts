@@ -4,23 +4,17 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 /**
- * Device ID of a PTZ device
- */
-export type DeviceIdentification = string;
-/**
- * ID of a sub device of the PTZ device used for following
- */
-export type SubDeviceIdentification = number;
-/**
- * Specification of velocity unit for pan/tilt. See description of PtzDeviceInfo
- */
-export type VelocityUnitOfPanTiltEGDegSOrPercentageOfFullVelocity = "deg/s" | "pct";
-/**
  * Velocity of which the PTZ device should be moving
  */
 export type PtzSetVelocity = {
-    deviceId: DeviceIdentification;
-    subDeviceId?: SubDeviceIdentification;
+    /**
+     * Device ID of a PTZ device
+     */
+    deviceId: string;
+    /**
+     * ID of a sub device of the PTZ device
+     */
+    subDeviceId?: number;
     /**
      * Pan velocity.
      */
@@ -37,5 +31,8 @@ export type PtzSetVelocity = {
      * Focus velocity -1 - +1.
      */
     f?: number;
-    ptUnits?: VelocityUnitOfPanTiltEGDegSOrPercentageOfFullVelocity;
+    /**
+     * Specification of velocity unit for pan/tilt. See description of PtzDeviceInfo
+     */
+    ptUnits?: "deg/s" | "pct";
 };

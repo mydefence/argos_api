@@ -1,0 +1,17 @@
+{
+    "event": "takConfigure",
+    "message": {
+        "callsign" : "ArgosC2",
+        "transports": [
+            {
+                "type": "tls",
+                "address": "127.0.0.1",
+                "port": 8089,
+                "credentials": {
+                    "credentialId": "123456"
+                }
+            }
+        ]
+    },
+    "responseId": "kn3t97nm"
+}

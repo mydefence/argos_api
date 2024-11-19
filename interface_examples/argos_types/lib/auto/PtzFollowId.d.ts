@@ -3,10 +3,9 @@
  * DO NOT MODIFY IT BY HAND. Instead, modify the source JSONSchema file,
  * and run json-schema-to-typescript to regenerate this file.
  */
-/**
- * Device ID of a PTZ device
- */
-export type PTZFollowInstanceIdentication = string;
 export type PtzFollowId = {
-    ptzFollowId: PTZFollowInstanceIdentication;
+    /**
+     * ID of the PTZ follow instance
+     */
+    ptzFollowId: string;
 };

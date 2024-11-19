@@ -1,0 +1,47 @@
+{
+    "$comment": "This file is auto-generated. Do not edit.",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DeviceMiscellaneousTakInfo",
+    "type": "object",
+    "description": "The device miscellaneous data for (A)TAK devices provides additional information about the TAK user. Note that the callsign can be found in deviceMiscellaneous type \"deviceName\". All fields should be considered read-only.",
+    "properties": {
+        "deviceId": {
+            "type": "string",
+            "description": "The device ID of the TAK device"
+        },
+        "deviceMiscellaneousType": {
+            "allOf": [
+                {
+                    "$ref": "./DeviceMiscellaneousType.json#"
+                },
+                {
+                    "const": "takInfo"
+                }
+            ]
+        },
+        "deviceMiscellaneousData": {
+            "type": "object",
+            "properties": {
+                "team": {
+                    "type": "string",
+                    "description": "The team of the TAK user. Typically a color."
+                },
+                "role": {
+                    "type": "string",
+                    "description": "The role of the TAK user, e.g. \"Team Member\"."
+                },
+                "typeCot": {
+                    "type": "string",
+                    "description": "The type of the TAK user. Format is according to CoT standard, e.g. \"a-f-G-U-C\"."
+                },
+                "typeStr": {
+                    "type": "string",
+                    "description": "The type of the TAK user. Human readable version of typeCot."
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false,
+    "required": ["deviceId", "deviceMiscellaneousType", "deviceMiscellaneousData"]
+}

@@ -5,7 +5,7 @@
     "properties": {
         "nodeId": {
             "type": "string",
-            "description": "ULID of this node"
+            "description": "Unique ID of this node"
         },
         "nodeState": {
             "type": "string",

@@ -22,7 +22,7 @@ export type DeviceState = "created" | "connecting" | "connected" | "disconnectin
 /**
  * Device types tells what kind of device it is and with that what kind of attributes and abilities is available - must always be used in combination with deviceVersion and if composite with the sub/composite devices found under the devices list
  */
-export type DeviceType = "blackbird" | "jaegar" | "dobermann" | "dobermann360" | "dobermann_dual" | "duo" | "echoguard" | "gps" | "groundaware" | "hepta" | "hexa" | "penta" | "pentaDM1xx" | "pentaWD2xx" | "quad" | "quadWD2xx" | "trio" | "wd200" | "wingman" | "wl1" | "wm200" | "wolfpack" | "onvif" | "skyeye" | "blackbird5k" | "echoguardQuad" | "groundawareTrio" | "aps" | "ring" | "xenta" | "echoshield" | "echoshieldQuad" | "visionflex" | "composite" | "lizardEar" | "circleScope";
+export type DeviceType = "blackbird" | "jaegar" | "dobermann" | "dobermann360" | "dobermann_dual" | "duo" | "echoguard" | "gps" | "groundaware" | "hepta" | "hexa" | "penta" | "pentaDM1xx" | "pentaWD2xx" | "quad" | "quadWD2xx" | "trio" | "wd200" | "wingman" | "wl1" | "wm200" | "wolfpack" | "onvif" | "skyeye" | "blackbird5k" | "echoguardQuad" | "groundawareTrio" | "aps" | "ring" | "xenta" | "echoshield" | "echoshieldQuad" | "visionflex" | "composite" | "lizardEar" | "circleScope" | "tak";
 /**
  * Defines the version of the individual devices and the capabilities attached to the specific device type version
  */
@@ -68,9 +68,9 @@ export type DeviceCount = number;
  */
 export type Devices = Device[];
 /**
- * Indicates if the device is created by the system or by the API (or user).
+ * Indicates if the device is created by the system, by the API (user), or by some external entity.
  */
-export type CreatedByField = "system" | "API";
+export type CreatedByField = "system" | "API" | "extern";
 /**
  * Current calibration state. 'recalibrate' indicates that the device is calibrated but needs to be recalibrated. Note: 'failed' is overwritten on next update.
  */

@@ -110,8 +110,8 @@
         "createdBy": {
             "type": ["string"],
             "title": "Created by field",
-            "description": "Indicates if the device is created by the system or by the API (or user).",
-            "enum": ["system", "API"]
+            "description": "Indicates if the device is created by the system, by the API (user), or by some external entity.",
+            "enum": ["system", "API", "extern"]
         },
         "deviceCalibration": {
             "title": "Device Calibration",

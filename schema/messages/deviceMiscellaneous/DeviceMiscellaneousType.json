@@ -15,6 +15,7 @@
         "confidenceThreshold",
         "ringSettings",
         "assetData",
-        "profiles"
+        "profiles",
+        "takInfo"
     ]
 }

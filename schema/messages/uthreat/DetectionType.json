@@ -3,5 +3,5 @@
     "title": "DetectionType",
     "type": "string",
     "description": "The type of the system component sending the threat.",
-    "enum": ["RF", "Radar", "Drone ID", "Demodulated", "Audio", "Vision"]
+    "enum": ["RF", "Radar", "Drone ID", "Demodulated", "Audio", "Vision", "CoT"]
 }

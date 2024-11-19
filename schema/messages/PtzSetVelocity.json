@@ -7,13 +7,11 @@
     "properties": {
         "deviceId": {
             "type": "string",
-            "title": "Device identification",
             "description": "Device ID of a PTZ device"
         },
         "subDeviceId": {
             "type": "number",
-            "title": "Sub-device identification",
-            "description": "ID of a sub device of the PTZ device used for following"
+            "description": "ID of a sub device of the PTZ device"
         },
         "p": {
             "type": "number",
@@ -33,7 +31,6 @@
         },
         "ptUnits": {
             "type": "string",
-            "title": "Velocity unit of pan/tilt e.g. deg/s or percentage of full velocity",
             "description": "Specification of velocity unit for pan/tilt. See description of PtzDeviceInfo",
             "enum": ["deg/s", "pct"]
         }

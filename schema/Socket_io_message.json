@@ -195,7 +195,15 @@
                 "rfRecordClearList",
                 "rfRecordClearListCompleted",
                 "rfRecordThreatsGetConfig",
-                "rfRecordThreatsConfig"
+                "rfRecordThreatsConfig",
+                "takGetConfiguration",
+                "takConfiguration",
+                "takConfigure",
+                "takConfigureCompleted",
+                "takConfigureError",
+                "takTransportGetList",
+                "takTransportList",
+                "takTransportUpdated"
             ]
         },
         "message": {
@@ -973,6 +981,38 @@
         {
             "if": { "properties": { "event": { "const": "rfRecordThreatsConfig" } } },
             "then": { "properties": { "message": { "$ref": "./messages/RfRecordThreatsConfig.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takGetConfiguration" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takConfiguration" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/TakConfiguration.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takConfigure" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/TakConfigure.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takConfigureCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takConfigureError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takTransportGetList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takTransportList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/TakTransportList.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takTransportUpdated" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/TakTransport.json#" } } }
         }
     ]
 }

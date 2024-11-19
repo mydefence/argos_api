@@ -1,0 +1,25 @@
+{
+    "event": "takConfiguration",
+    "message": {
+        "callsign" : "ArgosC2",
+        "transports": [
+            {
+                "type": "tls",
+                "name": "LocalhostTls",
+                "address": "127.0.0.1",
+                "port": 8089,
+                "credentials": {
+                    "credentialId": "01JB1Q3REPE88S19FH68Y3WJ45"
+                },
+                "verifyServer": true,
+                "options": {
+                    "direction": "both",
+                    "threshold": 0.5
+                },
+                "transportId": "01JB1Q3V6E7GFP80H9FKRS1X0A"
+
+            }
+        ]
+    },
+    "responseId": "kn3t97cm"
+}

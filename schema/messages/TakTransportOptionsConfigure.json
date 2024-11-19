@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "TakTransportOptionsConfigure",
+    "type": "object",
+    "properties": {
+        "direction": {
+            "type": "string",
+            "enum": ["input", "output", "both", "off"],
+            "default": "both",
+            "description": "Direction of CoT messages. `off` can be used to temporarily disable the transport."
+        },
+        "threshold": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "default": 0,
+            "description": "Filter uthreats on confidence before output"
+        }
+    },
+    "additionalProperties": false
+}

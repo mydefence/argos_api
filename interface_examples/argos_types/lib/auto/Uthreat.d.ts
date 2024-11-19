@@ -12,19 +12,19 @@ export type UthreatBasis = UthreatBasisPresence | UthreatBasisZone | UthreatBasi
 /**
  * The type of the system component sending the threat.
  */
-export type DetectionType = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio" | "Vision";
+export type DetectionType = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio" | "Vision" | "CoT";
 /**
  * The type of the system component sending the threat.
  */
-export type DetectionType1 = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio" | "Vision";
+export type DetectionType1 = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio" | "Vision" | "CoT";
 /**
  * The type of the system component sending the threat.
  */
-export type DetectionType2 = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio" | "Vision";
+export type DetectionType2 = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio" | "Vision" | "CoT";
 /**
  * The type of the system component sending the threat.
  */
-export type DetectionType3 = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio" | "Vision";
+export type DetectionType3 = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio" | "Vision" | "CoT";
 export type UthreatPresence = {
     /**
      * The unique ID of the uthreat from the system.
@@ -102,7 +102,7 @@ export type UthreatPresence = {
      */
     updatedTimeStamp: string;
     /**
-     * UTC time of stop of this uthreat. Only set when threat is stopped. Will be equal to updatedTimeStamp.
+     * UTC time of stop of this uthreat. Only set when threat is stopped. Also see updatedTimeStamp.
      */
     stoppedTimeStamp?: string;
 };
@@ -207,7 +207,7 @@ export type UthreatBasisPresence = {
      */
     updatedTimeStamp: string;
     /**
-     * UTC time of stop of this uthreat. Only set when threat is stopped. Will be equal to updatedTimeStamp.
+     * UTC time of stop of this uthreat. Only set when threat is stopped. Also see updatedTimeStamp.
      */
     stoppedTimeStamp?: string;
 };
@@ -322,7 +322,7 @@ export type UthreatBasisZone = {
      */
     updatedTimeStamp: string;
     /**
-     * UTC time of stop of this uthreat. Only set when threat is stopped. Will be equal to updatedTimeStamp.
+     * UTC time of stop of this uthreat. Only set when threat is stopped. Also see updatedTimeStamp.
      */
     stoppedTimeStamp?: string;
 };
@@ -445,7 +445,7 @@ export type UthreatBasisDirection = {
      */
     updatedTimeStamp: string;
     /**
-     * UTC time of stop of this uthreat. Only set when threat is stopped. Will be equal to updatedTimeStamp.
+     * UTC time of stop of this uthreat. Only set when threat is stopped. Also see updatedTimeStamp.
      */
     stoppedTimeStamp?: string;
 };
@@ -542,6 +542,27 @@ export type UthreatBasisLocation = {
         };
     };
     /**
+     * Collection of RF information of the threat
+     */
+    rfInfo?: {
+        /**
+         * The current frequency bands of the threat.
+         */
+        frequencyBands: FrequencyBand[];
+        /**
+         * The possible frequency bands of the threat. This may contain more frequencies than 'frequencyBands' for threats, that are known to use multiple frequency bands.
+         */
+        possibleBands: FrequencyBand[];
+        /**
+         * Detected power [dB].
+         */
+        power: number;
+        /**
+         * Unique ID of the RF source
+         */
+        rfEmitterId?: string;
+    };
+    /**
      * Confidence in the detection, in 0.0 .. 1.0 .
      */
     confidence: number;
@@ -558,7 +579,7 @@ export type UthreatBasisLocation = {
      */
     updatedTimeStamp: string;
     /**
-     * UTC time of stop of this uthreat. Only set when threat is stopped. Will be equal to updatedTimeStamp.
+     * UTC time of stop of this uthreat. Only set when threat is stopped. Also see updatedTimeStamp.
      */
     stoppedTimeStamp?: string;
 };
@@ -649,7 +670,7 @@ export type UthreatZone = {
      */
     updatedTimeStamp: string;
     /**
-     * UTC time of stop of this uthreat. Only set when threat is stopped. Will be equal to updatedTimeStamp.
+     * UTC time of stop of this uthreat. Only set when threat is stopped. Also see updatedTimeStamp.
      */
     stoppedTimeStamp?: string;
 };
@@ -748,7 +769,7 @@ export type UthreatDirection = {
      */
     updatedTimeStamp: string;
     /**
-     * UTC time of stop of this uthreat. Only set when threat is stopped. Will be equal to updatedTimeStamp.
+     * UTC time of stop of this uthreat. Only set when threat is stopped. Also see updatedTimeStamp.
      */
     stoppedTimeStamp?: string;
 };
@@ -861,7 +882,7 @@ export type UthreatLocation = {
      */
     updatedTimeStamp: string;
     /**
-     * UTC time of stop of this uthreat. Only set when threat is stopped. Will be equal to updatedTimeStamp.
+     * UTC time of stop of this uthreat. Only set when threat is stopped. Also see updatedTimeStamp.
      */
     stoppedTimeStamp?: string;
 };

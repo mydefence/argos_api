@@ -1,0 +1,30 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "TakTransport",
+    "type": "object",
+    "properties": {
+        "transportId": {
+            "type": "string",
+            "description": "Unique ID of this TAK tansport"
+        },
+        "transportState": {
+            "type": "string",
+            "enum": ["off", "connecting", "connected", "listening", "error"],
+            "description": "Current state of the TAK transport"
+        },
+        "clients": {
+            "type": "array",
+            "items": {
+                "type":  "string",
+                "description": "Network address of the client"
+            },
+            "description": "List of clients connected to this transport. Only present when transportState is 'listening'"
+        },
+        "errorInfo": {
+            "type": "string",
+            "description": "Error information. Will be set when transportState is 'error' and can be set if transportState is 'connecting"
+        }
+    },
+    "required": ["transportId", "transportState"],
+    "additionalProperties": false
+}

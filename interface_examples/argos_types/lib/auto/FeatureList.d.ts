@@ -6,5 +6,5 @@
 /**
  * Features of the backend.
  */
-export type Feature = "radarDevices" | "rfGeoThreatCoverageSim" | "frontendTimingGraph" | "frontendDevMode" | "sapientIntegration" | "vehicleMode" | "segmentRecording";
+export type Feature = "radarDevices" | "rfGeoThreatCoverageSim" | "frontendTimingGraph" | "frontendDevMode" | "sapientIntegration" | "segmentRecording";
 export type FeatureList = Feature[];

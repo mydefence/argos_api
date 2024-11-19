@@ -108,6 +108,36 @@
             "required": ["lat", "lon", "x", "y", "cov"],
             "additionalProperties": false
         },
+        "rfInfo": {
+            "type": "object",
+            "description": "Collection of RF information of the threat",
+            "properties": {
+                "frequencyBands": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../common/FrequencyBand.json"
+                    },
+                    "description": "The current frequency bands of the threat."
+                },
+                "possibleBands": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../common/FrequencyBand.json"
+                    },
+                    "description": "The possible frequency bands of the threat. This may contain more frequencies than 'frequencyBands' for threats, that are known to use multiple frequency bands."
+                },
+                "power": {
+                    "type": "number",
+                    "description": "Detected power [dB]."
+                },
+                "rfEmitterId": {
+                    "type": "string",
+                    "description": "Unique ID of the RF source"
+                }
+            },
+            "required": ["frequencyBands", "possibleBands", "power"],
+            "additionalProperties": false
+        },
         "confidence": {
             "type": "number",
             "description": "Confidence in the detection, in 0.0 .. 1.0 ."
@@ -126,7 +156,7 @@
         },
         "stoppedTimeStamp": {
             "type": "string",
-            "description": "UTC time of stop of this uthreat. Only set when threat is stopped. Will be equal to updatedTimeStamp."
+            "description": "UTC time of stop of this uthreat. Only set when threat is stopped. Also see updatedTimeStamp."
         }
     },
     "required": [

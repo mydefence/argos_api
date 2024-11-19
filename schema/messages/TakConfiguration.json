@@ -1,0 +1,100 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "TakConfiguration",
+    "type": "object",
+    "properties": {
+        "callsign": {
+            "type": "string",
+            "description": "Callsign used CoT messages."
+        },
+        "locationDeviceId": {
+            "type": "string",
+            "description": "When this is set, use the location of the specified device to broadcast Argos' location (using CoT event type a-f-G-E-V). The device should probably have useGpsLocation enabled. If not set Argos location will not be broadcast. Primarily relevant with vehicle systems."
+        },
+        "transports": {
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": { "const": "multicast" },
+                            "name": { "type": "string", "description": "Name of transport"},
+                            "localIpAddress": { "type": "string", "description": "IP address of the Argos server" },
+                            "multicastIpAddress": {
+                                "type": "string",
+                                "description": "Multicast IP address"
+                            },
+                            "port": { "type": "number", "description": "Multicast port number" },
+                            "options": { "$ref": "./TakTransportOptionsConfiguration.json#" },
+                            "transportId": { "type": "string", "description": "Transport ID" }
+                        },
+                        "required": ["type", "name", "localIpAddress", "multicastIpAddress", "port", "options", "transportId"],
+                        "additionalProperties": false
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": { "const": "tcp" },
+                            "name": { "type": "string", "description": "Name of transport"},
+                            "address": { "type": "string", "description": "TAK server IP address" },
+                            "port": { "type": "number", "description": "TAK server TCP port" },
+                            "options": { "$ref": "./TakTransportOptionsConfiguration.json#" },
+                            "transportId": { "type": "string", "description": "Transport ID" }
+                        },
+                        "required": ["type", "name", "address", "port", "options", "transportId"],
+                        "additionalProperties": false
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": { "const": "tls" },
+                            "name": { "type": "string", "description": "Name of transport"},
+                            "address": { "type": "string", "description": "TAK server IP address" },
+                            "port": { "type": "number", "description": "TAK server TLS port" },
+                            "credentials": {
+                                "type": "object",
+                                "properties": {
+                                    "credentialId": {
+                                        "type": "string",
+                                        "description": "Credential ID. Use when modifying an existing transport. Credentials can't be modified"
+                                    }
+                                },
+                                "required": ["credentialId"],
+                                "additionalProperties": false
+                            },
+                            "verifyServer": { "type": "boolean", "description": "Verify server certificate" },
+                            "options": { "$ref": "./TakTransportOptionsConfiguration.json#" },
+                            "transportId": { "type": "string", "description": "Transport ID" }
+                        },
+                        "required": [
+                            "type",
+                            "name",
+                            "address",
+                            "port",
+                            "credentials",
+                            "verifyServer",
+                            "options",
+                            "transportId"
+                        ],
+                        "additionalProperties": false
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": { "const": "tcpServer" },
+                            "name": { "type": "string", "description": "Name of transport"},
+                            "port": { "type": "number", "description": "TAK server TCP port" },
+                            "options": { "$ref": "./TakTransportOptionsConfiguration.json#" },
+                            "transportId": { "type": "string", "description": "Transport ID" }
+                        },
+                        "required": ["type", "name", "port", "options", "transportId"],
+                        "additionalProperties": false
+                    }
+                ]
+            }
+        }
+    },
+    "required": ["callsign", "transports"],
+    "additionalProperties": false
+}
