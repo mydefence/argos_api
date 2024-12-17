@@ -3,6 +3,10 @@ This repository contains the files needed to build a client interface to Argos -
 the MyDefence C2 system backend. For information on the interface refer to the
 [documentation](ArgosInterfaceSpecification.pdf).
 
+## Application Notes
+Application notes providing more detailed examples of integration into specific
+applications can be found in the [app_notes](app_notes) folder.
+
 ## Schema Specification
 The interface is specified using [JSON Schema](https://json-schema.org), and the
 specification  of the messages to/from Argos are placed in the [schema](schema)
