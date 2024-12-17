@@ -1,6 +1,6 @@
 {
   "name": "argos_types",
-  "version": "5.3.0",
+  "version": "5.4.0",
   "description": "Common types for Argos IPC",
   "scripts": {
     "build": "tsc",

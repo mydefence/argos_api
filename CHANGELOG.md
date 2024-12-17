@@ -1,5 +1,24 @@
 # Release Notes ARGOS
 
+## 5.4.0
+
+This is a bug fix release. Minor number is increased to be in sync with Iris
+versioning.
+
+### Improvements
+
+-   Better synchronization of TAK threat location and TAK device location.
+-   Documentation: Added _Argos Application Note: Vehicle System_
+-   Documentation: Added _Argos Application Note: Using Custom Maps_
+
+### Bugs
+
+-   TAK: Fix bug when using more than one TAK server connection.
+-   Fix issue with management of composite devices containing auto-discovered
+    devices, which triggered internal resets. System was functional but TAK
+    devices would come and go.
+-   TAK: Do not send muted threats to TAK server.
+
 ## 5.3.0
 
 ### Attention
@@ -24,6 +43,7 @@
     V4.3.2.3114.
 
 ### Bugs
+
 -   fix missing followUthreatId in ptzFollowStarted message
 
 ## 5.2.0
