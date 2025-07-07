@@ -15,7 +15,7 @@
         "clients": {
             "type": "array",
             "items": {
-                "type":  "string",
+                "type": "string",
                 "description": "Network address of the client"
             },
             "description": "List of clients connected to this transport. Only present when transportState is 'listening'"

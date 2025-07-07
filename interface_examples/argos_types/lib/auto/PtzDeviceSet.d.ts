@@ -13,9 +13,9 @@ export type PtzDeviceSet = {
      */
     trackingSubDevice?: number;
     /**
-     * Set camera tracking state
+     * Set camera tracking state. `acquire`: Start searching for threats in the video stream and track them if found. If ptzFollowStart is used, this should not be used also.
      */
-    tracking?: "disabled" | "acquire" | "track";
+    tracking?: "disabled" | "acquire";
     /**
      * Set or disable timeout. See PtzDeviceInfo.
      */

@@ -1,0 +1,46 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "VmsBoundingBox",
+    "description": "Defines a bounding box around drone detections in a video stream",
+    "type": "object",
+    "properties": {
+        "vmsStreamId": {
+            "type": "string",
+            "description": "VMS stream identification"
+        },
+        "boundingBoxId": {
+            "type": "string",
+            "description": "Unique identifier for the bounding box"
+        },
+        "basisThreatId": {
+            "type": "string",
+            "description": "Uthreat basis ID of the threat inside the bounding box."
+        },
+        "boundingBox": {
+            "type": "object",
+            "description": "Unit: pixels relative to top left corner",
+            "properties": {
+                "leftX": {
+                    "type": "number",
+                    "description": "Top left X coordinate of the bounding box"
+                },
+                "topY": {
+                    "type": "number",
+                    "description": "Top left Y coordinate of the bounding box"
+                },
+                "width": {
+                    "type": "number",
+                    "description": "Width of the bounding box (X dimension)"
+                },
+                "height": {
+                    "type": "number",
+                    "description": "Height of the bounding box (Y dimension)"
+                }
+            },
+            "required": ["leftX", "topY", "width", "height"],
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false,
+    "required": ["vmsStreamId", "boundingBoxId", "boundingBox"]
+}

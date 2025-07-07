@@ -1,0 +1,16 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "UserCapability",
+    "type": "string",
+    "description": "User capabilities. These are used to determine which requests a user can perform. The required capabilities for individual requests can be seen from `argosApiCapabilities.ts` or from the interface specification document.",
+    "enum": [
+        "CAP_C2_ECM",
+        "CAP_C2_ECM_GNSS",
+        "CAP_C2_ECM_STOP",
+        "CAP_C2_CONFIG",
+        "CAP_C2_MUTE",
+        "CAP_SYS_CONFIG",
+        "CAP_SYS_USERMGMT",
+        "CAP_DISABLED"
+    ]
+}

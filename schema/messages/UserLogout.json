@@ -1,0 +1,12 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "UserLogout",
+    "type": "object",
+    "properties": {
+        "all": {
+            "type": "boolean",
+            "description": "Logout all user's connections and tokens"
+        }
+    },
+    "additionalProperties": false
+}

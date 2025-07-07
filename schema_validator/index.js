@@ -6869,6 +6869,7 @@ var Socket_io_message_default = {
         "vmsSdpInit",
         "vmsSdpInitCompleted",
         "vmsSdpInitError",
+        "vmsBoundingBox",
         "ptzDeviceInfo",
         "ptzDeviceSet",
         "ptzDeviceSetCompleted",
@@ -6893,6 +6894,8 @@ var Socket_io_message_default = {
         "uthreatGetHistoryData",
         "uthreatHistoryData",
         "uthreatGetHistoryDataError",
+        "uthreatGetList",
+        "uthreatList",
         "originFilterAdd",
         "originFilterAdded",
         "originFilterAddCompleted",
@@ -6941,7 +6944,10 @@ var Socket_io_message_default = {
         "takConfigureError",
         "takTransportGetList",
         "takTransportList",
-        "takTransportUpdated"
+        "takTransportUpdated",
+        "userWelcome",
+        "userLogout",
+        "userLogoutCompleted"
       ]
     },
     message: {
@@ -7461,6 +7467,10 @@ var Socket_io_message_default = {
       then: { properties: { message: { $ref: "./messages/Error.json#" } } }
     },
     {
+      if: { properties: { event: { const: "vmsBoundingBox" } } },
+      then: { properties: { message: { $ref: "./messages/VmsBoundingBox.json#" } } }
+    },
+    {
       if: { properties: { event: { const: "ptzDeviceInfo" } } },
       then: { properties: { message: { $ref: "./messages/PtzDeviceInfo.json#" } } }
     },
@@ -7555,6 +7565,14 @@ var Socket_io_message_default = {
     {
       if: { properties: { event: { const: "uthreatGetHistoryDataError" } } },
       then: { properties: { message: { $ref: "./messages/Error.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "uthreatGetList" } } },
+      then: { properties: { message: { $ref: "./messages/Empty.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "uthreatList" } } },
+      then: { properties: { message: { $ref: "./messages/UthreatList.json#" } } }
     },
     {
       if: { properties: { event: { const: "originFilterAdd" } } },
@@ -7751,6 +7769,18 @@ var Socket_io_message_default = {
     {
       if: { properties: { event: { const: "takTransportUpdated" } } },
       then: { properties: { message: { $ref: "./messages/TakTransport.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "userWelcome" } } },
+      then: { properties: { message: { $ref: "./messages/UserWelcome.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "userLogout" } } },
+      then: { properties: { message: { $ref: "./messages/UserLogout.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "userLogoutCompleted" } } },
+      then: { properties: { message: { $ref: "./messages/Empty.json#" } } }
     }
   ]
 };

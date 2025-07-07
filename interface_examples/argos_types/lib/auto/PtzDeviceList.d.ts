@@ -48,9 +48,13 @@ export type PtzDeviceInfo = {
      */
     trackingSubDevice?: number;
     /**
-     * Camera tracking state. Absent if tracking is not supported.
+     * Camera tracking state. Absent if tracking is not supported. `acquire`: search for threats in the video stream and go to track if any is found. `follow`: like acquire but movement controlled using ptzFollowStart. `track`: Camera is automatically tracking a threat and other PTZ movement commands will be ignored.
      */
-    tracking?: "disabled" | "acquire" | "track";
+    tracking?: "disabled" | "acquire" | "follow" | "track";
+    /**
+     * If tracking produces threat information (device dependent), this is the id of the uthreat basis threat that is being tracked. Valid until tracking!=`track` or a new value is supplied.
+     */
+    trackingBasisThreatId?: string;
     /**
      * After this many seconds with no movement commands, the PTZ device will reset the orientation to the default (if it has been set). This is the same as setting "default" in ptzMoveAbs. Note: Setting "default" enables auto-focus if supported.
      */

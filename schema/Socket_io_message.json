@@ -131,6 +131,7 @@
                 "vmsSdpInit",
                 "vmsSdpInitCompleted",
                 "vmsSdpInitError",
+                "vmsBoundingBox",
                 "ptzDeviceInfo",
                 "ptzDeviceSet",
                 "ptzDeviceSetCompleted",
@@ -155,6 +156,8 @@
                 "uthreatGetHistoryData",
                 "uthreatHistoryData",
                 "uthreatGetHistoryDataError",
+                "uthreatGetList",
+                "uthreatList",
                 "originFilterAdd",
                 "originFilterAdded",
                 "originFilterAddCompleted",
@@ -203,7 +206,10 @@
                 "takConfigureError",
                 "takTransportGetList",
                 "takTransportList",
-                "takTransportUpdated"
+                "takTransportUpdated",
+                "userWelcome",
+                "userLogout",
+                "userLogoutCompleted"
             ]
         },
         "message": {
@@ -723,6 +729,10 @@
             "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
         },
         {
+            "if": { "properties": { "event": { "const": "vmsBoundingBox" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/VmsBoundingBox.json#" } } }
+        },
+        {
             "if": { "properties": { "event": { "const": "ptzDeviceInfo" } } },
             "then": { "properties": { "message": { "$ref": "./messages/PtzDeviceInfo.json#" } } }
         },
@@ -817,6 +827,14 @@
         {
             "if": { "properties": { "event": { "const": "uthreatGetHistoryDataError" } } },
             "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "uthreatGetList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "uthreatList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/UthreatList.json#" } } }
         },
         {
             "if": { "properties": { "event": { "const": "originFilterAdd" } } },
@@ -1013,6 +1031,18 @@
         {
             "if": { "properties": { "event": { "const": "takTransportUpdated" } } },
             "then": { "properties": { "message": { "$ref": "./messages/TakTransport.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "userWelcome" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/UserWelcome.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "userLogout" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/UserLogout.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "userLogoutCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
         }
     ]
 }

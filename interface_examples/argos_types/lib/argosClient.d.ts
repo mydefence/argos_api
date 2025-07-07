@@ -15,21 +15,43 @@ import { ArgosTypesMap } from './argosApi';
 declare function default_logger(format?: unknown, ...param: unknown[]): void;
 /** The default logger for messages sent and received. */
 declare function default_msg_logger<E extends keyof ArgosTypesMap>(event: E, message: ArgosTypesMap[E], direction: '←' | '→'): void;
+/** Login on login REST endpoint and return login token from cookie. Cookie is
+ * normally stored in a browser cookie. */
+export declare function apiLogin({ host, port, username, password, }: {
+    host?: string;
+    port?: string;
+    username: string;
+    password: string;
+}): Promise<string>;
 /** Class wraps socket.io connection to ARGOS server, and exposes the ARGOS API
  * with correct typing.
  * */
 export declare class ArgosClient extends EventEmitter {
-    ip: string;
-    port: string;
-    /** Wait for this before sending requests. */
+    /** Wait for this before sending requests. Authentication errors are not
+     * expected to go away, so causes reject. Other errors causes retry and
+     * promise stays pending. */
     connectedPromise: Promise<void>;
     /** The socket.io connection to ARGOS. Normally not needed. */
     sc: Socket;
     private responseCnt;
     private logger;
     private msg_logger;
-    constructor(ip?: string, port?: string, { https, logger, msg_logger, }?: {
-        https?: boolean;
+    /**
+     * Creates an instance of ArgosClient.
+     * @param options - Configuration options for the client.
+     * @param options.host - The hostname or IP address of the ARGOS server.
+     * @param options.port - The port number of the ARGOS server.
+     * @param options.cookie - Login token cookie for authentication.
+     * @param options.secure - Whether to use HTTPS for the connection.
+     * @param options.logger - A custom logger function. See {@link default_logger}.
+     * @param options.msg_logger - A custom logger function for messages. See
+     * {@link default_msg_logger}.
+     */
+    constructor({ host, port, cookie, secure, logger, msg_logger, }?: {
+        host?: string;
+        port?: string | number;
+        cookie?: string;
+        secure?: boolean;
         logger?: typeof default_logger;
         msg_logger?: typeof default_msg_logger;
     });

@@ -3,6 +3,9 @@
  * DO NOT MODIFY IT BY HAND. Instead, modify the source JSONSchema file,
  * and run json-schema-to-typescript to regenerate this file.
  */
+/**
+ * Start following a device or a threat. Cameras with vision based tracking will start searching for the threat and take over the tracking if found.
+ */
 export type PtzFollowStart = {
     /**
      * Device ID of the PTZ device to use for following

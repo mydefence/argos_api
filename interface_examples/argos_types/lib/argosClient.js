@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ArgosClient = void 0;
+exports.apiLogin = apiLogin;
 /*******************************************************************************
  *
  * Copyright (C) 2020 MyDefence Communication A/S. All rights reserved.
@@ -16,6 +17,8 @@ exports.ArgosClient = void 0;
 const socket_io_client_1 = require("socket.io-client");
 const events_1 = require("events");
 const util_1 = __importDefault(require("util"));
+const axios_1 = __importDefault(require("axios"));
+const https_1 = require("https");
 /** The default logger used. Implements same interface as `util.format()`.
  * Should be easy to map to e.g. a winston logger. */
 function default_logger(format, ...param) {
@@ -25,23 +28,51 @@ function default_logger(format, ...param) {
 function default_msg_logger(event, message, direction) {
     default_logger('%s %s %O', event, direction, message);
 }
+/** Login on login REST endpoint and return login token from cookie. Cookie is
+ * normally stored in a browser cookie. */
+async function apiLogin({ host = 'c2-server.local', port = '4000', username, password, }) {
+    const response = await axios_1.default
+        .post(`https://${host}:${port}/login`, { username, password }, { httpsAgent: new https_1.Agent({ ca: MYDEFENCE_ROOT_CA }) })
+        .catch((err) => {
+        throw new Error(`Login failed: ${err.response?.data}`);
+    });
+    const cookies = response.headers['set-cookie'];
+    if (!cookies)
+        throw new Error('No cookies in login response');
+    const loginCookie = cookies.find((cookie) => cookie.startsWith('login_token='));
+    if (!loginCookie)
+        throw new Error('No login token in login response');
+    // Extract the JWT token from the login cookie
+    return loginCookie;
+}
 /** Class wraps socket.io connection to ARGOS server, and exposes the ARGOS API
  * with correct typing.
  * */
 class ArgosClient extends events_1.EventEmitter {
-    constructor(ip = 'localhost', port = '5050', { https = false, logger = default_logger, msg_logger = default_msg_logger, } = {}) {
+    /**
+     * Creates an instance of ArgosClient.
+     * @param options - Configuration options for the client.
+     * @param options.host - The hostname or IP address of the ARGOS server.
+     * @param options.port - The port number of the ARGOS server.
+     * @param options.cookie - Login token cookie for authentication.
+     * @param options.secure - Whether to use HTTPS for the connection.
+     * @param options.logger - A custom logger function. See {@link default_logger}.
+     * @param options.msg_logger - A custom logger function for messages. See
+     * {@link default_msg_logger}.
+     */
+    constructor({ host = 'c2-server.local', port = 5051, cookie = undefined, secure = true, logger = default_logger, msg_logger = default_msg_logger, } = {}) {
         super();
-        this.ip = ip;
-        this.port = port;
         this.responseCnt = 0;
         this.logger = logger;
         this.msg_logger = msg_logger;
         let endpoint;
-        if (https) {
-            endpoint = `https://${this.ip}:${this.port}/`;
+        let ca;
+        if (secure) {
+            endpoint = `https://${host}:${port}/`;
+            ca = MYDEFENCE_ROOT_CA;
         }
         else {
-            endpoint = `http://${this.ip}:${this.port}/`;
+            endpoint = `http://${host}:${port}/`;
         }
         this.logger('CONNECTING to %s', endpoint);
         this.sc = (0, socket_io_client_1.io)(endpoint, {
@@ -49,18 +80,25 @@ class ArgosClient extends events_1.EventEmitter {
             reconnectionDelay: 1000,
             reconnectionDelayMax: 5000,
             reconnectionAttempts: 5000,
-            secure: https,
-            rejectUnauthorized: false,
+            secure,
+            ca,
+            ...(cookie && { extraHeaders: { Cookie: cookie } }),
         });
-        this.connectedPromise = new Promise((resolve) => this.sc.once('connect', resolve));
+        this.connectedPromise = new Promise((resolve, reject) => {
+            this.sc.once('connect', resolve);
+            this.sc.once('connect_error', (reason) => {
+                this.logger('CONNECT ERROR %s', reason);
+                if (`${reason}`.includes('Unauthorized')) {
+                    this.sc.disconnect();
+                    reject(new Error(`${reason}`));
+                }
+            });
+        });
         this.sc.onAny((event, res) => {
             if ('message' in res) {
                 this.msg_logger(res.event, res.message, '→');
                 super.emit(res.event, res.message);
             }
-        });
-        this.sc.on('error', (err) => {
-            this.logger('CONNECTION ERROR %O', err);
         });
         this.sc.on('connect', () => {
             this.logger('CONNECTED to %s', endpoint);
@@ -72,9 +110,6 @@ class ArgosClient extends events_1.EventEmitter {
                 this.sc.connect();
             }
         });
-        this.sc.on('connect_error', (reason) => {
-            this.logger('CONNECT ERROR %s', reason);
-        });
     }
     /** Disconnect from ARGOS. Use only when closing service, connection cannot
      * be re-established.
@@ -84,6 +119,7 @@ class ArgosClient extends events_1.EventEmitter {
         if (this.sc.connected) {
             await new Promise((resolve) => this.sc.once('disconnect', () => resolve()));
         }
+        this.sc.removeAllListeners();
     }
     responseId() {
         this.responseCnt += 1;
@@ -156,4 +192,26 @@ class ArgosClient extends events_1.EventEmitter {
     }
 }
 exports.ArgosClient = ArgosClient;
+/** Root CA certificate. Required for self-signed certificates used for HTTPS. For Chrome this is
+ * installed using add_linux.zip/add_windows.zip scripts downloaded from the landing page. This
+ * certificate is also present in these zip files in the file `mydefenceRootCA.pem`. In node we need
+ * to supply them manually. */
+const MYDEFENCE_ROOT_CA = `-----BEGIN CERTIFICATE-----
+MIIC0zCCAlqgAwIBAgIUEnSNVp6b/nWzf49+D/pGFcK3IdkwCgYIKoZIzj0EAwIw
+gaAxCzAJBgNVBAYTAkRLMRAwDgYDVQQIDAdKdXRsYW5kMRMwEQYDVQQHDApOci4g
+U3VuZGJ5MRYwFAYDVQQKDA1NeURlZmVuY2UgQS9TMRYwFAYDVQQLDA1JVCBEZXBh
+cnRtZW50MSMwIQYJKoZIhvcNAQkBFhRzdXBwb3J0QG15ZGVmZW5jZS5kazEVMBMG
+A1UEAwwMbXlkZWZlbmNlLmRrMB4XDTI1MDQxNjEzMzIzN1oXDTQ1MDQxMTEzMzIz
+N1owgaAxCzAJBgNVBAYTAkRLMRAwDgYDVQQIDAdKdXRsYW5kMRMwEQYDVQQHDApO
+ci4gU3VuZGJ5MRYwFAYDVQQKDA1NeURlZmVuY2UgQS9TMRYwFAYDVQQLDA1JVCBE
+ZXBhcnRtZW50MSMwIQYJKoZIhvcNAQkBFhRzdXBwb3J0QG15ZGVmZW5jZS5kazEV
+MBMGA1UEAwwMbXlkZWZlbmNlLmRrMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAE3r6a
+x5Hqmo1f9C1dcAi07YnHw+UT0yFMdbNMGUPbCo4pXRdTqj9shd1CHUeFFT4Gzdsc
+3VIVESvDEVvtyX/ypMKIiHR184N1d4kjRSl/TTcHBik6wPSIeOZ14yE72Nreo1Mw
+UTAdBgNVHQ4EFgQU+IyChrtYu/8ZpiYbaNsy6Bbflt4wHwYDVR0jBBgwFoAU+IyC
+hrtYu/8ZpiYbaNsy6Bbflt4wDwYDVR0TAQH/BAUwAwEB/zAKBggqhkjOPQQDAgNn
+ADBkAjBFUUBDhg/kCZYEn9oovWqEoCuRSw0Coy202ge0qCuMUTB2CezXJxNf3To2
+CMFhbpQCMDhYrhqXyRZVeS6fEF55vKSngc5pKszspei1IDcw6Q+UG+eH367qp7Np
+k3N7Kjrz4A==
+-----END CERTIFICATE-----`;
 //# sourceMappingURL=argosClient.js.map

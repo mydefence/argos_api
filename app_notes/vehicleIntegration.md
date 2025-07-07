@@ -186,7 +186,7 @@ heading and position. It is recommended to do this 1-2 times/sec:
 
 Lat/lon and heading may be set in different messages if preferred. If using a
 separate composite for effectors, it is _not_ required to keep its location
-updated.
+updated. Heading is relative to true north.
 
 ### Monitor Operational State
 

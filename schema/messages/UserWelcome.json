@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "UserWelcome",
+    "type": "object",
+    "properties": {
+        "username": {
+            "type": "string",
+            "description": "Username of the logged-in user"
+        },
+        "fullname": {
+            "type": "string",
+            "description": "Full name of the logged-in user"
+        },
+        "capabilities": {
+            "type": "array",
+            "items": {
+                "$ref": "./common/UserCapability.json"
+            },
+            "description": "List of capabilities assigned to the user"
+        }
+    },
+    "required": ["username", "fullname", "capabilities"],
+    "additionalProperties": false
+}

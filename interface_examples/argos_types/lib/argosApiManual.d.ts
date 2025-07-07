@@ -13,6 +13,7 @@
  * */
 import { Device } from './auto/Device';
 export { FrequencyBand } from './auto/DeviceMiscellaneousInfo';
+export { UserCapability } from './auto/UserWelcome';
 import { AlarmZoneAdd, AlarmZoneAddCircle, AlarmZoneAddPolygon } from './auto/AlarmZoneAdd';
 export { AlarmZoneAddCircle, AlarmZoneAddPolygon } from './auto/AlarmZoneAdd';
 export declare function isAlarmZoneAddCircle(alarmZoneAdd: AlarmZoneAdd): alarmZoneAdd is AlarmZoneAddCircle;

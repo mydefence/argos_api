@@ -16,6 +16,10 @@ export type SubDeviceIdentification = number;
  * Device ID of a PTZ device
  */
 export type DeviceIdentification1 = string;
+/**
+ * ID of a sub device of the PTZ device.
+ */
+export type SubDeviceIdentification1 = number;
 export type PtzMoveAbsOrientation = {
     deviceId: DeviceIdentification;
     subDeviceId?: SubDeviceIdentification;
@@ -48,6 +52,7 @@ export type TargetOrientationOfThePTZDevice = {
 };
 export type PtzMoveAbsPosition = {
     deviceId: DeviceIdentification1;
+    subDeviceId?: SubDeviceIdentification1;
     position: GeographicalPositionPTZDeviceShouldPointTowards;
 };
 /**

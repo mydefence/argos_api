@@ -6,6 +6,11 @@
             "title": "Device identification",
             "description": "Device ID of a PTZ device"
         },
+        "subDeviceId": {
+            "type": "number",
+            "title": "Sub-device identification",
+            "description": "ID of a sub device of the PTZ device."
+        },
         "position": {
             "type": "object",
             "title": "Geographical position PTZ device should point towards",

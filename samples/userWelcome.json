@@ -1,0 +1,8 @@
+{
+    "message": {
+        "username": "john",
+        "fullname": "John Doe",
+        "capabilities": ["CAP_C2_ECM", "CAP_C2_CONFIG"]
+    },
+    "event": "userWelcome"
+}

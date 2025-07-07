@@ -13,8 +13,8 @@
         },
         "tracking": {
             "type": "string",
-            "description": "Set camera tracking state",
-            "enum": ["disabled", "acquire", "track"]
+            "description": "Set camera tracking state. `acquire`: Start searching for threats in the video stream and track them if found. If ptzFollowStart is used, this should not be used also.",
+            "enum": ["disabled", "acquire"]
         },
         "resetOrientationTimeout": {
             "type": ["number", "null"],

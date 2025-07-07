@@ -55,8 +55,12 @@
         },
         "tracking": {
             "type": "string",
-            "description": "Camera tracking state. Absent if tracking is not supported.",
-            "enum": ["disabled", "acquire", "track"]
+            "description": "Camera tracking state. Absent if tracking is not supported. `acquire`: search for threats in the video stream and go to track if any is found. `follow`: like acquire but movement controlled using ptzFollowStart. `track`: Camera is automatically tracking a threat and other PTZ movement commands will be ignored.",
+            "enum": ["disabled", "acquire", "follow", "track"]
+        },
+        "trackingBasisThreatId": {
+            "type": "string",
+            "description": "If tracking produces threat information (device dependent), this is the id of the uthreat basis threat that is being tracked. Valid until tracking!=`track` or a new value is supplied."
         },
         "resetOrientationTimeout": {
             "type": ["number", "null"],

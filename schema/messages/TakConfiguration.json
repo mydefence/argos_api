@@ -19,7 +19,7 @@
                         "type": "object",
                         "properties": {
                             "type": { "const": "multicast" },
-                            "name": { "type": "string", "description": "Name of transport"},
+                            "name": { "type": "string", "description": "Name of transport" },
                             "localIpAddress": { "type": "string", "description": "IP address of the Argos server" },
                             "multicastIpAddress": {
                                 "type": "string",
@@ -29,14 +29,22 @@
                             "options": { "$ref": "./TakTransportOptionsConfiguration.json#" },
                             "transportId": { "type": "string", "description": "Transport ID" }
                         },
-                        "required": ["type", "name", "localIpAddress", "multicastIpAddress", "port", "options", "transportId"],
+                        "required": [
+                            "type",
+                            "name",
+                            "localIpAddress",
+                            "multicastIpAddress",
+                            "port",
+                            "options",
+                            "transportId"
+                        ],
                         "additionalProperties": false
                     },
                     {
                         "type": "object",
                         "properties": {
                             "type": { "const": "tcp" },
-                            "name": { "type": "string", "description": "Name of transport"},
+                            "name": { "type": "string", "description": "Name of transport" },
                             "address": { "type": "string", "description": "TAK server IP address" },
                             "port": { "type": "number", "description": "TAK server TCP port" },
                             "options": { "$ref": "./TakTransportOptionsConfiguration.json#" },
@@ -49,7 +57,7 @@
                         "type": "object",
                         "properties": {
                             "type": { "const": "tls" },
-                            "name": { "type": "string", "description": "Name of transport"},
+                            "name": { "type": "string", "description": "Name of transport" },
                             "address": { "type": "string", "description": "TAK server IP address" },
                             "port": { "type": "number", "description": "TAK server TLS port" },
                             "credentials": {
@@ -83,7 +91,7 @@
                         "type": "object",
                         "properties": {
                             "type": { "const": "tcpServer" },
-                            "name": { "type": "string", "description": "Name of transport"},
+                            "name": { "type": "string", "description": "Name of transport" },
                             "port": { "type": "number", "description": "TAK server TCP port" },
                             "options": { "$ref": "./TakTransportOptionsConfiguration.json#" },
                             "transportId": { "type": "string", "description": "Transport ID" }

@@ -10,6 +10,7 @@
     "license": "ISC",
     "dependencies": {
         "argos_types": "file:../argos_types",
+        "axios": "^1.7.9",
         "socket.io-client": "4.8.0",
         "uniqid": "5.4.0"
     },

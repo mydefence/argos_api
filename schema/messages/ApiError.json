@@ -8,7 +8,7 @@
             "type": "string",
             "title": "Error",
             "description": "Description of the API error",
-            "enum": ["invalidEvent", "invalidResponseId", "schemaViolation", "timeout"]
+            "enum": ["invalidEvent", "invalidResponseId", "schemaViolation", "timeout", "notAuthorized"]
         },
         "originalMessage": {
             "type": "object",

@@ -1,25 +1,30 @@
 {
   "name": "argos_types",
-  "version": "5.4.0",
+  "version": "6.0.0",
   "description": "Common types for Argos IPC",
-  "scripts": {
-    "build": "tsc",
-    "dev": "nodemon -e ts -w  ts_src --exec \"pnpm run build || exit 1\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "tsc --noEmit tests/test.ts && eslint --max-warnings 0 ts_src tests/*.ts"
-  },
   "author": "MyDefence A/S",
   "license": "Apache-2.0",
   "devDependencies": {
-    "json-schema-to-typescript": "^15.0.2",
+    "@types/axios": "^0.14.4",
+    "axios": "^1.7.7",
+    "json-schema-to-typescript": "^15.0.3",
     "quicktype": "^23.0.170"
   },
   "files": [
     "lib/auto",
     "lib/argosApi*",
-    "lib/argosClient*"
+    "lib/argosClient*",
+    "ts_src/argosClient.ts"
   ],
   "dependencies": {
-    "socket.io-client": "^4.8.0"
+    "socket.io-client": "^4.8.1"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "nodemon -e ts -w  ts_src --exec \"pnpm run build || exit 1\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "tsc --noEmit tests/test.ts && eslint --max-warnings 0 ts_src tests/*.ts",
+    "generate-ts": "ts-node ts_src/schema/generate_ts.ts",
+    "cap-check": "ts-node ts_src/schema/capability_check.ts"
   }
 }

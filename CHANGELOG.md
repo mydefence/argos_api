@@ -1,6 +1,71 @@
-# Release Notes ARGOS
+# Release Note for ARGOS Software
 
-## 5.4.0
+## Version 6.0.0
+
+This release features significant security improvements, notably user management
+with user capabilities, change to HTTPS only (configurable), and cleanup of open
+ports.
+
+User capabilities enables system administrators to limit what different users
+are allowed to do, e.g. a user can be disallowed from starting GNSS jamming.
+
+This release is tightly coupled to, and can only be installed using the new
+System Manager version `4.0.0`. Please also read its release documentation. All
+user management is done in the System Manager.
+
+The update is backward compatible: Existing Argos integrations do not have to
+implement the user handling and HTTPS. To be backwards compatible, you will need
+to enable HTTP access and enable the `argos` user in the System Manager. Please
+refer to the updated ArgosInterfaceSpecification.
+
+Also see ArgosInterfaceSpecification for default users and passwords.
+
+### Attention
+
+-   Lowest supported RF Sensor (Watchdog, Wolfpack) SW version has been
+    increased to `2.17.0`.
+-   Lowest supported EchoDyne EchoShield radar SW version has been increased to
+    bundle version `7.8.0`.
+-   EchoShield height must now be relative to WGS84 ellipsoid
+-   User management: Socket.io connection must be established with an
+    authentication cookie (user token) acquired from the System Manager login
+    API endpoint. Refer to the updated ArgosInterfaceSpecification and node.js
+    interface examples. The authentication can be disabled in the System
+    Manager, by enabling the 'argos` user, which will enable login without a
+    cookie, and with the capabilities of the 'argos' user.
+-   Security: Default only HTTPS (port 5051) access is enabled. HTTP (port 5050)
+    can be enabled in the System Manager for backwards compatibility.
+-   The certificate authority certificates used for the self signed HTTPS
+    certificates has been updated according to best security practices, and must
+    be reinstalled. This is done using the scripts downloadable from the landing
+    page on port 80.
+-   PtzDeviceInfo and PtzDeviceSet `tracking` properties updated. See schemas.
+
+### Improvements
+
+-   Update world magnetic model to WMM2025. (Mostly relevant for vehicle
+    solutions using compass heading.)
+-   New command `uthreatGetList` can be used to fetch current uthreats.
+-   New event `uthreatList` is sent on (re)start of sensor fusion service to
+    ensure state is synchronized between client and Argos.
+-   PTZ API: Added optional property `trackingBasisThreatId` to PtzDeviceInfo.
+    Currently only used with VisionFlex camera to indicate threat being
+    followed. Added optional property `subDeviceId` to ptzMoveAbs (position
+    variant).
+-   VMS API: Added event vmsBoundingBox with information on threat position in
+    video stream.
+-   Security: Number of open ports reduced to a minimum.
+-   On login an `userWelcome` message is pushed with user details.
+-   New command `userLogout` can be used to remove the user's token.
+-   New event `vmsBoundingBox` contains information about location of tracked
+    drones in video streams. Currently only used with VisionFlex camera.
+
+### Bug fixes
+
+-   Various minor bug fixes for VisionFlex camera integration.
+-   PTZ move commands ignored subDeviceId.
+
+## Version 5.4.0
 
 This is a bug fix release. Minor number is increased to be in sync with Iris
 versioning.
@@ -11,7 +76,7 @@ versioning.
 -   Documentation: Added _Argos Application Note: Vehicle System_
 -   Documentation: Added _Argos Application Note: Using Custom Maps_
 
-### Bugs
+### Bug fixes
 
 -   TAK: Fix bug when using more than one TAK server connection.
 -   Fix issue with management of composite devices containing auto-discovered
@@ -19,7 +84,7 @@ versioning.
     devices would come and go.
 -   TAK: Do not send muted threats to TAK server.
 
-## 5.3.0
+## Version 5.3.0
 
 ### Attention
 
@@ -42,11 +107,11 @@ versioning.
     removed. The required SkyEye API version is 4.2. Tested with SkyEye SW
     V4.3.2.3114.
 
-### Bugs
+### Bug fixes
 
 -   fix missing followUthreatId in ptzFollowStarted message
 
-## 5.2.0
+## Version 5.2.0
 
 ### Attention
 
@@ -80,7 +145,7 @@ versioning.
     TIE-24 interoperability tested. Sapient is not enabled per default, contact
     MyDefence for information on how to enable.ptyp
 
-### Bugs
+### Bug fixes
 
 -   GroundAware radar service was reset causing tracks to disappear at irregular
     interval. Issue introduced in v5.0.0.
@@ -92,7 +157,7 @@ versioning.
     zoom (low field-of-view) and `pct` = 0 is minimum zoom (high field-of-view).
 -   EchoShield: Various bug fixes (merged from 4.4.3)
 
-## 5.1.0
+## Version 5.1.0
 
 ### Improvements
 
@@ -101,18 +166,18 @@ versioning.
     instructions on how to enable the feature.
 -   Auto-remove of unused auto-discovered devices.
 
-### Bugs
+### Bug fixes
 
 -   Fix FWU of devices in `updateable` state.
 
-## 5.0.1
+## Version 5.0.1
 
-### Bugs
+### Bug fixes
 
 -   Interface example fixes. Some package dependencies were not at correct
     version, and description of install procedure was incomplete.
 
-## 5.0.0
+## Version 5.0.0
 
 ### Attention
 
@@ -162,7 +227,7 @@ versioning.
     it is possible to calibrate compass of WolfPack and WD150 devices.
 -   node.js API interface example code rewritten.
 
-## 4.4.4
+## Version 4.4.4
 
 ### Improvements
 
@@ -172,9 +237,9 @@ versioning.
     removed. The required SkyEye API version is 4.2. Tested with SkyEye SW
     V4.3.2.3114.
 
-## 4.4.3
+## Version 4.4.3
 
-### Bugs
+### Bug fixes
 
 -   EchoShield: Fix bug in handling of heading.
 
@@ -185,28 +250,28 @@ versioning.
     used. EchoShield devices now also reports their GPS height (EGM96) in device
     location when useGPS is enabled.
 
-## 4.4.2
+## Version 4.4.2
 
-### Bugs
+### Bug fixes
 
 -   EchoShield: If useGPSLocation was enabled when radar did not have GPS fix,
     latitude/longitude could be set to the string `nan`, which violates the API,
     and caused several critical issues.
 
-## 4.4.1
+## Version 4.4.1
 
-### Bugs
+### Bug fixes
 
 -   Fix issue with Jaegar camera intitialization.
 
-## 4.4.0
+## Version 4.4.0
 
-### Bugs
+### Bug fixes
 
 -   User modified threat confidence threshold for composite radar devices were
     not used after ARGOS restart.
 
-## 4.4.0
+## Version 4.4.0
 
 ### Attention
 
@@ -227,12 +292,12 @@ versioning.
 -   Sapient v7 ASM support. Tie2023 interoperability tested. Sapient is not
     enabled per default, contact MyDefence for information on how to enable.
 
-### Bugs
+### Bug fixes
 
 -   In Device schema changed `heading` from integer to number. `heading` could
     have a decimal part, and this matches the rest of the schemas.
 
-## 4.3.0
+## Version 4.3.0
 
 ### Attention
 
@@ -259,7 +324,7 @@ versioning.
 -   Silent Sentinal Jaegar: stability improvements regarding connection
     management
 
-### Bugs
+### Bug fixes
 
 -   Blackbird PTZ rotators accepted but ignored commands to move during its
     initialization sequence. The commands are now stored until initialization
@@ -267,20 +332,20 @@ versioning.
 -   Drone ID: Fix some scenarios with garbage characters in threat description.
 -   Drone ID: Handle a drone ID transmitter could change MAC address.
 
-## v4.2.2
+## Version v4.2.2
 
 ### Improvements
 
 -   Bug fix to RF geolocation of watchdog devices. Headings were some times not
     handled correctly resulting in no geolocation in some cases.
 
-## v4.2.1
+## Version v4.2.1
 
 ### Improvements
 
 -   Minor stability fixes to Echoguard asset service.
 
-## v4.2.0
+## Version v4.2.0
 
 ### Attention
 
@@ -302,9 +367,9 @@ versioning.
     clients. See interface specification for more information.
 -   Improved EchoGuard handling
 
-## v4.1.1
+## Version v4.1.1
 
-### Bugs
+### Bug fixes
 
 -   Startup device sanity check now removes dangling child devices if parent
     device does not exist.
@@ -317,7 +382,7 @@ versioning.
     This could happen for wd200 devices that were connected when system was
     powered off.
 
-## v4.1.0
+## Version v4.1.0
 
 -   Allow unmounting children in composite devices. This can e.g. be used to
     disable jamming in certain directions on a Dobermann 360, or disable
@@ -327,7 +392,7 @@ versioning.
 -   Added support for Regulus Ring ECM devices.
 -   Improved display of SkyEye AI threats.
 
-### Bugs
+### Bug fixes
 
 -   Fix error when removing an FWU image. Image was not removed from backend and
     reappeared at Argos restart.
@@ -337,16 +402,16 @@ versioning.
     devices in rf-geolocation.
 -   APS radar: Fix handling of heading
 
-## v4.0.1
+## Version v4.0.1
 
-### Bugs
+### Bug fixes
 
 -   Fix error where auto jamming did not stop. Happened with auto jamming
     without auto frequency.
 -   Fix error with selecting the correct frequencies with auto jamming on a zone
     and auto frequencies.
 
-## v4.0.0
+## Version v4.0.0
 
 ### Attention
 
@@ -381,20 +446,20 @@ versioning.
     -   Echoguard: [0.0..0.75]
     -   Groundaware: [0.0..0.50]
 
-## v3.0.2
+## Version v3.0.2
 
-### Bugs
+### Bug fixes
 
 -   Fixed errors when processing Wifi threats from composite devices (e.g.
     Wolfpack).
 
-## v3.0.1
+## Version v3.0.1
 
-### Bugs
+### Bug fixes
 
 -   Change default sensor fusion level to 'rf'.
 
-## v3.0.0
+## Version v3.0.0
 
 2022-07-07
 
@@ -427,19 +492,19 @@ versioning.
 -   The sample program in the documentation package is now written in
     typescript, and includes typescript types for the ARGOS API.
 
-### Bugs
+### Bug fixes
 
-## v2.9.1
+## Version v2.9.1
 
 2022-03-22
 
-### Bugs
+### Bug fixes
 
 -   Jaegar - fix enabling focus assist
 -   Fix use GPS location for joined devices
 -   ptzDeviceUpdate: Properties with value 0 were not correctly reported
 
-## v2.9.0
+## Version v2.9.0
 
 2022-03-01
 
@@ -468,7 +533,7 @@ versioning.
         ptzDeviceInfo)
 -   Added API for getting ARGOS features
 
-### Bugs
+### Bug fixes
 
 -   Schema file changes:
     -   Schema fixes to make Argos comply with own standard
@@ -477,24 +542,24 @@ versioning.
     -   Some properties of CompositeDeviceAdd no longer required, and deviceParentId
         is marked deprecated.
 
-## v2.8.2
+## Version v2.8.2
 
 2022-01-14
 
-### Bugs
+### Bug fixes
 
 -   EchoGuard settings would be defaulted upon connecting to the panel. No
     settings would be applied to the panel. Bug introduced in v2.8.0
 
-## v2.8.1
+## Version v2.8.1
 
 2021-11-08
 
-### Bugs
+### Bug fixes
 
 -   Migration of old map center to new mission center did not work
 
-## v2.8.0
+## Version v2.8.0
 
 2021-10-28
 
@@ -525,32 +590,32 @@ versioning.
     unchanged on port 5050. To use it you need to install a new root certificate
     authority (CA) on the clients. See ArgosInterfaceSpecification.pdf.
 
-### Bugs
+### Bug fixes
 
 -   Schema file changes:
     -   DeviceLocationChange and Device.deviceAttributes corrected
     -   various minor syntax fixes
 
-## v2.7.2
+## Version v2.7.2
 
 2021-08-24
 
-### Bugs
+### Bug fixes
 
 -   Blackbird jammer wouldn't start on 433 and GNSS frequency bands
 
-## v2.7.1
+## Version v2.7.1
 
 2021-08-12
 
-### Bugs
+### Bug fixes
 
 -   Schema files for alarm zone api corrected
 -   Auto jam bug fix regarding handling of multiple threats
 -   Auto jam bug fix regarding handling of Dobermann 360
 -   Auto jam bug fix regarding allowGnss mode
 
-## v2.7.0
+## Version v2.7.0
 
 2021-06-21
 
@@ -570,11 +635,11 @@ versioning.
     jamming frequencies
 -   Added support for retrieving history of ECM activation
 
-### Bugs
+### Bug fixes
 
 -   Handling of deviceOrientation (device mounted upside down)
 
-## v2.6.4
+## Version v2.6.4
 
 2021-06-03
 
@@ -582,11 +647,11 @@ versioning.
 
 -
 
-### Bugs
+### Bug fixes
 
 -   Various bugfixes for Echoguard asset service
 
-## v2.6.3
+## Version v2.6.3
 
 2021-04-20
 
@@ -594,11 +659,11 @@ versioning.
 
 -
 
-### Bugs
+### Bug fixes
 
 -   Groundaware could cause exceptions under certain conditions
 
-## v2.6.2
+## Version v2.6.2
 
 2021-04-19
 
@@ -606,13 +671,13 @@ versioning.
 
 -   Blackbird service can read tilt limits from environment
 
-### Bugs
+### Bug fixes
 
 -   Groundaware service did not shut down properly when unmounting
 -   Groundaware service could leave alerts hanging
 -   fix elevation control in camera asset service
 
-## v2.6.1
+## Version v2.6.1
 
 2021-03-11
 
@@ -620,11 +685,11 @@ versioning.
 
 -
 
-### Bugs
+### Bug fixes
 
 -   Fix for pan degree outside +/- 360
 
-## v2.6.0
+## Version v2.6.0
 
 2021-02-26
 
@@ -644,11 +709,11 @@ versioning.
 -   Added Blackbird device
 -   Reworked ECM interface
 
-### Bugs
+### Bug fixes
 
 -
 
-## v2.5.0
+## Version v2.5.0
 
 2020-12-14
 
@@ -656,21 +721,21 @@ versioning.
 
 -   Support for muting by threatType
 
-### Bugs
+### Bug fixes
 
 -   frequencyBand decoding for lower frequency bands (433, 868, 1G2)
 
-## v2.4.1
+## Version v2.4.1
 
 2020-11-06
 
 ### Improvements
 
-### Bugs
+### Bug fixes
 
 -   Status timer was not restarted after reconnection in WD200 asset service
 
-## v2.4.0
+## Version v2.4.0
 
 2020-10-23
 
@@ -679,30 +744,30 @@ versioning.
 -   Device software version in messages related to devices
 -   FWU of RF sensor and RF effector devices
 
-### Bugs
+### Bug fixes
 
-## v2.3.2
+## Version v2.3.2
 
 2020-10-01
 
 ### Improvements
 
-### Bugs
+### Bug fixes
 
 -   wrong start of Dobermann GNSS jamming
 -   Reconnect issue
 
-## v2.3.1
+## Version v2.3.1
 
 2020-09-10
 
 ### Improvements
 
-### Bugs
+### Bug fixes
 
 -   Composite devices could not be updated after GPS location update
 
-## v2.3.0
+## Version v2.3.0
 
 2020-08-20
 
@@ -712,11 +777,11 @@ versioning.
 -   "productName" in miscellaneous data
 -   "deviceName" now initialized to "productName"
 
-### Bugs
+### Bug fixes
 
 -   Better handling of socket connections to devices (timeouts, reconnects)
 
-## v2.2.1
+## Version v2.2.1
 
 2020-08-04
 
@@ -724,7 +789,7 @@ versioning.
 
 -   Added support for hepta device
 
-## v2.2.0
+## Version v2.2.0
 
 2020-06-18
 
@@ -732,19 +797,19 @@ versioning.
 
 -   Added support for joining devices into a composite device
 
-### Bugs
+### Bug fixes
 
-## v2.1.1
+## Version v2.1.1
 
 2020-04-23
 
 ### Improvements
 
-### Bugs
+### Bug fixes
 
 -   Device orientation (upsidedown) not affecting threats
 
-## v2.1.0
+## Version v2.1.0
 
 2020-04-03
 
@@ -758,7 +823,7 @@ versioning.
 -   Wolfpack v. 3 support
 -   Watchdog v. 3 support
 
-## v2.2.0
+## Version v2.2.0
 
 ??????
 
@@ -767,4 +832,4 @@ versioning.
 -   Now composite devices can be created from Iris
 -   It is now possible to set the serial number on devices from the API
 
-### Bugs
+### Bug fixes

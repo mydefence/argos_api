@@ -3,6 +3,7 @@
     "title": "ptzFollowStart",
     "type": "object",
     "additionalProperties": false,
+    "description": "Start following a device or a threat. Cameras with vision based tracking will start searching for the threat and take over the tracking if found.",
     "properties": {
         "deviceId": {
             "type": "string",
