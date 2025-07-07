@@ -1,7 +1,7 @@
 {
     "$comment": "This file is auto-generated. Do not edit.",
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "DeviceMiscellaneousDeviceRangeChange",
+    "title": "DeviceMiscellaneousNominalTargetSizeChange",
     "type": "object",
     "properties": {
         "deviceId": {
@@ -14,16 +14,17 @@
                     "$ref": "./DeviceMiscellaneousType.json#"
                 },
                 {
-                    "const": "deviceRange"
+                    "const": "nominalTargetSize"
                 }
             ]
         },
         "deviceMiscellaneousData": {
             "type": "object",
             "properties": {
-                "deviceRange": {
+                "nominalTargetSize": {
                     "type": "number",
-                    "description": "If this miscellaneous data is present, the device may be configured for working range. It should not be added for other devices. Legal values are between deviceRangeMin and deviceRangeMax"
+                    "description": "If this miscellaneous data is present, the device may be configured for nominal target size in meters. Used to adjust field-of-view when cueing to a target.",
+                    "exclusiveMinimum": 0
                 }
             },
             "additionalProperties": false

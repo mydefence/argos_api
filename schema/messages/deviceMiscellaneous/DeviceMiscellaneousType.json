@@ -16,6 +16,9 @@
         "ringSettings",
         "assetData",
         "profiles",
-        "takInfo"
+        "takInfo",
+        "ptzDefaultDistance",
+        "ptzDefaultHeight",
+        "nominalTargetSize"
     ]
 }

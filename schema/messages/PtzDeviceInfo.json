@@ -5,7 +5,7 @@
     "properties": {
         "deviceId": {
             "type": "string",
-            "description": "The device id"
+            "description": "The device id. For PTZ devices in composites, this is the id of the child (PTZ) device."
         },
         "description": {
             "type": "string"

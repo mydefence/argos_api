@@ -8,7 +8,7 @@
  */
 export type PtzFollowStart = {
     /**
-     * Device ID of the PTZ device to use for following
+     * Device ID of the PTZ device to use for following. For PTZ devices in composites, this is the id of the child (PTZ) device.
      */
     deviceId: string;
     /**

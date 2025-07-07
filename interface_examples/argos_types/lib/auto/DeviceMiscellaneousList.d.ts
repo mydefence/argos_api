@@ -3,8 +3,8 @@
  * DO NOT MODIFY IT BY HAND. Instead, modify the source JSONSchema file,
  * and run json-schema-to-typescript to regenerate this file.
  */
-export type DeviceMiscellaneousInfo = DeviceMiscellaneousDeviceName | DeviceMiscellaneousDeviceOrder | DeviceMiscellaneousDeviceOrientation | DeviceMiscellaneousProductName | DeviceMiscellaneousFrequencyBands | DeviceMiscellaneousDroneList | DeviceMiscellaneousUseGPSLocation | DeviceMiscellaneousPtzLimits | DeviceMiscellaneousDeviceRange | DeviceMiscellaneousConfidenceThreshold | DeviceMiscellaneousRingSettings | DeviceMiscellaneousAssetData | DeviceMiscellaneousProfiles | DeviceMiscellaneousTakInfo;
-export type DeviceMiscellaneousType = "deviceName" | "productName" | "deviceOrientation" | "deviceOrder" | "frequencyBands" | "droneList" | "useGPSLocation" | "ptzLimits" | "deviceRange" | "confidenceThreshold" | "ringSettings" | "assetData" | "profiles" | "takInfo";
+export type DeviceMiscellaneousInfo = DeviceMiscellaneousDeviceName | DeviceMiscellaneousDeviceOrder | DeviceMiscellaneousDeviceOrientation | DeviceMiscellaneousProductName | DeviceMiscellaneousFrequencyBands | DeviceMiscellaneousDroneList | DeviceMiscellaneousUseGPSLocation | DeviceMiscellaneousPtzLimits | DeviceMiscellaneousDeviceRange | DeviceMiscellaneousConfidenceThreshold | DeviceMiscellaneousRingSettings | DeviceMiscellaneousAssetData | DeviceMiscellaneousProfiles | DeviceMiscellaneousTakInfo | DeviceMiscellaneousPtzDefaultDistance | DeviceMiscellaneousPtzDefaultHeight | DeviceMiscellaneousNominalTargetSize;
+export type DeviceMiscellaneousType = "deviceName" | "productName" | "deviceOrientation" | "deviceOrder" | "frequencyBands" | "droneList" | "useGPSLocation" | "ptzLimits" | "deviceRange" | "confidenceThreshold" | "ringSettings" | "assetData" | "profiles" | "takInfo" | "ptzDefaultDistance" | "ptzDefaultHeight" | "nominalTargetSize";
 /**
  * Information about the frequency of an effector/detector.
  */
@@ -380,5 +380,44 @@ export type DeviceMiscellaneousTakInfo = {
          * The type of the TAK user. Human readable version of typeCot.
          */
         typeStr: string;
+    };
+};
+export type DeviceMiscellaneousPtzDefaultDistance = {
+    /**
+     * The device id
+     */
+    deviceId: string;
+    deviceMiscellaneousType: DeviceMiscellaneousType & "ptzDefaultDistance";
+    deviceMiscellaneousData: {
+        /**
+         * If this miscellaneous data is present, the device may be configured for PTZ default distance in meters. Used when cueing where a full 3D location of the target is not available.
+         */
+        ptzDefaultDistance: number;
+    };
+};
+export type DeviceMiscellaneousPtzDefaultHeight = {
+    /**
+     * The device id
+     */
+    deviceId: string;
+    deviceMiscellaneousType: DeviceMiscellaneousType & "ptzDefaultHeight";
+    deviceMiscellaneousData: {
+        /**
+         * If this miscellaneous data is present, the device may be configured for PTZ default height in meters. The value is relative to the chosen reference. Used when turning/cueing where a full 3D location of the target is not available.
+         */
+        ptzDefaultHeight: number;
+    };
+};
+export type DeviceMiscellaneousNominalTargetSize = {
+    /**
+     * The device id
+     */
+    deviceId: string;
+    deviceMiscellaneousType: DeviceMiscellaneousType & "nominalTargetSize";
+    deviceMiscellaneousData: {
+        /**
+         * If this miscellaneous data is present, the device may be configured for nominal target size in meters. Used to adjust field-of-view when cueing to a target.
+         */
+        nominalTargetSize: number;
     };
 };

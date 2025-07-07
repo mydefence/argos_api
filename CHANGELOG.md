@@ -1,5 +1,38 @@
 # Release Note for ARGOS Software
 
+## Version 6.1.0
+
+### Attention
+
+-   API: Added deviceMiscellaneousType `ptzDefaultDistance`, `ptzDefaultHeight`
+    and `nominalTargetSize`.
+
+### Improvements
+
+-   PTZ follow functionality on direction uthreat if sensor and and PTZ device is in
+    the same composite device.
+-   Visionflex support for cuing based on directions. Requires visionflex to be
+    part of the same composite device as the sensor generating the direction
+    uthreat.
+-   Visionflex starts 3D search pattern when cued to a target with height
+    information. 2D search pattern is started otherwise.
+-   Visionflex support for `ptzDefaultDistance`. Used when cuing to a direction
+    uthreat. The cameara zoom and focus to this distance and start a 2D search
+    pattern.
+-   Visionflex support for `ptzDefaultHeight`. Used when turning to a location
+    without height information.
+-   Visionflex support for `nominalTargetSize` . Used when cuing to a direction
+    uthreat. The camera will zoom to a field of view ideal for finding targets of
+    this size.
+-   Handling of uthreatId in sensor fusion improved when joining/splitting
+    threats.
+
+### Bug fixes
+
+-   EchoGuard/Shield protection against NaN values in threats. Could cause
+    problems in the upper layers - e.g. sensor fusion
+-   Bug fix in handling of height when creating composite devices.
+
 ## Version 6.0.0
 
 This release features significant security improvements, notably user management

@@ -23,10 +23,19 @@
             "$ref": "./deviceMiscellaneous/DeviceMiscellaneousFrequencyBandsChange.json#"
         },
         {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousNominalTargetSizeChange.json#"
+        },
+        {
             "$ref": "./deviceMiscellaneous/DeviceMiscellaneousProductNameChange.json#"
         },
         {
             "$ref": "./deviceMiscellaneous/DeviceMiscellaneousProfilesChange.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousPtzDefaultDistanceChange.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousPtzDefaultHeightChange.json#"
         },
         {
             "$ref": "./deviceMiscellaneous/DeviceMiscellaneousPtzLimitsChange.json#"

@@ -3,13 +3,13 @@
  * DO NOT MODIFY IT BY HAND. Instead, modify the source JSONSchema file,
  * and run json-schema-to-typescript to regenerate this file.
  */
-export type DeviceMiscellaneousChange = DeviceMiscellaneousConfidenceThreshold | DeviceMiscellaneousDeviceName | DeviceMiscellaneousDeviceOrder | DeviceMiscellaneousDeviceOrientation | DeviceMiscellaneousDeviceRange | DeviceMiscellaneousFrequencyBands | DeviceMiscellaneousProductName | DeviceMiscellaneousProfiles | DeviceMiscellaneousPtzLimits | DeviceMiscellaneousRingSettings | DeviceMiscellaneousTakInfo | DeviceMiscellaneousUseGPSLocation;
-export type DeviceMiscellaneousType = "deviceName" | "productName" | "deviceOrientation" | "deviceOrder" | "frequencyBands" | "droneList" | "useGPSLocation" | "ptzLimits" | "deviceRange" | "confidenceThreshold" | "ringSettings" | "assetData" | "profiles" | "takInfo";
+export type DeviceMiscellaneousChange = DeviceMiscellaneousConfidenceThresholdChange | DeviceMiscellaneousDeviceNameChange | DeviceMiscellaneousDeviceOrderChange | DeviceMiscellaneousDeviceOrientationChange | DeviceMiscellaneousDeviceRangeChange | DeviceMiscellaneousFrequencyBandsChange | DeviceMiscellaneousNominalTargetSizeChange | DeviceMiscellaneousProductNameChange | DeviceMiscellaneousProfilesChange | DeviceMiscellaneousPtzDefaultDistanceChange | DeviceMiscellaneousPtzDefaultHeightChange | DeviceMiscellaneousPtzLimitsChange | DeviceMiscellaneousRingSettingsChange | DeviceMiscellaneousTakInfoChange | DeviceMiscellaneousUseGPSLocationChange;
+export type DeviceMiscellaneousType = "deviceName" | "productName" | "deviceOrientation" | "deviceOrder" | "frequencyBands" | "droneList" | "useGPSLocation" | "ptzLimits" | "deviceRange" | "confidenceThreshold" | "ringSettings" | "assetData" | "profiles" | "takInfo" | "ptzDefaultDistance" | "ptzDefaultHeight" | "nominalTargetSize";
 /**
  * Information about the frequency of an effector/detector.
  */
 export type FrequencyBand = "433" | "900" | "1G2" | "2G4" | "5G2" | "5G8" | "GNSS";
-export type DeviceMiscellaneousConfidenceThreshold = {
+export type DeviceMiscellaneousConfidenceThresholdChange = {
     /**
      * The device id
      */
@@ -22,7 +22,7 @@ export type DeviceMiscellaneousConfidenceThreshold = {
         confidenceThreshold?: number;
     };
 };
-export type DeviceMiscellaneousDeviceName = {
+export type DeviceMiscellaneousDeviceNameChange = {
     /**
      * The device id
      */
@@ -35,7 +35,7 @@ export type DeviceMiscellaneousDeviceName = {
         deviceName?: string;
     };
 };
-export type DeviceMiscellaneousDeviceOrder = {
+export type DeviceMiscellaneousDeviceOrderChange = {
     /**
      * The device id
      */
@@ -48,7 +48,7 @@ export type DeviceMiscellaneousDeviceOrder = {
         deviceOrder?: number;
     };
 };
-export type DeviceMiscellaneousDeviceOrientation = {
+export type DeviceMiscellaneousDeviceOrientationChange = {
     /**
      * The device id
      */
@@ -61,7 +61,7 @@ export type DeviceMiscellaneousDeviceOrientation = {
         deviceOrientation?: number;
     };
 };
-export type DeviceMiscellaneousDeviceRange = {
+export type DeviceMiscellaneousDeviceRangeChange = {
     /**
      * The device id
      */
@@ -74,7 +74,7 @@ export type DeviceMiscellaneousDeviceRange = {
         deviceRange?: number;
     };
 };
-export type DeviceMiscellaneousFrequencyBands = {
+export type DeviceMiscellaneousFrequencyBandsChange = {
     /**
      * The device id
      */
@@ -87,7 +87,20 @@ export type DeviceMiscellaneousFrequencyBands = {
         currentBands?: FrequencyBand[];
     };
 };
-export type DeviceMiscellaneousProductName = {
+export type DeviceMiscellaneousNominalTargetSizeChange = {
+    /**
+     * The device id
+     */
+    deviceId: string;
+    deviceMiscellaneousType: DeviceMiscellaneousType & "nominalTargetSize";
+    deviceMiscellaneousData: {
+        /**
+         * If this miscellaneous data is present, the device may be configured for nominal target size in meters. Used to adjust field-of-view when cueing to a target.
+         */
+        nominalTargetSize?: number;
+    };
+};
+export type DeviceMiscellaneousProductNameChange = {
     /**
      * The device id
      */
@@ -100,7 +113,7 @@ export type DeviceMiscellaneousProductName = {
         productName?: string;
     };
 };
-export type DeviceMiscellaneousProfiles = {
+export type DeviceMiscellaneousProfilesChange = {
     /**
      * The device id
      */
@@ -113,7 +126,33 @@ export type DeviceMiscellaneousProfiles = {
         profileIndex?: number;
     };
 };
-export type DeviceMiscellaneousPtzLimits = {
+export type DeviceMiscellaneousPtzDefaultDistanceChange = {
+    /**
+     * The device id
+     */
+    deviceId: string;
+    deviceMiscellaneousType: DeviceMiscellaneousType & "ptzDefaultDistance";
+    deviceMiscellaneousData: {
+        /**
+         * If this miscellaneous data is present, the device may be configured for PTZ default distance in meters. Used when cueing where a full 3D location of the target is not available.
+         */
+        ptzDefaultDistance?: number;
+    };
+};
+export type DeviceMiscellaneousPtzDefaultHeightChange = {
+    /**
+     * The device id
+     */
+    deviceId: string;
+    deviceMiscellaneousType: DeviceMiscellaneousType & "ptzDefaultHeight";
+    deviceMiscellaneousData: {
+        /**
+         * If this miscellaneous data is present, the device may be configured for PTZ default height in meters. The value is relative to the chosen reference. Used when turning/cueing where a full 3D location of the target is not available.
+         */
+        ptzDefaultHeight?: number;
+    };
+};
+export type DeviceMiscellaneousPtzLimitsChange = {
     /**
      * The device id
      */
@@ -148,7 +187,7 @@ export type DeviceMiscellaneousPtzLimits = {
         };
     };
 };
-export type DeviceMiscellaneousRingSettings = {
+export type DeviceMiscellaneousRingSettingsChange = {
     /**
      * The device id
      */
@@ -231,7 +270,7 @@ export type DeviceMiscellaneousRingSettings = {
 /**
  * The device miscellaneous data for (A)TAK devices provides additional information about the TAK user. Note that the callsign can be found in deviceMiscellaneous type "deviceName". All fields should be considered read-only.
  */
-export type DeviceMiscellaneousTakInfo = {
+export type DeviceMiscellaneousTakInfoChange = {
     /**
      * The device ID of the TAK device
      */
@@ -256,7 +295,7 @@ export type DeviceMiscellaneousTakInfo = {
         typeStr?: string;
     };
 };
-export type DeviceMiscellaneousUseGPSLocation = {
+export type DeviceMiscellaneousUseGPSLocationChange = {
     /**
      * The device id
      */

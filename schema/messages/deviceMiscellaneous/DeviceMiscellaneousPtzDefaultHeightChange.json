@@ -1,7 +1,7 @@
 {
     "$comment": "This file is auto-generated. Do not edit.",
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "DeviceMiscellaneousDeviceRangeChange",
+    "title": "DeviceMiscellaneousPtzDefaultHeightChange",
     "type": "object",
     "properties": {
         "deviceId": {
@@ -14,16 +14,16 @@
                     "$ref": "./DeviceMiscellaneousType.json#"
                 },
                 {
-                    "const": "deviceRange"
+                    "const": "ptzDefaultHeight"
                 }
             ]
         },
         "deviceMiscellaneousData": {
             "type": "object",
             "properties": {
-                "deviceRange": {
+                "ptzDefaultHeight": {
                     "type": "number",
-                    "description": "If this miscellaneous data is present, the device may be configured for working range. It should not be added for other devices. Legal values are between deviceRangeMin and deviceRangeMax"
+                    "description": "If this miscellaneous data is present, the device may be configured for PTZ default height in meters. The value is relative to the chosen reference. Used when turning/cueing where a full 3D location of the target is not available."
                 }
             },
             "additionalProperties": false

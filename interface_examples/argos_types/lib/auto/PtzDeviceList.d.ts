@@ -6,7 +6,7 @@
 export type PtzDeviceList = PtzDeviceInfo[];
 export type PtzDeviceInfo = {
     /**
-     * The device id
+     * The device id. For PTZ devices in composites, this is the id of the child (PTZ) device.
      */
     deviceId: string;
     description?: string;

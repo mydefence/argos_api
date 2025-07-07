@@ -1,7 +1,6 @@
 {
-    "$comment": "This file is auto-generated. Do not edit.",
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "DeviceMiscellaneousDeviceRangeChange",
+    "title": "DeviceMiscellaneousPtzDefaultDistance",
     "type": "object",
     "properties": {
         "deviceId": {
@@ -14,19 +13,21 @@
                     "$ref": "./DeviceMiscellaneousType.json#"
                 },
                 {
-                    "const": "deviceRange"
+                    "const": "ptzDefaultDistance"
                 }
             ]
         },
         "deviceMiscellaneousData": {
             "type": "object",
             "properties": {
-                "deviceRange": {
+                "ptzDefaultDistance": {
                     "type": "number",
-                    "description": "If this miscellaneous data is present, the device may be configured for working range. It should not be added for other devices. Legal values are between deviceRangeMin and deviceRangeMax"
+                    "description": "If this miscellaneous data is present, the device may be configured for PTZ default distance in meters. Used when cueing where a full 3D location of the target is not available.",
+                    "exclusiveMinimum": 0
                 }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "required": ["ptzDefaultDistance"]
         }
     },
     "additionalProperties": false,

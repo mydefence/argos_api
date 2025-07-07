@@ -1,7 +1,7 @@
 {
     "$comment": "This file is auto-generated. Do not edit.",
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "DeviceMiscellaneousFrequencyBands",
+    "title": "DeviceMiscellaneousFrequencyBandsChange",
     "type": "object",
     "properties": {
         "deviceId": {

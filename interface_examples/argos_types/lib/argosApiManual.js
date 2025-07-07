@@ -37,6 +37,9 @@ exports.isDeviceMiscellaneousConfidenceThreshold = isDeviceMiscellaneousConfiden
 exports.isDeviceMiscellaneousRingSettings = isDeviceMiscellaneousRingSettings;
 exports.isDeviceMiscellaneousProfiles = isDeviceMiscellaneousProfiles;
 exports.isDeviceMiscellaneousTakInfo = isDeviceMiscellaneousTakInfo;
+exports.isDeviceMiscellaneousPtzDefaultDistance = isDeviceMiscellaneousPtzDefaultDistance;
+exports.isDeviceMiscellaneousPtzDefaultHeight = isDeviceMiscellaneousPtzDefaultHeight;
+exports.isDeviceMiscellaneousNominalTargetSize = isDeviceMiscellaneousNominalTargetSize;
 exports.miscellaneousDataFind = miscellaneousDataFind;
 exports.isPtzMoveAbsOrientation = isPtzMoveAbsOrientation;
 exports.isPtzMoveAbsPosition = isPtzMoveAbsPosition;
@@ -133,6 +136,15 @@ function isDeviceMiscellaneousProfiles(misc) {
 }
 function isDeviceMiscellaneousTakInfo(misc) {
     return misc.deviceMiscellaneousType == 'takInfo';
+}
+function isDeviceMiscellaneousPtzDefaultDistance(misc) {
+    return misc.deviceMiscellaneousType == 'ptzDefaultDistance';
+}
+function isDeviceMiscellaneousPtzDefaultHeight(misc) {
+    return misc.deviceMiscellaneousType == 'ptzDefaultHeight';
+}
+function isDeviceMiscellaneousNominalTargetSize(misc) {
+    return misc.deviceMiscellaneousType == 'nominalTargetSize';
 }
 /** Search miscellaneous data list and narrow to the requested type. */
 function miscellaneousDataFind(deviceMiscellaneousList, miscType) {

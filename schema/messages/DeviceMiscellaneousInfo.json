@@ -44,6 +44,15 @@
         },
         {
             "$ref": "./deviceMiscellaneous/DeviceMiscellaneousTakInfo.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousPtzDefaultDistance.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousPtzDefaultHeight.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousNominalTargetSize.json#"
         }
     ]
 }
