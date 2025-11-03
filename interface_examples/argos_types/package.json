@@ -1,13 +1,13 @@
 {
   "name": "argos_types",
-  "version": "6.1.0",
+  "version": "6.2.0",
   "description": "Common types for Argos IPC",
   "author": "MyDefence A/S",
   "license": "Apache-2.0",
   "devDependencies": {
-    "axios": "^1.9.0",
+    "axios": "^1.12.2",
     "json-schema-to-typescript": "^15.0.4",
-    "quicktype": "^23.2.5"
+    "quicktype": "^23.2.6"
   },
   "files": [
     "lib/auto",

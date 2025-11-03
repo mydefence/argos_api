@@ -3095,9 +3095,9 @@ var require_data = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/fast-uri@3.0.2/node_modules/fast-uri/lib/scopedChars.js
+// ../../../node_modules/.pnpm/fast-uri@3.0.6/node_modules/fast-uri/lib/scopedChars.js
 var require_scopedChars = __commonJS({
-  "../../../node_modules/.pnpm/fast-uri@3.0.2/node_modules/fast-uri/lib/scopedChars.js"(exports2, module2) {
+  "../../../node_modules/.pnpm/fast-uri@3.0.6/node_modules/fast-uri/lib/scopedChars.js"(exports2, module2) {
     "use strict";
     var HEX = {
       0: 0,
@@ -3129,16 +3129,17 @@ var require_scopedChars = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/fast-uri@3.0.2/node_modules/fast-uri/lib/utils.js
+// ../../../node_modules/.pnpm/fast-uri@3.0.6/node_modules/fast-uri/lib/utils.js
 var require_utils = __commonJS({
-  "../../../node_modules/.pnpm/fast-uri@3.0.2/node_modules/fast-uri/lib/utils.js"(exports2, module2) {
+  "../../../node_modules/.pnpm/fast-uri@3.0.6/node_modules/fast-uri/lib/utils.js"(exports2, module2) {
     "use strict";
     var { HEX } = require_scopedChars();
+    var IPV4_REG = /^(?:(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)$/u;
     function normalizeIPv4(host) {
       if (findToken(host, ".") < 3) {
         return { host, isIPV4: false };
       }
-      const matches = host.match(/^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])$/u) || [];
+      const matches = host.match(IPV4_REG) || [];
       const [address] = matches;
       if (address) {
         return { host: stripLeadingZeros(address, "."), isIPV4: true };
@@ -3224,7 +3225,7 @@ var require_utils = __commonJS({
       output.address = address.join("");
       return output;
     }
-    function normalizeIPv6(host, opts = {}) {
+    function normalizeIPv6(host) {
       if (findToken(host, ":") < 2) {
         return { host, isIPV6: false };
       }
@@ -3321,7 +3322,7 @@ var require_utils = __commonJS({
       }
       return components;
     }
-    function recomposeAuthority(components, options) {
+    function recomposeAuthority(components) {
       const uriTokens = [];
       if (components.userinfo !== void 0) {
         uriTokens.push(components.userinfo);
@@ -3333,7 +3334,7 @@ var require_utils = __commonJS({
         if (ipV4res.isIPV4) {
           host = ipV4res.host;
         } else {
-          const ipV6res = normalizeIPv6(ipV4res.host, { isIPV4: false });
+          const ipV6res = normalizeIPv6(ipV4res.host);
           if (ipV6res.isIPV6 === true) {
             host = `[${ipV6res.escapedHost}]`;
           } else {
@@ -3359,11 +3360,11 @@ var require_utils = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/fast-uri@3.0.2/node_modules/fast-uri/lib/schemes.js
+// ../../../node_modules/.pnpm/fast-uri@3.0.6/node_modules/fast-uri/lib/schemes.js
 var require_schemes = __commonJS({
-  "../../../node_modules/.pnpm/fast-uri@3.0.2/node_modules/fast-uri/lib/schemes.js"(exports2, module2) {
+  "../../../node_modules/.pnpm/fast-uri@3.0.6/node_modules/fast-uri/lib/schemes.js"(exports2, module2) {
     "use strict";
-    var UUID_REG = /^[\da-f]{8}\b-[\da-f]{4}\b-[\da-f]{4}\b-[\da-f]{4}\b-[\da-f]{12}$/iu;
+    var UUID_REG = /^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/iu;
     var URN_REG = /([\da-z][\d\-a-z]{0,31}):((?:[\w!$'()*+,\-.:;=@]|%[\da-f]{2})+)/iu;
     function isSecure(wsComponents) {
       return typeof wsComponents.secure === "boolean" ? wsComponents.secure : String(wsComponents.scheme).toLowerCase() === "wss";
@@ -3505,9 +3506,9 @@ var require_schemes = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/fast-uri@3.0.2/node_modules/fast-uri/index.js
+// ../../../node_modules/.pnpm/fast-uri@3.0.6/node_modules/fast-uri/index.js
 var require_fast_uri = __commonJS({
-  "../../../node_modules/.pnpm/fast-uri@3.0.2/node_modules/fast-uri/index.js"(exports2, module2) {
+  "../../../node_modules/.pnpm/fast-uri@3.0.6/node_modules/fast-uri/index.js"(exports2, module2) {
     "use strict";
     var { normalizeIPv6, normalizeIPv4, removeDotSegments, recomposeAuthority, normalizeComponentEncoding } = require_utils();
     var SCHEMES = require_schemes();
@@ -3626,7 +3627,7 @@ var require_fast_uri = __commonJS({
       if (options.reference !== "suffix" && components.scheme) {
         uriTokens.push(components.scheme, ":");
       }
-      const authority = recomposeAuthority(components, options);
+      const authority = recomposeAuthority(components);
       if (authority !== void 0) {
         if (options.reference !== "suffix") {
           uriTokens.push("//");
@@ -3654,7 +3655,7 @@ var require_fast_uri = __commonJS({
       }
       return uriTokens.join("");
     }
-    var hexLookUp = Array.from({ length: 127 }, (v, k) => /[^!"$&'()*+,\-.;=_`a-z{}~]/u.test(String.fromCharCode(k)));
+    var hexLookUp = Array.from({ length: 127 }, (_v, k) => /[^!"$&'()*+,\-.;=_`a-z{}~]/u.test(String.fromCharCode(k)));
     function nonSimpleDomain(value) {
       let code = 0;
       for (let i = 0, len = value.length; i < len; ++i) {
@@ -3695,7 +3696,7 @@ var require_fast_uri = __commonJS({
         if (parsed.host) {
           const ipv4result = normalizeIPv4(parsed.host);
           if (ipv4result.isIPV4 === false) {
-            const ipv6result = normalizeIPv6(ipv4result.host, { isIPV4: false });
+            const ipv6result = normalizeIPv6(ipv4result.host);
             parsed.host = ipv6result.host.toLowerCase();
             isIP = ipv6result.isIPV6;
           } else {
@@ -3703,7 +3704,7 @@ var require_fast_uri = __commonJS({
             isIP = true;
           }
         }
-        if (parsed.scheme === void 0 && parsed.userinfo === void 0 && parsed.host === void 0 && parsed.port === void 0 && !parsed.path && parsed.query === void 0) {
+        if (parsed.scheme === void 0 && parsed.userinfo === void 0 && parsed.host === void 0 && parsed.port === void 0 && parsed.query === void 0 && !parsed.path) {
           parsed.reference = "same-document";
         } else if (parsed.scheme === void 0) {
           parsed.reference = "relative";
@@ -3732,10 +3733,10 @@ var require_fast_uri = __commonJS({
           if (gotEncoding && parsed.host !== void 0) {
             parsed.host = unescape(parsed.host);
           }
-          if (parsed.path !== void 0 && parsed.path.length) {
+          if (parsed.path) {
             parsed.path = escape(unescape(parsed.path));
           }
-          if (parsed.fragment !== void 0 && parsed.fragment.length) {
+          if (parsed.fragment) {
             parsed.fragment = encodeURI(decodeURIComponent(parsed.fragment));
           }
         }

@@ -10,7 +10,7 @@
 import { API, Device, miscellaneousDataFind } from 'argos_types/lib/argosApi'
 import { apiLogin, ArgosClient } from 'argos_types/lib/argosClient'
 
-const ARGOS_HOST = 'c2-server.local'
+const ARGOS_HOST = 'argos.mydefence.dk'
 
 // Register some process signals for shutting down the process
 process.on('SIGTERM', () => {
@@ -27,7 +27,7 @@ async function main() {
 
     let cookie: string | undefined
     if (!args.includes('--no-login')) {
-        cookie = await apiLogin({ host: ARGOS_HOST, username: 'setup', password: 'iris' })
+        cookie = await apiLogin({ host: ARGOS_HOST, username: 'operator', password: '' })
     }
 
     const argos = new ArgosClient({ host: ARGOS_HOST, cookie })
@@ -37,9 +37,19 @@ async function main() {
         console.log('\ndeviceList received as push message', deviceList)
     })
 
-    argos.on(API.DEVICE_ADDED, async (deviceAdded) => {
+    argos.on(API.DEVICE_ADDED, (deviceAdded) => {
         console.log('\ndeviceAdded received as push message')
-        await printDeviceInfo(deviceAdded)
+        console.log(`${deviceAdded.deviceId} added`)
+    })
+
+    argos.on(API.DEVICE_MISCELLANEOUS, (deviceMisc) => {
+        console.log('\ndeviceMiscellaneous received as push message')
+        console.log(`${deviceMisc.deviceId} miscellaneous data updated`)
+    })
+
+    argos.on(API.DEVICE_LOCATIONS, (deviceLocations) => {
+        console.log('\ndeviceLocations received as push message')
+        console.log(`${deviceLocations.deviceId} locations updated`)
     })
 
     argos.on(API.DEVICE_REMOVED, (deviceRemoved) => {

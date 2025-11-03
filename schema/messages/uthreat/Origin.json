@@ -1,0 +1,7 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Origin",
+    "description": "Source of a threat detection. `local` means detected by a sensor controlled by this Argos C2. `CoT` means received from an external system using CoT (TAK) transport. Multiple origins may apply to a single detection due to sensor fusion",
+    "type": "string",
+    "enum": ["local", "CoT"]
+}

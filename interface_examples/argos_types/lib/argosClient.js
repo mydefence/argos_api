@@ -24,7 +24,9 @@ const https_1 = require("https");
 function default_logger(format, ...param) {
     console.log(new Date().toISOString(), util_1.default.format(format, ...param));
 }
-/** The default logger for messages sent and received. */
+/** The default logger for messages sent and received. Direction for
+ * request/response pattern will show '←R', 'R→', and push messages from ARGOS
+ * API will show 'P→' */
 function default_msg_logger(event, message, direction) {
     default_logger('%s %s %O', event, direction, message);
 }
@@ -96,8 +98,17 @@ class ArgosClient extends events_1.EventEmitter {
         });
         this.sc.onAny((event, res) => {
             if ('message' in res) {
-                this.msg_logger(res.event, res.message, '→');
-                super.emit(res.event, res.message);
+                if (event === res.event) {
+                    // This is a push message from ARGOS, not a response to a
+                    // request, so we emit it
+                    this.msg_logger(res.event, res.message, 'P→');
+                    super.emit(res.event, res.message);
+                }
+                else {
+                    // This is a response to a request, so we emit it with the
+                    // responseId
+                    this.msg_logger(res.event, res.message, 'R→');
+                }
             }
         });
         this.sc.on('connect', () => {
@@ -130,11 +141,20 @@ class ArgosClient extends events_1.EventEmitter {
      *
      * The event will be send to ARGOS and to any local listeners.
      *
+     * If responseId is not provided, a new responseId will be generated and the
+     * message part of the response will not be emitted on the ArgosClient event
+     * emitter. If an emit is wanted, then set the responseId to event name.
+     * @example
+     *     argos.emit(API.MISSION_CENTER_GET, {}) // Will not emit response
+     *     argos.emit(API.MISSION_CENTER_GET, {}, API.MISSION_CENTER) // Will emit response
+     *
      * @param event - ARGOS internal or external event
      * @param message - Event data. Type inferred from 'event`
+     * @param responseId - Optional responseId to use for the request. If not
+     * provided, a new responseId will be generated.
      * */
     emit(event, message, responseId = this.responseId()) {
-        this.msg_logger(event, message, '←');
+        this.msg_logger(event, message, '←R');
         const req = { message, responseId };
         this.sc.emit(event, req);
         return super.emit(event, message);

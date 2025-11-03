@@ -11,7 +11,9 @@
                     "credentialId": "123456"
                 }
             }
-        ]
+        ],
+        "sendLocations": true,
+        "sendThreatDetails": true
     },
     "responseId": "kn3t97nm"
 }

@@ -1,5 +1,30 @@
 # Release Note for ARGOS Software
 
+## Version 6.2.0
+
+### Attention
+
+-   API: `deviceMiscellaneous` and `deviceLocations` are now automatically
+    pushed immediately after `deviceAdded` when a device is automatically
+    discovered and added or manually added. Miscellaneous and location data can
+    still be requested with their associated get requests.
+-   ArgosClient: changed such that only push messages are emitted on
+    eventEmitter. Prior to this change, responses to a request was also emitted
+    on the associated event
+-   API: TakConfiguration property `locationDeviceId` renamed to `vehicleDeviceId`, added new
+    properties `sendLocations` and `sendThreatDetails`.
+-   API: Added property `origins` to UthreatBasis and UthreatHistory to distringuish between threats
+    detected locally, externally, or a fusion of both.
+-   Note. Existing Uthreat history information will be cleared when upgrading.
+
+### Improvements
+
+-   Threat types and their mute state is persisted in database.
+-   TAK: RF geolocation works across independent Argos systems when connected using TAK and
+    `sendThreatDetails` is enbled.
+-   TAK: Support sharing of device locations.
+-   Updated Xenta radar support and track filtering.
+
 ## Version 6.1.0
 
 ### Attention

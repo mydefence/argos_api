@@ -5,11 +5,19 @@
     "properties": {
         "callsign": {
             "type": "string",
-            "description": "Callsign used CoT messages."
+            "description": "Callsign used for CoT messages."
         },
-        "locationDeviceId": {
+        "vehicleDeviceId": {
             "type": "string",
-            "description": "When this is set, use the location of the specified device to broadcast Argos' location (using CoT event type a-f-G-E-V). The device should probably have useGpsLocation enabled. If not set Argos location will not be broadcast. Primarily relevant with vehicle systems."
+            "description": "When this is set, broadcast the location of the specified device using CoT event type `a-f-G-E-V` - Ground Equipment Vehicle. The device should probably have useGpsLocation enabled. For vehicle systems. When false, broadcast mission center information using CoT event type `a-f-G-U-H` - Special C2 Headquarters. The CoT object in either case contain the configured callsign, and be used as parent link in threat details."
+        },
+        "sendLocations": {
+            "type": "boolean",
+            "description": "When true, broadcast location of all devices using CoT messages."
+        },
+        "sendThreatDetails": {
+            "type": "boolean",
+            "description": "When true, broadcast threat details using proprietary CoT message properties. For interworking with other MyDefence systems or wearables. Setting this will also set `sendLocations` to true."
         },
         "transports": {
             "type": "array",
@@ -103,6 +111,6 @@
             }
         }
     },
-    "required": ["callsign", "transports"],
+    "required": ["callsign", "transports", "sendLocations", "sendThreatDetails"],
     "additionalProperties": false
 }

@@ -59,6 +59,7 @@
                     "rfEmitterId": "624597c3b7db5"
                 },
                 "confidence": 0.6,
+                "origins": ["local", "CoT"],
                 "createdTimeStamp": "2022-03-31T12:00:03.737Z",
                 "updatedTimeStamp": "2022-03-31T12:01:23.578Z"
             },
@@ -86,6 +87,7 @@
                     "possibleBands": ["433"],
                     "rfEmitterId": "624597c3b7db5"
                 },
+                "origins": ["local", "CoT"],
                 "confidence": 0.6,
                 "createdTimeStamp": "2022-03-31T12:00:03.737Z",
                 "updatedTimeStamp": "2022-03-31T12:02:24.801Z"

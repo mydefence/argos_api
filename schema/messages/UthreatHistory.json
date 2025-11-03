@@ -36,6 +36,14 @@
                         },
                         "description": "List of the detection types related to this uthreat for the given time interval."
                     },
+                    "origins": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "./uthreat/Origin.json"
+                        },
+                        "minItems": 1,
+                        "description": "List of the origins related to this uthreat for the given time interval."
+                    },
                     "frequencyBands": {
                         "type": "array",
                         "items": {
@@ -57,6 +65,7 @@
                     "description",
                     "muted",
                     "detectionType",
+                    "origins",
                     "createdTimeStamp",
                     "aboveConfidenceThreshold",
                     "frequencyBands"

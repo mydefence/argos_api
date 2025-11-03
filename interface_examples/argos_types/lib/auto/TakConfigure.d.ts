@@ -9,9 +9,17 @@ export type TakConfigure = {
      */
     callsign: string;
     /**
-     * When this is set, use the location of the specified device to broadcast Argos' location (using CoT event type a-f-G-U-C). The device should probably have useGpsLocation enabled. If not set Argos location will not be broadcast. Primarily relevant with vehicle systems.
+     * When this is set, broadcast the location of the specified device using CoT event type `a-f-G-E-V` - Ground Equipment Vehicle. The device should probably have useGpsLocation enabled. For vehicle systems. When false, broadcast mission center information using CoT event type `a-f-G-U-H` - Special C2 Headquarters. The CoT object in either case contain the configured callsign, and be used as parent link in threat details.
      */
-    locationDeviceId?: string;
+    vehicleDeviceId?: string;
+    /**
+     * When true, broadcast location of all devices using CoT messages.
+     */
+    sendLocations: boolean;
+    /**
+     * When true, broadcast threat details using proprietary CoT message properties. For interworking with other MyDefence systems or wearables. Setting this will also set `sendLocations` to true.
+     */
+    sendThreatDetails: boolean;
     transports: ({
         type: "multicast";
         /**

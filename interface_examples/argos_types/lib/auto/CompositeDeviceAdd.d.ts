@@ -6,7 +6,7 @@
 /**
  * Device types tells what kind of device it is and with that what kind of attributes and abilities is available - must always be used in combination with deviceVersion and if composite with the sub/composite devices found under the devices list
  */
-export type DeviceType = "composite" | "duo" | "trio" | "quad" | "penta" | "hexa" | "hepta" | "echoguardQuad" | "groundawareTrio" | "echoshieldQuad";
+export type DeviceType = "composite" | "duo" | "trio" | "quad" | "penta" | "hexa" | "hepta" | "echoguardQuad" | "groundawareTrio" | "echoshieldQuad" | "dobermann360" | "dobermann_dual";
 /**
  * The version of the composite template will typically be the version of the devices used to create the composite. If deviceType is "composite" deviceVersion is ignored.
  */

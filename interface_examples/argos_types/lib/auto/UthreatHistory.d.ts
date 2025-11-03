@@ -8,6 +8,10 @@
  */
 export type DetectionType = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio" | "Vision" | "CoT";
 /**
+ * Source of a threat detection. `local` means detected by a sensor controlled by this Argos C2. `CoT` means received from an external system using CoT (TAK) transport. Multiple origins may apply to a single detection due to sensor fusion
+ */
+export type Origin = "local" | "CoT";
+/**
  * Information about the frequency of an effector/detector.
  */
 export type FrequencyBand = "433" | "900" | "1G2" | "2G4" | "5G2" | "5G8" | "GNSS";
@@ -40,6 +44,12 @@ export type UthreatHistory = {
          * List of the detection types related to this uthreat for the given time interval.
          */
         detectionType: DetectionType[];
+        /**
+         * List of the origins related to this uthreat for the given time interval.
+         *
+         * @minItems 1
+         */
+        origins: [Origin, ...Origin[]];
         /**
          * List of frequency bands related to this uthreat for the given time interval.
          */

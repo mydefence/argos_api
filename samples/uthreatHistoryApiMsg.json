@@ -8,6 +8,7 @@
                 "muted": false,
                 "detectionType": ["RF"],
                 "frequencyBands": ["2G4"],
+                "origins": ["local"],
                 "aboveConfidenceThreshold": true,
                 "createdTimeStamp": "2020-09-07T13:50:52.808Z",
                 "stoppedTimeStamp": "2020-09-07T13:50:53.675Z"
@@ -19,6 +20,7 @@
                 "muted": false,
                 "detectionType": ["RF"],
                 "frequencyBands": ["2G4"],
+                "origins": ["local", "CoT"],
                 "aboveConfidenceThreshold": false,
                 "createdTimeStamp": "2020-09-07T13:50:14.533Z",
                 "stoppedTimeStamp": "2020-09-07T13:51:14.091Z"

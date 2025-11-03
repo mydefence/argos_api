@@ -146,6 +146,14 @@
             "type": "number",
             "description": "Threat type ID will be set for RF threats. Can be used in a threatTypeMute request."
         },
+        "origins": {
+            "type": "array",
+            "description": "Source of the threat detection",
+            "items": {
+                "$ref": "./Origin.json"
+            },
+            "minItems": 1
+        },
         "createdTimeStamp": {
             "type": "string",
             "description": "UTC time of creation of this uthreat."
@@ -167,6 +175,7 @@
         "category",
         "location",
         "confidence",
+        "origins",
         "createdTimeStamp",
         "updatedTimeStamp"
     ]

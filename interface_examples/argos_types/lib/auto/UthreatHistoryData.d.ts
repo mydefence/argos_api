@@ -14,6 +14,10 @@ export type UthreatBasis = UthreatBasisPresence | UthreatBasisZone | UthreatBasi
  */
 export type DetectionType = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio" | "Vision" | "CoT";
 /**
+ * Source of a threat detection. `local` means detected by a sensor controlled by this Argos C2. `CoT` means received from an external system using CoT (TAK) transport. Multiple origins may apply to a single detection due to sensor fusion
+ */
+export type Origin = "local" | "CoT";
+/**
  * The type of the system component sending the threat.
  */
 export type DetectionType1 = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio" | "Vision" | "CoT";
@@ -210,6 +214,12 @@ export type UthreatBasisPresence = {
      */
     threatType?: number;
     /**
+     * Source of the threat detection
+     *
+     * @minItems 1
+     */
+    origins: [Origin, ...Origin[]];
+    /**
      * UTC time of creation of this uthreat.
      */
     createdTimeStamp: string;
@@ -324,6 +334,12 @@ export type UthreatBasisZone = {
      * Threat type ID will be set for RF threats. Can be used in a threatTypeMute request.
      */
     threatType?: number;
+    /**
+     * Source of the threat detection
+     *
+     * @minItems 1
+     */
+    origins: [Origin, ...Origin[]];
     /**
      * UTC time of creation of this uthreat.
      */
@@ -447,6 +463,12 @@ export type UthreatBasisDirection = {
      * Threat type ID will be set for RF threats. Can be used in a threatTypeMute request.
      */
     threatType?: number;
+    /**
+     * Source of the threat detection
+     *
+     * @minItems 1
+     */
+    origins: [Origin, ...Origin[]];
     /**
      * UTC time of creation of this uthreat.
      */
@@ -581,6 +603,12 @@ export type UthreatBasisLocation = {
      * Threat type ID will be set for RF threats. Can be used in a threatTypeMute request.
      */
     threatType?: number;
+    /**
+     * Source of the threat detection
+     *
+     * @minItems 1
+     */
+    origins: [Origin, ...Origin[]];
     /**
      * UTC time of creation of this uthreat.
      */

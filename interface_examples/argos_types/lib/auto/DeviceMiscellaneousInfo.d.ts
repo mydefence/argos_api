@@ -13,6 +13,10 @@ export type FrequencyBand = "433" | "900" | "1G2" | "2G4" | "5G2" | "5G8" | "GNS
  * Profiles supported by the Xenta radar
  */
 export type XentaRadarProfile = "EarlyWarning" | "MultiPurpose" | "CUavMediumRange" | "CUavCloseRange";
+/**
+ * Device types tells what kind of device it is and with that what kind of attributes and abilities is available - must always be used in combination with deviceVersion and if composite with the sub/composite devices found under the devices list
+ */
+export type DeviceType = "blackbird" | "jaegar" | "dobermann" | "dobermann360" | "dobermann_dual" | "duo" | "echoguard" | "gps" | "groundaware" | "hepta" | "hexa" | "penta" | "pentaDM1xx" | "pentaWD2xx" | "quad" | "quadWD2xx" | "trio" | "wd200" | "wingman" | "wl1" | "wm200" | "wolfpack" | "onvif" | "skyeye" | "blackbird5k" | "echoguardQuad" | "groundawareTrio" | "aps" | "ring" | "xenta" | "echoshield" | "echoshieldQuad" | "visionflex" | "composite" | "lizardEar" | "circleScope" | "tak";
 export type DeviceMiscellaneousDeviceName = {
     /**
      * The device id
@@ -376,6 +380,10 @@ export type DeviceMiscellaneousTakInfo = {
          * The type of the TAK user. Human readable version of typeCot.
          */
         typeStr: string;
+        /**
+         * The device types of the remote TAK devices.
+         */
+        deviceTypes?: DeviceType[];
     };
 };
 export type DeviceMiscellaneousPtzDefaultDistance = {

@@ -59,6 +59,7 @@
                     "rfEmitterId": "624597c3b7db5"
                 },
                 "confidence": 0.85,
+                "origins": ["CoT"],
                 "createdTimeStamp": "2022-03-31T12:00:03.737Z",
                 "updatedTimeStamp": "2022-03-31T12:01:23.578Z"
             },
@@ -87,6 +88,7 @@
                     "rfEmitterId": "624597c3b7db5"
                 },
                 "confidence": 0.85,
+                "origins": ["CoT"],
                 "createdTimeStamp": "2022-03-31T12:00:03.737Z",
                 "updatedTimeStamp": "2022-03-31T12:01:23.577Z"
             }

@@ -36,6 +36,13 @@
                 "typeStr": {
                     "type": "string",
                     "description": "The type of the TAK user. Human readable version of typeCot."
+                },
+                "deviceTypes": {
+                    "type": "array",
+                    "description": "The device types of the remote TAK devices.",
+                    "items": {
+                        "$ref": "../common/DeviceType.json"
+                    }
                 }
             },
             "required": ["typeCot", "typeStr"],

@@ -13,8 +13,10 @@ import { ArgosTypesMap } from './argosApi';
 /** The default logger used. Implements same interface as `util.format()`.
  * Should be easy to map to e.g. a winston logger. */
 declare function default_logger(format?: unknown, ...param: unknown[]): void;
-/** The default logger for messages sent and received. */
-declare function default_msg_logger<E extends keyof ArgosTypesMap>(event: E, message: ArgosTypesMap[E], direction: '←' | '→'): void;
+/** The default logger for messages sent and received. Direction for
+ * request/response pattern will show '←R', 'R→', and push messages from ARGOS
+ * API will show 'P→' */
+declare function default_msg_logger<E extends keyof ArgosTypesMap>(event: E, message: ArgosTypesMap[E], direction: '←R' | 'R→' | 'P→'): void;
 /** Login on login REST endpoint and return login token from cookie. Cookie is
  * normally stored in a browser cookie. */
 export declare function apiLogin({ host, port, username, password, }: {
@@ -65,8 +67,17 @@ export declare class ArgosClient extends EventEmitter {
      *
      * The event will be send to ARGOS and to any local listeners.
      *
+     * If responseId is not provided, a new responseId will be generated and the
+     * message part of the response will not be emitted on the ArgosClient event
+     * emitter. If an emit is wanted, then set the responseId to event name.
+     * @example
+     *     argos.emit(API.MISSION_CENTER_GET, {}) // Will not emit response
+     *     argos.emit(API.MISSION_CENTER_GET, {}, API.MISSION_CENTER) // Will emit response
+     *
      * @param event - ARGOS internal or external event
      * @param message - Event data. Type inferred from 'event`
+     * @param responseId - Optional responseId to use for the request. If not
+     * provided, a new responseId will be generated.
      * */
     emit<E extends keyof ArgosTypesMap>(event: E, message: ArgosTypesMap[E], responseId?: string): boolean;
     /** Listen for messages from ARGOS or emitted locally on in {@link emit}.
