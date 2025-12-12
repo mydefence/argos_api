@@ -19,11 +19,12 @@ declare function default_logger(format?: unknown, ...param: unknown[]): void;
 declare function default_msg_logger<E extends keyof ArgosTypesMap>(event: E, message: ArgosTypesMap[E], direction: '←R' | 'R→' | 'P→'): void;
 /** Login on login REST endpoint and return login token from cookie. Cookie is
  * normally stored in a browser cookie. */
-export declare function apiLogin({ host, port, username, password, }: {
+export declare function apiLogin({ host, port, username, password, ca, }: {
     host?: string;
     port?: string;
     username: string;
     password: string;
+    ca?: string;
 }): Promise<string>;
 /** Class wraps socket.io connection to ARGOS server, and exposes the ARGOS API
  * with correct typing.
@@ -49,11 +50,12 @@ export declare class ArgosClient extends EventEmitter {
      * @param options.msg_logger - A custom logger function for messages. See
      * {@link default_msg_logger}.
      */
-    constructor({ host, port, cookie, secure, logger, msg_logger, }?: {
+    constructor({ host, port, cookie, secure, ca, logger, msg_logger, }?: {
         host?: string;
         port?: string | number;
         cookie?: string;
         secure?: boolean;
+        ca?: string;
         logger?: typeof default_logger;
         msg_logger?: typeof default_msg_logger;
     });

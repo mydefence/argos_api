@@ -7,10 +7,10 @@
  * whole or in part without written permission from MyDefence Communication A/S.
  *
  *******************************************************************************/
+import { parseArgs } from 'node:util'
+import { readFileSync } from 'node:fs'
 import { API, Device, miscellaneousDataFind } from 'argos_types/lib/argosApi'
 import { apiLogin, ArgosClient } from 'argos_types/lib/argosClient'
-
-const ARGOS_HOST = 'argos.mydefence.dk'
 
 // Register some process signals for shutting down the process
 process.on('SIGTERM', () => {
@@ -22,15 +22,83 @@ process.on('SIGINT', function () {
     process.exit()
 })
 
-async function main() {
-    const args = process.argv.slice(2)
+function printUsage() {
+    console.error('Usage: node index.js <host> [options]')
+    console.error('\nArguments:')
+    console.error('  host          The Argos server hostname (required)')
+    console.error('\nOptions:')
+    console.error('  --no-login    Skip authentication')
+    console.error('  --exit        Exit after initial device list fetch')
+    console.error('  --insecure    Allow insecure connections')
+    console.error('  --ca-cert     Path to CA certificate file')
+    console.error('  --help        Show this help message')
+    console.error('\nExample:')
+    console.error('  node index.js c2-server.local --exit')
+}
 
-    let cookie: string | undefined
-    if (!args.includes('--no-login')) {
-        cookie = await apiLogin({ host: ARGOS_HOST, username: 'operator', password: '' })
+async function main() {
+    const { values: args, positionals } = parseArgs({
+        options: {
+            'no-login': {
+                type: 'boolean',
+                default: false,
+            },
+            exit: {
+                type: 'boolean',
+                default: false,
+            },
+            insecure: {
+                type: 'boolean',
+                default: false,
+            },
+            'ca-cert': {
+                type: 'string',
+            },
+            help: {
+                type: 'boolean',
+                default: false,
+            },
+        },
+        allowPositionals: true,
+    })
+
+    // Show help if requested
+    if (args.help) {
+        printUsage()
+        process.exit(0)
     }
 
-    const argos = new ArgosClient({ host: ARGOS_HOST, cookie })
+    // Validate that host argument is provided
+    if (!positionals[0]) {
+        console.error('Error: Host argument is required\n')
+        printUsage()
+        process.exit(1)
+    }
+
+    let ca: string | undefined
+    if (args['ca-cert']) {
+        try {
+            ca = readFileSync(args['ca-cert'], 'utf8')
+        } catch (error) {
+            console.error(`Error reading CA certificate file: ${error.message}`)
+            process.exit(1)
+        }
+    }
+
+    const host = positionals[0]
+
+    let cookie: string | undefined
+    if (!args['no-login']) {
+        cookie = await apiLogin({ host, username: 'operator', password: '', ca })
+    }
+
+    let secure: boolean | undefined
+
+    if (args.insecure) {
+        secure = false
+    }
+
+    const argos = new ArgosClient({ host, cookie, secure, ca })
 
     // Register listener for Argos push events
     argos.on(API.DEVICE_LIST, (deviceList) => {
@@ -66,9 +134,14 @@ async function main() {
         for (const device of deviceList) {
             await printDeviceInfo(device)
         }
-        if (args.includes('--exit')) {
+        if (args.exit) {
             process.exit(0)
         }
+    })
+
+    argos.sc.on('connect', () => {
+        console.warn('Argos API reconnected!')
+        console.warn(' - You may have lost push messages during outage, ensure to re-sync data if needed.')
     })
 
     // Helper function for printing device information

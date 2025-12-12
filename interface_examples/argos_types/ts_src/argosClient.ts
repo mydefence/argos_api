@@ -38,18 +38,16 @@ export async function apiLogin({
     port = '4000',
     username,
     password,
+    ca = MYDEFENCE_ROOT_CA,
 }: {
     host?: string
     port?: string
     username: string
     password: string
+    ca?: string
 }) {
     const response = await axios
-        .post(
-            `https://${host}:${port}/login`,
-            { username, password },
-            { httpsAgent: new Agent({ ca: MYDEFENCE_ROOT_CA }) },
-        )
+        .post(`https://${host}:${port}/login`, { username, password }, { httpsAgent: new Agent({ ca }) })
         .catch((err) => {
             throw new Error(`Login failed: ${err.response?.data}`)
         })
@@ -91,9 +89,10 @@ export class ArgosClient extends EventEmitter {
      */
     public constructor({
         host = 'c2-server.local',
-        port = 5051,
+        port = undefined,
         cookie = undefined,
         secure = true,
+        ca = MYDEFENCE_ROOT_CA,
         logger = default_logger,
         msg_logger = default_msg_logger,
     }: {
@@ -101,6 +100,7 @@ export class ArgosClient extends EventEmitter {
         port?: string | number
         cookie?: string
         secure?: boolean
+        ca?: string
         logger?: typeof default_logger
         msg_logger?: typeof default_msg_logger
     } = {}) {
@@ -108,11 +108,11 @@ export class ArgosClient extends EventEmitter {
         this.logger = logger
         this.msg_logger = msg_logger
         let endpoint: string
-        let ca
         if (secure) {
+            port ??= 5051
             endpoint = `https://${host}:${port}/`
-            ca = MYDEFENCE_ROOT_CA
         } else {
+            port ??= 5050
             endpoint = `http://${host}:${port}/`
         }
         this.logger('CONNECTING to %s', endpoint)
