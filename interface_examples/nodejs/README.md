@@ -15,7 +15,7 @@ indicates the used node.js version.
 
 ## Compiling and Running
 
-Update `ARGOS_IP` in `ts_src/index.ts` to point to your ARGOS server. Then execute:
+To compile and run execute:
 
     npm install --install-links
-    npm start
+    npm start -- <ARGOS_IP>
