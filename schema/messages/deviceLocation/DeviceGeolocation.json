@@ -32,7 +32,7 @@
         },
         "deviceLocationHeight": {
             "type": "number",
-            "description": "Height relative to choosen reference in meters"
+            "description": "Height relative to chosen reference in meters"
         },
         "deviceLocationPitch": {
             "type": "number",
@@ -54,6 +54,8 @@
         "deviceLocationLatitude",
         "deviceLocationLongitude",
         "deviceLocationHeading",
-        "deviceLocationHeight"
+        "deviceLocationHeight",
+        "deviceLocationX",
+        "deviceLocationY"
     ]
 }

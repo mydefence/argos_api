@@ -1,0 +1,6 @@
+{
+    "message": {
+        "errorInfo": "Affiliation not found"
+    },
+    "event": "uthreatPersistentAffiliationRemoveError"
+}

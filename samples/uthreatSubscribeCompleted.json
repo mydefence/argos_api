@@ -1,0 +1,8 @@
+{
+    "message": {
+        "suppressed": true,
+        "typeMute": false,
+        "dridDetails": ["uthreat-id-123", "uthreat-id-456"]
+    },
+    "event": "uthreatSubscribeCompleted"
+}

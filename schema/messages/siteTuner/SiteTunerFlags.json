@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "title": "SiteTunerFlags",
+    "description": "SiteTuner configuration flags",
+    "properties": {
+        "lock": {
+            "type": "boolean",
+            "description": "If set the configuration is locked to the current settings. Otherwise it will be updated periodically."
+        },
+        "enable": {
+            "type": "boolean",
+            "description": "Enable or disable the SiteTuner feature. Disabling preserves the current configuration and parameters but disables the suppression of threats."
+        }
+    },
+    "required": ["lock", "enable"],
+    "additionalProperties": false
+}

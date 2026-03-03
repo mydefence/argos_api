@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ProfileGroupEchoShieldRadar",
+    "type": "object",
+    "properties": {
+        "name": {
+            "const": "EchoShieldRadar",
+            "description": "The name of the profile group."
+        },
+        "profiles": {
+            "type": "array",
+            "items": {
+                "$ref": "EchoShieldRadarProfile.json#"
+            },
+            "description": "The profiles in the profile group."
+        }
+    },
+    "additionalProperties": false,
+    "required": ["name", "profiles"]
+}

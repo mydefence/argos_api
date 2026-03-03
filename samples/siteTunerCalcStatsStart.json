@@ -1,0 +1,10 @@
+{
+    "message": {
+        "requestId": "req-calc-stats-67890",
+        "from": "2026-01-01T00:00:00.000Z",
+        "to": "2026-02-08T23:59:59.999Z",
+        "force": false
+    },
+    "event": "siteTunerCalcStatsStart",
+    "responseId": "01ARZ3NDEKTSV4RRFFQ69G5FEZ"
+}

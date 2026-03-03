@@ -131,16 +131,8 @@ A strategy must be chosen for handling of location and heading:
 
 ### Mission Center
 
-Mission center must be programmed to somewhere near your geographic location. It
-is used internally when working with cartesian coordinates, and it should be
-within some 100 kms of the actual location to avoid rounding errors in the
-internal calculations.
-
-We suggest to program it to the the vehicle's position each time the vehicle is
-started.
-
-    <- missionCenterSet(latitude,longitude)
-    -> missionCenterSetCompleted
+Earlier versions of this document described setting mission center. As of Argos release 6.3.0 this
+is no longer required.
 
 ### Compass Calibration
 

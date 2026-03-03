@@ -5,11 +5,11 @@
     "additionalProperties": false,
     "properties": {
         "latitude": {
-            "type": ["number", "null"],
+            "type": ["number"],
             "description": "Defines the geographical latitude with up to 6 decimals. null if not set."
         },
         "longitude": {
-            "type": ["number", "null"],
+            "type": ["number"],
             "description": "Defines the geographical longitude with up to 6 decimals. null if not set."
         }
     },

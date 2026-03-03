@@ -29,13 +29,13 @@ export type DeviceGeolocation = {
     /**
      * If mission center is configured, this is set to the x coordinate (meters) of the device relative to the mission center. Update of mission center will not trigger location update messages. Cannot be set directly, only through deviceLocationLatitude/Longitude.
      */
-    deviceLocationX?: number;
+    deviceLocationX: number;
     /**
      * If mission center is configured, this is set to the y coordinate (meters) of the device relative to the mission center. Update of mission center will not trigger location update messages. Cannot be set directly, only through deviceLocationLatitude/Longitude.
      */
-    deviceLocationY?: number;
+    deviceLocationY: number;
     /**
-     * Height relative to choosen reference in meters
+     * Height relative to chosen reference in meters
      */
     deviceLocationHeight: number;
     /**

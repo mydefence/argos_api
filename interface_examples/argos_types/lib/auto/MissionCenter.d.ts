@@ -7,9 +7,9 @@ export type MissionCenter = {
     /**
      * Defines the geographical latitude with up to 6 decimals. null if not set.
      */
-    latitude: number | null;
+    latitude: number;
     /**
      * Defines the geographical longitude with up to 6 decimals. null if not set.
      */
-    longitude: number | null;
+    longitude: number;
 };

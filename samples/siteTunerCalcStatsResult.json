@@ -1,0 +1,49 @@
+{
+    "message": {
+        "requestId": "req-67890-calc-stats",
+        "statistics": {
+            "threatCount": 128,
+            "partiallySuppressedCount": 42,
+            "fullySuppressedCount": 23,
+            "threatTime": 7200.75,
+            "suppressedTime": 3150.5,
+            "detectionStats": {
+                "1000100": {
+                    "device123": {
+                        "threatStats": {
+                            "suppressed": {
+                                "2425000000": {
+                                    "-70": 12,
+                                    "-65": 8
+                                },
+                                "5800000000": {
+                                    "-60": 5
+                                }
+                            },
+                            "unsuppressed": {
+                                "2425000000": {
+                                    "-50": 6,
+                                    "-45": 3
+                                }
+                            }
+                        },
+                        "alertStats": {
+                            "suppressed": {
+                                "2425000000": {
+                                    "-70": 4,
+                                    "-65": 2
+                                }
+                            },
+                            "unsuppressed": {
+                                "2425000000": {
+                                    "-50": 2
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "event": "siteTunerCalcStatsResult"
+}

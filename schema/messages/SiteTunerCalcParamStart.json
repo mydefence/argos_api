@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "title": "SiteTunerCalcParamStart",
+    "properties": {
+        "requestId": {
+            "type": "string",
+            "description": "The user must allocate a unique identifier for the request. Needed to handle multiple users accessing the SiteTuner interface simultaneously. This id will be present in the result"
+        },
+        "force": {
+            "type": "boolean",
+            "description": "If set, any ongoing calculation will be forced to stop and the new calculation will start. Default: false",
+            "default": false
+        },
+        "paramConfig": {
+            "$ref": "./siteTuner/SiteTunerParamConfig.json"
+        }
+    },
+    "required": ["requestId", "paramConfig"],
+    "additionalProperties": false
+}

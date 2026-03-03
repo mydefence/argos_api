@@ -29,7 +29,7 @@ export declare function isOriginFilterCircle(originFilter: OriginFilter): origin
 /** Type guard for polygon origin filters */
 export declare function isOriginFilterPolygon(originFilter: OriginFilter): originFilter is OriginFilterPolygon;
 import { Uthreat, UthreatPresence, UthreatZone, UthreatDirection, UthreatLocation, UthreatBasis, UthreatBasisPresence, UthreatBasisZone, UthreatBasisDirection, UthreatBasisLocation } from './auto/Uthreat';
-export { UthreatPresence, UthreatZone, UthreatDirection, UthreatLocation, UthreatBasis, UthreatBasisPresence, UthreatBasisZone, UthreatBasisDirection, UthreatBasisLocation, } from './auto/Uthreat';
+export { UthreatPresence, UthreatZone, UthreatDirection, UthreatLocation, UthreatBasis, UthreatBasisPresence, UthreatBasisZone, UthreatBasisDirection, UthreatBasisLocation, Affiliation, AffiliationOrFalse, } from './auto/Uthreat';
 export declare function isUthreatPresence(ut: Uthreat): ut is UthreatPresence;
 export declare function isUthreatZone(ut: Uthreat): ut is UthreatZone;
 export declare function isUthreatDirection(ut: Uthreat): ut is UthreatDirection;
@@ -42,6 +42,8 @@ export declare function isUthreatBasisLocation(utb: UthreatBasis): utb is Uthrea
 export declare function uthreatType(ut: Uthreat | UthreatBasis): 'presence' | 'zone' | 'direction' | 'location';
 import { DeviceMiscellaneousInfo, DeviceMiscellaneousDeviceName, DeviceMiscellaneousDeviceOrder, DeviceMiscellaneousDeviceOrientation, DeviceMiscellaneousProductName, DeviceMiscellaneousFrequencyBands, DeviceMiscellaneousDroneList, DeviceMiscellaneousUseGPSLocation, DeviceMiscellaneousPtzLimits, DeviceMiscellaneousDeviceRange, DeviceMiscellaneousConfidenceThreshold, DeviceMiscellaneousRingSettings, DeviceMiscellaneousType, DeviceMiscellaneousProfiles, DeviceMiscellaneousTakInfo, DeviceMiscellaneousPtzDefaultDistance, DeviceMiscellaneousPtzDefaultHeight, DeviceMiscellaneousNominalTargetSize } from './auto/DeviceMiscellaneousInfo';
 export { DeviceMiscellaneousInfo, DeviceMiscellaneousType, DeviceMiscellaneousDeviceName, DeviceMiscellaneousDeviceOrder, DeviceMiscellaneousDeviceOrientation, DeviceMiscellaneousProductName, DeviceMiscellaneousFrequencyBands, DeviceMiscellaneousDroneList, DeviceMiscellaneousUseGPSLocation, DeviceMiscellaneousPtzLimits, DeviceMiscellaneousDeviceRange, DeviceMiscellaneousConfidenceThreshold, DeviceMiscellaneousRingSettings, DeviceMiscellaneousProfiles, DeviceMiscellaneousTakInfo, DeviceMiscellaneousPtzDefaultDistance, DeviceMiscellaneousPtzDefaultHeight, DeviceMiscellaneousNominalTargetSize, } from './auto/DeviceMiscellaneousInfo';
+export type { SiteTunerParamConfig, SiteTunerFlags } from './auto/SiteTunerConfiguration';
+export type { SiteTunerStatistics, SiteTunerDetectionStats } from './auto/SiteTunerCalcStatsResult';
 export declare function isDeviceMiscellaneousDeviceName(misc: DeviceMiscellaneousInfo): misc is DeviceMiscellaneousDeviceName;
 export declare function isDeviceMiscellaneousDeviceOrder(misc: DeviceMiscellaneousInfo): misc is DeviceMiscellaneousDeviceOrder;
 export declare function isDeviceMiscellaneousDeviceOrientation(misc: DeviceMiscellaneousInfo): misc is DeviceMiscellaneousDeviceOrientation;

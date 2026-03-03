@@ -13,6 +13,7 @@ exports.CAPABILTY_REQUIREMENTS_NONE = exports.CAPABILTY_REQUIREMENTS = void 0;
 const argosApi_1 = require("./argosApi");
 /** This lists all incoming events with requirement for user capabilities. Notice, that GNSS related
  * requests also need `CAP_C2_GNSS` capability (see ArgosInterfaceSpecification.pdf for more info).
+ * If multiple capabilities are listed, then *either* one of them is sufficient.
  * */
 exports.CAPABILTY_REQUIREMENTS = {
     [argosApi_1.API.ALARM_ZONE_ADD]: 'CAP_C2_CONFIG',
@@ -43,6 +44,11 @@ exports.CAPABILTY_REQUIREMENTS = {
     [argosApi_1.API.THREAT_TYPE_MUTE]: 'CAP_C2_MUTE',
     [argosApi_1.API.THREAT_TYPE_UN_MUTE]: 'CAP_C2_MUTE',
     [argosApi_1.API.UTHREAT_SET_MUTE]: 'CAP_C2_MUTE',
+    [argosApi_1.API.UTHREAT_AFFILIATION_CHANGE]: 'CAP_C2_MUTE',
+    [argosApi_1.API.UTHREAT_PERSISTENT_AFFILIATION_CHANGE]: 'CAP_C2_MUTE',
+    [argosApi_1.API.UTHREAT_PERSISTENT_AFFILIATION_REMOVE]: 'CAP_C2_MUTE',
+    [argosApi_1.API.SITE_TUNER_CONFIGURE]: 'CAP_C2_SITE_TUNER',
+    [argosApi_1.API.SITE_TUNER_APPLY_PARAM]: 'CAP_C2_SITE_TUNER',
 };
 /** This lists all incoming events with ***no*** requirement for user capabilities. */
 exports.CAPABILTY_REQUIREMENTS_NONE = [
@@ -72,16 +78,24 @@ exports.CAPABILTY_REQUIREMENTS_NONE = [
     argosApi_1.API.RF_RECORD_THREATS_GET_CONFIG,
     argosApi_1.API.SAPIENT_GET_CONFIGURATION,
     argosApi_1.API.SAPIENT_NODE_GET_LIST,
+    argosApi_1.API.SITE_TUNER_CALC_PARAM_START,
+    argosApi_1.API.SITE_TUNER_CALC_STATS_START,
+    argosApi_1.API.SITE_TUNER_GET_CONFIGURATION,
+    argosApi_1.API.SITE_TUNER_GET_PARAMETERS,
     argosApi_1.API.SYSTEM_LOG_GET_LIST,
     argosApi_1.API.TAK_GET_CONFIGURATION,
     argosApi_1.API.TAK_TRANSPORT_GET_LIST,
     argosApi_1.API.THREAT_TYPE_GET_LIST,
     argosApi_1.API.USER_LOGOUT,
     argosApi_1.API.UTHREAT_GET_CONFIGURATION,
-    argosApi_1.API.UTHREAT_GET_HISTORY_DATA,
     argosApi_1.API.UTHREAT_GET_HISTORY,
+    argosApi_1.API.UTHREAT_GET_HISTORY_DATA,
     argosApi_1.API.UTHREAT_GET_LIST,
+    argosApi_1.API.UTHREAT_GET_MUTE_STATUS,
+    argosApi_1.API.UTHREAT_PERSISTENT_AFFILIATION_GET_LIST,
+    argosApi_1.API.UTHREAT_SUBSCRIBE,
     argosApi_1.API.VMS_SDP_INIT,
     argosApi_1.API.VMS_STREAM_GET_LIST,
+    argosApi_1.API.TRACE_MARK,
 ];
 //# sourceMappingURL=argosApiCapabilities.js.map

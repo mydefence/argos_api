@@ -1,0 +1,21 @@
+{
+    "message": [
+        {
+            "uasId": "DJI-12345-ABCDEF",
+            "affiliation": "friendly",
+            "rfThreatTypesDrone": [1000100, 1000200],
+            "rfThreatTypesCtrl": [1000300, 1000400],
+            "persist": true,
+            "description": "Window cleaning drone #3"
+        },
+        {
+            "uasId": "AUTEL-67890-GHIJKL",
+            "affiliation": "neutral",
+            "rfThreatTypesDrone": [],
+            "rfThreatTypesCtrl": [],
+            "persist": "2026-12-31T23:59:59.999Z",
+            "description": "Survey drone for construction site"
+        }
+    ],
+    "event": "uthreatPersistentAffiliationList"
+}

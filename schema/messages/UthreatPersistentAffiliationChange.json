@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "title": "UthreatPersistentAffiliationChange",
+    "properties": {
+        "uasId": {
+            "type": "string",
+            "description": "Currently only uasID can be used to define a persistent ID"
+        },
+        "affiliation": {
+            "$ref": "./uthreat/AffiliationOrFalse.json#"
+        },
+        "rfThreatTypesDrone": {
+            "type": "array",
+            "items": {
+                "type": "number"
+            },
+            "description": "List of RF protocols that the Drone ID drone position is allowed to fuse with. rfThreatTypes refer to ThreatTypeList. The threat types are automatically found from the uthreat referred to in uthreatSetAffiliation. If empty it may fuse with any protocols."
+        },
+        "rfThreatTypesCtrl": {
+            "type": "array",
+            "items": {
+                "type": "number"
+            },
+            "description": "List of RF protocols that the Drone ID pilot position is allowed to fuse with. rfThreatTypes refer to ThreatTypeList. The threat types are automatically found from the uthreat referred to in uthreatSetAffiliation. If empty it may fuse with any protocols."
+        },
+        "persist": {
+            "oneOf": [{ "type": "boolean" }, { "type": "string" }],
+            "description": "true or end date"
+        },
+        "description": {
+            "type": "string",
+            "description": "The user may provide a description of the drone, e.g. DJI#3, Window cleaner. Otherwise a default description is generated."
+        }
+    },
+    "required": ["uasId"],
+    "additionalProperties": false
+}

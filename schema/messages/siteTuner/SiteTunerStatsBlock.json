@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "title": "SiteTunerStatsBlock",
+    "description": "Statistics of frequency/power for each suppressed/unsuppressed detection. Frequency and power will be rounded appropriately to give a useful grouping of detections.",
+    "definitions": {
+        "FrequencyPowerMap": {
+            "type": "object",
+            "description": "Map from frequency to map of power levels",
+            "title": "FrequencyMap",
+            "additionalProperties": {
+                "type": "object",
+                "description": "Map from power level to count of detections with that frequency and power level",
+                "title": "PowerLevelMap",
+                "additionalProperties": {
+                    "type": "number",
+                    "description": "Count of detections with that frequency and power level"
+                }
+            }
+        }
+    },
+    "properties": {
+        "suppressed": {
+            "$ref": "#/definitions/FrequencyPowerMap"
+        },
+        "unsuppressed": {
+            "$ref": "#/definitions/FrequencyPowerMap"
+        }
+    },
+    "required": ["suppressed", "unsuppressed"],
+    "additionalProperties": false
+}

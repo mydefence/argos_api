@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "title": "UthreatAffiliationChange",
+    "description": "Change affiliation of current or historic uthreat. The affiliations friendly, neutral, hostile will be interpreted as confirmation of true positive detection. falseDetection will cause the threat to be muted (mute type suppressed). The affiliation will be reflected in future UthreatHistory responses for uthreats with uthreatId. If the affiliation is persisted it will be confirmed with a uthreatPersistentAffiliationAdded and it will be reflected in all future UthreatHistory reports matching the Drone ID. UthreatHistoryData is never modified. If a threat contains a persistent ID (Drone ID) with a known affiliation, that affiliation has priority, and uthreatAffiliationChange will fail unless the persist flag is set to update the persistent affiliation.",
+    "properties": {
+        "uthreatId": {
+            "type": "string"
+        },
+        "affiliation": {
+            "$ref": "./uthreat/AffiliationOrFalse.json#"
+        },
+        "persist": {
+            "oneOf": [{ "type": "boolean" }, { "type": "string", "format": "date-time" }],
+            "description": "If this is set, and if the uthreat contains persistent IDs (i.e. Drone ID), the affiliation will be stored for future detections. A date-time value can be provided to specify when the persistence expires. In case persistence was possible a uthreatAffiliationAdded/Changed event will be emitted. Failure to find an appropriate persistent ID will be silently ignored. The affiliation is stored for the uthreatId if persistence is not requested or possible."
+        },
+        "description": {
+            "type": "string",
+            "description": "Optionally a string can be used to describe the drone, e.g. DJI#3, Window cleaner."
+        }
+    },
+    "required": ["uthreatId", "affiliation"],
+    "additionalProperties": false
+}

@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "title": "SiteTunerApplyParam",
+    "description": "Change SiteTuner parameters and configuration to the one specified by requestId",
+    "properties": {
+        "requestId": {
+            "type": "string",
+            "description": "The unique identifier of the calculated parameters to apply. If this ID does not match the last SiteTunerCalcParamStart / SiteTunerCalcParamResult the apply request will fail."
+        },
+        "lock": {
+            "type": "boolean",
+            "description": "If set the configuration is locked to the current settings. Otherwise it will be updated periodically."
+        }
+    },
+    "required": ["requestId", "lock"],
+    "additionalProperties": false
+}

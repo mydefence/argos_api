@@ -5,10 +5,22 @@
  */
 export type Uthreat = UthreatPresence | UthreatZone | UthreatDirection | UthreatLocation;
 /**
+ * Affiliation of threat. Also known as basic standard identity in MIL-STD-2525C. Extended with falseDetection.
+ */
+export type AffiliationOrFalse = Affiliation | "falseDetection";
+/**
+ * Affiliation of threat. Also known as basic standard identity in MIL-STD-2525C.
+ */
+export type Affiliation = "unknown" | "friendly" | "neutral" | "hostile";
+/**
  * Information about the frequency of an effector/detector.
  */
 export type FrequencyBand = "433" | "900" | "1G2" | "2G4" | "5G2" | "5G8" | "GNSS";
 export type UthreatBasis = UthreatBasisPresence | UthreatBasisZone | UthreatBasisDirection | UthreatBasisLocation;
+/**
+ * Affiliation of threat. Also known as basic standard identity in MIL-STD-2525C. Extended with falseDetection.
+ */
+export type AffiliationOrFalse1 = Affiliation | "falseDetection";
 /**
  * The type of the system component sending the threat.
  */
@@ -18,17 +30,41 @@ export type DetectionType = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio
  */
 export type Origin = "local" | "CoT";
 /**
+ * Affiliation of threat. Also known as basic standard identity in MIL-STD-2525C. Extended with falseDetection.
+ */
+export type AffiliationOrFalse2 = Affiliation | "falseDetection";
+/**
  * The type of the system component sending the threat.
  */
 export type DetectionType1 = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio" | "Vision" | "CoT";
+/**
+ * Affiliation of threat. Also known as basic standard identity in MIL-STD-2525C. Extended with falseDetection.
+ */
+export type AffiliationOrFalse3 = Affiliation | "falseDetection";
 /**
  * The type of the system component sending the threat.
  */
 export type DetectionType2 = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio" | "Vision" | "CoT";
 /**
+ * Affiliation of threat. Also known as basic standard identity in MIL-STD-2525C. Extended with falseDetection.
+ */
+export type AffiliationOrFalse4 = Affiliation | "falseDetection";
+/**
  * The type of the system component sending the threat.
  */
 export type DetectionType3 = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio" | "Vision" | "CoT";
+/**
+ * Affiliation of threat. Also known as basic standard identity in MIL-STD-2525C. Extended with falseDetection.
+ */
+export type AffiliationOrFalse5 = Affiliation | "falseDetection";
+/**
+ * Affiliation of threat. Also known as basic standard identity in MIL-STD-2525C. Extended with falseDetection.
+ */
+export type AffiliationOrFalse6 = Affiliation | "falseDetection";
+/**
+ * Affiliation of threat. Also known as basic standard identity in MIL-STD-2525C. Extended with falseDetection.
+ */
+export type AffiliationOrFalse7 = Affiliation | "falseDetection";
 export type UthreatList = Uthreat[];
 export type UthreatPresence = {
     /**
@@ -36,9 +72,10 @@ export type UthreatPresence = {
      */
     uthreatId: string;
     /**
-     * True if uthreat has been muted.
+     * `true` if uthreat has been muted using uthreatMute. `suppressed` is used with RF threats that have been removed by SiteFilter. `type` is used with RF threats that have been muted using threatTypeMute. Threats with muted state `suppressed` or `type` are not sent by default on API. They can be enabled using uthreatSubscribe.
      */
-    muted: boolean;
+    muted: boolean | ("suppressed" | "type");
+    affiliation: AffiliationOrFalse;
     /**
      * Used to link controller and drone.
      */
@@ -91,7 +128,7 @@ export type UthreatPresence = {
         possibleBands: FrequencyBand[];
     };
     /**
-     * Confidence in the detection, in 0.0 .. 1.0 .
+     * Confidence in the detection, in 0.0 .. 1.0.
      */
     confidence: number;
     /**
@@ -113,9 +150,10 @@ export type UthreatPresence = {
 };
 export type UthreatBasisPresence = {
     /**
-     * True if uthreat has been muted.
+     * `suppressed` is used with RF threats that have been removed by SiteFilter. `type` is used with RF threats that have been muted using threatTypeMute.
      */
-    muted?: boolean;
+    muted?: false | ("suppressed" | "type");
+    affiliation?: AffiliationOrFalse1;
     /**
      * The unique ID of the threat from a system component.
      */
@@ -196,7 +234,7 @@ export type UthreatBasisPresence = {
         rfEmitterId?: string;
     };
     /**
-     * Confidence in the detection, in 0.0 .. 1.0 .
+     * Confidence in the detection, in 0.0 .. 1.0.
      */
     confidence: number;
     /**
@@ -209,6 +247,25 @@ export type UthreatBasisPresence = {
      * @minItems 1
      */
     origins: [Origin, ...Origin[]];
+    /**
+     * All drone ID data decoded into a JSON object from Remote ID packets for this threat. Only available when detectionType is `Drone ID` and uthreatSubscribe.dridDetails is set.
+     */
+    dridDetails?: {
+        [k: string]: unknown;
+    };
+    /**
+     * If the device has classified the threat, this object contains the classification result.
+     */
+    classification?: {
+        /**
+         * The threat type as classified by the device. The possible values depend on the device. The legal values are a superset of all possible classifications from all supported devices.
+         */
+        class: "Aircraft" | "Bird" | "Clutter" | "Human" | "UAV Fixed Wing" | "UAV Multi Rotor" | "Vehicle";
+        /**
+         * The device's confidence in the classification. Range 0.0 .. 1.0.
+         */
+        probability: number;
+    };
     /**
      * UTC time of creation of this uthreat.
      */
@@ -224,9 +281,10 @@ export type UthreatBasisPresence = {
 };
 export type UthreatBasisZone = {
     /**
-     * True if uthreat has been muted.
+     * `suppressed` is used with RF threats that have been removed by SiteFilter. `type` is used with RF threats that have been muted using threatTypeMute.
      */
-    muted?: boolean;
+    muted?: false | ("suppressed" | "type");
+    affiliation?: AffiliationOrFalse2;
     /**
      * The unique ID of the threat from a system component.
      */
@@ -317,7 +375,7 @@ export type UthreatBasisZone = {
         rfEmitterId?: string;
     };
     /**
-     * Confidence in the detection, in 0.0 .. 1.0 .
+     * Confidence in the detection, in 0.0 .. 1.0.
      */
     confidence: number;
     /**
@@ -330,6 +388,25 @@ export type UthreatBasisZone = {
      * @minItems 1
      */
     origins: [Origin, ...Origin[]];
+    /**
+     * All drone ID data decoded into a JSON object from Remote ID packets for this threat. Only available when detectionType is `Drone ID` and uthreatSubscribe.dridDetails is set.
+     */
+    dridDetails?: {
+        [k: string]: unknown;
+    };
+    /**
+     * If the device has classified the threat, this object contains the classification result.
+     */
+    classification?: {
+        /**
+         * The threat type as classified by the device. The possible values depend on the device. The legal values are a superset of all possible classifications from all supported devices.
+         */
+        class: "Aircraft" | "Bird" | "Clutter" | "Human" | "UAV Fixed Wing" | "UAV Multi Rotor" | "Vehicle";
+        /**
+         * The device's confidence in the classification. Range 0.0 .. 1.0.
+         */
+        probability: number;
+    };
     /**
      * UTC time of creation of this uthreat.
      */
@@ -345,9 +422,10 @@ export type UthreatBasisZone = {
 };
 export type UthreatBasisDirection = {
     /**
-     * True if uthreat has been muted.
+     * `suppressed` is used with RF threats that have been removed by SiteFilter. `type` is used with RF threats that have been muted using threatTypeMute.
      */
-    muted?: boolean;
+    muted?: false | ("suppressed" | "type");
+    affiliation?: AffiliationOrFalse3;
     /**
      * The unique ID of the threat from a system component.
      */
@@ -446,7 +524,7 @@ export type UthreatBasisDirection = {
         rfEmitterId?: string;
     };
     /**
-     * Confidence in the detection, in 0.0 .. 1.0 .
+     * Confidence in the detection, in 0.0 .. 1.0.
      */
     confidence: number;
     /**
@@ -459,6 +537,25 @@ export type UthreatBasisDirection = {
      * @minItems 1
      */
     origins: [Origin, ...Origin[]];
+    /**
+     * All drone ID data decoded into a JSON object from Remote ID packets for this threat. Only available when detectionType is `Drone ID` and uthreatSubscribe.dridDetails is set.
+     */
+    dridDetails?: {
+        [k: string]: unknown;
+    };
+    /**
+     * If the device has classified the threat, this object contains the classification result.
+     */
+    classification?: {
+        /**
+         * The threat type as classified by the device. The possible values depend on the device. The legal values are a superset of all possible classifications from all supported devices.
+         */
+        class: "Aircraft" | "Bird" | "Clutter" | "Human" | "UAV Fixed Wing" | "UAV Multi Rotor" | "Vehicle";
+        /**
+         * The device's confidence in the classification. Range 0.0 .. 1.0.
+         */
+        probability: number;
+    };
     /**
      * UTC time of creation of this uthreat.
      */
@@ -474,9 +571,10 @@ export type UthreatBasisDirection = {
 };
 export type UthreatBasisLocation = {
     /**
-     * True if uthreat has been muted.
+     * `suppressed` is used with RF threats that have been removed by SiteFilter. `type` is used with RF threats that have been muted using threatTypeMute.
      */
-    muted?: boolean;
+    muted?: false | ("suppressed" | "type");
+    affiliation?: AffiliationOrFalse4;
     /**
      * The unique ID of the threat from a system component.
      */
@@ -586,7 +684,7 @@ export type UthreatBasisLocation = {
         rfEmitterId?: string;
     };
     /**
-     * Confidence in the detection, in 0.0 .. 1.0 .
+     * Confidence in the detection, in 0.0 .. 1.0.
      */
     confidence: number;
     /**
@@ -599,6 +697,25 @@ export type UthreatBasisLocation = {
      * @minItems 1
      */
     origins: [Origin, ...Origin[]];
+    /**
+     * All drone ID data decoded into a JSON object from Remote ID packets for this threat. Only available when detectionType is `Drone ID` and uthreatSubscribe.dridDetails is set.
+     */
+    dridDetails?: {
+        [k: string]: unknown;
+    };
+    /**
+     * If the device has classified the threat, this object contains the classification result.
+     */
+    classification?: {
+        /**
+         * The threat type as classified by the device. The possible values depend on the device. The legal values are a superset of all possible classifications from all supported devices.
+         */
+        class: "Aircraft" | "Bird" | "Clutter" | "Human" | "UAV Fixed Wing" | "UAV Multi Rotor" | "Vehicle";
+        /**
+         * The device's confidence in the classification. Range 0.0 .. 1.0.
+         */
+        probability: number;
+    };
     /**
      * UTC time of creation of this uthreat.
      */
@@ -618,9 +735,10 @@ export type UthreatZone = {
      */
     uthreatId: string;
     /**
-     * True if uthreat has been muted.
+     * `true` if uthreat has been muted using uthreatMute. `suppressed` is used with RF threats that have been removed by SiteFilter. `type` is used with RF threats that have been muted using threatTypeMute. Threats with muted state `suppressed` or `type` are not sent by default on API. They can be enabled using uthreatSubscribe.
      */
-    muted: boolean;
+    muted: boolean | ("suppressed" | "type");
+    affiliation: AffiliationOrFalse5;
     /**
      * Used to link controller and drone.
      */
@@ -683,7 +801,7 @@ export type UthreatZone = {
         possibleBands: FrequencyBand[];
     };
     /**
-     * Confidence in the detection, in 0.0 .. 1.0 .
+     * Confidence in the detection, in 0.0 .. 1.0.
      */
     confidence: number;
     /**
@@ -709,9 +827,10 @@ export type UthreatDirection = {
      */
     uthreatId: string;
     /**
-     * True if uthreat has been muted.
+     * `true` if uthreat has been muted using uthreatMute. `suppressed` is used with RF threats that have been removed by SiteFilter. `type` is used with RF threats that have been muted using threatTypeMute. Threats with muted state `suppressed` or `type` are not sent by default on API. They can be enabled using uthreatSubscribe.
      */
-    muted: boolean;
+    muted: boolean | ("suppressed" | "type");
+    affiliation: AffiliationOrFalse6;
     /**
      * Used to link controller and drone.
      */
@@ -782,7 +901,7 @@ export type UthreatDirection = {
         possibleBands: FrequencyBand[];
     };
     /**
-     * Confidence in the detection, in 0.0 .. 1.0 .
+     * Confidence in the detection, in 0.0 .. 1.0.
      */
     confidence: number;
     /**
@@ -808,9 +927,10 @@ export type UthreatLocation = {
      */
     uthreatId: string;
     /**
-     * True if uthreat has been muted.
+     * `true` if uthreat has been muted using uthreatMute. `suppressed` is used with RF threats that have been removed by SiteFilter. `type` is used with RF threats that have been muted using threatTypeMute. Threats with muted state `suppressed` or `type` are not sent by default on API. They can be enabled using uthreatSubscribe.
      */
-    muted: boolean;
+    muted: boolean | ("suppressed" | "type");
+    affiliation: AffiliationOrFalse7;
     /**
      * Used to link controller and drone.
      */
@@ -895,7 +1015,7 @@ export type UthreatLocation = {
         possibleBands: FrequencyBand[];
     };
     /**
-     * Confidence in the detection, in 0.0 .. 1.0 .
+     * Confidence in the detection, in 0.0 .. 1.0.
      */
     confidence: number;
     /**

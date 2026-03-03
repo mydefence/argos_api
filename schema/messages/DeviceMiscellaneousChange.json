@@ -5,6 +5,9 @@
     "type": "object",
     "oneOf": [
         {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousAssetDataChange.json#"
+        },
+        {
             "$ref": "./deviceMiscellaneous/DeviceMiscellaneousConfidenceThresholdChange.json#"
         },
         {

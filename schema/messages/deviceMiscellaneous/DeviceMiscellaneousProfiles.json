@@ -24,6 +24,9 @@
                     "oneOf": [
                         {
                             "$ref": "./profileGroup/ProfileGroupXentaRadar.json#"
+                        },
+                        {
+                            "$ref": "./profileGroup/ProfileGroupEchoShieldRadar.json#"
                         }
                     ],
                     "description": "The profile group of the device. Device specific constant.",

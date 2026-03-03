@@ -1,0 +1,16 @@
+{
+    "message": {
+        "paramConfig": {
+            "aggressiveness": 75,
+            "mobile": false,
+            "from": "2026-02-01T00:00:00.000Z",
+            "to": "2026-02-05T23:59:59.999Z",
+            "excludeTypeIds": [1000100, 1000200]
+        },
+        "flags": {
+            "enable": true,
+            "lock": false
+        }
+    },
+    "event": "siteTunerConfiguration"
+}

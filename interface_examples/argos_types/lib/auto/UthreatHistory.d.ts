@@ -4,6 +4,14 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 /**
+ * The affiliation of the uthreat. This affiliation is the latest configured for the uthreat, which may be changed after uthreat end using uthreatAffiliationAdd. This is different from the UthreatHistoryData affiliation, which always contains the affiliation when the threat was active.
+ */
+export type AffiliationOrFalse = Affiliation | "falseDetection";
+/**
+ * Affiliation of threat. Also known as basic standard identity in MIL-STD-2525C.
+ */
+export type Affiliation = "unknown" | "friendly" | "neutral" | "hostile";
+/**
  * The type of the system component sending the threat.
  */
 export type DetectionType = "RF" | "Radar" | "Drone ID" | "Demodulated" | "Audio" | "Vision" | "CoT";
@@ -36,6 +44,7 @@ export type UthreatHistory = {
          * Has the uthreat been muted in the given time interval.
          */
         muted: boolean;
+        affiliation: AffiliationOrFalse;
         /**
          * Was any uthreat confidence above the UthreatConfig.droneConfidenceThreshold at the time of detection.
          */
@@ -54,6 +63,10 @@ export type UthreatHistory = {
          * List of frequency bands related to this uthreat for the given time interval.
          */
         frequencyBands: FrequencyBand[];
+        /**
+         * The uasId of the uthreat if uthreat contains detection from sensor capable of identifying uasId.
+         */
+        uasId?: string;
         createdTimeStamp: string;
         stoppedTimeStamp?: string;
     }[];

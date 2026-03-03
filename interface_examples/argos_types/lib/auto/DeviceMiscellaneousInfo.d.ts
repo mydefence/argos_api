@@ -14,9 +14,13 @@ export type FrequencyBand = "433" | "900" | "1G2" | "2G4" | "5G2" | "5G8" | "GNS
  */
 export type XentaRadarProfile = "EarlyWarning" | "MultiPurpose" | "CUavMediumRange" | "CUavCloseRange";
 /**
+ * Profiles supported by the EchoShield radar
+ */
+export type EchoShieldRadarProfile = "C-UAS_1" | "C-UAS_2" | "DISMOUNT" | "COASTAL_C-UAS";
+/**
  * Device types tells what kind of device it is and with that what kind of attributes and abilities is available - must always be used in combination with deviceVersion and if composite with the sub/composite devices found under the devices list
  */
-export type DeviceType = "blackbird" | "jaegar" | "dobermann" | "dobermann360" | "dobermann_dual" | "duo" | "echoguard" | "gps" | "groundaware" | "hepta" | "hexa" | "penta" | "pentaDM1xx" | "pentaWD2xx" | "quad" | "quadWD2xx" | "trio" | "wd200" | "wingman" | "wl1" | "wm200" | "wolfpack" | "onvif" | "skyeye" | "blackbird5k" | "echoguardQuad" | "groundawareTrio" | "aps" | "ring" | "xenta" | "echoshield" | "echoshieldQuad" | "visionflex" | "composite" | "lizardEar" | "circleScope" | "tak";
+export type DeviceType = "blackbird" | "jaegar" | "dobermann" | "dobermann360" | "dobermann_dual" | "dobermannTrio" | "duo" | "echoguard" | "gps" | "groundaware" | "hepta" | "hexa" | "penta" | "pentaDM1xx" | "pentaWD2xx" | "quad" | "quadWD2xx" | "trio" | "wd200" | "wingman" | "wl1" | "wm200" | "wolfpack" | "onvif" | "skyeye" | "blackbird5k" | "echoguardQuad" | "groundawareTrio" | "aps" | "ring" | "xenta" | "echoshield" | "echoshieldQuad" | "visionflex" | "composite" | "lizardEar" | "circleScope" | "tak";
 export type DeviceMiscellaneousDeviceName = {
     /**
      * The device id
@@ -320,7 +324,7 @@ export type DeviceMiscellaneousAssetData = {
     deviceMiscellaneousType: DeviceMiscellaneousType & "assetData";
     deviceMiscellaneousData: {
         /**
-         * Various data for internal asset service. Not intended for usage by 3rd party integrators.
+         * Various data for internal asset service. You should normally never need to read or edit this data. For very specialized integrations.
          */
         assetData: {
             [k: string]: unknown;
@@ -337,7 +341,7 @@ export type DeviceMiscellaneousProfiles = {
         /**
          * The profile group of the device. Device specific constant.
          */
-        profileGroup: ProfileGroupXentaRadar;
+        profileGroup: ProfileGroupXentaRadar | ProfileGroupEchoShieldRadar;
         /**
          * The index (in `profileGroup.profiles`) of the active/wanted profile.
          */
@@ -353,6 +357,16 @@ export type ProfileGroupXentaRadar = {
      * The profiles in the profile group.
      */
     profiles: XentaRadarProfile[];
+};
+export type ProfileGroupEchoShieldRadar = {
+    /**
+     * The name of the profile group.
+     */
+    name: "EchoShieldRadar";
+    /**
+     * The profiles in the profile group.
+     */
+    profiles: EchoShieldRadarProfile[];
 };
 /**
  * The device miscellaneous data for (A)TAK devices provides additional information about the TAK user. Note that the callsign can be found in deviceMiscellaneous type "deviceName". All fields should be considered read-only.

@@ -9,6 +9,8 @@
                 "deviceLocationLongitude": 9.951365,
                 "deviceLocationHeading": 0,
                 "deviceLocationHeight": 0,
+                "deviceLocationX": 0,
+                "deviceLocationY": 0,
                 "deviceParentId": null
             }
         ]

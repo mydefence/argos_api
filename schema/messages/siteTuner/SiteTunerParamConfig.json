@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "SiteTunerParamConfig",
+    "type": "object",
+    "additionalProperties": false,
+    "description": "Configuration of SiteTuner parameters",
+    "properties": {
+        "aggressiveness": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100,
+            "description": "The user can select an aggressiveness level. Range 0-100. Refer to interface specification for details on how this value affects the Site Tuner parameters."
+        },
+        "mobile": {
+            "type": "boolean",
+            "description": "Setting this flag indicates the configuration is for a mobile device (mounted on a vehicle/vessel). Some commonly occurring threat types may be disabled, or have their detection settings adjusted. Clearing this indicate that the device is no longer mobile."
+        },
+        "from": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Analysis period start time in UTC ISO 8601 format"
+        },
+        "to": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Analysis period end time in UTC ISO 8601 format"
+        },
+        "excludeTypeIds": {
+            "type": "array",
+            "items": {
+                "type": "number"
+            },
+            "description": "List of detection type ids ( refer to threatType from ThreatTypeList) to exclude from suppression"
+        }
+    },
+    "required": ["aggressiveness", "mobile", "from", "to"]
+}

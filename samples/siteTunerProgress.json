@@ -1,0 +1,8 @@
+{
+    "message": {
+        "requestId": "req-12345-calc-param",
+        "progress": 75,
+        "description": "analyzing"
+    },
+    "event": "siteTunerProgress"
+}

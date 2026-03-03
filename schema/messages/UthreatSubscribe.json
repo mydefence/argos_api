@@ -1,0 +1,30 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "title": "UthreatSubscribe",
+    "description": "Per client configuration of optional data to receive. Must be set for each socket (re)connection.",
+    "properties": {
+        "suppressed": {
+            "type": "boolean",
+            "description": "If this is set uthreats that are suppressed by SiteTuner will also be sent on API. Default: false.",
+            "default": false
+        },
+        "typeMute": {
+            "type": "boolean",
+            "description": "If this is set uthreats that are muted using threatTypeMute will also be sent on API. Default: false.",
+            "default": false
+        },
+        "dridDetails": {
+            "oneOf": [
+                { "type": "boolean" },
+                {
+                    "type": "array",
+                    "items": { "type": "string" }
+                }
+            ],
+            "description": "Set to get complete decoded Remote ID packets (if available) in each uthreat update. Set to true to get Remote ID information on all uthreats. Alternatively provide a list of uthreatIds. Data will be available untyped on Drone ID uthreat basis element, except controllers where it will only be available on the associated drone uthreat. Default: false.",
+            "default": false
+        }
+    },
+    "additionalProperties": false
+}

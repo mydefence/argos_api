@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "title": "SiteTunerDetectionStats",
+    "description": "Map from numeric detection type ids to device specific statistics",
+    "additionalProperties": {
+        "type": "object",
+        "title": "DeviceIdToStatsMap",
+        "description": "Map from deviceIds to threat/alert suppression statistics",
+        "additionalProperties": {
+            "type": "object",
+            "properties": {
+                "threatStats": {
+                    "$ref": "./SiteTunerStatsBlock.json"
+                },
+                "alertStats": {
+                    "$ref": "./SiteTunerStatsBlock.json"
+                }
+            },
+            "required": ["threatStats", "alertStats"],
+            "additionalProperties": false
+        }
+    }
+}

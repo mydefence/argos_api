@@ -1,11 +1,11 @@
 {
   "name": "argos_types",
-  "version": "6.2.0",
+  "version": "6.3.0",
   "description": "Common types for Argos IPC",
   "author": "MyDefence A/S",
   "license": "Apache-2.0",
   "devDependencies": {
-    "axios": "^1.12.2",
+    "axios": "^1.13.5",
     "json-schema-to-typescript": "^15.0.4",
     "quicktype": "^23.2.6"
   },
@@ -13,6 +13,7 @@
     "lib/auto",
     "lib/argosApi*",
     "lib/argosClient*",
+    "lib/siteTuner.d.ts",
     "ts_src/argosClient.ts"
   ],
   "dependencies": {

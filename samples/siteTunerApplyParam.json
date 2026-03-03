@@ -1,0 +1,8 @@
+{
+    "message": {
+        "requestId": "req-calc-param-12345",
+        "lock": true
+    },
+    "event": "siteTunerApplyParam",
+    "responseId": "01ARZ3NDEKTSV4RRFFQ69G5FDY"
+}

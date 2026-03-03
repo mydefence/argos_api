@@ -25,6 +25,10 @@
                         "type": "boolean",
                         "description": "Has the uthreat been muted in the given time interval."
                     },
+                    "affiliation": {
+                        "$ref": "./uthreat/AffiliationOrFalse.json",
+                        "description": "The affiliation of the uthreat. This affiliation is the latest configured for the uthreat, which may be changed after uthreat end using uthreatAffiliationAdd. This is different from the UthreatHistoryData affiliation, which always contains the affiliation when the threat was active. "
+                    },
                     "aboveConfidenceThreshold": {
                         "type": "boolean",
                         "description": "Was any uthreat confidence above the UthreatConfig.droneConfidenceThreshold at the time of detection."
@@ -51,6 +55,10 @@
                         },
                         "description": "List of frequency bands related to this uthreat for the given time interval."
                     },
+                    "uasId": {
+                        "type": "string",
+                        "description": "The uasId of the uthreat if uthreat contains detection from sensor capable of identifying uasId."
+                    },
                     "createdTimeStamp": {
                         "type": "string"
                     },
@@ -64,6 +72,7 @@
                     "category",
                     "description",
                     "muted",
+                    "affiliation",
                     "detectionType",
                     "origins",
                     "createdTimeStamp",

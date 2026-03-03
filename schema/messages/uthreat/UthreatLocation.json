@@ -10,8 +10,20 @@
             "description": "The unique ID of the uthreat from the system."
         },
         "muted": {
-            "type": "boolean",
-            "description": "True if uthreat has been muted."
+            "oneOf": [
+                {
+                    "type": "boolean"
+                },
+                {
+                    "type": "string",
+                    "enum": ["suppressed", "type"]
+                }
+            ],
+            "description": "`true` if uthreat has been muted using uthreatMute. `suppressed` is used with RF threats that have been removed by SiteFilter. `type` is used with RF threats that have been muted using threatTypeMute. Threats with muted state `suppressed` or `type` are not sent by default on API. They can be enabled using uthreatSubscribe."
+        },
+        "affiliation": {
+            "$ref": "./AffiliationOrFalse.json",
+            "description": "Affiliation of threat. Also known as basic standard identity in MIL-STD-2525C. Extended with falseDetection."
         },
         "associatedUthreatId": {
             "type": "string",
@@ -115,7 +127,9 @@
         },
         "confidence": {
             "type": "number",
-            "description": "Confidence in the detection, in 0.0 .. 1.0 ."
+            "description": "Confidence in the detection, in 0.0 .. 1.0.",
+            "minimum": 0,
+            "maximum": 1
         },
         "uthreatBasis": {
             "type": "array",
@@ -140,6 +154,7 @@
     "required": [
         "uthreatId",
         "muted",
+        "affiliation",
         "description",
         "category",
         "location",

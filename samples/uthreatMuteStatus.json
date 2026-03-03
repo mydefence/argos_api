@@ -1,0 +1,7 @@
+{
+    "message": {
+        "suppressedCnt": 12,
+        "typeMuteCnt": 3
+    },
+    "event": "uthreatMuteStatus"
+}

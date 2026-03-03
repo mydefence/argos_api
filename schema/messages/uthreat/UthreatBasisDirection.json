@@ -6,8 +6,21 @@
     "additionalProperties": false,
     "properties": {
         "muted": {
-            "type": "boolean",
-            "description": "True if uthreat has been muted."
+            "oneOf": [
+                {
+                    "type": "boolean",
+                    "enum": [false]
+                },
+                {
+                    "type": "string",
+                    "enum": ["suppressed", "type"]
+                }
+            ],
+            "description": "`suppressed` is used with RF threats that have been removed by SiteFilter. `type` is used with RF threats that have been muted using threatTypeMute."
+        },
+        "affiliation": {
+            "$ref": "./AffiliationOrFalse.json",
+            "description": "Affiliation of threat. Also known as basic standard identity in MIL-STD-2525C. Extended with falseDetection."
         },
         "threatId": {
             "type": "string",
@@ -131,7 +144,9 @@
         },
         "confidence": {
             "type": "number",
-            "description": "Confidence in the detection, in 0.0 .. 1.0 ."
+            "description": "Confidence in the detection, in 0.0 .. 1.0.",
+            "minimum": 0,
+            "maximum": 1
         },
         "threatType": {
             "type": "number",
@@ -144,6 +159,29 @@
                 "$ref": "./Origin.json"
             },
             "minItems": 1
+        },
+        "dridDetails": {
+            "type": "object",
+            "description": "All drone ID data decoded into a JSON object from Remote ID packets for this threat. Only available when detectionType is `Drone ID` and uthreatSubscribe.dridDetails is set."
+        },
+        "classification": {
+            "type": "object",
+            "description": "If the device has classified the threat, this object contains the classification result.",
+            "properties": {
+                "class": {
+                    "type": "string",
+                    "description": "The threat type as classified by the device. The possible values depend on the device. The legal values are a superset of all possible classifications from all supported devices.",
+                    "enum": ["Aircraft", "Bird", "Clutter", "Human", "UAV Fixed Wing", "UAV Multi Rotor", "Vehicle"]
+                },
+                "probability": {
+                    "type": "number",
+                    "description": "The device's confidence in the classification. Range 0.0 .. 1.0.",
+                    "minimum": 0,
+                    "maximum": 1
+                }
+            },
+            "required": ["class", "probability"],
+            "additionalProperties": false
         },
         "createdTimeStamp": {
             "type": "string",

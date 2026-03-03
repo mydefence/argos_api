@@ -1,0 +1,10 @@
+{
+    "message": {
+        "uthreatId": "uthreat-abc123-def456",
+        "affiliation": "friendly",
+        "persist": true,
+        "description": "Authorized maintenance drone"
+    },
+    "event": "uthreatAffiliationChange",
+    "responseId": "01ARZ3NDEKTSV4RRFFQ69G5FH2"
+}

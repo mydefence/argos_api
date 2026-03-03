@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "title": "SiteTunerProgress",
+    "description": "Progress of calculation initiated with SiteTunerCalcParam or SiteTunerCalcStats",
+    "properties": {
+        "requestId": {
+            "type": "string",
+            "description": "requestId from SiteTunerCalcParam or SiteTunerCalcStats"
+        },
+        "progress": {
+            "type": "number",
+            "description": "Progress percentage 0-100",
+            "minimum": 0,
+            "maximum": 100
+        },
+        "description": {
+            "type": "string",
+            "enum": ["analyzing", "generating", "simulating"]
+        }
+    },
+    "required": ["requestId", "progress", "description"],
+    "additionalProperties": false
+}

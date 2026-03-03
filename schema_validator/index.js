@@ -6948,7 +6948,44 @@ var Socket_io_message_default = {
         "takTransportUpdated",
         "userWelcome",
         "userLogout",
-        "userLogoutCompleted"
+        "userLogoutCompleted",
+        "siteTunerConfiguration",
+        "siteTunerConfigure",
+        "siteTunerConfigureCompleted",
+        "siteTunerGetConfiguration",
+        "siteTunerGetParameters",
+        "siteTunerParameters",
+        "siteTunerCalcParamStart",
+        "siteTunerCalcParamStartCompleted",
+        "siteTunerCalcParamStartError",
+        "siteTunerCalcParamResult",
+        "siteTunerApplyParam",
+        "siteTunerApplyParamCompleted",
+        "siteTunerApplyParamError",
+        "siteTunerCalcStatsStart",
+        "siteTunerCalcStatsStartCompleted",
+        "siteTunerCalcStatsStartError",
+        "siteTunerCalcStatsResult",
+        "siteTunerProgress",
+        "uthreatSubscribe",
+        "uthreatSubscribeCompleted",
+        "uthreatGetMuteStatus",
+        "uthreatMuteStatus",
+        "uthreatAffiliationChange",
+        "uthreatAffiliationChangeCompleted",
+        "uthreatAffiliationChangeError",
+        "uthreatPersistentAffiliationAdded",
+        "uthreatPersistentAffiliationGetList",
+        "uthreatPersistentAffiliationList",
+        "uthreatPersistentAffiliationChange",
+        "uthreatPersistentAffiliationChanged",
+        "uthreatPersistentAffiliationChangeCompleted",
+        "uthreatPersistentAffiliationChangeError",
+        "uthreatPersistentAffiliationRemove",
+        "uthreatPersistentAffiliationRemoved",
+        "uthreatPersistentAffiliationRemoveCompleted",
+        "uthreatPersistentAffiliationRemoveError",
+        "traceMark"
       ]
     },
     message: {
@@ -7782,6 +7819,154 @@ var Socket_io_message_default = {
     {
       if: { properties: { event: { const: "userLogoutCompleted" } } },
       then: { properties: { message: { $ref: "./messages/Empty.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "siteTunerConfiguration" } } },
+      then: { properties: { message: { $ref: "./messages/SiteTunerConfiguration.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "siteTunerConfigure" } } },
+      then: { properties: { message: { $ref: "./messages/SiteTunerConfigure.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "siteTunerConfigureCompleted" } } },
+      then: { properties: { message: { $ref: "./messages/SiteTunerConfiguration.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "siteTunerGetConfiguration" } } },
+      then: { properties: { message: { $ref: "./messages/Empty.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "siteTunerGetParameters" } } },
+      then: { properties: { message: { $ref: "./messages/Empty.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "siteTunerParameters" } } },
+      then: { properties: { message: { $ref: "./messages/SiteTunerParameters.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "siteTunerCalcParamStart" } } },
+      then: { properties: { message: { $ref: "./messages/SiteTunerCalcParamStart.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "siteTunerCalcParamStartCompleted" } } },
+      then: { properties: { message: { $ref: "./messages/Empty.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "siteTunerCalcParamStartError" } } },
+      then: { properties: { message: { $ref: "./messages/Error.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "siteTunerCalcParamResult" } } },
+      then: { properties: { message: { $ref: "./messages/SiteTunerCalcParamResult.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "siteTunerApplyParam" } } },
+      then: { properties: { message: { $ref: "./messages/SiteTunerApplyParam.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "siteTunerApplyParamCompleted" } } },
+      then: { properties: { message: { $ref: "./messages/Empty.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "siteTunerApplyParamError" } } },
+      then: { properties: { message: { $ref: "./messages/Error.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "siteTunerCalcStatsStart" } } },
+      then: { properties: { message: { $ref: "./messages/SiteTunerCalcStatsStart.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "siteTunerCalcStatsStartCompleted" } } },
+      then: { properties: { message: { $ref: "./messages/Empty.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "siteTunerCalcStatsStartError" } } },
+      then: { properties: { message: { $ref: "./messages/Error.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "siteTunerCalcStatsResult" } } },
+      then: { properties: { message: { $ref: "./messages/SiteTunerCalcStatsResult.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "siteTunerProgress" } } },
+      then: { properties: { message: { $ref: "./messages/SiteTunerProgress.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "uthreatSubscribe" } } },
+      then: { properties: { message: { $ref: "./messages/UthreatSubscribe.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "uthreatSubscribeCompleted" } } },
+      then: { properties: { message: { $ref: "./messages/UthreatSubscribeCompleted.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "uthreatGetMuteStatus" } } },
+      then: { properties: { message: { $ref: "./messages/Empty.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "uthreatMuteStatus" } } },
+      then: { properties: { message: { $ref: "./messages/UthreatMuteStatus.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "uthreatAffiliationChange" } } },
+      then: { properties: { message: { $ref: "./messages/UthreatAffiliationChange.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "uthreatAffiliationChangeCompleted" } } },
+      then: { properties: { message: { $ref: "./messages/Empty.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "uthreatAffiliationChangeError" } } },
+      then: { properties: { message: { $ref: "./messages/Error.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "uthreatPersistentAffiliationAdded" } } },
+      then: { properties: { message: { $ref: "./messages/UthreatPersistentAffiliation.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "uthreatPersistentAffiliationGetList" } } },
+      then: { properties: { message: { $ref: "./messages/Empty.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "uthreatPersistentAffiliationList" } } },
+      then: { properties: { message: { $ref: "./messages/UthreatPersistentAffiliationList.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "uthreatPersistentAffiliationChange" } } },
+      then: { properties: { message: { $ref: "./messages/UthreatPersistentAffiliationChange.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "uthreatPersistentAffiliationChanged" } } },
+      then: { properties: { message: { $ref: "./messages/UthreatPersistentAffiliation.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "uthreatPersistentAffiliationChangeCompleted" } } },
+      then: { properties: { message: { $ref: "./messages/Empty.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "uthreatPersistentAffiliationChangeError" } } },
+      then: { properties: { message: { $ref: "./messages/Error.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "uthreatPersistentAffiliationRemove" } } },
+      then: { properties: { message: { $ref: "./messages/UthreatPersistentAffiliationRemove.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "uthreatPersistentAffiliationRemoved" } } },
+      then: { properties: { message: { $ref: "./messages/UthreatPersistentAffiliationRemoved.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "uthreatPersistentAffiliationRemoveCompleted" } } },
+      then: { properties: { message: { $ref: "./messages/Empty.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "uthreatPersistentAffiliationRemoveError" } } },
+      then: { properties: { message: { $ref: "./messages/Error.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "traceMark" } } },
+      then: { properties: { message: { $ref: "./messages/TraceMark.json#" } } }
     }
   ]
 };

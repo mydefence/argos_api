@@ -1,0 +1,39 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "title": "SiteTunerStatistics",
+    "properties": {
+        "threatCount": {
+            "type": "number",
+            "description": "Total number of threats (uthreat basis threats with detection type RF) including suppressed in the analysis period"
+        },
+        "partiallySuppressedCount": {
+            "type": "number",
+            "description": "Number of threats that were suppressed for some of its duration"
+        },
+        "fullySuppressedCount": {
+            "type": "number",
+            "description": "Number of threats that were suppressed for its entire duration"
+        },
+        "threatTime": {
+            "type": "number",
+            "description": "Total time in seconds that threats (including suppressed) were active during the analysis period. Threats that have been marked as true positive, and threats that are in the excludeTypeIds list are not included."
+        },
+        "suppressedTime": {
+            "type": "number",
+            "description": "Total time in seconds that threats were suppressed during the analysis period"
+        },
+        "detectionStats": {
+            "$ref": "./SiteTunerDetectionStats.json"
+        }
+    },
+    "required": [
+        "threatCount",
+        "partiallySuppressedCount",
+        "fullySuppressedCount",
+        "threatTime",
+        "suppressedTime",
+        "detectionStats"
+    ],
+    "additionalProperties": false
+}

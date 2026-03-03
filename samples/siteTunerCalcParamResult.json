@@ -1,0 +1,58 @@
+{
+    "message": {
+        "requestId": "req-calc-param-12345",
+        "parameters": {
+            "1000100": {
+                "device123": [
+                    {
+                        "minFrequency": 2400000000,
+                        "maxFrequency": 2450000000,
+                        "minPower": -80,
+                        "maxPower": -60
+                    }
+                ]
+            }
+        },
+        "statistics": {
+            "threatCount": 42,
+            "partiallySuppressedCount": 15,
+            "fullySuppressedCount": 8,
+            "threatTime": 3600.5,
+            "suppressedTime": 1800.25,
+            "detectionStats": {
+                "1000100": {
+                    "device123": {
+                        "threatStats": {
+                            "suppressed": {
+                                "2425000000": {
+                                    "-70": 5,
+                                    "-65": 3
+                                }
+                            },
+                            "unsuppressed": {
+                                "2425000000": {
+                                    "-50": 2,
+                                    "-45": 1
+                                }
+                            }
+                        },
+                        "alertStats": {
+                            "suppressed": {
+                                "2425000000": {
+                                    "-70": 2,
+                                    "-65": 1
+                                }
+                            },
+                            "unsuppressed": {
+                                "2425000000": {
+                                    "-50": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "event": "siteTunerCalcParamResult"
+}

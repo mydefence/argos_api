@@ -1,0 +1,7 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Affiliation",
+    "description": "Affiliation of threat. Also known as basic standard identity in MIL-STD-2525C.",
+    "type": "string",
+    "enum": ["unknown", "friendly", "neutral", "hostile"]
+}

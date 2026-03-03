@@ -1,0 +1,11 @@
+{
+    "message": {
+        "uasId": "DJI-12345-ABCDEF",
+        "affiliation": "neutral",
+        "rfThreatTypesDrone": [1000100],
+        "rfThreatTypesCtrl": [1000300],
+        "persist": true,
+        "description": "Updated window cleaning drone #3"
+    },
+    "event": "uthreatPersistentAffiliationChanged"
+}

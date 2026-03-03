@@ -1,5 +1,50 @@
 # Release Note for ARGOS Software
 
+## Version 6.3.0
+
+## Attention
+
+-   API: `missionCenter` properties `latitude` and `longitude` may no longer be `null`.
+-   API: `deviceLocationChanged` and  `deviceLocations` properties `deviceLocationX` and
+    `deviceLocationY` are now required (always present).
+-   EchoShield: Minimum supported SW version is now 8.0.0.
+-   API: DeviceMiscellaneousData type `assetData` may be modified from API. For very advanced
+    integrations only.
+-   API: Uthreat/UthreatBasis property `muted` can now also have values `suppressed` and `type`. This
+    will only happen if the client has subscribed for suppressed uthreats.
+-   UthreatBasis threat property can no longer have value `true`.
+-   API: Additional property `affiliation` added to Uthreat and UthreatHistory.
+-   API: uthreatHistory elements now includes property `uasId` if it has been decoded by a sensor.
+-   uthreat history database will be reset.
+
+## Improvements
+
+-   Mission center is automatically set to match device locations. For vehicle solutions it will be
+    automatically updated as the vehicle moves with appropriate intervals.
+-   Support for marking affiliation (friend, hostile, etc.) of drones, including TAK integration.
+-   GPS asset support for general NMEA message handling. Compass orientation
+    will translate to asset heading in `deviceGeolocation`.
+-   GPS asset ip and port may be specified as <ip>:<port> when adding the asset.
+-   Alarm zone ignores threats with friendly or neutral affiliation.
+-   ECM auto-jamming ignores threats with friendly or neutral affiliation.
+-   The ONVIF camera asset has been updated to support additional types of ONVIF cameras.
+-   EchoShield: Support for SW version 8.
+-   API: Optional classification property added to UthreatBasis to convey information about
+    classification for devices supporting classification.
+-   Preview of Site Tuner feature for reducing false alarm rate on installations. The feature works
+    by analyzing internal database collections and setting up filters for unwanted threats. The
+    feature is still under development. Use at own risk.
+-   Support for composite of 3 Dobermann RF effectors.
+-   Sapient: detectionReports uses `objectInfo` to describe the detected threat, e.g. the RF
+    protocol detected.
+-   Sapient: detectionReports uses the `state` field to convey the state of the threat. Value will
+    transition from `started` to `updated` to `stopped`.
+-   Sapient: RF geolocated threats will, along with rangeBearing detectionReports from each sensor,
+    also result in a location detectionReport from one of the involved sensors. Location detection
+    reports will be sent from the same device throughout the lifetime of the threat. The feature is
+    enabled by default, but can be disabled in environment via
+    `SAPIENT_RF_GEOLOCATION_ON_EDGE_NODE`.
+
 ## Version 6.2.0
 
 ### Attention
@@ -84,7 +129,7 @@ Also see ArgosInterfaceSpecification for default users and passwords.
     increased to `2.17.0`.
 -   Lowest supported EchoDyne EchoShield radar SW version has been increased to
     bundle version `7.8.0`.
--   EchoShield height must now be relative to WGS84 ellipsoid
+-   EchoShield height must now be relative to WGS84 ellipsoid.
 -   User management: Socket.io connection must be established with an
     authentication cookie (user token) acquired from the System Manager login
     API endpoint. Refer to the updated ArgosInterfaceSpecification and node.js
@@ -167,7 +212,7 @@ versioning.
 
 ### Bug fixes
 
--   fix missing followUthreatId in ptzFollowStarted message
+-   fix missing followUthreatId in ptzFollowStarted message.
 
 ## Version 5.2.0
 
@@ -175,12 +220,12 @@ versioning.
 
 -   API
     -   Optional field `startTime` removed from `systemState`
--   Support for OpenWorks Vision Flex camera V1 API removed
+-   Support for OpenWorks Vision Flex camera V1 API removed.
 
 ### Improvements
 
--   Support for CircleScope tracker
--   Support for OpenWorks Vision Flex camera V2 API
+-   Support for CircleScope tracker.
+-   Support for OpenWorks Vision Flex camera V2 API.
 -   Discover composite devices even if some child is not working. Wolfpack and
     Dobermann Dual/360 devices will be added to the device list after discovery
     of the first child (used to be after discovery of all children). This makes
@@ -339,8 +384,8 @@ versioning.
 -   handle drone ID from DJI (tested with DJI Mavic 3 Classic and DJI Air 3)
 -   API: Added `confidenceThresholdMax` to
     DeviceMiscellaneousConfidenceThreshold.
--   Support for Echodyne EchoShield radar
--   Support for OpenWorks Vision Flex camera
+-   Support for Echodyne EchoShield radar..
+-   Support for OpenWorks Vision Flex camera.
 -   Support for Weibel XENTA-C radar (asterix protocol). Support was actually
     included in 4.3.0 but had not been validated, and was therefore not
     announced.
@@ -423,7 +468,7 @@ versioning.
     sensor and effector devices. See API description in interface specification.
 -   New SystemLog API added: Note that system events are pushed to connected
     clients. See interface specification for more information.
--   Improved EchoGuard handling
+-   Improved EchoGuard handling.
 
 ## Version v4.1.1
 
@@ -668,10 +713,10 @@ versioning.
 
 ### Bug fixes
 
--   Schema files for alarm zone api corrected
--   Auto jam bug fix regarding handling of multiple threats
--   Auto jam bug fix regarding handling of Dobermann 360
--   Auto jam bug fix regarding allowGnss mode
+-   Schema files for alarm zone api corrected.
+-   Auto jam bug fix regarding handling of multiple threats.
+-   Auto jam bug fix regarding handling of Dobermann 360.
+-   Auto jam bug fix regarding allowGnss mode.
 
 ## Version v2.7.0
 
@@ -745,7 +790,7 @@ versioning.
 
 ### Bug fixes
 
--   Fix for pan degree outside +/- 360
+-   Fix for pan degree outside +/- 360.
 
 ## Version v2.6.0
 
@@ -762,10 +807,10 @@ versioning.
 -   getVersions/versions API removed. getSystemState/systemState provides the
     same.
 -   Dynamic treatTypes pulled from mounted devices
--   Added Echoguard device
--   Added Groundaware device
--   Added Blackbird device
--   Reworked ECM interface
+-   Added Echoguard device.
+-   Added Groundaware device.
+-   Added Blackbird device.
+-   Reworked ECM interface.
 
 ### Bug fixes
 
@@ -812,8 +857,8 @@ versioning.
 
 ### Bug fixes
 
--   wrong start of Dobermann GNSS jamming
--   Reconnect issue
+-   wrong start of Dobermann GNSS jamming.
+-   Reconnect issue.
 
 ## Version v2.3.1
 
@@ -823,7 +868,7 @@ versioning.
 
 ### Bug fixes
 
--   Composite devices could not be updated after GPS location update
+-   Composite devices could not be updated after GPS location update..
 
 ## Version v2.3.0
 
@@ -831,9 +876,9 @@ versioning.
 
 ### Improvements
 
--   Added support Dobermann Dual
--   "productName" in miscellaneous data
--   "deviceName" now initialized to "productName"
+-   Added support Dobermann Dual.
+-   "productName" in miscellaneous data.
+-   "deviceName" now initialized to "productName".
 
 ### Bug fixes
 
@@ -845,7 +890,7 @@ versioning.
 
 ### Improvements
 
--   Added support for hepta device
+-   Added support for hepta device..
 
 ## Version v2.2.0
 
@@ -853,7 +898,7 @@ versioning.
 
 ### Improvements
 
--   Added support for joining devices into a composite device
+-   Added support for joining devices into a composite device..
 
 ### Bug fixes
 
@@ -873,13 +918,13 @@ versioning.
 
 ### Improvements
 
--   Added GPS support for devices able to provide GPS location data
--   Updated the API with a new intermediate states
--   Improved the Argos log system
+-   Added GPS support for devices able to provide GPS location data.
+-   Updated the API with a new intermediate states.
+-   Improved the Argos log system.
 -   device_register service replaced by device_state service with improved
     internal state handling
--   Wolfpack v. 3 support
--   Watchdog v. 3 support
+-   Wolfpack v. 3 support.
+-   Watchdog v. 3 support.
 
 ## Version v2.2.0
 
@@ -887,7 +932,7 @@ versioning.
 
 ### Improvements
 
--   Now composite devices can be created from Iris
--   It is now possible to set the serial number on devices from the API
+-   Now composite devices can be created from Iris..
+-   It is now possible to set the serial number on devices from the API..
 
 ### Bug fixes

@@ -3,7 +3,7 @@
  * DO NOT MODIFY IT BY HAND. Instead, modify the source JSONSchema file,
  * and run json-schema-to-typescript to regenerate this file.
  */
-export type DeviceMiscellaneousChange = DeviceMiscellaneousConfidenceThresholdChange | DeviceMiscellaneousDeviceNameChange | DeviceMiscellaneousDeviceOrderChange | DeviceMiscellaneousDeviceOrientationChange | DeviceMiscellaneousDeviceRangeChange | DeviceMiscellaneousFrequencyBandsChange | DeviceMiscellaneousNominalTargetSizeChange | DeviceMiscellaneousProductNameChange | DeviceMiscellaneousProfilesChange | DeviceMiscellaneousPtzDefaultDistanceChange | DeviceMiscellaneousPtzDefaultHeightChange | DeviceMiscellaneousPtzLimitsChange | DeviceMiscellaneousRingSettingsChange | DeviceMiscellaneousTakInfoChange | DeviceMiscellaneousUseGPSLocationChange;
+export type DeviceMiscellaneousChange = DeviceMiscellaneousAssetDataChange | DeviceMiscellaneousConfidenceThresholdChange | DeviceMiscellaneousDeviceNameChange | DeviceMiscellaneousDeviceOrderChange | DeviceMiscellaneousDeviceOrientationChange | DeviceMiscellaneousDeviceRangeChange | DeviceMiscellaneousFrequencyBandsChange | DeviceMiscellaneousNominalTargetSizeChange | DeviceMiscellaneousProductNameChange | DeviceMiscellaneousProfilesChange | DeviceMiscellaneousPtzDefaultDistanceChange | DeviceMiscellaneousPtzDefaultHeightChange | DeviceMiscellaneousPtzLimitsChange | DeviceMiscellaneousRingSettingsChange | DeviceMiscellaneousTakInfoChange | DeviceMiscellaneousUseGPSLocationChange;
 export type DeviceMiscellaneousType = "deviceName" | "productName" | "deviceOrientation" | "deviceOrder" | "frequencyBands" | "droneList" | "useGPSLocation" | "ptzLimits" | "deviceRange" | "confidenceThreshold" | "ringSettings" | "assetData" | "profiles" | "takInfo" | "ptzDefaultDistance" | "ptzDefaultHeight" | "nominalTargetSize";
 /**
  * Information about the frequency of an effector/detector.
@@ -12,7 +12,22 @@ export type FrequencyBand = "433" | "900" | "1G2" | "2G4" | "5G2" | "5G8" | "GNS
 /**
  * Device types tells what kind of device it is and with that what kind of attributes and abilities is available - must always be used in combination with deviceVersion and if composite with the sub/composite devices found under the devices list
  */
-export type DeviceType = "blackbird" | "jaegar" | "dobermann" | "dobermann360" | "dobermann_dual" | "duo" | "echoguard" | "gps" | "groundaware" | "hepta" | "hexa" | "penta" | "pentaDM1xx" | "pentaWD2xx" | "quad" | "quadWD2xx" | "trio" | "wd200" | "wingman" | "wl1" | "wm200" | "wolfpack" | "onvif" | "skyeye" | "blackbird5k" | "echoguardQuad" | "groundawareTrio" | "aps" | "ring" | "xenta" | "echoshield" | "echoshieldQuad" | "visionflex" | "composite" | "lizardEar" | "circleScope" | "tak";
+export type DeviceType = "blackbird" | "jaegar" | "dobermann" | "dobermann360" | "dobermann_dual" | "dobermannTrio" | "duo" | "echoguard" | "gps" | "groundaware" | "hepta" | "hexa" | "penta" | "pentaDM1xx" | "pentaWD2xx" | "quad" | "quadWD2xx" | "trio" | "wd200" | "wingman" | "wl1" | "wm200" | "wolfpack" | "onvif" | "skyeye" | "blackbird5k" | "echoguardQuad" | "groundawareTrio" | "aps" | "ring" | "xenta" | "echoshield" | "echoshieldQuad" | "visionflex" | "composite" | "lizardEar" | "circleScope" | "tak";
+export type DeviceMiscellaneousAssetDataChange = {
+    /**
+     * The device id
+     */
+    deviceId: string;
+    deviceMiscellaneousType: DeviceMiscellaneousType & "assetData";
+    deviceMiscellaneousData: {
+        /**
+         * Various data for internal asset service. You should normally never need to read or edit this data. For very specialized integrations.
+         */
+        assetData?: {
+            [k: string]: unknown;
+        };
+    };
+};
 export type DeviceMiscellaneousConfidenceThresholdChange = {
     /**
      * The device id

@@ -10,13 +10,13 @@
     "license": "ISC",
     "dependencies": {
         "argos_types": "file:../argos_types",
-        "axios": "1.12.2",
+        "axios": "1.13.1",
         "socket.io-client": "4.8.1",
         "uniqid": "5.4.0"
     },
     "devDependencies": {
-        "@types/node": "22.17.1",
+        "@types/node": "24.10.0",
         "@types/uniqid": "5.3.4",
-        "typescript": "5.9.2"
+        "typescript": "5.9.3"
     }
 }

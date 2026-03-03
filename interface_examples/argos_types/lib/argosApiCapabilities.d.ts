@@ -10,6 +10,7 @@
 import { ArgosTypesMap, UserCapability } from './argosApi';
 /** This lists all incoming events with requirement for user capabilities. Notice, that GNSS related
  * requests also need `CAP_C2_GNSS` capability (see ArgosInterfaceSpecification.pdf for more info).
+ * If multiple capabilities are listed, then *either* one of them is sufficient.
  * */
 export declare const CAPABILTY_REQUIREMENTS: Partial<Record<keyof ArgosTypesMap, UserCapability | UserCapability[]>>;
 /** This lists all incoming events with ***no*** requirement for user capabilities. */

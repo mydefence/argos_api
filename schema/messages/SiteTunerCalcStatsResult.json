@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "title": "SiteTunerCalcStatsResult",
+    "description": "Result of statistics calculation for SiteTuner",
+    "properties": {
+        "requestId": {
+            "type": "string",
+            "description": "The unique identifier of the calc stats request. The user should validate the requestId"
+        },
+        "statistics": {
+            "$ref": "./siteTuner/SiteTunerStatistics.json"
+        }
+    },
+    "required": ["requestId", "statistics"],
+    "additionalProperties": false
+}

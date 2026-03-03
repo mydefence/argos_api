@@ -167,6 +167,44 @@ import { UserWelcome } from './auto/UserWelcome';
 export { UserWelcome } from './auto/UserWelcome';
 import { UserLogout } from './auto/UserLogout';
 export { UserLogout } from './auto/UserLogout';
+import { SiteTunerConfiguration } from './auto/SiteTunerConfiguration';
+export { SiteTunerConfiguration } from './auto/SiteTunerConfiguration';
+import { SiteTunerConfigure } from './auto/SiteTunerConfigure';
+export { SiteTunerConfigure } from './auto/SiteTunerConfigure';
+import { SiteTunerParameters } from './auto/SiteTunerParameters';
+export { SiteTunerParameters } from './auto/SiteTunerParameters';
+import { SiteTunerCalcParamStart } from './auto/SiteTunerCalcParamStart';
+export { SiteTunerCalcParamStart } from './auto/SiteTunerCalcParamStart';
+import { SiteTunerCalcParamResult } from './auto/SiteTunerCalcParamResult';
+export { SiteTunerCalcParamResult } from './auto/SiteTunerCalcParamResult';
+import { SiteTunerApplyParam } from './auto/SiteTunerApplyParam';
+export { SiteTunerApplyParam } from './auto/SiteTunerApplyParam';
+import { SiteTunerCalcStatsStart } from './auto/SiteTunerCalcStatsStart';
+export { SiteTunerCalcStatsStart } from './auto/SiteTunerCalcStatsStart';
+import { SiteTunerCalcStatsResult } from './auto/SiteTunerCalcStatsResult';
+export { SiteTunerCalcStatsResult } from './auto/SiteTunerCalcStatsResult';
+import { SiteTunerProgress } from './auto/SiteTunerProgress';
+export { SiteTunerProgress } from './auto/SiteTunerProgress';
+import { UthreatSubscribe } from './auto/UthreatSubscribe';
+export { UthreatSubscribe } from './auto/UthreatSubscribe';
+import { UthreatSubscribeCompleted } from './auto/UthreatSubscribeCompleted';
+export { UthreatSubscribeCompleted } from './auto/UthreatSubscribeCompleted';
+import { UthreatMuteStatus } from './auto/UthreatMuteStatus';
+export { UthreatMuteStatus } from './auto/UthreatMuteStatus';
+import { UthreatAffiliationChange } from './auto/UthreatAffiliationChange';
+export { UthreatAffiliationChange } from './auto/UthreatAffiliationChange';
+import { UthreatPersistentAffiliation } from './auto/UthreatPersistentAffiliation';
+export { UthreatPersistentAffiliation } from './auto/UthreatPersistentAffiliation';
+import { UthreatPersistentAffiliationList } from './auto/UthreatPersistentAffiliationList';
+export { UthreatPersistentAffiliationList } from './auto/UthreatPersistentAffiliationList';
+import { UthreatPersistentAffiliationChange } from './auto/UthreatPersistentAffiliationChange';
+export { UthreatPersistentAffiliationChange } from './auto/UthreatPersistentAffiliationChange';
+import { UthreatPersistentAffiliationRemove } from './auto/UthreatPersistentAffiliationRemove';
+export { UthreatPersistentAffiliationRemove } from './auto/UthreatPersistentAffiliationRemove';
+import { UthreatPersistentAffiliationRemoved } from './auto/UthreatPersistentAffiliationRemoved';
+export { UthreatPersistentAffiliationRemoved } from './auto/UthreatPersistentAffiliationRemoved';
+import { TraceMark } from './auto/TraceMark';
+export { TraceMark } from './auto/TraceMark';
 export type DeviceAdded = Device;
 export type DeviceRemoved = Device;
 export type DeviceUpdated = Device;
@@ -314,6 +352,25 @@ export type TakConfigureError = Error;
 export type TakTransportGetList = Empty;
 export type TakTransportUpdated = TakTransport;
 export type UserLogoutCompleted = Empty;
+export type SiteTunerConfigureCompleted = SiteTunerConfiguration;
+export type SiteTunerGetConfiguration = Empty;
+export type SiteTunerGetParameters = Empty;
+export type SiteTunerCalcParamStartCompleted = Empty;
+export type SiteTunerCalcParamStartError = Error;
+export type SiteTunerApplyParamCompleted = Empty;
+export type SiteTunerApplyParamError = Error;
+export type SiteTunerCalcStatsStartCompleted = Empty;
+export type SiteTunerCalcStatsStartError = Error;
+export type UthreatGetMuteStatus = Empty;
+export type UthreatAffiliationChangeCompleted = Empty;
+export type UthreatAffiliationChangeError = Error;
+export type UthreatPersistentAffiliationAdded = UthreatPersistentAffiliation;
+export type UthreatPersistentAffiliationGetList = Empty;
+export type UthreatPersistentAffiliationChanged = UthreatPersistentAffiliation;
+export type UthreatPersistentAffiliationChangeCompleted = Empty;
+export type UthreatPersistentAffiliationChangeError = Error;
+export type UthreatPersistentAffiliationRemoveCompleted = Empty;
+export type UthreatPersistentAffiliationRemoveError = Error;
 declare const emptyObjectSymbol: unique symbol;
 export type Empty = {
     [emptyObjectSymbol]?: never;
@@ -520,7 +577,44 @@ export declare enum API {
     TAK_TRANSPORT_UPDATED = "takTransportUpdated",
     USER_WELCOME = "userWelcome",
     USER_LOGOUT = "userLogout",
-    USER_LOGOUT_COMPLETED = "userLogoutCompleted"
+    USER_LOGOUT_COMPLETED = "userLogoutCompleted",
+    SITE_TUNER_CONFIGURATION = "siteTunerConfiguration",
+    SITE_TUNER_CONFIGURE = "siteTunerConfigure",
+    SITE_TUNER_CONFIGURE_COMPLETED = "siteTunerConfigureCompleted",
+    SITE_TUNER_GET_CONFIGURATION = "siteTunerGetConfiguration",
+    SITE_TUNER_GET_PARAMETERS = "siteTunerGetParameters",
+    SITE_TUNER_PARAMETERS = "siteTunerParameters",
+    SITE_TUNER_CALC_PARAM_START = "siteTunerCalcParamStart",
+    SITE_TUNER_CALC_PARAM_START_COMPLETED = "siteTunerCalcParamStartCompleted",
+    SITE_TUNER_CALC_PARAM_START_ERROR = "siteTunerCalcParamStartError",
+    SITE_TUNER_CALC_PARAM_RESULT = "siteTunerCalcParamResult",
+    SITE_TUNER_APPLY_PARAM = "siteTunerApplyParam",
+    SITE_TUNER_APPLY_PARAM_COMPLETED = "siteTunerApplyParamCompleted",
+    SITE_TUNER_APPLY_PARAM_ERROR = "siteTunerApplyParamError",
+    SITE_TUNER_CALC_STATS_START = "siteTunerCalcStatsStart",
+    SITE_TUNER_CALC_STATS_START_COMPLETED = "siteTunerCalcStatsStartCompleted",
+    SITE_TUNER_CALC_STATS_START_ERROR = "siteTunerCalcStatsStartError",
+    SITE_TUNER_CALC_STATS_RESULT = "siteTunerCalcStatsResult",
+    SITE_TUNER_PROGRESS = "siteTunerProgress",
+    UTHREAT_SUBSCRIBE = "uthreatSubscribe",
+    UTHREAT_SUBSCRIBE_COMPLETED = "uthreatSubscribeCompleted",
+    UTHREAT_GET_MUTE_STATUS = "uthreatGetMuteStatus",
+    UTHREAT_MUTE_STATUS = "uthreatMuteStatus",
+    UTHREAT_AFFILIATION_CHANGE = "uthreatAffiliationChange",
+    UTHREAT_AFFILIATION_CHANGE_COMPLETED = "uthreatAffiliationChangeCompleted",
+    UTHREAT_AFFILIATION_CHANGE_ERROR = "uthreatAffiliationChangeError",
+    UTHREAT_PERSISTENT_AFFILIATION_ADDED = "uthreatPersistentAffiliationAdded",
+    UTHREAT_PERSISTENT_AFFILIATION_GET_LIST = "uthreatPersistentAffiliationGetList",
+    UTHREAT_PERSISTENT_AFFILIATION_LIST = "uthreatPersistentAffiliationList",
+    UTHREAT_PERSISTENT_AFFILIATION_CHANGE = "uthreatPersistentAffiliationChange",
+    UTHREAT_PERSISTENT_AFFILIATION_CHANGED = "uthreatPersistentAffiliationChanged",
+    UTHREAT_PERSISTENT_AFFILIATION_CHANGE_COMPLETED = "uthreatPersistentAffiliationChangeCompleted",
+    UTHREAT_PERSISTENT_AFFILIATION_CHANGE_ERROR = "uthreatPersistentAffiliationChangeError",
+    UTHREAT_PERSISTENT_AFFILIATION_REMOVE = "uthreatPersistentAffiliationRemove",
+    UTHREAT_PERSISTENT_AFFILIATION_REMOVED = "uthreatPersistentAffiliationRemoved",
+    UTHREAT_PERSISTENT_AFFILIATION_REMOVE_COMPLETED = "uthreatPersistentAffiliationRemoveCompleted",
+    UTHREAT_PERSISTENT_AFFILIATION_REMOVE_ERROR = "uthreatPersistentAffiliationRemoveError",
+    TRACE_MARK = "traceMark"
 }
 export type ArgosTypesMap = {
     [API.API_ERROR]: ApiError;
@@ -724,4 +818,41 @@ export type ArgosTypesMap = {
     [API.USER_WELCOME]: UserWelcome;
     [API.USER_LOGOUT]: UserLogout;
     [API.USER_LOGOUT_COMPLETED]: UserLogoutCompleted;
+    [API.SITE_TUNER_CONFIGURATION]: SiteTunerConfiguration;
+    [API.SITE_TUNER_CONFIGURE]: SiteTunerConfigure;
+    [API.SITE_TUNER_CONFIGURE_COMPLETED]: SiteTunerConfigureCompleted;
+    [API.SITE_TUNER_GET_CONFIGURATION]: SiteTunerGetConfiguration;
+    [API.SITE_TUNER_GET_PARAMETERS]: SiteTunerGetParameters;
+    [API.SITE_TUNER_PARAMETERS]: SiteTunerParameters;
+    [API.SITE_TUNER_CALC_PARAM_START]: SiteTunerCalcParamStart;
+    [API.SITE_TUNER_CALC_PARAM_START_COMPLETED]: SiteTunerCalcParamStartCompleted;
+    [API.SITE_TUNER_CALC_PARAM_START_ERROR]: SiteTunerCalcParamStartError;
+    [API.SITE_TUNER_CALC_PARAM_RESULT]: SiteTunerCalcParamResult;
+    [API.SITE_TUNER_APPLY_PARAM]: SiteTunerApplyParam;
+    [API.SITE_TUNER_APPLY_PARAM_COMPLETED]: SiteTunerApplyParamCompleted;
+    [API.SITE_TUNER_APPLY_PARAM_ERROR]: SiteTunerApplyParamError;
+    [API.SITE_TUNER_CALC_STATS_START]: SiteTunerCalcStatsStart;
+    [API.SITE_TUNER_CALC_STATS_START_COMPLETED]: SiteTunerCalcStatsStartCompleted;
+    [API.SITE_TUNER_CALC_STATS_START_ERROR]: SiteTunerCalcStatsStartError;
+    [API.SITE_TUNER_CALC_STATS_RESULT]: SiteTunerCalcStatsResult;
+    [API.SITE_TUNER_PROGRESS]: SiteTunerProgress;
+    [API.UTHREAT_SUBSCRIBE]: UthreatSubscribe;
+    [API.UTHREAT_SUBSCRIBE_COMPLETED]: UthreatSubscribeCompleted;
+    [API.UTHREAT_GET_MUTE_STATUS]: UthreatGetMuteStatus;
+    [API.UTHREAT_MUTE_STATUS]: UthreatMuteStatus;
+    [API.UTHREAT_AFFILIATION_CHANGE]: UthreatAffiliationChange;
+    [API.UTHREAT_AFFILIATION_CHANGE_COMPLETED]: UthreatAffiliationChangeCompleted;
+    [API.UTHREAT_AFFILIATION_CHANGE_ERROR]: UthreatAffiliationChangeError;
+    [API.UTHREAT_PERSISTENT_AFFILIATION_ADDED]: UthreatPersistentAffiliationAdded;
+    [API.UTHREAT_PERSISTENT_AFFILIATION_GET_LIST]: UthreatPersistentAffiliationGetList;
+    [API.UTHREAT_PERSISTENT_AFFILIATION_LIST]: UthreatPersistentAffiliationList;
+    [API.UTHREAT_PERSISTENT_AFFILIATION_CHANGE]: UthreatPersistentAffiliationChange;
+    [API.UTHREAT_PERSISTENT_AFFILIATION_CHANGED]: UthreatPersistentAffiliationChanged;
+    [API.UTHREAT_PERSISTENT_AFFILIATION_CHANGE_COMPLETED]: UthreatPersistentAffiliationChangeCompleted;
+    [API.UTHREAT_PERSISTENT_AFFILIATION_CHANGE_ERROR]: UthreatPersistentAffiliationChangeError;
+    [API.UTHREAT_PERSISTENT_AFFILIATION_REMOVE]: UthreatPersistentAffiliationRemove;
+    [API.UTHREAT_PERSISTENT_AFFILIATION_REMOVED]: UthreatPersistentAffiliationRemoved;
+    [API.UTHREAT_PERSISTENT_AFFILIATION_REMOVE_COMPLETED]: UthreatPersistentAffiliationRemoveCompleted;
+    [API.UTHREAT_PERSISTENT_AFFILIATION_REMOVE_ERROR]: UthreatPersistentAffiliationRemoveError;
+    [API.TRACE_MARK]: TraceMark;
 };

@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "title": "SiteTunerCalcParamResult",
+    "description": "Result of calculation initiated with SiteTunerCalcParamStart",
+    "properties": {
+        "requestId": {
+            "type": "string",
+            "description": "The unique identifier of the calc param request. The user should validate the requestId"
+        },
+        "parameters": {
+            "$ref": "./SiteTunerParameters.json"
+        },
+        "statistics": {
+            "$ref": "./siteTuner/SiteTunerStatistics.json"
+        }
+    },
+    "required": ["requestId", "parameters", "statistics"],
+    "additionalProperties": false
+}

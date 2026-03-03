@@ -1,0 +1,15 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "AffiliationOrFalse",
+    "description": "Affiliation of threat or false detection indicator.",
+    "oneOf": [
+        {
+            "$ref": "./Affiliation.json"
+        },
+        {
+            "type": "string",
+            "const": "falseDetection",
+            "description": "This will mute the uthreat (if active) and suppress any active RF threats in it. Also used on historic uthreats, where it will affect the threat report and SiteTuner."
+        }
+    ]
+}

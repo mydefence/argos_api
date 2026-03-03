@@ -1,0 +1,8 @@
+{
+    "message": {
+        "lock": false,
+        "enable": true
+    },
+    "event": "siteTunerConfigure",
+    "responseId": "01ARZ3NDEKTSV4RRFFQ69G5FAV"
+}

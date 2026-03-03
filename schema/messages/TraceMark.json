@@ -1,0 +1,13 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "TraceMark",
+    "type": "object",
+    "description": "This event will add a log entry across all relevant service logs for easy log correlation with client state. Extra properties are allowed and will be included in the log entry.",
+    "properties": {
+        "id": {
+            "type": "string",
+            "description": "Unique ID for cross-referencing"
+        }
+    },
+    "required": ["id"]
+}

@@ -1,0 +1,12 @@
+{
+    "message": {
+        "uasId": "DJI-54321-MNOPQR",
+        "affiliation": "hostile",
+        "rfThreatTypesDrone": [1000100, 1000200],
+        "rfThreatTypesCtrl": [1000300],
+        "persist": true,
+        "description": "Suspicious drone - updated classification"
+    },
+    "event": "uthreatPersistentAffiliationChange",
+    "responseId": "01ARZ3NDEKTSV4RRFFQ69G5FK4"
+}

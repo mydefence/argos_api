@@ -1,0 +1,7 @@
+{
+    "message": {
+        "uasId": "DJI-12345-ABCDEF"
+    },
+    "event": "uthreatPersistentAffiliationRemove",
+    "responseId": "01ARZ3NDEKTSV4RRFFQ69G5FL5"
+}
