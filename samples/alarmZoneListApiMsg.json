@@ -25,6 +25,8 @@
                     "lon": 8.48319
                 }
             ],
+            "confidenceThreshold": 0.8,
+            "triggerOnAllUthreatTypes": true,
             "alarmZoneId": "cvuxhv7zgkdtv2cnb"
         },
         {
@@ -52,6 +54,8 @@
                     "lon": 8.48319
                 }
             ],
+            "confidenceThreshold": 0.8,
+            "triggerOnAllUthreatTypes": true,
             "alarmZoneId": "cvuxhvbehkdtwgd2q"
         },
         {
@@ -79,6 +83,8 @@
                     "lon": 8.48319
                 }
             ],
+            "confidenceThreshold": 0.5,
+            "triggerOnAllUthreatTypes": false,
             "alarmZoneId": "cvuxhvbehkdtwgevv"
         },
         {
@@ -93,6 +99,8 @@
                 "lon": 9.46319,
                 "radiusInMeters": 300
             },
+            "confidenceThreshold": 0.5,
+            "triggerOnAllUthreatTypes": false,
             "alarmZoneId": "cvuxhvbehkdtwgevv"
         }
     ],

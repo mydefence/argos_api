@@ -26,6 +26,13 @@
         "autoTimeout": {
             "type": "integer",
             "description": "Jamming timeout in seconds"
+        },
+        "autoConfidenceThreshold": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Minimum drone confidence (0-1) required to trigger auto jamming"
         }
-    }
+    },
+    "required": ["autoStart", "autoFreq", "autoTimeout", "autoConfidenceThreshold"]
 }

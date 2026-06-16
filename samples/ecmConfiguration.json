@@ -2,7 +2,8 @@
     "message": {
         "autoStart": "off",
         "autoFreq": "noGnss",
-        "autoTimeout": 300
+        "autoTimeout": 300,
+        "autoConfidenceThreshold": 0.7
     },
     "event": "ecmConfiguration"
 }

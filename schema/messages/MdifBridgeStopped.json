@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "MdifBridgeStopped",
+    "type": "object",
+    "additionalProperties": false,
+    "description": "Indicates that the bridge to the MDIF device has been stopped by Argos, e.g. due to timeout. This message is not sent when stopping the bridge using mdifBridgeStop event",
+    "properties": {
+        "port": {
+            "type": "number",
+            "description": "Port number on the Argos server of the bridge. Matches port in an mdifBridgeStarted message"
+        }
+    },
+    "required": ["port"]
+}

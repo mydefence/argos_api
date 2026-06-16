@@ -207,6 +207,23 @@
                 "takTransportGetList",
                 "takTransportList",
                 "takTransportUpdated",
+                "takTlsClientAdd",
+                "takTlsClientAddCompleted",
+                "takTlsClientAddError",
+                "takTlsClientAdded",
+                "takTlsClientRemove",
+                "takTlsClientRemoveCompleted",
+                "takTlsClientRemoveError",
+                "takTlsClientRemoved",
+                "takTlsClientUpdate",
+                "takTlsClientUpdateCompleted",
+                "takTlsClientUpdateError",
+                "takTlsClientUpdated",
+                "takTlsClientGetList",
+                "takTlsClientList",
+                "takTlsClientPkcs12",
+                "takTlsClientPkcs12Completed",
+                "takTlsClientPkcs12Error",
                 "userWelcome",
                 "userLogout",
                 "userLogoutCompleted",
@@ -246,7 +263,14 @@
                 "uthreatPersistentAffiliationRemoved",
                 "uthreatPersistentAffiliationRemoveCompleted",
                 "uthreatPersistentAffiliationRemoveError",
-                "traceMark"
+                "traceMark",
+                "mdifBridgeStart",
+                "mdifBridgeStartCompleted",
+                "mdifBridgeStopped",
+                "mdifBridgeStartError",
+                "mdifBridgeStop",
+                "mdifBridgeStopCompleted",
+                "mdifBridgeStopError"
             ]
         },
         "message": {
@@ -555,7 +579,7 @@
         },
         {
             "if": { "properties": { "event": { "const": "alarmZoneUpdate" } } },
-            "then": { "properties": { "message": { "$ref": "./messages/AlarmZone.json#" } } }
+            "then": { "properties": { "message": { "$ref": "./messages/AlarmZoneUpdate.json#" } } }
         },
         {
             "if": { "properties": { "event": { "const": "alarmZoneUpdateCompleted" } } },
@@ -671,7 +695,7 @@
         },
         {
             "if": { "properties": { "event": { "const": "ecmConfigure" } } },
-            "then": { "properties": { "message": { "$ref": "./messages/EcmConfig.json#" } } }
+            "then": { "properties": { "message": { "$ref": "./messages/EcmConfigure.json#" } } }
         },
         {
             "if": { "properties": { "event": { "const": "ecmConfiguration" } } },
@@ -1070,6 +1094,74 @@
             "then": { "properties": { "message": { "$ref": "./messages/TakTransport.json#" } } }
         },
         {
+            "if": { "properties": { "event": { "const": "takTlsClientAdd" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/TakTlsClientAdd.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takTlsClientAddCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takTlsClientAddError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takTlsClientAdded" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/TakTlsClient.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takTlsClientRemove" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/TakTlsClientRemove.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takTlsClientRemoveCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takTlsClientRemoveError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takTlsClientRemoved" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/TakTlsClientRemoved.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takTlsClientUpdate" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/TakTlsClientUpdate.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takTlsClientUpdateCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takTlsClientUpdateError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takTlsClientUpdated" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/TakTlsClient.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takTlsClientGetList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takTlsClientList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/TakTlsClientList.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takTlsClientPkcs12" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/TakTlsClientPkcs12.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takTlsClientPkcs12Completed" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/TakTlsClientPkcs12Completed.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "takTlsClientPkcs12Error" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
             "if": { "properties": { "event": { "const": "userWelcome" } } },
             "then": { "properties": { "message": { "$ref": "./messages/UserWelcome.json#" } } }
         },
@@ -1226,8 +1318,36 @@
             "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
         },
         {
+            "if": { "properties": { "event": { "const": "mdifBridgeStart" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/MdifBridgeStart.json#" } } }
+        },
+        {
             "if": { "properties": { "event": { "const": "traceMark" } } },
             "then": { "properties": { "message": { "$ref": "./messages/TraceMark.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "mdifBridgeStartCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/MdifBridgeStartCompleted.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "mdifBridgeStopped" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/MdifBridgeStopped.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "mdifBridgeStartError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "mdifBridgeStop" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/MdifBridgeStop.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "mdifBridgeStopCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "mdifBridgeStopError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
         }
     ]
 }

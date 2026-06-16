@@ -2,6 +2,7 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "DeviceMiscellaneousFrequencyBands",
     "type": "object",
+    "description": "Device miscellaneous information about ECM frequency channels using pre-defined channel definitions. In Argos 6 this is used for all ECM devices, expect `boxer`. DEPRECATION NOTICE: In Argos release 7 all other ECM devices will be updated to use miscellaneous type `ecmChannels` instead of this. Implementors should prepare for handling this type.",
     "properties": {
         "deviceId": {
             "type": "string",

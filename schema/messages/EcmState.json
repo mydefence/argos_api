@@ -14,20 +14,21 @@
         "activeFrequencyBands": {
             "type": "array",
             "items": {
-                "$ref": "common/FrequencyBand.json#"
+                "type": "string"
             }
         },
         "deviceDetails": {
-            "type": "object"
+            "type": "object",
+            "description": "DEPRECATED. Is never included"
         },
         "timestamp": {
             "type": "string",
-            "description": "UTC time in ISO8601 format"
+            "description": "DEPRECATED. Is never included"
         },
         "timeout": {
             "type": "integer",
             "description": "Timeout (seconds) of auto jamming. Set when deviceId ='auto'"
         }
     },
-    "required": ["deviceId"]
+    "required": ["deviceId", "activeFrequencyBands"]
 }

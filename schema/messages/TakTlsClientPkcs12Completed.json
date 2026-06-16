@@ -1,0 +1,13 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "TakTlsClientPkcs12Completed",
+    "type": "object",
+    "properties": {
+        "pkcs12": {
+            "type": "string",
+            "description": "The PKCS#12 data of the client as a base64 encoded string."
+        }
+    },
+    "required": ["pkcs12"],
+    "additionalProperties": false
+}

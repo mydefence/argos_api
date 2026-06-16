@@ -112,6 +112,28 @@ export type TakConfigure = {
          */
         port?: number;
         options?: TakTransportOptionsConfigure;
+    } | {
+        type: "tlsServer";
+        /**
+         * Name of transport
+         */
+        name?: string;
+        /**
+         * TAK server TLS port
+         */
+        port?: number;
+        credentials: {
+            /**
+             * Credential ID. Use when modifying an existing transport. Credentials can't be modified
+             */
+            credentialId: string;
+        } | {
+            /**
+             * Use when creating a new transport. A self-signed certificate will be generated automatically.
+             */
+            generate: true;
+        };
+        options?: TakTransportOptionsConfigure;
     })[];
 };
 export type TakTransportOptionsConfigure = {

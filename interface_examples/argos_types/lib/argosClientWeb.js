@@ -1,28 +1,16 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ArgosClient = void 0;
-exports.apiLogin = apiLogin;
-/*******************************************************************************
+/**
+ * Copyright (c) 2026 MyDefence A/S. All rights reserved.
  *
- * Copyright (C) 2020 MyDefence Communication A/S. All rights reserved.
- *
- * These computer program listings and specifications, are the property of
- * MyDefence Communication A/S and shall not be reproduced or copied or used in
- * whole or in part without written permission from MyDefence Communication A/S.
- *
- *******************************************************************************/
-const socket_io_client_1 = require("socket.io-client");
-const events_1 = require("events");
-const util_1 = __importDefault(require("util"));
-const axios_1 = __importDefault(require("axios"));
-const https_1 = require("https");
+ * These computer program listings and specifications are the property of
+ * MyDefence A/S and shall not be reproduced or copied or used in whole or in
+ * part without written permission from MyDefence A/S.
+ */
+import { io } from 'socket.io-client';
+import { EventEmitter } from 'events';
 /** The default logger used. Implements same interface as `util.format()`.
  * Should be easy to map to e.g. a winston logger. */
-function default_logger(format, ...param) {
-    console.log(new Date().toISOString(), util_1.default.format(format, ...param));
+function default_logger(msg, ...param) {
+    console.log(`${new Date().toISOString()} ${msg}`, ...param);
 }
 /** The default logger for messages sent and received. Direction for
  * request/response pattern will show '←R', 'R→', and push messages from ARGOS
@@ -30,39 +18,27 @@ function default_logger(format, ...param) {
 function default_msg_logger(event, message, direction) {
     default_logger('%s %s %O', event, direction, message);
 }
-/** Login on login REST endpoint and return login token from cookie. Cookie is
- * normally stored in a browser cookie. */
-async function apiLogin({ host = 'c2-server.local', port = '4000', username, password, ca = MYDEFENCE_ROOT_CA, }) {
-    const response = await axios_1.default
-        .post(`https://${host}:${port}/login`, { username, password }, { httpsAgent: new https_1.Agent({ ca }) })
-        .catch((err) => {
-        throw new Error(`Login failed: ${err.response?.data}`);
-    });
-    const cookies = response.headers['set-cookie'];
-    if (!cookies)
-        throw new Error('No cookies in login response');
-    const loginCookie = cookies.find((cookie) => cookie.startsWith('login_token='));
-    if (!loginCookie)
-        throw new Error('No login token in login response');
-    // Extract the JWT token from the login cookie
-    return loginCookie;
-}
 /** Class wraps socket.io connection to ARGOS server, and exposes the ARGOS API
  * with correct typing.
  * */
-class ArgosClient extends events_1.EventEmitter {
+export class ArgosClient extends EventEmitter {
     /**
      * Creates an instance of ArgosClient.
      * @param options - Configuration options for the client.
      * @param options.host - The hostname or IP address of the ARGOS server.
      * @param options.port - The port number of the ARGOS server.
      * @param options.cookie - Login token cookie for authentication.
+     * @param options.auth_token - Authentication token for the ARGOS server. Alternative to cookie
+     * based authentication for desktop applications. If both cookie and auth_token are provided,
+     * cookie will be used.
      * @param options.secure - Whether to use HTTPS for the connection.
+     * @param options.ca - TLS root CA certificate (PEM string). Used in Node.js
+     * only; silently ignored when running in a browser.
      * @param options.logger - A custom logger function. See {@link default_logger}.
      * @param options.msg_logger - A custom logger function for messages. See
      * {@link default_msg_logger}.
      */
-    constructor({ host = 'c2-server.local', port = undefined, cookie = undefined, secure = true, ca = MYDEFENCE_ROOT_CA, logger = default_logger, msg_logger = default_msg_logger, } = {}) {
+    constructor({ host = 'c2-server.local', port = undefined, cookie = undefined, auth_token = undefined, secure = true, ca = MYDEFENCE_ROOT_CA, logger = default_logger, msg_logger = default_msg_logger, } = {}) {
         super();
         this.responseCnt = 0;
         this.logger = logger;
@@ -77,7 +53,7 @@ class ArgosClient extends events_1.EventEmitter {
             endpoint = `http://${host}:${port}/`;
         }
         this.logger('CONNECTING to %s', endpoint);
-        this.sc = (0, socket_io_client_1.io)(endpoint, {
+        this.sc = io(endpoint, {
             reconnection: true,
             reconnectionDelay: 1000,
             reconnectionDelayMax: 5000,
@@ -85,6 +61,12 @@ class ArgosClient extends events_1.EventEmitter {
             secure,
             ca,
             ...(cookie && { extraHeaders: { Cookie: cookie } }),
+            ...(!cookie &&
+                auth_token && {
+                auth: {
+                    token: auth_token,
+                },
+            }),
         });
         this.connectedPromise = new Promise((resolve, reject) => {
             this.sc.once('connect', resolve);
@@ -211,12 +193,11 @@ class ArgosClient extends events_1.EventEmitter {
         });
     }
 }
-exports.ArgosClient = ArgosClient;
 /** Root CA certificate. Required for self-signed certificates used for HTTPS. For Chrome this is
  * installed using add_linux.zip/add_windows.zip scripts downloaded from the landing page. This
  * certificate is also present in these zip files in the file `mydefenceRootCA.pem`. In node we need
  * to supply them manually. */
-const MYDEFENCE_ROOT_CA = `-----BEGIN CERTIFICATE-----
+export const MYDEFENCE_ROOT_CA = `-----BEGIN CERTIFICATE-----
 MIIC0zCCAlqgAwIBAgIUEnSNVp6b/nWzf49+D/pGFcK3IdkwCgYIKoZIzj0EAwIw
 gaAxCzAJBgNVBAYTAkRLMRAwDgYDVQQIDAdKdXRsYW5kMRMwEQYDVQQHDApOci4g
 U3VuZGJ5MRYwFAYDVQQKDA1NeURlZmVuY2UgQS9TMRYwFAYDVQQLDA1JVCBEZXBh
@@ -234,4 +215,4 @@ ADBkAjBFUUBDhg/kCZYEn9oovWqEoCuRSw0Coy202ge0qCuMUTB2CezXJxNf3To2
 CMFhbpQCMDhYrhqXyRZVeS6fEF55vKSngc5pKszspei1IDcw6Q+UG+eH367qp7Np
 k3N7Kjrz4A==
 -----END CERTIFICATE-----`;
-//# sourceMappingURL=argosClient.js.map
+//# sourceMappingURL=argosClientWeb.js.map

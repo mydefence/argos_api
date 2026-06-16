@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "EcmConfigure",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "autoStart": {
+            "oneOf": [
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of zones. Empty list means any zone."
+                },
+                {
+                    "type": "string",
+                    "enum": ["off", "all"]
+                }
+            ],
+            "description": "Enable automatic jamming on either any threats (`all`), any zone breach (`[]`), or breach of specific zones (`['zone1', 'zone2']`)"
+        },
+        "autoFreq": {
+            "type": "string",
+            "enum": ["off", "noGnss", "allowGnss"]
+        },
+        "autoTimeout": {
+            "type": "integer",
+            "description": "Jamming timeout in seconds"
+        },
+        "autoConfidenceThreshold": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Minimum drone confidence (0-1) required to trigger auto jamming"
+        }
+    }
+}

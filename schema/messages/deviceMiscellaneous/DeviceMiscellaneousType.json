@@ -19,6 +19,7 @@
         "takInfo",
         "ptzDefaultDistance",
         "ptzDefaultHeight",
-        "nominalTargetSize"
+        "nominalTargetSize",
+        "ecmChannels"
     ]
 }

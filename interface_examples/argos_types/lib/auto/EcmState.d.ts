@@ -4,19 +4,18 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 export type DeviceIdentification = string | null;
-/**
- * Information about the frequency of an effector/detector.
- */
-export type FrequencyBand = "433" | "900" | "1G2" | "2G4" | "5G2" | "5G8" | "GNSS";
 export type EcmState = {
     deviceId: string;
     deviceParentId?: DeviceIdentification;
-    activeFrequencyBands?: FrequencyBand[];
+    activeFrequencyBands: string[];
+    /**
+     * DEPRECATED. Is never included
+     */
     deviceDetails?: {
         [k: string]: unknown;
     };
     /**
-     * UTC time in ISO8601 format
+     * DEPRECATED. Is never included
      */
     timestamp?: string;
     /**

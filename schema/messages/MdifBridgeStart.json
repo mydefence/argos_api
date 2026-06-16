@@ -1,0 +1,40 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "MdifBridgeStart",
+    "type": "object",
+    "description": "Request Argos to start a bridge to an MDIF device.",
+    "oneOf": [
+        {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": ["tcp", "ws", "tls"],
+                    "description": "Type of bridge to create. 'tcp' creates a TCP socket bridge, 'tls' creates a TLS socket bridge, while 'ws' creates a WebSocket bridge."
+                },
+                "deviceId": {
+                    "type": "string",
+                    "description": "Device ID of the MDIF device."
+                }
+            },
+            "required": ["type", "deviceId"],
+            "additionalProperties": false
+        },
+        {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": ["tcp", "ws", "tls"],
+                    "description": "Type of bridge to create. 'tcp' creates a TCP socket bridge, 'tls' creates a TLS socket bridge, while 'ws' creates a WebSocket bridge."
+                },
+                "deviceIp": {
+                    "type": "string",
+                    "description": "IP address of MDIF device."
+                }
+            },
+            "required": ["type", "deviceIp"],
+            "additionalProperties": false
+        }
+    ]
+}

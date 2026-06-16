@@ -16,7 +16,7 @@
             "activeFrequencyBands": {
                 "type": "array",
                 "items": {
-                    "$ref": "common/FrequencyBand.json#"
+                    "type": "string"
                 }
             },
             "createdTimeStamp": {

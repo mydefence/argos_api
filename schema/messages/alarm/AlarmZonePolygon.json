@@ -33,6 +33,16 @@
             "type": "integer",
             "description": "Audio alarm level of the alarm zone."
         },
+        "confidenceThreshold": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Minimum drone confidence (0-1) required to trigger an alarm in this zone."
+        },
+        "triggerOnAllUthreatTypes": {
+            "type": "boolean",
+            "description": "Whether to trigger an alarm on all uthreat types or only UthreatLocation."
+        },
         "polygon": {
             "type": "array",
             "description": "Polygon defining the alarm zone.",
@@ -54,5 +64,16 @@
             }
         }
     },
-    "required": ["alarmZoneId", "color", "name", "order", "isActive", "visualAlarmLevel", "audioAlarmLevel", "polygon"]
+    "required": [
+        "alarmZoneId",
+        "color",
+        "name",
+        "order",
+        "isActive",
+        "visualAlarmLevel",
+        "audioAlarmLevel",
+        "confidenceThreshold",
+        "triggerOnAllUthreatTypes",
+        "polygon"
+    ]
 }

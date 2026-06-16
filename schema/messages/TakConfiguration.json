@@ -106,6 +106,29 @@
                         },
                         "required": ["type", "name", "port", "options", "transportId"],
                         "additionalProperties": false
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": { "const": "tlsServer" },
+                            "name": { "type": "string", "description": "Name of transport" },
+                            "port": { "type": "number", "description": "TAK server TLS port" },
+                            "credentials": {
+                                "type": "object",
+                                "properties": {
+                                    "credentialId": {
+                                        "type": "string",
+                                        "description": "Credential ID"
+                                    }
+                                },
+                                "required": ["credentialId"],
+                                "additionalProperties": false
+                            },
+                            "options": { "$ref": "./TakTransportOptionsConfiguration.json#" },
+                            "transportId": { "type": "string", "description": "Transport ID" }
+                        },
+                        "required": ["type", "name", "port", "credentials", "options", "transportId"],
+                        "additionalProperties": false
                     }
                 ]
             }

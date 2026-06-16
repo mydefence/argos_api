@@ -38,6 +38,14 @@ export type AlarmZonePolygon = {
      */
     audioAlarmLevel: number;
     /**
+     * Minimum drone confidence (0-1) required to trigger an alarm in this zone.
+     */
+    confidenceThreshold: number;
+    /**
+     * Whether to trigger an alarm on all uthreat types or only UthreatLocation.
+     */
+    triggerOnAllUthreatTypes: boolean;
+    /**
      * Polygon defining the alarm zone.
      */
     polygon: {
@@ -80,6 +88,14 @@ export type AlarmZoneCircle = {
      * Audio alarm level of the alarm zone.
      */
     audioAlarmLevel: number;
+    /**
+     * Minimum drone confidence (0-1) required to trigger an alarm in this zone.
+     */
+    confidenceThreshold: number;
+    /**
+     * Whether to trigger an alarm on all uthreat types or only UthreatLocation.
+     */
+    triggerOnAllUthreatTypes: boolean;
     /**
      * Circle defining the alarm zone..
      */

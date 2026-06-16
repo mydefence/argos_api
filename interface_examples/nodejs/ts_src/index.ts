@@ -1,16 +1,14 @@
-/*******************************************************************************
+/**
+ * Copyright (c) 2026 MyDefence A/S. All rights reserved.
  *
- * Copyright (C) 2020 MyDefence Communication A/S. All rights reserved.
- *
- * These computer program listings and specifications, are the property of
- * MyDefence Communication A/S and shall not be reproduced or copied or used in
- * whole or in part without written permission from MyDefence Communication A/S.
- *
- *******************************************************************************/
+ * These computer program listings and specifications are the property of
+ * MyDefence A/S and shall not be reproduced or copied or used in whole or in
+ * part without written permission from MyDefence A/S.
+ */
 import { parseArgs } from 'node:util'
 import { readFileSync } from 'node:fs'
-import { API, Device, miscellaneousDataFind } from 'argos_types/lib/argosApi'
-import { apiLogin, ArgosClient } from 'argos_types/lib/argosClient'
+import { API, Device, miscellaneousDataFind } from 'argos_types'
+import { apiLogin, ArgosClient } from 'argos_types/argosClient.js'
 
 // Register some process signals for shutting down the process
 process.on('SIGTERM', () => {
@@ -80,7 +78,7 @@ async function main() {
         try {
             ca = readFileSync(args['ca-cert'], 'utf8')
         } catch (error) {
-            console.error(`Error reading CA certificate file: ${error.message}`)
+            console.error(`Error reading CA certificate file: ${error}`)
             process.exit(1)
         }
     }
@@ -160,6 +158,10 @@ async function main() {
         const deviceGeoLocation = deviceLocation.deviceLocations.find(
             (locElem) => locElem.deviceLocationType == 'deviceGeolocation',
         )
+        if (!deviceGeoLocation) {
+            console.warn(`Device ${deviceId} has no geolocation data`)
+            return
+        }
 
         // Print device info
         let str = `${deviceId}\t${deviceName}`

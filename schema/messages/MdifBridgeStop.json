@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "MdifBridgeStop",
+    "type": "object",
+    "additionalProperties": false,
+    "description": "Request Argos to cleanup an active bridge.",
+    "properties": {
+        "port": {
+            "type": "number",
+            "description": "Port number on the Argos server for the bridge."
+        }
+    },
+    "required": ["port"]
+}

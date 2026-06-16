@@ -258,9 +258,9 @@ export type UthreatBasisPresence = {
      */
     classification?: {
         /**
-         * The threat type as classified by the device. The possible values depend on the device. The legal values are a superset of all possible classifications from all supported devices.
+         * The threat type as classified by the device. The possible values depend on the device.
          */
-        class: "Aircraft" | "Bird" | "Clutter" | "Human" | "UAV Fixed Wing" | "UAV Multi Rotor" | "Vehicle";
+        class: string;
         /**
          * The device's confidence in the classification. Range 0.0 .. 1.0.
          */
@@ -399,9 +399,9 @@ export type UthreatBasisZone = {
      */
     classification?: {
         /**
-         * The threat type as classified by the device. The possible values depend on the device. The legal values are a superset of all possible classifications from all supported devices.
+         * The threat type as classified by the device. The possible values depend on the device.
          */
-        class: "Aircraft" | "Bird" | "Clutter" | "Human" | "UAV Fixed Wing" | "UAV Multi Rotor" | "Vehicle";
+        class: string;
         /**
          * The device's confidence in the classification. Range 0.0 .. 1.0.
          */
@@ -548,9 +548,9 @@ export type UthreatBasisDirection = {
      */
     classification?: {
         /**
-         * The threat type as classified by the device. The possible values depend on the device. The legal values are a superset of all possible classifications from all supported devices.
+         * The threat type as classified by the device. The possible values depend on the device.
          */
-        class: "Aircraft" | "Bird" | "Clutter" | "Human" | "UAV Fixed Wing" | "UAV Multi Rotor" | "Vehicle";
+        class: string;
         /**
          * The device's confidence in the classification. Range 0.0 .. 1.0.
          */
@@ -704,13 +704,17 @@ export type UthreatBasisLocation = {
         [k: string]: unknown;
     };
     /**
+     * RCS (Radar Cross Section) of the threat [dBm²]. Available for radar devices reporting RCS.
+     */
+    rcs?: number;
+    /**
      * If the device has classified the threat, this object contains the classification result.
      */
     classification?: {
         /**
-         * The threat type as classified by the device. The possible values depend on the device. The legal values are a superset of all possible classifications from all supported devices.
+         * The threat type as classified by the device. The possible values depend on the device.
          */
-        class: "Aircraft" | "Bird" | "Clutter" | "Human" | "UAV Fixed Wing" | "UAV Multi Rotor" | "Vehicle";
+        class: string;
         /**
          * The device's confidence in the classification. Range 0.0 .. 1.0.
          */

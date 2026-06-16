@@ -1,0 +1,45 @@
+{
+    "$comment": "This file is auto-generated. Do not edit.",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DeviceMiscellaneousEcmChannelsChange",
+    "type": "object",
+    "description": "Device miscellaneous information about ECM frequency channels with dynamic channel definitions. In Argos 6, this is only used with `boxer` type device. In Argos release 7 all other ECM devices will be updated to use this new miscellaneous type instead of Device miscellaneous `frequencyBands`.",
+    "properties": {
+        "deviceId": {
+            "type": "string",
+            "description": "The device id"
+        },
+        "deviceMiscellaneousType": {
+            "allOf": [
+                {
+                    "$ref": "./DeviceMiscellaneousType.json#"
+                },
+                {
+                    "const": "ecmChannels"
+                }
+            ]
+        },
+        "deviceMiscellaneousData": {
+            "type": "object",
+            "properties": {
+                "currentChannels": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            }
+                        },
+                        "required": ["name"],
+                        "additionalProperties": false
+                    },
+                    "description": "The currently selected frequency channels. Set this to change the ECM frequency channels. List must contain between 0 and `numSimultaneusChannels` values taken from `ecmChannels`"
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false,
+    "required": ["deviceId", "deviceMiscellaneousType", "deviceMiscellaneousData"]
+}

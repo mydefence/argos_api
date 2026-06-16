@@ -1,30 +1,67 @@
 {
   "name": "argos_types",
-  "version": "6.3.0",
+  "version": "6.5.0",
   "description": "Common types for Argos IPC",
+  "type": "module",
   "author": "MyDefence A/S",
   "license": "Apache-2.0",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./index.js": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./argosClient.js": {
+      "browser": {
+        "types": "./lib/argosClientWeb.d.ts",
+        "default": "./lib/argosClientWeb.js"
+      },
+      "types": "./lib/argosClientNode.d.ts",
+      "default": "./lib/argosClientNode.js"
+    },
+    "./argosClientWeb.js": {
+      "types": "./lib/argosClientWeb.d.ts",
+      "default": "./lib/argosClientWeb.js"
+    },
+    "./argosClientNode.js": {
+      "types": "./lib/argosClientNode.d.ts",
+      "default": "./lib/argosClientNode.js"
+    },
+    "./lib/*": "./lib/*",
+    "./package.json": "./package.json"
+  },
   "devDependencies": {
-    "axios": "^1.13.5",
+    "axios": "^1.16.1",
     "json-schema-to-typescript": "^15.0.4",
     "quicktype": "^23.2.6"
   },
   "files": [
-    "lib/auto",
-    "lib/argosApi*",
-    "lib/argosClient*",
-    "lib/siteTuner.d.ts",
-    "ts_src/argosClient.ts"
+    "lib/"
   ],
+  "peerDependencies": {
+    "axios": "^1.16.1"
+  },
+  "peerDependenciesMeta": {
+    "axios": {
+      "optional": true
+    }
+  },
   "dependencies": {
-    "socket.io-client": "^4.8.1"
+    "events": "^3.3.0",
+    "socket.io-client": "^4.8.3"
   },
   "scripts": {
     "build": "tsc",
+    "compile": "tsc",
     "dev": "nodemon -e ts -w  ts_src --exec \"pnpm run build || exit 1\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "tsc --noEmit tests/test.ts && eslint --max-warnings 0 ts_src tests/*.ts",
-    "generate-ts": "ts-node ts_src/schema/generate_ts.ts",
-    "cap-check": "ts-node ts_src/schema/capability_check.ts"
+    "test": "echo \"No tests found\"",
+    "lint": "tsc --noEmit -p tests/tsconfig.json && eslint --max-warnings 0 ts_src tests/*.ts",
+    "generate-ts": "tsx ts_src/schema/generate_ts.ts",
+    "cap-check": "node --loader ts-node/esm ts_src/schema/capability_check.ts"
   }
 }

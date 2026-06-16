@@ -4,10 +4,14 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 export type EcmConfig = {
-    autoStart?: string[] | ("off" | "all");
-    autoFreq?: "off" | "noGnss" | "allowGnss";
+    autoStart: string[] | ("off" | "all");
+    autoFreq: "off" | "noGnss" | "allowGnss";
     /**
      * Jamming timeout in seconds
      */
-    autoTimeout?: number;
+    autoTimeout: number;
+    /**
+     * Minimum drone confidence (0-1) required to trigger auto jamming
+     */
+    autoConfidenceThreshold: number;
 };

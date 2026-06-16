@@ -11,7 +11,9 @@
             "lat": 57.134407,
             "lon": 9.46319,
             "radiusInMeters": 23
-        }
+        },
+        "confidenceThreshold": 0.5,
+        "triggerOnAllUthreatTypes": true
     },
     "event": "alarmZoneUpdated"
 }

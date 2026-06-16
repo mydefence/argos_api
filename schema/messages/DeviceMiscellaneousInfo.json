@@ -53,6 +53,9 @@
         },
         {
             "$ref": "./deviceMiscellaneous/DeviceMiscellaneousNominalTargetSize.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousEcmChannels.json#"
         }
     ]
 }

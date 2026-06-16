@@ -3,8 +3,8 @@
  * DO NOT MODIFY IT BY HAND. Instead, modify the source JSONSchema file,
  * and run json-schema-to-typescript to regenerate this file.
  */
-export type DeviceMiscellaneousChange = DeviceMiscellaneousAssetDataChange | DeviceMiscellaneousConfidenceThresholdChange | DeviceMiscellaneousDeviceNameChange | DeviceMiscellaneousDeviceOrderChange | DeviceMiscellaneousDeviceOrientationChange | DeviceMiscellaneousDeviceRangeChange | DeviceMiscellaneousFrequencyBandsChange | DeviceMiscellaneousNominalTargetSizeChange | DeviceMiscellaneousProductNameChange | DeviceMiscellaneousProfilesChange | DeviceMiscellaneousPtzDefaultDistanceChange | DeviceMiscellaneousPtzDefaultHeightChange | DeviceMiscellaneousPtzLimitsChange | DeviceMiscellaneousRingSettingsChange | DeviceMiscellaneousTakInfoChange | DeviceMiscellaneousUseGPSLocationChange;
-export type DeviceMiscellaneousType = "deviceName" | "productName" | "deviceOrientation" | "deviceOrder" | "frequencyBands" | "droneList" | "useGPSLocation" | "ptzLimits" | "deviceRange" | "confidenceThreshold" | "ringSettings" | "assetData" | "profiles" | "takInfo" | "ptzDefaultDistance" | "ptzDefaultHeight" | "nominalTargetSize";
+export type DeviceMiscellaneousChange = DeviceMiscellaneousAssetDataChange | DeviceMiscellaneousConfidenceThresholdChange | DeviceMiscellaneousDeviceNameChange | DeviceMiscellaneousDeviceOrderChange | DeviceMiscellaneousDeviceOrientationChange | DeviceMiscellaneousDeviceRangeChange | DeviceMiscellaneousEcmChannelsChange | DeviceMiscellaneousFrequencyBandsChange | DeviceMiscellaneousNominalTargetSizeChange | DeviceMiscellaneousProductNameChange | DeviceMiscellaneousProfilesChange | DeviceMiscellaneousPtzDefaultDistanceChange | DeviceMiscellaneousPtzDefaultHeightChange | DeviceMiscellaneousPtzLimitsChange | DeviceMiscellaneousRingSettingsChange | DeviceMiscellaneousTakInfoChange | DeviceMiscellaneousUseGPSLocationChange;
+export type DeviceMiscellaneousType = "deviceName" | "productName" | "deviceOrientation" | "deviceOrder" | "frequencyBands" | "droneList" | "useGPSLocation" | "ptzLimits" | "deviceRange" | "confidenceThreshold" | "ringSettings" | "assetData" | "profiles" | "takInfo" | "ptzDefaultDistance" | "ptzDefaultHeight" | "nominalTargetSize" | "ecmChannels";
 /**
  * Information about the frequency of an effector/detector.
  */
@@ -12,7 +12,7 @@ export type FrequencyBand = "433" | "900" | "1G2" | "2G4" | "5G2" | "5G8" | "GNS
 /**
  * Device types tells what kind of device it is and with that what kind of attributes and abilities is available - must always be used in combination with deviceVersion and if composite with the sub/composite devices found under the devices list
  */
-export type DeviceType = "blackbird" | "jaegar" | "dobermann" | "dobermann360" | "dobermann_dual" | "dobermannTrio" | "duo" | "echoguard" | "gps" | "groundaware" | "hepta" | "hexa" | "penta" | "pentaDM1xx" | "pentaWD2xx" | "quad" | "quadWD2xx" | "trio" | "wd200" | "wingman" | "wl1" | "wm200" | "wolfpack" | "onvif" | "skyeye" | "blackbird5k" | "echoguardQuad" | "groundawareTrio" | "aps" | "ring" | "xenta" | "echoshield" | "echoshieldQuad" | "visionflex" | "composite" | "lizardEar" | "circleScope" | "tak";
+export type DeviceType = "blackbird" | "jaegar" | "dobermann" | "dobermann360" | "dobermann_dual" | "dobermannTrio" | "duo" | "echoguard" | "gps" | "groundaware" | "hepta" | "hexa" | "penta" | "pentaDM1xx" | "pentaWD2xx" | "quad" | "quadWD2xx" | "trio" | "wd200" | "wingman" | "wl1" | "wm200" | "wolfpack" | "onvif" | "skyeye" | "blackbird5k" | "echoguardQuad" | "groundawareTrio" | "aps" | "ring" | "xenta" | "echoshield" | "echoshieldQuad" | "visionflex" | "composite" | "lizardEar" | "circleScope" | "tak" | "boxer";
 export type DeviceMiscellaneousAssetDataChange = {
     /**
      * The device id
@@ -93,6 +93,27 @@ export type DeviceMiscellaneousDeviceRangeChange = {
         deviceRange?: number;
     };
 };
+/**
+ * Device miscellaneous information about ECM frequency channels with dynamic channel definitions. In Argos 6, this is only used with `boxer` type device. In Argos release 7 all other ECM devices will be updated to use this new miscellaneous type instead of Device miscellaneous `frequencyBands`.
+ */
+export type DeviceMiscellaneousEcmChannelsChange = {
+    /**
+     * The device id
+     */
+    deviceId: string;
+    deviceMiscellaneousType: DeviceMiscellaneousType & "ecmChannels";
+    deviceMiscellaneousData: {
+        /**
+         * The currently selected frequency channels. Set this to change the ECM frequency channels. List must contain between 0 and `numSimultaneusChannels` values taken from `ecmChannels`
+         */
+        currentChannels?: {
+            name: string;
+        }[];
+    };
+};
+/**
+ * Device miscellaneous information about ECM frequency channels using pre-defined channel definitions. In Argos 6 this is used for all ECM devices, expect `boxer`. DEPRECATION NOTICE: In Argos release 7 all other ECM devices will be updated to use miscellaneous type `ecmChannels` instead of this. Implementors should prepare for handling this type.
+ */
 export type DeviceMiscellaneousFrequencyBandsChange = {
     /**
      * The device id

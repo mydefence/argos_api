@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "TakTlsClientUpdate",
+    "type": "object",
+    "properties": {
+        "transportId": {
+            "type": "string",
+            "description": "The transportId of the tlsServer transport the client belongs to."
+        },
+        "name": {
+            "type": "string",
+            "description": "Name of the client to update. Combined with transportId to uniquely identify the client."
+        },
+        "enabled": {
+            "type": "boolean",
+            "description": "The desired enabled state for the client."
+        }
+    },
+    "required": ["transportId", "name", "enabled"],
+    "additionalProperties": false
+}

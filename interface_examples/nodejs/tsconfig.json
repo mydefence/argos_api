@@ -1,9 +1,15 @@
 {
-  "compilerOptions": {
-    "outDir": "./dist",
-    "allowJs": false,
-    "target": "es5",
-    "esModuleInterop": true
-  },
-  "include": ["./ts_src/**/*"]
+    "compilerOptions": {
+        "lib": ["es2024", "ESNext.Array", "ESNext.Collection", "ESNext.Error", "ESNext.Iterator", "ESNext.Promise"],
+        "rootDir": "./ts_src",
+        "outDir": "./dist",
+        "allowJs": false,
+        "target": "es2024",
+        "module": "nodenext",
+        "moduleResolution": "node16",
+        "esModuleInterop": true,
+        "types": ["node"],
+        "skipLibCheck": true
+    },
+    "include": ["./ts_src/**/*"]
 }

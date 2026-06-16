@@ -23,6 +23,9 @@
             "$ref": "./deviceMiscellaneous/DeviceMiscellaneousDeviceRangeChange.json#"
         },
         {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousEcmChannelsChange.json#"
+        },
+        {
             "$ref": "./deviceMiscellaneous/DeviceMiscellaneousFrequencyBandsChange.json#"
         },
         {

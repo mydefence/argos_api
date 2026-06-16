@@ -24,7 +24,9 @@
                 "lat": 57.154407,
                 "lon": 8.48319
             }
-        ]
+        ],
+        "confidenceThreshold": 0.5,
+        "triggerOnAllUthreatTypes": true
     },
     "event": "alarmZoneAdded"
 }

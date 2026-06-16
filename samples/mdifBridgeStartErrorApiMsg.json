@@ -1,0 +1,6 @@
+{
+    "message": {
+        "errorInfo": "Device 40710b6pkih4coqj is not an MDIF device"
+    },
+    "event": "mdifBridgeStartError"
+}

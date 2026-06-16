@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "TakTlsClient",
+    "type": "object",
+    "properties": {
+        "transportId": {
+            "type": "string",
+            "description": "The transportId of the tlsServer transport the client belongs to."
+        },
+        "name": {
+            "type": "string",
+            "description": "Name of the client."
+        },
+        "expiry": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 formatted date and time when the certificate expires."
+        },
+        "enabled": {
+            "type": "boolean",
+            "description": "Indicates whether the client is currently enabled."
+        }
+    },
+    "required": ["transportId", "name", "expiry", "enabled"],
+    "additionalProperties": false
+}

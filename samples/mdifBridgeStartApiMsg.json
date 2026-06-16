@@ -1,0 +1,8 @@
+{
+    "message": {
+        "type": "tcp",
+        "deviceId": "40710b6pkih4coqj"
+    },
+    "event": "mdifBridgeStart",
+    "responseId": "01ARZ3NDEKTSV4RRFFQ69G5FAV"
+}

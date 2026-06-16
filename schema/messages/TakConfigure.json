@@ -123,6 +123,43 @@
                         },
                         "required": ["type"],
                         "additionalProperties": false
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": { "const": "tlsServer" },
+                            "name": { "type": "string", "description": "Name of transport" },
+                            "port": { "type": "number", "default": 8089, "description": "TAK server TLS port" },
+                            "credentials": {
+                                "oneOf": [
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "credentialId": {
+                                                "type": "string",
+                                                "description": "Credential ID. Use when modifying an existing transport. Credentials can't be modified"
+                                            }
+                                        },
+                                        "required": ["credentialId"],
+                                        "additionalProperties": false
+                                    },
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "generate": {
+                                                "const": true,
+                                                "description": "Use when creating a new transport. A self-signed certificate will be generated automatically."
+                                            }
+                                        },
+                                        "required": ["generate"],
+                                        "additionalProperties": false
+                                    }
+                                ]
+                            },
+                            "options": { "$ref": "./TakTransportOptionsConfigure.json#" }
+                        },
+                        "required": ["type", "credentials"],
+                        "additionalProperties": false
                     }
                 ]
             }

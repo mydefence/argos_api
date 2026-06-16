@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "MdifBridgeStartCompleted",
+    "type": "object",
+    "additionalProperties": false,
+    "description": "Indicates that the bridge to the MDIF device is ready to receive a connection.",
+    "properties": {
+        "port": {
+            "type": "number",
+            "description": "Port number on the Argos server of the bridge. The port number will be the key for future events related to this bridge instance."
+        }
+    },
+    "required": ["port"]
+}

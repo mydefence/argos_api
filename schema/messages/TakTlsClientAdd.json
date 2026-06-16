@@ -1,0 +1,27 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "TakTlsClientAdd",
+    "type": "object",
+    "properties": {
+        "transportId": {
+            "type": "string",
+            "description": "The transportId of the tlsServer transport to add a client to."
+        },
+        "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Name for the client. Used as the Common Name (CN) in the generated certificate."
+        },
+        "password": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Password used to protect the resulting PKCS12 file."
+        },
+        "expirationSeconds": {
+            "type": "number",
+            "description": "Certificate validity period in seconds from the time of generation."
+        }
+    },
+    "required": ["transportId", "name", "password", "expirationSeconds"],
+    "additionalProperties": false
+}

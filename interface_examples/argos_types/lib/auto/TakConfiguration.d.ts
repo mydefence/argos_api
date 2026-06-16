@@ -106,6 +106,27 @@ export type TakConfiguration = {
          * Transport ID
          */
         transportId: string;
+    } | {
+        type: "tlsServer";
+        /**
+         * Name of transport
+         */
+        name: string;
+        /**
+         * TAK server TLS port
+         */
+        port: number;
+        credentials: {
+            /**
+             * Credential ID
+             */
+            credentialId: string;
+        };
+        options: TakTransportOptionsConfiguration;
+        /**
+         * Transport ID
+         */
+        transportId: string;
     })[];
 };
 export type TakTransportOptionsConfiguration = {

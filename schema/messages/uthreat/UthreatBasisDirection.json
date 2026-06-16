@@ -170,8 +170,7 @@
             "properties": {
                 "class": {
                     "type": "string",
-                    "description": "The threat type as classified by the device. The possible values depend on the device. The legal values are a superset of all possible classifications from all supported devices.",
-                    "enum": ["Aircraft", "Bird", "Clutter", "Human", "UAV Fixed Wing", "UAV Multi Rotor", "Vehicle"]
+                    "description": "The threat type as classified by the device. The possible values depend on the device."
                 },
                 "probability": {
                     "type": "number",

@@ -1,0 +1,6 @@
+{
+    "message": {
+        "port": 9865
+    },
+    "event": "mdifBridgeStartCompleted"
+}

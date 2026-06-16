@@ -1,0 +1,78 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DeviceMiscellaneousEcmChannels",
+    "type": "object",
+    "description": "Device miscellaneous information about ECM frequency channels with dynamic channel definitions. In Argos 6, this is only used with `boxer` type device. In Argos release 7 all other ECM devices will be updated to use this new miscellaneous type instead of Device miscellaneous `frequencyBands`.",
+    "properties": {
+        "deviceId": {
+            "type": "string",
+            "description": "The device id"
+        },
+        "deviceMiscellaneousType": {
+            "allOf": [
+                {
+                    "$ref": "./DeviceMiscellaneousType.json#"
+                },
+                {
+                    "const": "ecmChannels"
+                }
+            ]
+        },
+        "deviceMiscellaneousData": {
+            "type": "object",
+            "properties": {
+                "ecmChannels": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "freqRanges": {
+                                "type": "array",
+                                "items": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "number"
+                                    },
+                                    "minItems": 2,
+                                    "maxItems": 2,
+                                    "description": "Frequency range [min, max] in Hz"
+                                },
+                                "description": "Array of frequency ranges. Usually only one range, but possible to have discontinuous ranges"
+                            }
+                        },
+                        "required": ["name", "freqRanges"],
+                        "additionalProperties": false
+                    },
+                    "description": "The frequency channels supported by the device.",
+                    "$comment": "read-only"
+                },
+                "currentChannels": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            }
+                        },
+                        "required": ["name"],
+                        "additionalProperties": false
+                    },
+                    "description": "The currently selected frequency channels. Set this to change the ECM frequency channels. List must contain between 0 and `numSimultaneusChannels` values taken from `ecmChannels`"
+                },
+                "numSimultaneusChannels": {
+                    "type": "number",
+                    "description": "The number of possible simultaneous frequency channels on this device.",
+                    "$comment": "read-only"
+                }
+            },
+            "additionalProperties": false,
+            "required": ["ecmChannels", "currentChannels", "numSimultaneusChannels"]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["deviceId", "deviceMiscellaneousType", "deviceMiscellaneousData"]
+}
