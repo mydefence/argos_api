@@ -33,6 +33,7 @@
             "description": "Only used with deviceType=composite: Used for miscellaneous data fields productName and deviceName."
         },
         "devices": {
+            "description": "The list of child devices that make up the composite device. At least 2 children are required. Heading must be provided. Children preserve their absolute height.",
             "type": "array",
             "items": {
                 "type": "object",
@@ -41,6 +42,7 @@
                         "type": "string"
                     },
                     "heading": {
+                        "description": "Relative heading in the composite device.",
                         "type": "number"
                     },
                     "hasOmniAntenna": {

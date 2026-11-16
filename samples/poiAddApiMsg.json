@@ -1,0 +1,12 @@
+{
+    "message": {
+        "color": "#c69540",
+        "name": "Hangar",
+        "isActive": true,
+        "lat": 57.134407,
+        "lon": 9.46319,
+        "rangeRings": true
+    },
+    "event": "poiAdd",
+    "responseId": "kb675ypp"
+}

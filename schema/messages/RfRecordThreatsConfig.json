@@ -2,7 +2,7 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "RfRecordThreatsConfig",
     "type": "object",
-    "description": "Configure recording of RF segment information for threats. MyDefence internal and subject to change without notice.",
+    "description": "MyDefence internal and subject to change without notice. Configure recording of RF segment information for threats.",
     "properties": {
         "devices": {
             "type": "array",

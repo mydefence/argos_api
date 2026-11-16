@@ -1,0 +1,10 @@
+{
+    "message": {
+        "poiId": "kb675fefef",
+        "name": "Hangar 2",
+        "isActive": false,
+        "rangeRings": true
+    },
+    "event": "poiUpdate",
+    "responseId": "kb675yzz"
+}

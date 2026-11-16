@@ -24,6 +24,10 @@ export type PtzMoveAbsOrientation = {
     deviceId: DeviceIdentification;
     subDeviceId?: SubDeviceIdentification;
     orientation: TargetOrientationOfThePTZDevice;
+    /**
+     * Start searching for threats at the requested orientation after the move is completed.
+     */
+    startAcquisition?: boolean;
 };
 /**
  * PTZ device will move to the specified orientation [deg]
@@ -44,7 +48,7 @@ export type TargetOrientationOfThePTZDevice = {
     /**
      * Focus [pct].
      */
-    f?: number | "default";
+    f?: number | "auto-focus" | "default";
     /**
      * Unit of zoom e.g. deg FOV or percentage of full range. Supported units are device dependent and both units may not be supported by all devices.
      */
@@ -54,6 +58,10 @@ export type PtzMoveAbsPosition = {
     deviceId: DeviceIdentification1;
     subDeviceId?: SubDeviceIdentification1;
     position: GeographicalPositionPTZDeviceShouldPointTowards;
+    /**
+     * Start searching for threats at the requested position after the move is completed.
+     */
+    startAcquisition?: boolean;
 };
 /**
  * PTZ device will move to the specified geographical position

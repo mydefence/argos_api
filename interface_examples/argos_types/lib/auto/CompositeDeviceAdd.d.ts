@@ -25,8 +25,14 @@ export type CompositeDeviceAdd = {
      * Only used with deviceType=composite: Used for miscellaneous data fields productName and deviceName.
      */
     productName?: string;
+    /**
+     * The list of child devices that make up the composite device. At least 2 children are required. Heading must be provided. Children preserve their absolute height.
+     */
     devices: {
         deviceId: string;
+        /**
+         * Relative heading in the composite device.
+         */
         heading: number;
         /**
          * DEPRECATED. Do not add this property. Will be disallowed in the future!

@@ -56,6 +56,9 @@
         },
         {
             "$ref": "./deviceMiscellaneous/DeviceMiscellaneousEcmChannels.json#"
+        },
+        {
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousTlsConfig.json#"
         }
     ]
 }

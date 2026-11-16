@@ -1,0 +1,37 @@
+{
+    "title": "CompositeDeviceEdit",
+    "description": "JSON schema for the compositeDeviceEdit event",
+    "type": "object",
+    "required": ["deviceId", "deviceType", "devices"],
+    "additionalProperties": false,
+    "properties": {
+        "deviceId": {
+            "type": "string"
+        },
+        "deviceType": {
+            "const": "composite"
+        },
+        "devices": {
+            "type": "array",
+            "description": "The list of child devices that make up the composite device. At least 2 children are required. Heading must be provided. Children preserve their absolute height.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "deviceId": {
+                        "type": "string"
+                    },
+                    "heading": {
+                        "description": "Relative heading in the composite device.",
+                        "type": "number"
+                    },
+                    "replacesDeviceId": {
+                        "description": "Set this when replacing an installed child device, to copy the old child device's settings.",
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false,
+                "required": ["deviceId", "heading"]
+            }
+        }
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "message": {
+        "autoFollowOverrideTimeout": 20,
+        "autoFollow": {
+            "40710b6pkih4coqj": {
+                "alarmZoneIds": ["area1", "area2"],
+                "enabled": true
+            }
+        }
+    },
+    "event": "ptzConfigure",
+    "responseId": "988erbn4jktg6ftz"
+}

@@ -20,4 +20,8 @@ export type PtzFollow = {
      * Device ID of device that is followed (e.g. GPS). Present when following a device
      */
     followDeviceId?: string;
+    /**
+     * Set to indicate that follow was initiated by the auto-follow function.
+     */
+    autoFollowing?: true;
 };

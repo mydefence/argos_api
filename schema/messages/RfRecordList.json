@@ -2,13 +2,32 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "RfRecordList",
     "type": "array",
-    "description": "List of RF segment recording. MyDefence internal and subject to change without notice.",
+    "description": "MyDefence internal and subject to change without notice. Current and completed RF segment recording operations. A failed recording is included in exactly one rfRecordList broadcast, then forgotten without a separate removal update. Subsequent broadcasts and rfRecordGetList responses omit it; clients that only poll may miss failures.",
     "items": {
         "type": "object",
         "properties": {
+            "recordingId": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Unique ID for this logical recording operation."
+            },
             "recType": {
                 "description": "Type of recording",
                 "enum": ["threat", "snapshot"]
+            },
+            "deviceIds": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Devices requested for this recording operation."
+            },
+            "status": {
+                "enum": ["inProgress", "complete", "partial", "failed"],
+                "description": "inProgress: recording or archive creation is ongoing. complete: all requested device transfers completed and an archive is available. partial: an archive is available, but at least one device transfer was incomplete or failed. failed: no archive could be published, either because no device produced usable data or because processing failed. A failed entry is broadcast once, then removed from memory without another update and is not persisted; errorInfo describes the failure."
+            },
+            "bytesTransferred": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Bytes received from devices so far (updated at most once per second while inProgress), or total bytes for a completed/partial recording. Always 0 for failed recordings."
             },
             "threatType": {
                 "type": "number",
@@ -20,10 +39,14 @@
             },
             "filePath": {
                 "type": "string",
-                "description": "Path to the recording data. Can be fetched from http://<argos-ip:28230>/<filePath>"
+                "description": "Path to the recording archive for complete or partial recordings. Can be fetched from https://<argos-ip:28230>/<filePath>"
+            },
+            "errorInfo": {
+                "type": "string",
+                "description": "Reason a recording failed. Present on the single broadcast containing the failed entry; the entry is then forgotten and omitted from subsequent list broadcasts and responses."
             }
         },
         "additionalProperties": false,
-        "required": ["recType", "createdTimeStamp", "filePath"]
+        "required": ["recordingId", "recType", "deviceIds", "status", "bytesTransferred", "createdTimeStamp"]
     }
 }

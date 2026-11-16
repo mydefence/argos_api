@@ -1,6 +1,6 @@
 {
   "name": "argos_types",
-  "version": "6.5.0",
+  "version": "6.6.0",
   "description": "Common types for Argos IPC",
   "type": "module",
   "author": "MyDefence A/S",

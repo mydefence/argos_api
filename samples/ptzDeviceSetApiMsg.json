@@ -2,8 +2,7 @@
     "message": {
         "deviceId": "ajsdlfajjj322",
         "trackingSubDevice": 1,
-        "tracking": "acquire",
-        "resetOrientationTimeout": null
+        "tracking": "acquire"
     },
     "event": "ptzDeviceSet",
     "responseId": "asd2j2u819"

@@ -1,0 +1,35 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "PtzConfigure",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "autoFollowOverrideTimeout": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Period in seconds after last manual operation of a camera during which auto-follow is temporarily disabled."
+        },
+        "autoFollow": {
+            "type": "object",
+            "description": "Per-PTZ-device auto-follow configuration, keyed by device id. Submitting this property replaces the whole map.",
+            "additionalProperties": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "alarmZoneIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "minItems": 1,
+                        "description": "Alarm zones that trigger cueing on this device."
+                    },
+                    "enabled": {
+                        "type": "boolean"
+                    }
+                },
+                "required": ["alarmZoneIds", "enabled"]
+            }
+        }
+    }
+}

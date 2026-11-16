@@ -3,6 +3,7 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "DeviceMiscellaneousDeviceOrientationChange",
     "type": "object",
+    "description": "Only used with MD RF sensors to handle devices mounted upside-down.",
     "properties": {
         "deviceId": {
             "type": "string",
@@ -23,7 +24,8 @@
             "properties": {
                 "deviceOrientation": {
                     "type": "number",
-                    "description": "Orientation of device in degrees."
+                    "description": "Orientation of device in degrees. Currently only 0 and 180 supported.",
+                    "enum": [0, 180]
                 }
             },
             "additionalProperties": false

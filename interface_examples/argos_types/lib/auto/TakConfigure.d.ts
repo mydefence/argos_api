@@ -9,7 +9,7 @@ export type TakConfigure = {
      */
     callsign: string;
     /**
-     * When this is set, broadcast the location of the specified device using CoT event type `a-f-G-E-V` - Ground Equipment Vehicle. The device should probably have useGpsLocation enabled. For vehicle systems. When false, broadcast mission center information using CoT event type `a-f-G-U-H` - Special C2 Headquarters. The CoT object in either case contain the configured callsign, and be used as parent link in threat details.
+     * When this is set, broadcast the location of the specified device using CoT event type `a-f-G-E-V` - Ground Equipment Vehicle. The device should probably have useGpsLocation enabled. For vehicle systems. Must be an existing local root device, otherwise the configuration is rejected. A system log warning is raised if the device is later removed. When false, broadcast mission center information using CoT event type `a-f-G-U-H` - Special C2 Headquarters. The CoT object in either case contain the configured callsign, and be used as parent link in threat details.
      */
     vehicleDeviceId?: string;
     /**

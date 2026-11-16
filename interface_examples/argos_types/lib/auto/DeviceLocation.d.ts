@@ -23,11 +23,11 @@ export type DeviceGeolocation = {
      */
     deviceLocationHeading: number;
     /**
-     * If mission center is configured, this is set to the x coordinate (meters) of the device relative to the mission center. Update of mission center will not trigger location update messages. Cannot be set directly, only through deviceLocationLatitude/Longitude.
+     * This is set to the x coordinate (meters) of the device relative to the mission center. Mission center updates publish deviceLocations for root devices. Children inherit their parent's coordinates on location queries but do not receive additional notifications when their parent's position or the mission center changes. Cannot be set directly, only through deviceLocationLatitude/Longitude.
      */
     deviceLocationX: number;
     /**
-     * If mission center is configured, this is set to the y coordinate (meters) of the device relative to the mission center. Update of mission center will not trigger location update messages. Cannot be set directly, only through deviceLocationLatitude/Longitude.
+     * This is set to the y coordinate (meters) of the device relative to the mission center. Mission center updates publish deviceLocations for root devices. Children inherit their parent's coordinates on location queries but do not receive additional notifications when their parent's position or the mission center changes. Cannot be set directly, only through deviceLocationLatitude/Longitude.
      */
     deviceLocationY: number;
     /**

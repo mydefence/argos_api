@@ -1,0 +1,172 @@
+{
+    "$comment": "This file is auto-generated from DeviceMiscellaneousTlsConfigBase.json. Do not edit.",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DeviceMiscellaneousTlsConfig",
+    "type": "object",
+    "definitions": {
+        "CertificateMaterial": {
+            "description": "CA certificate material used to verify a peer.",
+            "oneOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "format": {
+                            "const": "pem"
+                        },
+                        "certificate": {
+                            "type": "string",
+                            "description": "PEM-encoded CA certificate. May contain a concatenated chain/bundle of multiple certificates."
+                        }
+                    },
+                    "required": ["format", "certificate"],
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "ClientCredentialMaterial": {
+            "description": "Client identity material presented for mutual TLS.",
+            "oneOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "format": {
+                            "const": "pem"
+                        },
+                        "certificate": {
+                            "type": "string",
+                            "description": "PEM-encoded client certificate."
+                        },
+                        "privateKey": {
+                            "const": "(secret)",
+                            "$comment": "secret",
+                            "description": "undefined This value is redacted here and always reads as \"(secret)\" on this device-facing API - the real value is never returned. Submit the real value via deviceMiscellaneousChange to set/change it; submitting \"(secret)\" (or omitting the field) leaves it unchanged."
+                        }
+                    },
+                    "required": ["format", "certificate", "privateKey"],
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "TlsAuthCapabilities": {
+            "type": "object",
+            "description": "Authentication methods a connection supports. Device/connection specific constant - read-only, use it to determine which `serverVerification.mode`/`clientCredentials` choices are valid before submitting a `tlsConfig` change.",
+            "properties": {
+                "serverVerificationModes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": ["none", "fingerprint", "ca"]
+                    },
+                    "description": "Which `serverVerification.mode` values this connection accepts."
+                },
+                "clientCredentialsSupported": {
+                    "type": "boolean",
+                    "description": "Whether this connection accepts a client certificate for mutual TLS, i.e. whether `clientCredentials` may be set."
+                }
+            },
+            "required": ["serverVerificationModes", "clientCredentialsSupported"],
+            "additionalProperties": false
+        },
+        "TlsConnectionConfig": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Whether TLS is used for this connection."
+                },
+                "serverVerification": {
+                    "description": "How Argos validates the identity of the remote device on this connection.",
+                    "oneOf": [
+                        {
+                            "type": "object",
+                            "properties": {
+                                "mode": {
+                                    "const": "none",
+                                    "description": "No identity verification: the connection is encrypted, but Argos does not check whether it is actually talking to the expected device. Choose this only when a stronger mode is not viable, e.g. a device with no stable certificate or a physically isolated, trusted network."
+                                }
+                            },
+                            "required": ["mode"],
+                            "additionalProperties": false
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "mode": {
+                                    "const": "fingerprint",
+                                    "description": "Trust-on-first-connection: Argos accepts the device's certificate on the first connection and pins its fingerprint (see the sibling `fingerprint` property) for every later connection, raising an alarm if it ever changes."
+                                },
+                                "fingerprint": {
+                                    "type": ["string", "null"],
+                                    "description": "Secure connection fingerprint of the device. Trust is established at first connection. A string value indicates that trust has been established, while a null value indicates that trust has yet to be established. Setting the fingerprint to null will reset trust and trigger re-establishment of trust."
+                                }
+                            },
+                            "required": ["mode", "fingerprint"],
+                            "additionalProperties": false
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "mode": {
+                                    "const": "ca",
+                                    "description": "Certificate-authority verification: Argos checks that the device's certificate was signed by the CA certificate provided in the sibling `ca` property. The strongest verification mode."
+                                },
+                                "ca": {
+                                    "$ref": "#/definitions/CertificateMaterial"
+                                }
+                            },
+                            "required": ["mode", "ca"],
+                            "additionalProperties": false
+                        }
+                    ]
+                },
+                "clientCredentials": {
+                    "$ref": "#/definitions/ClientCredentialMaterial",
+                    "description": "Client certificate and private key to present for mutual TLS. Omit entirely when the device does not require a client certificate."
+                }
+            },
+            "required": ["enabled", "serverVerification"],
+            "additionalProperties": false
+        }
+    },
+    "properties": {
+        "deviceId": {
+            "type": "string",
+            "description": "The device id."
+        },
+        "deviceMiscellaneousType": {
+            "allOf": [
+                {
+                    "$ref": "./DeviceMiscellaneousType.json#"
+                },
+                {
+                    "const": "tlsConfig"
+                }
+            ]
+        },
+        "deviceMiscellaneousData": {
+            "type": "object",
+            "properties": {
+                "connections": {
+                    "type": "object",
+                    "description": "TLS configuration keyed by connection name. Connection names are defined by the asset service (e.g. 'broadcast', 'c2').",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/TlsConnectionConfig"
+                    }
+                },
+                "supportedAuthentication": {
+                    "type": "object",
+                    "description": "Authentication capabilities keyed by connection name, one entry per key present in the sibling `connections` map.",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/TlsAuthCapabilities"
+                    },
+                    "$comment": "read-only"
+                }
+            },
+            "additionalProperties": false,
+            "required": ["connections", "supportedAuthentication"]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["deviceId", "deviceMiscellaneousType", "deviceMiscellaneousData"]
+}

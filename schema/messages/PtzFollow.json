@@ -19,6 +19,11 @@
         "followDeviceId": {
             "type": "string",
             "description": "Device ID of device that is followed (e.g. GPS). Present when following a device"
+        },
+        "autoFollowing": {
+            "type": "boolean",
+            "const": true,
+            "description": "Set to indicate that follow was initiated by the auto-follow function."
         }
     },
     "required": ["ptzFollowId", "deviceId"]

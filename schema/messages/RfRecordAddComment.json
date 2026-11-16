@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "RfRecordAddComment",
+    "type": "object",
+    "description": "MyDefence internal and subject to change without notice. Adds a text file `comment.txt` to the archive of a finished recording. A later request for the same recording replaces the previous comment.",
+    "properties": {
+        "recordingId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "ID of a complete or partial recording."
+        },
+        "comment": {
+            "type": "string",
+            "description": "Text written to comment.txt in the archive."
+        }
+    },
+    "additionalProperties": false,
+    "required": ["recordingId", "comment"]
+}

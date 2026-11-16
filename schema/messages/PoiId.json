@@ -1,0 +1,15 @@
+{
+    "$comment": "This file is auto-generated. Do not edit.",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "PoiId",
+    "description": "Point of interest API is a frontend helper, not used in the backend.",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "poiId": {
+            "type": "string",
+            "description": "Unique id of the point of interest."
+        }
+    },
+    "required": ["poiId"]
+}

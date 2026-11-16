@@ -1,0 +1,10 @@
+{
+    "$comment": "This file is auto-generated. Do not edit.",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "PoiList",
+    "type": "array",
+    "items": {
+        "$ref": "./Poi.json#"
+    },
+    "description": "List of points of interest. Point of interest API is a frontend helper, not used in the backend."
+}

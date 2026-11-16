@@ -17,7 +17,7 @@ export type PtzDeviceSet = {
      */
     tracking?: "disabled" | "acquire";
     /**
-     * Set or disable timeout. See PtzDeviceInfo.
+     * Deprecated. No longer supported; any value is treated as if this property were not present.
      */
     resetOrientationTimeout?: number | null;
 };

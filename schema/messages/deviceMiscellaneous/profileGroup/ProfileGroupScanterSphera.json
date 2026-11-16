@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ProfileGroupScanterSphera",
+    "type": "object",
+    "properties": {
+        "name": {
+            "const": "scanterSphera",
+            "description": "The name of the profile group."
+        },
+        "profiles": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "The profiles in the profile group. Profile names are read from the device's 'Informative Profile Name' parameters and are not known beforehand, hence free-form strings rather than a fixed enum."
+        }
+    },
+    "additionalProperties": false,
+    "required": ["name", "profiles"]
+}

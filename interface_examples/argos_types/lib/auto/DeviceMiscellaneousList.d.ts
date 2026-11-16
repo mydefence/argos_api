@@ -3,8 +3,8 @@
  * DO NOT MODIFY IT BY HAND. Instead, modify the source JSONSchema file,
  * and run json-schema-to-typescript to regenerate this file.
  */
-export type DeviceMiscellaneousInfo = DeviceMiscellaneousDeviceName | DeviceMiscellaneousDeviceOrder | DeviceMiscellaneousDeviceOrientation | DeviceMiscellaneousProductName | DeviceMiscellaneousFrequencyBands | DeviceMiscellaneousDroneList | DeviceMiscellaneousUseGPSLocation | DeviceMiscellaneousPtzLimits | DeviceMiscellaneousDeviceRange | DeviceMiscellaneousConfidenceThreshold | DeviceMiscellaneousRingSettings | DeviceMiscellaneousAssetData | DeviceMiscellaneousProfiles | DeviceMiscellaneousTakInfo | DeviceMiscellaneousPtzDefaultDistance | DeviceMiscellaneousPtzDefaultHeight | DeviceMiscellaneousNominalTargetSize | DeviceMiscellaneousEcmChannels;
-export type DeviceMiscellaneousType = "deviceName" | "productName" | "deviceOrientation" | "deviceOrder" | "frequencyBands" | "droneList" | "useGPSLocation" | "ptzLimits" | "deviceRange" | "confidenceThreshold" | "ringSettings" | "assetData" | "profiles" | "takInfo" | "ptzDefaultDistance" | "ptzDefaultHeight" | "nominalTargetSize" | "ecmChannels";
+export type DeviceMiscellaneousInfo = DeviceMiscellaneousDeviceName | DeviceMiscellaneousDeviceOrder | DeviceMiscellaneousDeviceOrientation | DeviceMiscellaneousProductName | DeviceMiscellaneousFrequencyBands | DeviceMiscellaneousDroneList | DeviceMiscellaneousUseGPSLocation | DeviceMiscellaneousPtzLimits | DeviceMiscellaneousDeviceRange | DeviceMiscellaneousConfidenceThreshold | DeviceMiscellaneousRingSettings | DeviceMiscellaneousAssetData | DeviceMiscellaneousProfiles | DeviceMiscellaneousTakInfo | DeviceMiscellaneousPtzDefaultDistance | DeviceMiscellaneousPtzDefaultHeight | DeviceMiscellaneousNominalTargetSize | DeviceMiscellaneousEcmChannels | DeviceMiscellaneousTlsConfig;
+export type DeviceMiscellaneousType = "deviceName" | "productName" | "deviceOrientation" | "deviceOrder" | "frequencyBands" | "droneList" | "useGPSLocation" | "ptzLimits" | "deviceRange" | "confidenceThreshold" | "ringSettings" | "assetData" | "profiles" | "takInfo" | "ptzDefaultDistance" | "ptzDefaultHeight" | "nominalTargetSize" | "ecmChannels" | "tlsConfig";
 /**
  * Information about the frequency of an effector/detector.
  */
@@ -20,7 +20,7 @@ export type EchoShieldRadarProfile = "C-UAS_1" | "C-UAS_2" | "DISMOUNT" | "COAST
 /**
  * Device types tells what kind of device it is and with that what kind of attributes and abilities is available - must always be used in combination with deviceVersion and if composite with the sub/composite devices found under the devices list
  */
-export type DeviceType = "blackbird" | "jaegar" | "dobermann" | "dobermann360" | "dobermann_dual" | "dobermannTrio" | "duo" | "echoguard" | "gps" | "groundaware" | "hepta" | "hexa" | "penta" | "pentaDM1xx" | "pentaWD2xx" | "quad" | "quadWD2xx" | "trio" | "wd200" | "wingman" | "wl1" | "wm200" | "wolfpack" | "onvif" | "skyeye" | "blackbird5k" | "echoguardQuad" | "groundawareTrio" | "aps" | "ring" | "xenta" | "echoshield" | "echoshieldQuad" | "visionflex" | "composite" | "lizardEar" | "circleScope" | "tak" | "boxer";
+export type DeviceType = "blackbird" | "jaegar" | "dobermann" | "dobermann360" | "dobermann_dual" | "dobermannTrio" | "duo" | "echoguard" | "gps" | "groundaware" | "hepta" | "hexa" | "penta" | "pentaDM1xx" | "pentaWD2xx" | "quad" | "quadWD2xx" | "trio" | "wd200" | "wingman" | "wl1" | "wm200" | "wolfpack" | "onvif" | "skyeye" | "blackbird5k" | "echoguardQuad" | "groundawareTrio" | "aps" | "ring" | "xenta" | "echoshield" | "echoshieldQuad" | "visionflex" | "composite" | "lizardEar" | "circleScope" | "tak" | "boxer" | "g1x" | "robinRadar" | "scanterSphera";
 export type DeviceMiscellaneousList = {
     deviceId: string;
     deviceMiscellaneousList: DeviceMiscellaneousInfo[];
@@ -51,6 +51,9 @@ export type DeviceMiscellaneousDeviceOrder = {
         deviceOrder: number;
     };
 };
+/**
+ * Only used with MD RF sensors to handle devices mounted upside-down.
+ */
 export type DeviceMiscellaneousDeviceOrientation = {
     /**
      * The device id
@@ -59,9 +62,9 @@ export type DeviceMiscellaneousDeviceOrientation = {
     deviceMiscellaneousType: DeviceMiscellaneousType & "deviceOrientation";
     deviceMiscellaneousData: {
         /**
-         * Orientation of device in degrees.
+         * Orientation of device in degrees. Currently only 0 and 180 supported.
          */
-        deviceOrientation: number;
+        deviceOrientation: 0 | 180;
     };
 };
 export type DeviceMiscellaneousProductName = {
@@ -348,7 +351,7 @@ export type DeviceMiscellaneousProfiles = {
         /**
          * The profile group of the device. Device specific constant.
          */
-        profileGroup: ProfileGroupXentaRadar | ProfileGroupEchoShieldRadar;
+        profileGroup: ProfileGroupXentaRadar | ProfileGroupEchoShieldRadar | ProfileGroupScanterSphera;
         /**
          * The index (in `profileGroup.profiles`) of the active/wanted profile.
          */
@@ -374,6 +377,16 @@ export type ProfileGroupEchoShieldRadar = {
      * The profiles in the profile group.
      */
     profiles: EchoShieldRadarProfile[];
+};
+export type ProfileGroupScanterSphera = {
+    /**
+     * The name of the profile group.
+     */
+    name: "scanterSphera";
+    /**
+     * The profiles in the profile group. Profile names are read from the device's 'Informative Profile Name' parameters and are not known beforehand, hence free-form strings rather than a fixed enum.
+     */
+    profiles: string[];
 };
 /**
  * The device miscellaneous data for (A)TAK devices provides additional information about the TAK user. Note that the callsign can be found in deviceMiscellaneous type "deviceName". All fields should be considered read-only.
@@ -477,4 +490,91 @@ export type DeviceMiscellaneousEcmChannels = {
          */
         numSimultaneusChannels: number;
     };
+};
+export type DeviceMiscellaneousTlsConfig = {
+    /**
+     * The device id.
+     */
+    deviceId: string;
+    deviceMiscellaneousType: DeviceMiscellaneousType & "tlsConfig";
+    deviceMiscellaneousData: {
+        /**
+         * TLS configuration keyed by connection name. Connection names are defined by the asset service (e.g. 'broadcast', 'c2').
+         */
+        connections: {
+            [k: string]: TlsConnectionConfig;
+        };
+        /**
+         * Authentication capabilities keyed by connection name, one entry per key present in the sibling `connections` map.
+         */
+        supportedAuthentication: {
+            [k: string]: TlsAuthCapabilities;
+        };
+    };
+};
+export type TlsConnectionConfig = {
+    /**
+     * Whether TLS is used for this connection.
+     */
+    enabled: boolean;
+    /**
+     * How Argos validates the identity of the remote device on this connection.
+     */
+    serverVerification: {
+        /**
+         * No identity verification: the connection is encrypted, but Argos does not check whether it is actually talking to the expected device. Choose this only when a stronger mode is not viable, e.g. a device with no stable certificate or a physically isolated, trusted network.
+         */
+        mode: "none";
+    } | {
+        /**
+         * Trust-on-first-connection: Argos accepts the device's certificate on the first connection and pins its fingerprint (see the sibling `fingerprint` property) for every later connection, raising an alarm if it ever changes.
+         */
+        mode: "fingerprint";
+        /**
+         * Secure connection fingerprint of the device. Trust is established at first connection. A string value indicates that trust has been established, while a null value indicates that trust has yet to be established. Setting the fingerprint to null will reset trust and trigger re-establishment of trust.
+         */
+        fingerprint: string | null;
+    } | {
+        /**
+         * Certificate-authority verification: Argos checks that the device's certificate was signed by the CA certificate provided in the sibling `ca` property. The strongest verification mode.
+         */
+        mode: "ca";
+        /**
+         * CA certificate material used to verify a peer.
+         */
+        ca: {
+            format: "pem";
+            /**
+             * PEM-encoded CA certificate. May contain a concatenated chain/bundle of multiple certificates.
+             */
+            certificate: string;
+        };
+    };
+    /**
+     * Client certificate and private key to present for mutual TLS. Omit entirely when the device does not require a client certificate.
+     */
+    clientCredentials?: {
+        format: "pem";
+        /**
+         * PEM-encoded client certificate.
+         */
+        certificate: string;
+        /**
+         * undefined This value is redacted here and always reads as "(secret)" on this device-facing API - the real value is never returned. Submit the real value via deviceMiscellaneousChange to set/change it; submitting "(secret)" (or omitting the field) leaves it unchanged.
+         */
+        privateKey: "(secret)";
+    };
+};
+/**
+ * Authentication methods a connection supports. Device/connection specific constant - read-only, use it to determine which `serverVerification.mode`/`clientCredentials` choices are valid before submitting a `tlsConfig` change.
+ */
+export type TlsAuthCapabilities = {
+    /**
+     * Which `serverVerification.mode` values this connection accepts.
+     */
+    serverVerificationModes: ("none" | "fingerprint" | "ca")[];
+    /**
+     * Whether this connection accepts a client certificate for mutual TLS, i.e. whether `clientCredentials` may be set.
+     */
+    clientCredentialsSupported: boolean;
 };

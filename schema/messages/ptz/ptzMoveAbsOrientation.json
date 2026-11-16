@@ -24,7 +24,7 @@
                         },
                         {
                             "const": "default",
-                            "description": "Use to reset to installation defaults (from miscellaneous data)"
+                            "description": "Deprecated. No longer supported; treated as if pan were not present."
                         }
                     ]
                 },
@@ -36,7 +36,7 @@
                         },
                         {
                             "const": "default",
-                            "description": "Use to reset to installation defaults (from miscellaneous data)"
+                            "description": "Deprecated. No longer supported; treated as if tilt were not present."
                         }
                     ]
                 },
@@ -48,7 +48,7 @@
                         },
                         {
                             "const": "default",
-                            "description": "Use to reset to installation defaults (from miscellaneous data)"
+                            "description": "Deprecated. No longer supported; treated as if zoom were not present."
                         }
                     ]
                 },
@@ -59,8 +59,12 @@
                             "type": "number"
                         },
                         {
+                            "const": "auto-focus",
+                            "description": "Triggers one-shot auto-focus, if supported."
+                        },
+                        {
                             "const": "default",
-                            "description": "Use to reset to installation defaults (from miscellaneous data). Note: Setting \"default\" enables auto-focus if supported."
+                            "description": "Deprecated. Use \"auto-focus\" instead. Mapped to \"auto-focus\"."
                         }
                     ]
                 },
@@ -72,6 +76,10 @@
             },
             "additionalProperties": false,
             "minProperties": 1
+        },
+        "startAcquisition": {
+            "type": "boolean",
+            "description": "Start searching for threats at the requested orientation after the move is completed."
         }
     },
     "additionalProperties": false,

@@ -1,6 +1,7 @@
 import { readArgosSchema, SCHEMA_DIR } from './readSchema.js';
 import { compileFromFile } from 'json-schema-to-typescript';
 import { open, writeFile, mkdir } from 'node:fs/promises';
+import { generateMiscSecretPaths } from './generateMiscSecrets.js';
 const AUTO_DIR = 'ts_src/auto';
 /** Convert lowerCamelCase `event` to UpperCamelCase */
 function toUpperCamel(event) {
@@ -86,6 +87,8 @@ async function main() {
     const evObj = await analyzeSchema(schema, ajv);
     const types = await generateTypes(evObj);
     await generateArgosApi(evObj, types);
+    // Depends on ts_src/auto/DeviceMiscellaneousInfo.ts, written by generateTypes() above.
+    await generateMiscSecretPaths();
 }
 main();
 const HEADER = `/**

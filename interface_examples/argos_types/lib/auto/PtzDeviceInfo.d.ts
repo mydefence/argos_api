@@ -55,9 +55,13 @@ export type PtzDeviceInfo = {
      */
     trackingBasisThreatId?: string;
     /**
-     * After this many seconds with no movement commands, the PTZ device will reset the orientation to the default (if it has been set). This is the same as setting "default" in ptzMoveAbs. Note: Setting "default" enables auto-focus if supported.
+     * Deprecated. No longer supported; any value is treated as if this property were not present.
      */
     resetOrientationTimeout?: number | null;
+    /**
+     * Only present on devices configured for auto-follow. `true` while auto-follow is temporarily disabled due to manual user override. In ptzDeviceUpdate `false` signals that the override has ended; in ptzDeviceInfo and ptzDeviceList the property is absent when there is no override.
+     */
+    autoFollowOverride?: boolean;
     /**
      * If the device contains independent sub-devices (e.g. a camera with multiple tubes with independent zoom and focus), they are listed here with their independent dimensions
      */

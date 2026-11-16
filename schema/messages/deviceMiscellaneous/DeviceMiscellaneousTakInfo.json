@@ -23,26 +23,31 @@
             "properties": {
                 "team": {
                     "type": "string",
-                    "description": "The team of the TAK user. Typically a color."
+                    "description": "The team of the TAK user. Typically a color.",
+                    "$comment": "read-only"
                 },
                 "role": {
                     "type": "string",
-                    "description": "The role of the TAK user, e.g. \"Team Member\"."
+                    "description": "The role of the TAK user, e.g. \"Team Member\".",
+                    "$comment": "read-only"
                 },
                 "typeCot": {
                     "type": "string",
-                    "description": "The type of the TAK user. Format is according to CoT standard, e.g. \"a-f-G-U-C\"."
+                    "description": "The type of the TAK user. Format is according to CoT standard, e.g. \"a-f-G-U-C\".",
+                    "$comment": "read-only"
                 },
                 "typeStr": {
                     "type": "string",
-                    "description": "The type of the TAK user. Human readable version of typeCot."
+                    "description": "The type of the TAK user. Human readable version of typeCot.",
+                    "$comment": "read-only"
                 },
                 "deviceTypes": {
                     "type": "array",
                     "description": "The device types of the remote TAK devices.",
                     "items": {
                         "$ref": "../common/DeviceType.json"
-                    }
+                    },
+                    "$comment": "read-only"
                 }
             },
             "required": ["typeCot", "typeStr"],

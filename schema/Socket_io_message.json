@@ -60,6 +60,9 @@
                 "compositeDeviceAdd",
                 "compositeDeviceAddCompleted",
                 "compositeDeviceAddError",
+                "compositeDeviceEdit",
+                "compositeDeviceEditCompleted",
+                "compositeDeviceEditError",
                 "fwuImageGetList",
                 "fwuImageList",
                 "fwuImageAdd",
@@ -92,6 +95,20 @@
                 "alarmStarted",
                 "alarmUpdated",
                 "alarmStopped",
+                "poiAdd",
+                "poiAddCompleted",
+                "poiAddError",
+                "poiAdded",
+                "poiUpdate",
+                "poiUpdateCompleted",
+                "poiUpdateError",
+                "poiUpdated",
+                "poiRemove",
+                "poiRemoveCompleted",
+                "poiRemoveError",
+                "poiRemoved",
+                "poiGetList",
+                "poiList",
                 "rfGeoThreatSimulationStart",
                 "rfGeoThreatSimulationStartCompleted",
                 "rfGeoThreatSimulationStartError",
@@ -112,6 +129,11 @@
                 "ptzSetVelocity",
                 "ptzSetVelocityCompleted",
                 "ptzSetVelocityError",
+                "ptzConfigure",
+                "ptzConfiguration",
+                "ptzConfigureCompleted",
+                "ptzConfigureError",
+                "ptzGetConfiguration",
                 "ecmHistory",
                 "ecmGetHistory",
                 "threatTypeGetList",
@@ -193,6 +215,9 @@
                 "rfRecordSnapshotStart",
                 "rfRecordSnapshotStartCompleted",
                 "rfRecordSnapshotStartError",
+                "rfRecordAddComment",
+                "rfRecordAddCommentCompleted",
+                "rfRecordAddCommentError",
                 "rfRecordList",
                 "rfRecordGetList",
                 "rfRecordClearList",
@@ -486,6 +511,18 @@
             "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
         },
         {
+            "if": { "properties": { "event": { "const": "compositeDeviceEdit" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/CompositeDeviceEdit.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "compositeDeviceEditCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "compositeDeviceEditError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
             "if": { "properties": { "event": { "const": "fwuImageGetList" } } },
             "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
         },
@@ -614,6 +651,62 @@
             "then": { "properties": { "message": { "$ref": "./messages/Alarm.json#" } } }
         },
         {
+            "if": { "properties": { "event": { "const": "poiAdd" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PoiAdd.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "poiAddCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PoiId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "poiAddError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "poiAdded" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Poi.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "poiUpdate" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PoiUpdate.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "poiUpdateCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PoiId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "poiUpdateError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "poiUpdated" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Poi.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "poiRemove" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PoiId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "poiRemoveCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PoiId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "poiRemoveError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "poiRemoved" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PoiId.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "poiGetList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "poiList" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PoiList.json#" } } }
+        },
+        {
             "if": { "properties": { "event": { "const": "rfGeoThreatSimulationStart" } } },
             "then": { "properties": { "message": { "$ref": "./messages/RfGeoThreatSimulationStart.json#" } } }
         },
@@ -692,6 +785,26 @@
         {
             "if": { "properties": { "event": { "const": "ptzSetVelocityError" } } },
             "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzConfigure" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PtzConfigure.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzConfiguration" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PtzConfig.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzConfigureCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/PtzConfig.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzConfigureError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "ptzGetConfiguration" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
         },
         {
             "if": { "properties": { "event": { "const": "ecmConfigure" } } },
@@ -1027,15 +1140,27 @@
         },
         {
             "if": { "properties": { "event": { "const": "rfRecordSnapshotStart" } } },
-            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+            "then": { "properties": { "message": { "$ref": "./messages/DeviceIds.json#" } } }
         },
         {
             "if": { "properties": { "event": { "const": "rfRecordSnapshotStartCompleted" } } },
-            "then": { "properties": { "message": { "$ref": "./messages/DeviceId.json#" } } }
+            "then": { "properties": { "message": { "$ref": "./messages/RfRecordSnapshotStartCompleted.json#" } } }
         },
         {
             "if": { "properties": { "event": { "const": "rfRecordSnapshotStartError" } } },
-            "then": { "properties": { "message": { "$ref": "./messages/DeviceDeviceIdError.json#" } } }
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "rfRecordAddComment" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/RfRecordAddComment.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "rfRecordAddCommentCompleted" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Empty.json#" } } }
+        },
+        {
+            "if": { "properties": { "event": { "const": "rfRecordAddCommentError" } } },
+            "then": { "properties": { "message": { "$ref": "./messages/Error.json#" } } }
         },
         {
             "if": { "properties": { "event": { "const": "rfRecordList" } } },

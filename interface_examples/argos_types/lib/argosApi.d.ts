@@ -43,6 +43,8 @@ import { CompositeDeviceAdd } from './auto/CompositeDeviceAdd.js';
 export { CompositeDeviceAdd } from './auto/CompositeDeviceAdd.js';
 import { Error } from './auto/Error.js';
 export { Error } from './auto/Error.js';
+import { CompositeDeviceEdit } from './auto/CompositeDeviceEdit.js';
+export { CompositeDeviceEdit } from './auto/CompositeDeviceEdit.js';
 import { FwuImageList } from './auto/FwuImageList.js';
 export { FwuImageList } from './auto/FwuImageList.js';
 import { FwuImageAdd } from './auto/FwuImageAdd.js';
@@ -67,6 +69,16 @@ import { AlarmZoneList } from './auto/AlarmZoneList.js';
 export { AlarmZoneList } from './auto/AlarmZoneList.js';
 import { Alarm } from './auto/Alarm.js';
 export { Alarm } from './auto/Alarm.js';
+import { PoiAdd } from './auto/PoiAdd.js';
+export { PoiAdd } from './auto/PoiAdd.js';
+import { PoiId } from './auto/PoiId.js';
+export { PoiId } from './auto/PoiId.js';
+import { Poi } from './auto/Poi.js';
+export { Poi } from './auto/Poi.js';
+import { PoiUpdate } from './auto/PoiUpdate.js';
+export { PoiUpdate } from './auto/PoiUpdate.js';
+import { PoiList } from './auto/PoiList.js';
+export { PoiList } from './auto/PoiList.js';
 import { RfGeoThreatSimulationStart } from './auto/RfGeoThreatSimulationStart.js';
 export { RfGeoThreatSimulationStart } from './auto/RfGeoThreatSimulationStart.js';
 import { RfGeoThreatSimulationStartCompleted } from './auto/RfGeoThreatSimulationStartCompleted.js';
@@ -87,6 +99,10 @@ import { PtzMoveAbs } from './auto/PtzMoveAbs.js';
 export { PtzMoveAbs } from './auto/PtzMoveAbs.js';
 import { PtzSetVelocity } from './auto/PtzSetVelocity.js';
 export { PtzSetVelocity } from './auto/PtzSetVelocity.js';
+import { PtzConfigure } from './auto/PtzConfigure.js';
+export { PtzConfigure } from './auto/PtzConfigure.js';
+import { PtzConfig } from './auto/PtzConfig.js';
+export { PtzConfig } from './auto/PtzConfig.js';
 import { EcmConfigure } from './auto/EcmConfigure.js';
 export { EcmConfigure } from './auto/EcmConfigure.js';
 import { EcmConfig } from './auto/EcmConfig.js';
@@ -155,6 +171,10 @@ import { DeviceCalibrationStart } from './auto/DeviceCalibrationStart.js';
 export { DeviceCalibrationStart } from './auto/DeviceCalibrationStart.js';
 import { RfRecordThreatsConfig } from './auto/RfRecordThreatsConfig.js';
 export { RfRecordThreatsConfig } from './auto/RfRecordThreatsConfig.js';
+import { RfRecordSnapshotStartCompleted } from './auto/RfRecordSnapshotStartCompleted.js';
+export { RfRecordSnapshotStartCompleted } from './auto/RfRecordSnapshotStartCompleted.js';
+import { RfRecordAddComment } from './auto/RfRecordAddComment.js';
+export { RfRecordAddComment } from './auto/RfRecordAddComment.js';
 import { RfRecordList } from './auto/RfRecordList.js';
 export { RfRecordList } from './auto/RfRecordList.js';
 import { TakConfiguration } from './auto/TakConfiguration.js';
@@ -268,6 +288,8 @@ export type GetTime = Empty;
 export type GetSystemState = Empty;
 export type CompositeDeviceAddCompleted = DeviceId;
 export type CompositeDeviceAddError = Error;
+export type CompositeDeviceEditCompleted = DeviceId;
+export type CompositeDeviceEditError = Error;
 export type FwuImageGetList = Empty;
 export type FwuImageAdded = FwuImage;
 export type FwuImageAddCompleted = FwuImage;
@@ -294,6 +316,17 @@ export type AlarmZoneGetList = Empty;
 export type AlarmStarted = Alarm;
 export type AlarmUpdated = Alarm;
 export type AlarmStopped = Alarm;
+export type PoiAddCompleted = PoiId;
+export type PoiAddError = Error;
+export type PoiAdded = Poi;
+export type PoiUpdateCompleted = PoiId;
+export type PoiUpdateError = Error;
+export type PoiUpdated = Poi;
+export type PoiRemove = PoiId;
+export type PoiRemoveCompleted = PoiId;
+export type PoiRemoveError = Error;
+export type PoiRemoved = PoiId;
+export type PoiGetList = Empty;
 export type PtzFollowStartCompleted = PtzFollowId;
 export type PtzFollowStarted = PtzFollow;
 export type PtzFollowStartError = Error;
@@ -306,6 +339,10 @@ export type PtzMoveAbsCompleted = DeviceId;
 export type PtzMoveAbsError = Error;
 export type PtzSetVelocityCompleted = DeviceId;
 export type PtzSetVelocityError = Error;
+export type PtzConfiguration = PtzConfig;
+export type PtzConfigureCompleted = PtzConfig;
+export type PtzConfigureError = Error;
+export type PtzGetConfiguration = Empty;
 export type EcmConfiguration = EcmConfig;
 export type EcmConfigureCompleted = EcmConfig;
 export type EcmConfigureError = Error;
@@ -363,9 +400,10 @@ export type DeviceCalibrationStartError = DeviceDeviceIdError;
 export type RfRecordThreatsConfigure = RfRecordThreatsConfig;
 export type RfRecordThreatsConfigureCompleted = Empty;
 export type RfRecordThreatsConfigureError = Error;
-export type RfRecordSnapshotStart = DeviceId;
-export type RfRecordSnapshotStartCompleted = DeviceId;
-export type RfRecordSnapshotStartError = DeviceDeviceIdError;
+export type RfRecordSnapshotStart = DeviceIds;
+export type RfRecordSnapshotStartError = Error;
+export type RfRecordAddCommentCompleted = Empty;
+export type RfRecordAddCommentError = Error;
 export type RfRecordGetList = Empty;
 export type RfRecordClearList = Empty;
 export type RfRecordClearListCompleted = Empty;
@@ -460,6 +498,9 @@ export declare enum API {
     COMPOSITE_DEVICE_ADD = "compositeDeviceAdd",
     COMPOSITE_DEVICE_ADD_COMPLETED = "compositeDeviceAddCompleted",
     COMPOSITE_DEVICE_ADD_ERROR = "compositeDeviceAddError",
+    COMPOSITE_DEVICE_EDIT = "compositeDeviceEdit",
+    COMPOSITE_DEVICE_EDIT_COMPLETED = "compositeDeviceEditCompleted",
+    COMPOSITE_DEVICE_EDIT_ERROR = "compositeDeviceEditError",
     FWU_IMAGE_GET_LIST = "fwuImageGetList",
     FWU_IMAGE_LIST = "fwuImageList",
     FWU_IMAGE_ADD = "fwuImageAdd",
@@ -492,6 +533,20 @@ export declare enum API {
     ALARM_STARTED = "alarmStarted",
     ALARM_UPDATED = "alarmUpdated",
     ALARM_STOPPED = "alarmStopped",
+    POI_ADD = "poiAdd",
+    POI_ADD_COMPLETED = "poiAddCompleted",
+    POI_ADD_ERROR = "poiAddError",
+    POI_ADDED = "poiAdded",
+    POI_UPDATE = "poiUpdate",
+    POI_UPDATE_COMPLETED = "poiUpdateCompleted",
+    POI_UPDATE_ERROR = "poiUpdateError",
+    POI_UPDATED = "poiUpdated",
+    POI_REMOVE = "poiRemove",
+    POI_REMOVE_COMPLETED = "poiRemoveCompleted",
+    POI_REMOVE_ERROR = "poiRemoveError",
+    POI_REMOVED = "poiRemoved",
+    POI_GET_LIST = "poiGetList",
+    POI_LIST = "poiList",
     RF_GEO_THREAT_SIMULATION_START = "rfGeoThreatSimulationStart",
     RF_GEO_THREAT_SIMULATION_START_COMPLETED = "rfGeoThreatSimulationStartCompleted",
     RF_GEO_THREAT_SIMULATION_START_ERROR = "rfGeoThreatSimulationStartError",
@@ -512,6 +567,11 @@ export declare enum API {
     PTZ_SET_VELOCITY = "ptzSetVelocity",
     PTZ_SET_VELOCITY_COMPLETED = "ptzSetVelocityCompleted",
     PTZ_SET_VELOCITY_ERROR = "ptzSetVelocityError",
+    PTZ_CONFIGURE = "ptzConfigure",
+    PTZ_CONFIGURATION = "ptzConfiguration",
+    PTZ_CONFIGURE_COMPLETED = "ptzConfigureCompleted",
+    PTZ_CONFIGURE_ERROR = "ptzConfigureError",
+    PTZ_GET_CONFIGURATION = "ptzGetConfiguration",
     ECM_CONFIGURE = "ecmConfigure",
     ECM_CONFIGURATION = "ecmConfiguration",
     ECM_CONFIGURE_COMPLETED = "ecmConfigureCompleted",
@@ -598,6 +658,9 @@ export declare enum API {
     RF_RECORD_SNAPSHOT_START = "rfRecordSnapshotStart",
     RF_RECORD_SNAPSHOT_START_COMPLETED = "rfRecordSnapshotStartCompleted",
     RF_RECORD_SNAPSHOT_START_ERROR = "rfRecordSnapshotStartError",
+    RF_RECORD_ADD_COMMENT = "rfRecordAddComment",
+    RF_RECORD_ADD_COMMENT_COMPLETED = "rfRecordAddCommentCompleted",
+    RF_RECORD_ADD_COMMENT_ERROR = "rfRecordAddCommentError",
     RF_RECORD_LIST = "rfRecordList",
     RF_RECORD_GET_LIST = "rfRecordGetList",
     RF_RECORD_CLEAR_LIST = "rfRecordClearList",
@@ -724,6 +787,9 @@ export type ArgosTypesMap = {
     [API.COMPOSITE_DEVICE_ADD]: CompositeDeviceAdd;
     [API.COMPOSITE_DEVICE_ADD_COMPLETED]: CompositeDeviceAddCompleted;
     [API.COMPOSITE_DEVICE_ADD_ERROR]: CompositeDeviceAddError;
+    [API.COMPOSITE_DEVICE_EDIT]: CompositeDeviceEdit;
+    [API.COMPOSITE_DEVICE_EDIT_COMPLETED]: CompositeDeviceEditCompleted;
+    [API.COMPOSITE_DEVICE_EDIT_ERROR]: CompositeDeviceEditError;
     [API.FWU_IMAGE_GET_LIST]: FwuImageGetList;
     [API.FWU_IMAGE_LIST]: FwuImageList;
     [API.FWU_IMAGE_ADD]: FwuImageAdd;
@@ -756,6 +822,20 @@ export type ArgosTypesMap = {
     [API.ALARM_STARTED]: AlarmStarted;
     [API.ALARM_UPDATED]: AlarmUpdated;
     [API.ALARM_STOPPED]: AlarmStopped;
+    [API.POI_ADD]: PoiAdd;
+    [API.POI_ADD_COMPLETED]: PoiAddCompleted;
+    [API.POI_ADD_ERROR]: PoiAddError;
+    [API.POI_ADDED]: PoiAdded;
+    [API.POI_UPDATE]: PoiUpdate;
+    [API.POI_UPDATE_COMPLETED]: PoiUpdateCompleted;
+    [API.POI_UPDATE_ERROR]: PoiUpdateError;
+    [API.POI_UPDATED]: PoiUpdated;
+    [API.POI_REMOVE]: PoiRemove;
+    [API.POI_REMOVE_COMPLETED]: PoiRemoveCompleted;
+    [API.POI_REMOVE_ERROR]: PoiRemoveError;
+    [API.POI_REMOVED]: PoiRemoved;
+    [API.POI_GET_LIST]: PoiGetList;
+    [API.POI_LIST]: PoiList;
     [API.RF_GEO_THREAT_SIMULATION_START]: RfGeoThreatSimulationStart;
     [API.RF_GEO_THREAT_SIMULATION_START_COMPLETED]: RfGeoThreatSimulationStartCompleted;
     [API.RF_GEO_THREAT_SIMULATION_START_ERROR]: RfGeoThreatSimulationStartError;
@@ -776,6 +856,11 @@ export type ArgosTypesMap = {
     [API.PTZ_SET_VELOCITY]: PtzSetVelocity;
     [API.PTZ_SET_VELOCITY_COMPLETED]: PtzSetVelocityCompleted;
     [API.PTZ_SET_VELOCITY_ERROR]: PtzSetVelocityError;
+    [API.PTZ_CONFIGURE]: PtzConfigure;
+    [API.PTZ_CONFIGURATION]: PtzConfiguration;
+    [API.PTZ_CONFIGURE_COMPLETED]: PtzConfigureCompleted;
+    [API.PTZ_CONFIGURE_ERROR]: PtzConfigureError;
+    [API.PTZ_GET_CONFIGURATION]: PtzGetConfiguration;
     [API.ECM_CONFIGURE]: EcmConfigure;
     [API.ECM_CONFIGURATION]: EcmConfiguration;
     [API.ECM_CONFIGURE_COMPLETED]: EcmConfigureCompleted;
@@ -862,6 +947,9 @@ export type ArgosTypesMap = {
     [API.RF_RECORD_SNAPSHOT_START]: RfRecordSnapshotStart;
     [API.RF_RECORD_SNAPSHOT_START_COMPLETED]: RfRecordSnapshotStartCompleted;
     [API.RF_RECORD_SNAPSHOT_START_ERROR]: RfRecordSnapshotStartError;
+    [API.RF_RECORD_ADD_COMMENT]: RfRecordAddComment;
+    [API.RF_RECORD_ADD_COMMENT_COMPLETED]: RfRecordAddCommentCompleted;
+    [API.RF_RECORD_ADD_COMMENT_ERROR]: RfRecordAddCommentError;
     [API.RF_RECORD_LIST]: RfRecordList;
     [API.RF_RECORD_GET_LIST]: RfRecordGetList;
     [API.RF_RECORD_CLEAR_LIST]: RfRecordClearList;

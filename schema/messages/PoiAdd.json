@@ -1,0 +1,35 @@
+{
+    "$comment": "This file is auto-generated. Do not edit.",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "PoiAdd",
+    "description": "Point of interest API is a frontend helper, not used in the backend.",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "color": {
+            "type": "string",
+            "description": "Color of the point of interest."
+        },
+        "name": {
+            "type": "string",
+            "description": "Name of the point of interest."
+        },
+        "isActive": {
+            "type": "boolean",
+            "description": "Switch for (de)activating the point of interest."
+        },
+        "lat": {
+            "type": "number",
+            "description": "Latitude of the point of interest."
+        },
+        "lon": {
+            "type": "number",
+            "description": "Longitude of the point of interest."
+        },
+        "rangeRings": {
+            "type": "boolean",
+            "description": "Whether range rings are shown around the point of interest."
+        }
+    },
+    "required": ["color", "name", "isActive", "lat", "lon", "rangeRings"]
+}

@@ -19,8 +19,7 @@
                 "z": { "pct": 27 },
                 "f": 33
             }
-        ],
-        "resetOrientationTimeout": 300
+        ]
     },
     "event": "ptzDeviceInfo"
 }

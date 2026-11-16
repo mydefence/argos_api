@@ -5,11 +5,11 @@
  */
 export type MissionCenter = {
     /**
-     * Defines the geographical latitude with up to 6 decimals. null if not set.
+     * Defines the geographical latitude with up to 6 decimals. The mission center defaults to latitude 0, longitude 0, and is automatically updated to match device locations.
      */
     latitude: number;
     /**
-     * Defines the geographical longitude with up to 6 decimals. null if not set.
+     * Defines the geographical longitude with up to 6 decimals. The mission center defaults to latitude 0, longitude 0, and is automatically updated to match device locations.
      */
     longitude: number;
 };

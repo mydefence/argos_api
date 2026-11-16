@@ -44,6 +44,10 @@
             },
             "additionalProperties": false,
             "required": ["latitude", "longitude"]
+        },
+        "startAcquisition": {
+            "type": "boolean",
+            "description": "Start searching for threats at the requested position after the move is completed."
         }
     },
     "additionalProperties": false,

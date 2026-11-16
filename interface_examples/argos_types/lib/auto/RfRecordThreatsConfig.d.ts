@@ -4,7 +4,7 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 /**
- * Configure recording of RF segment information for threats. MyDefence internal and subject to change without notice.
+ * MyDefence internal and subject to change without notice. Configure recording of RF segment information for threats.
  */
 export type RfRecordThreatsConfig = {
     /**

@@ -5,6 +5,68 @@ changes including bug fixes to Iris and Argos refer to `Release_note_C2` documen
 
 Contact MyDefence support for older release notes.
 
+## 6.6.0 - 2026-11
+
+### Attention
+
+- Deprecated the `"default"` value for `p`/`t`/`z` in `ptzMoveAbs` orientation and the
+  `resetOrientationTimeout` property (`PtzDeviceInfo`/`PtzDeviceSet`). These are no longer
+  supported; any value sent is treated as if the property were not present. New value
+  `"auto-focus"` added for the `f` (focus) property, to trigger one-shot auto-focus. The
+  deprecated `"default"` value for `f` is still accepted and mapped to `"auto-focus"`.
+
+### New Features
+
+- New optional property `deviceSecureState` on `Device` schema. See schema for further details.
+- EchoGuard: The content of the `assetData` device miscellaneous has changed. `sysparam` is now an
+  object with the settings reported by the radar instead of a text string. Devices with the old
+  format must be removed and added again.  Minimum required EchoGuard Sw version is `18.0.0`.
+- New device miscellaneous type `tlsConfig` added, for configuring TLS (encrypted, authenticated)
+  connections to devices that support it, including server verification (fingerprint or CA) and
+  optional mutual TLS client credentials. See the schema for further details.
+- New `compositeDeviceEdit` command added to enable editing of generic composite devices.
+- New device types added. `scanterSphera`, `g1x` and `robinRadar`. All are radar integrations.
+  `g1x` and `robinRadar` are in working progress and not fully tested against real devices.
+- New optional `startAcquisition` property on `ptzMoveAbs` (both orientation and position variants).
+  When `true`, the camera starts searching for threats at the requested orientation/position once
+  the move completes.
+- New `ptzConfigure`/`ptzGetConfiguration` commands and `ptzConfiguration` event for configuring
+  auto-follow: per PTZ device, a set of alarm zones that automatically start PTZ follow of a threat
+  breaking the zone, plus `autoFollowOverrideTimeout`, the number of seconds auto-follow is
+  suspended after manual operation of the camera. See schema for details.
+- New optional property `autoFollowOverride` on `PtzDeviceInfo` (`ptzDeviceInfo`, `ptzDeviceList`
+  and `ptzDeviceUpdate`). Present on devices configured for auto-follow while auto-follow is
+  suspended by manual operation. See schema for details.
+- New optional property `autoFollowing` on `ptzFollow`, set when the follow was started by
+  auto-follow.
+- New API for storing points of interest (POI) for the front end: `poiAdd`, `poiUpdate`,
+  `poiRemove`, `poiGetList` and the push events `poiAdded`, `poiUpdated`, `poiRemoved` and
+  `poiList`.
+
+### Improvements
+
+- Allow deviceMiscellaneousChange on child devices for relevant types.
+- deviceMiscellaneousChange type takInfo is disallowed in schema. It was previously only documented
+  as read-only.
+
+### Bug Fixes
+
+## 6.5.4 - 2026-10
+
+No API changes.
+
+## 6.5.3 - 2026-08
+
+No API changes.
+
+## 6.5.2 - 2026-08
+
+No API changes.
+
+## 6.5.1 - 2026-08
+
+No API changes.
+
 ## 6.5.0 - 2026-06
 
 ### Attention

@@ -1,0 +1,58 @@
+{
+    "message": {
+        "deviceId": "p8k2xw4tz7qmnc1r",
+        "deviceMiscellaneousList": [
+            {
+                "deviceId": "p8k2xw4tz7qmnc1r",
+                "deviceMiscellaneousType": "tlsConfig",
+                "deviceMiscellaneousData": {
+                    "connections": {
+                        "broadcast": {
+                            "enabled": true,
+                            "serverVerification": {
+                                "mode": "none"
+                            }
+                        },
+                        "c2": {
+                            "enabled": true,
+                            "serverVerification": {
+                                "mode": "fingerprint",
+                                "fingerprint": "3F:2A:9E:1B:7C:44:D0:8A:5E:61:F3:2B:9C:0D:77:4A:E8:15:C6:3D:2F:90:AB:1E:6C:34:F7:82:0B:5A:D9:11"
+                            }
+                        },
+                        "video": {
+                            "enabled": true,
+                            "serverVerification": {
+                                "mode": "ca",
+                                "ca": {
+                                    "format": "pem",
+                                    "certificate": "-----BEGIN CERTIFICATE-----\nMIIBxTCCAWugAwIBAgIUXQ1v8+example+ca+certificate==\n-----END CERTIFICATE-----\n"
+                                }
+                            },
+                            "clientCredentials": {
+                                "format": "pem",
+                                "certificate": "-----BEGIN CERTIFICATE-----\nMIIBxTCCAWugAwIBAgIUXQ1v8+example+client+certificate==\n-----END CERTIFICATE-----\n",
+                                "privateKey": "(secret)"
+                            }
+                        }
+                    },
+                    "supportedAuthentication": {
+                        "broadcast": {
+                            "serverVerificationModes": ["none", "fingerprint"],
+                            "clientCredentialsSupported": false
+                        },
+                        "c2": {
+                            "serverVerificationModes": ["none", "fingerprint", "ca"],
+                            "clientCredentialsSupported": false
+                        },
+                        "video": {
+                            "serverVerificationModes": ["ca"],
+                            "clientCredentialsSupported": true
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "event": "deviceMiscellaneous"
+}

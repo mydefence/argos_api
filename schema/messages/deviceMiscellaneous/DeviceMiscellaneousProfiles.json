@@ -27,6 +27,9 @@
                         },
                         {
                             "$ref": "./profileGroup/ProfileGroupEchoShieldRadar.json#"
+                        },
+                        {
+                            "$ref": "./profileGroup/ProfileGroupScanterSphera.json#"
                         }
                     ],
                     "description": "The profile group of the device. Device specific constant.",

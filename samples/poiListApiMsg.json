@@ -1,0 +1,23 @@
+{
+    "message": [
+        {
+            "poiId": "cvuxhv7zgkdtv2cnb",
+            "color": "#c69540",
+            "name": "Hangar",
+            "isActive": true,
+            "lat": 57.134407,
+            "lon": 9.46319,
+            "rangeRings": true
+        },
+        {
+            "poiId": "cvuxhvbehkdtwgd2q",
+            "color": "#2040ff",
+            "name": "Gate",
+            "isActive": false,
+            "lat": 57.14,
+            "lon": 9.47,
+            "rangeRings": false
+        }
+    ],
+    "event": "poiList"
+}

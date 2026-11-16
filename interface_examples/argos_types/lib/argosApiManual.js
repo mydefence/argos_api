@@ -109,6 +109,9 @@ export function isDeviceMiscellaneousNominalTargetSize(misc) {
 export function isDeviceMiscellaneousEcmChannels(misc) {
     return misc.deviceMiscellaneousType == 'ecmChannels';
 }
+export function isDeviceMiscellaneousTlsConfig(misc) {
+    return misc.deviceMiscellaneousType == 'tlsConfig';
+}
 /** Search miscellaneous data list and narrow to the requested type. */
 export function miscellaneousDataFind(deviceMiscellaneousList, miscType) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

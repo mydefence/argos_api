@@ -4,13 +4,29 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 /**
- * List of RF segment recording. MyDefence internal and subject to change without notice.
+ * MyDefence internal and subject to change without notice. Current and completed RF segment recording operations. A failed recording is included in exactly one rfRecordList broadcast, then forgotten without a separate removal update. Subsequent broadcasts and rfRecordGetList responses omit it; clients that only poll may miss failures.
  */
 export type RfRecordList = {
+    /**
+     * Unique ID for this logical recording operation.
+     */
+    recordingId: string;
     /**
      * Type of recording
      */
     recType: "threat" | "snapshot";
+    /**
+     * Devices requested for this recording operation.
+     */
+    deviceIds: string[];
+    /**
+     * inProgress: recording or archive creation is ongoing. complete: all requested device transfers completed and an archive is available. partial: an archive is available, but at least one device transfer was incomplete or failed. failed: no archive could be published, either because no device produced usable data or because processing failed. A failed entry is broadcast once, then removed from memory without another update and is not persisted; errorInfo describes the failure.
+     */
+    status: "inProgress" | "complete" | "partial" | "failed";
+    /**
+     * Bytes received from devices so far (updated at most once per second while inProgress), or total bytes for a completed/partial recording. Always 0 for failed recordings.
+     */
+    bytesTransferred: number;
     /**
      * Type of threat that triggered the recording. Set for recType `threat`. Number refers to `id` in DeviceMiscellaneous:droneList.
      */
@@ -20,7 +36,11 @@ export type RfRecordList = {
      */
     createdTimeStamp: string;
     /**
-     * Path to the recording data. Can be fetched from http://<argos-ip:28230>/<filePath>
+     * Path to the recording archive for complete or partial recordings. Can be fetched from https://<argos-ip:28230>/<filePath>
      */
-    filePath: string;
+    filePath?: string;
+    /**
+     * Reason a recording failed. Present on the single broadcast containing the failed entry; the entry is then forgotten and omitted from subsequent list broadcasts and responses.
+     */
+    errorInfo?: string;
 }[];

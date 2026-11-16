@@ -18,7 +18,7 @@
         },
         "resetOrientationTimeout": {
             "type": ["number", "null"],
-            "description": "Set or disable timeout. See PtzDeviceInfo."
+            "description": "Deprecated. No longer supported; any value is treated as if this property were not present."
         }
     },
     "additionalProperties": false,

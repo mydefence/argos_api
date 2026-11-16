@@ -50,7 +50,7 @@
             "$ref": "./deviceMiscellaneous/DeviceMiscellaneousRingSettingsChange.json#"
         },
         {
-            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousTakInfoChange.json#"
+            "$ref": "./deviceMiscellaneous/DeviceMiscellaneousTlsConfigChange.json#"
         },
         {
             "$ref": "./deviceMiscellaneous/DeviceMiscellaneousUseGPSLocationChange.json#"

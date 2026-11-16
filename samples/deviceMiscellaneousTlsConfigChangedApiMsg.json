@@ -1,0 +1,37 @@
+{
+    "message": {
+        "deviceId": "p8k2xw4tz7qmnc1r",
+        "deviceMiscellaneousType": "tlsConfig",
+        "deviceMiscellaneousData": {
+            "connections": {
+                "broadcast": {
+                    "enabled": true,
+                    "serverVerification": {
+                        "mode": "none"
+                    }
+                },
+                "c2": {
+                    "enabled": true,
+                    "serverVerification": {
+                        "mode": "ca",
+                        "ca": {
+                            "format": "pem",
+                            "certificate": "-----BEGIN CERTIFICATE-----\nMIIBxTCCAWugAwIBAgIUXQ1v8+example+ca+certificate==\n-----END CERTIFICATE-----\n"
+                        }
+                    }
+                }
+            },
+            "supportedAuthentication": {
+                "broadcast": {
+                    "serverVerificationModes": ["none", "fingerprint"],
+                    "clientCredentialsSupported": false
+                },
+                "c2": {
+                    "serverVerificationModes": ["none", "fingerprint", "ca"],
+                    "clientCredentialsSupported": false
+                }
+            }
+        }
+    },
+    "event": "deviceMiscellaneousChanged"
+}

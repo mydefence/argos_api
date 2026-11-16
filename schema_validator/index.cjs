@@ -3095,12 +3095,20 @@ var require_data = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/fast-uri@3.1.0/node_modules/fast-uri/lib/utils.js
+// ../../../node_modules/.pnpm/fast-uri@4.2.3/node_modules/fast-uri/lib/utils.js
 var require_utils = __commonJS({
-  "../../../node_modules/.pnpm/fast-uri@3.1.0/node_modules/fast-uri/lib/utils.js"(exports2, module2) {
+  "../../../node_modules/.pnpm/fast-uri@4.2.3/node_modules/fast-uri/lib/utils.js"(exports2, module2) {
     "use strict";
     var isUUID = RegExp.prototype.test.bind(/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/iu);
     var isIPv4 = RegExp.prototype.test.bind(/^(?:(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)$/u);
+    var isPort = RegExp.prototype.test.bind(/^\d*$/u);
+    var isHexPair = RegExp.prototype.test.bind(/^[\da-f]{2}$/iu);
+    var isUnreserved = RegExp.prototype.test.bind(/^[\da-z\-._~]$/iu);
+    var isPathCharacter = RegExp.prototype.test.bind(/^[A-Za-z0-9\-._~!$&'()*+,;=:@/]$/u);
+    var isQueryFragmentCharacter = RegExp.prototype.test.bind(/^[A-Za-z0-9\-._~!$&'()*+,;=:@/?]$/u);
+    var isUserinfoCharacter = RegExp.prototype.test.bind(/^[A-Za-z0-9\-._~!$&'()*+,;=:]$/u);
+    var isRegNameCharacter = RegExp.prototype.test.bind(/^[A-Za-z0-9\-._~!$&'()*+,;=]$/u);
+    var isLiteralRegName = RegExp.prototype.test.bind(/^[A-Za-z0-9\-._~!$&'()*+,;=]*$/u);
     function stringArrayToHexStripped(input) {
       let acc = "";
       let code = 0;
@@ -3125,91 +3133,110 @@ var require_utils = __commonJS({
       }
       return acc;
     }
+    var isHextet = RegExp.prototype.test.bind(/^[\dA-Fa-f]{1,4}$/);
+    var isIPvFuture = RegExp.prototype.test.bind(/^[vV][\dA-Fa-f]+\.[A-Za-z\d\-._~!$&'()*+,;=:]+$/);
+    var isZoneCharacter = RegExp.prototype.test.bind(/^[A-Za-z\d\-._~]$/);
     var nonSimpleDomain = RegExp.prototype.test.bind(/[^!"$&'()*+,\-.;=_`a-z{}~]/u);
-    function consumeIsZone(buffer) {
-      buffer.length = 0;
+    var nonSimpleDomainChars = RegExp.prototype.test.bind(/[^\d!"$&'()*+,\-.;=_`a-z{}~]/u);
+    var numericLastLabel = RegExp.prototype.test.bind(/(?:^|\.)\d+$/u);
+    function nonSimpleMailtoDomain(domain) {
+      return nonSimpleDomainChars(domain) || numericLastLabel(domain);
+    }
+    function isZoneIdentifier(zone) {
+      if (zone.length === 0) return false;
+      for (let i = 0; i < zone.length; i++) {
+        if (isZoneCharacter(zone[i])) continue;
+        if (zone[i] === "%" && i + 2 < zone.length && isHexPair(zone.slice(i + 1, i + 3))) {
+          i += 2;
+          continue;
+        }
+        return false;
+      }
       return true;
     }
-    function consumeHextets(buffer, address, output) {
-      if (buffer.length) {
-        const hex = stringArrayToHexStripped(buffer);
-        if (hex !== "") {
-          address.push(hex);
+    function compressIPv6ZeroRun(hextets) {
+      let bestStart = -1;
+      let bestLength = 0;
+      let runStart = -1;
+      let runLength = 0;
+      for (let i = 0; i < hextets.length; i++) {
+        if (hextets[i] === "0") {
+          if (runStart === -1) runStart = i;
+          runLength++;
+          if (runLength > bestLength) {
+            bestLength = runLength;
+            bestStart = runStart;
+          }
         } else {
-          output.error = true;
-          return false;
+          runStart = -1;
+          runLength = 0;
         }
-        buffer.length = 0;
       }
-      return true;
+      if (bestLength < 2) return hextets.join(":");
+      const head = hextets.slice(0, bestStart).join(":");
+      const tail = hextets.slice(bestStart + bestLength).join(":");
+      return head + "::" + tail;
     }
-    function getIPV6(input) {
-      let tokenCount = 0;
-      const output = { error: false, address: "", zone: "" };
-      const address = [];
-      const buffer = [];
-      let endipv6Encountered = false;
-      let endIpv6 = false;
-      let consume = consumeHextets;
-      for (let i = 0; i < input.length; i++) {
-        const cursor = input[i];
-        if (cursor === "[" || cursor === "]") {
-          continue;
-        }
-        if (cursor === ":") {
-          if (endipv6Encountered === true) {
-            endIpv6 = true;
-          }
-          if (!consume(buffer, address, output)) {
-            break;
-          }
-          if (++tokenCount > 7) {
-            output.error = true;
-            break;
-          }
-          if (i > 0 && input[i - 1] === ":") {
-            endipv6Encountered = true;
-          }
-          address.push(":");
-          continue;
-        } else if (cursor === "%") {
-          if (!consume(buffer, address, output)) {
-            break;
-          }
-          consume = consumeIsZone;
-        } else {
-          buffer.push(cursor);
-          continue;
-        }
+    function normalizeIPv6Address(input) {
+      const compression = input.indexOf("::");
+      if (compression !== -1 && input.indexOf("::", compression + 1) !== -1) return void 0;
+      const left = compression === -1 ? input.split(":") : input.slice(0, compression).split(":");
+      const right = compression === -1 ? [] : input.slice(compression + 2).split(":");
+      if (compression !== -1) {
+        if (left.length === 1 && left[0] === "") left.length = 0;
+        if (right.length === 1 && right[0] === "") right.length = 0;
       }
-      if (buffer.length) {
-        if (consume === consumeIsZone) {
-          output.zone = buffer.join("");
-        } else if (endIpv6) {
-          address.push(buffer.join(""));
-        } else {
-          address.push(stringArrayToHexStripped(buffer));
+      const parts = left.concat(right);
+      let hextetCount = 0;
+      for (let i = 0; i < parts.length; i++) {
+        const part = parts[i];
+        if (part === "") return void 0;
+        if (part.indexOf(".") !== -1) {
+          if (i !== parts.length - 1 || compression !== -1 && right.length === 0 || !isIPv4(part)) return void 0;
+          hextetCount += 2;
+          continue;
         }
+        if (!isHextet(part)) return void 0;
+        parts[i] = parseInt(part, 16).toString(16);
+        hextetCount++;
       }
-      output.address = address.join("");
-      return output;
+      if (compression === -1) {
+        if (hextetCount !== 8) return void 0;
+        return compressIPv6ZeroRun(parts);
+      }
+      if (hextetCount >= 8) return void 0;
+      const expanded = parts.slice(0, left.length);
+      for (let i = hextetCount; i < 8; i++) expanded.push("0");
+      for (let i = left.length; i < parts.length; i++) expanded.push(parts[i]);
+      return compressIPv6ZeroRun(expanded);
     }
     function normalizeIPv6(host) {
-      if (findToken(host, ":") < 2) {
-        return { host, isIPV6: false };
+      const bracketed = host[0] === "[" && host[host.length - 1] === "]";
+      const hasBracket = host[0] === "[" || host[host.length - 1] === "]";
+      if (hasBracket && !bracketed) return { host, isIPV6: false, error: true };
+      let input = bracketed ? host.slice(1, -1) : host;
+      if (bracketed && isIPvFuture(input)) {
+        input = input.toLowerCase();
+        return { host: `[${input}]`, escapedHost: input, isIPV6: false, isIPVFuture: true };
       }
-      const ipv6 = getIPV6(host);
-      if (!ipv6.error) {
-        let newHost = ipv6.address;
-        let escapedHost = ipv6.address;
-        if (ipv6.zone) {
-          newHost += "%" + ipv6.zone;
-          escapedHost += "%25" + ipv6.zone;
-        }
-        return { host: newHost, isIPV6: true, escapedHost };
-      } else {
-        return { host, isIPV6: false };
+      if (findToken(input, ":") < 2) {
+        return { host, isIPV6: false, error: bracketed };
       }
+      let zoneIdentifier = "";
+      const zoneSeparator = input.indexOf("%");
+      if (zoneSeparator !== -1) {
+        const separatorLength = input.slice(zoneSeparator, zoneSeparator + 3).toLowerCase() === "%25" ? 3 : 1;
+        zoneIdentifier = input.slice(zoneSeparator + separatorLength);
+        if (!isZoneIdentifier(zoneIdentifier)) return { host, isIPV6: false, error: true };
+        input = input.slice(0, zoneSeparator);
+      }
+      const address = normalizeIPv6Address(input);
+      if (address === void 0) return { host, isIPV6: false, error: true };
+      return {
+        host: address + (zoneIdentifier ? "%" + zoneIdentifier : ""),
+        escapedHost: address + (zoneIdentifier ? "%25" + zoneIdentifier : ""),
+        isIPV6: true
+      };
     }
     function findToken(str, token) {
       let ind = 0;
@@ -3243,7 +3270,7 @@ var require_utils = __commonJS({
               continue;
             }
           } else if (input[0] === "/") {
-            if (input[1] === "." || input[1] === "/") {
+            if (input[1] === ".") {
               output.push("/");
               break;
             }
@@ -3293,57 +3320,354 @@ var require_utils = __commonJS({
       }
       return output.join("");
     }
-    function normalizeComponentEncoding(component, esc) {
-      const func = esc !== true ? escape : unescape;
-      if (component.scheme !== void 0) {
-        component.scheme = func(component.scheme);
+    function removeDotSegmentsRelative(path2) {
+      if (path2 === "" || path2[0] === "/") {
+        return removeDotSegments(path2);
       }
-      if (component.userinfo !== void 0) {
-        component.userinfo = func(component.userinfo);
+      const segments = path2.split("/");
+      const last = segments.length - 1;
+      const output = [];
+      let trailingDirectory = false;
+      for (let i = 0; i <= last; i++) {
+        const segment = segments[i];
+        if (segment === "." || segment === "..") {
+          if (segment === "..") {
+            if (output.length !== 0 && output[output.length - 1] !== "..") {
+              output.pop();
+            } else {
+              output.push("..");
+            }
+          }
+          trailingDirectory = i === last;
+        } else {
+          output.push(segment);
+        }
       }
-      if (component.host !== void 0) {
-        component.host = func(component.host);
+      if (trailingDirectory && output[output.length - 1] !== "..") {
+        output.push("");
       }
-      if (component.path !== void 0) {
-        component.path = func(component.path);
+      if (output.length === 0 || output[0] === "" || output[0].includes(":")) {
+        output.unshift(".");
       }
-      if (component.query !== void 0) {
-        component.query = func(component.query);
-      }
-      if (component.fragment !== void 0) {
-        component.fragment = func(component.fragment);
-      }
-      return component;
+      return output.join("/");
     }
-    function recomposeAuthority(component) {
+    var IP_HOST_DELIMS = { "@": "%40", "/": "%2F", "?": "%3F", "#": "%23" };
+    var IP_HOST_DELIM_RE = /[@/?#]/g;
+    function encodeHost(host, isIP, allowNonAscii = false) {
+      if (!isIP) {
+        if (isLiteralRegName(host)) return host;
+        return encodeComponent(host, isRegNameCharacter, allowNonAscii);
+      }
+      IP_HOST_DELIM_RE.lastIndex = 0;
+      return host.replace(IP_HOST_DELIM_RE, (ch) => IP_HOST_DELIMS[ch]);
+    }
+    function normalizePercentEncoding(input, decodeUnreserved = false) {
+      if (input.indexOf("%") === -1) {
+        return input;
+      }
+      let output = "";
+      for (let i = 0; i < input.length; i++) {
+        if (input[i] === "%" && i + 2 < input.length) {
+          const hex = input.slice(i + 1, i + 3);
+          if (isHexPair(hex)) {
+            const normalizedHex = hex.toUpperCase();
+            const decoded = String.fromCharCode(parseInt(normalizedHex, 16));
+            if (decodeUnreserved && isUnreserved(decoded)) {
+              output += decoded;
+            } else {
+              output += "%" + normalizedHex;
+            }
+            i += 2;
+            continue;
+          }
+        }
+        output += input[i];
+      }
+      return output;
+    }
+    var BYTE_HEX = new Array(256);
+    {
+      const HEX_DIGITS = "0123456789ABCDEF";
+      for (let i = 0; i < 256; i++) {
+        BYTE_HEX[i] = "%" + HEX_DIGITS[i >> 4] + HEX_DIGITS[i & 15];
+      }
+    }
+    function isEscapeSafe(cp) {
+      return cp >= 48 && cp <= 57 || cp >= 65 && cp <= 90 || cp >= 97 && cp <= 122 || cp === 42 || cp === 43 || cp === 45 || cp === 46 || cp === 47 || cp === 64 || cp === 95;
+    }
+    function percentEncodeNonAscii(cp) {
+      if (cp < 2048) {
+        return BYTE_HEX[192 | cp >> 6] + BYTE_HEX[128 | cp & 63];
+      }
+      if (cp < 65536) {
+        return BYTE_HEX[224 | cp >> 12] + BYTE_HEX[128 | cp >> 6 & 63] + BYTE_HEX[128 | cp & 63];
+      }
+      return BYTE_HEX[240 | cp >> 18] + BYTE_HEX[128 | cp >> 12 & 63] + BYTE_HEX[128 | cp >> 6 & 63] + BYTE_HEX[128 | cp & 63];
+    }
+    function normalizePathEncoding(input) {
+      let output = "";
+      for (let i = 0; i < input.length; i++) {
+        const ch = input[i];
+        if (ch === "%" && i + 2 < input.length) {
+          const hex = input.slice(i + 1, i + 3);
+          if (isHexPair(hex)) {
+            const normalizedHex = hex.toUpperCase();
+            const decoded = String.fromCharCode(parseInt(normalizedHex, 16));
+            if (decoded !== "." && isUnreserved(decoded)) {
+              output += decoded;
+            } else {
+              output += "%" + normalizedHex;
+            }
+            i += 2;
+            continue;
+          }
+        }
+        if (isPathCharacter(ch)) {
+          output += ch;
+        } else {
+          const code = input.charCodeAt(i);
+          if (code < 128) {
+            output += isEscapeSafe(code) ? ch : BYTE_HEX[code];
+          } else if (code < 55296 || code > 57343) {
+            output += percentEncodeNonAscii(code);
+          } else if (code <= 56319 && i + 1 < input.length) {
+            const low = input.charCodeAt(i + 1);
+            if (low >= 56320 && low <= 57343) {
+              output += percentEncodeNonAscii(65536 + (code - 55296 << 10) + (low - 56320));
+              i++;
+            } else {
+              output += percentEncodeNonAscii(65533);
+            }
+          } else {
+            output += percentEncodeNonAscii(65533);
+          }
+        }
+      }
+      return output;
+    }
+    function serializePathEncoding(input, pathNoScheme = false) {
+      let output = "";
+      let firstSegment = pathNoScheme && input[0] !== "/";
+      for (let i = 0; i < input.length; i++) {
+        const ch = input[i];
+        if (ch === "%" && i + 2 < input.length) {
+          const hex = input.slice(i + 1, i + 3);
+          if (isHexPair(hex)) {
+            output += "%" + hex.toUpperCase();
+            i += 2;
+            continue;
+          }
+        }
+        if (ch === "/") {
+          firstSegment = false;
+        }
+        if (isPathCharacter(ch) && (ch !== ":" || !firstSegment)) {
+          output += ch;
+        } else {
+          const code = input.charCodeAt(i);
+          if (code < 128) {
+            output += BYTE_HEX[code];
+          } else if (code < 55296 || code > 57343) {
+            output += percentEncodeNonAscii(code);
+          } else if (code <= 56319 && i + 1 < input.length) {
+            const low = input.charCodeAt(i + 1);
+            if (low >= 56320 && low <= 57343) {
+              output += percentEncodeNonAscii(65536 + (code - 55296 << 10) + (low - 56320));
+              i++;
+            } else {
+              output += percentEncodeNonAscii(65533);
+            }
+          } else {
+            output += percentEncodeNonAscii(65533);
+          }
+        }
+      }
+      return output;
+    }
+    function normalizeQueryFragmentEncoding(input) {
+      let output = "";
+      for (let i = 0; i < input.length; i++) {
+        const ch = input[i];
+        if (ch === "%" && i + 2 < input.length) {
+          const hex = input.slice(i + 1, i + 3);
+          if (isHexPair(hex)) {
+            const normalizedHex = hex.toUpperCase();
+            const decoded = String.fromCharCode(parseInt(normalizedHex, 16));
+            if (isUnreserved(decoded)) {
+              output += decoded;
+            } else {
+              output += "%" + normalizedHex;
+            }
+            i += 2;
+            continue;
+          }
+        }
+        if (isQueryFragmentCharacter(ch)) {
+          output += ch;
+        } else {
+          const code = input.charCodeAt(i);
+          if (code < 128) {
+            output += isEscapeSafe(code) ? ch : BYTE_HEX[code];
+          } else if (code < 55296 || code > 57343) {
+            output += percentEncodeNonAscii(code);
+          } else if (code <= 56319 && i + 1 < input.length) {
+            const low = input.charCodeAt(i + 1);
+            if (low >= 56320 && low <= 57343) {
+              output += percentEncodeNonAscii(65536 + (code - 55296 << 10) + (low - 56320));
+              i++;
+            } else {
+              output += percentEncodeNonAscii(65533);
+            }
+          } else {
+            output += percentEncodeNonAscii(65533);
+          }
+        }
+      }
+      return output;
+    }
+    function encodeComponent(input, isAllowed, allowNonAscii = false) {
+      let output = "";
+      for (let i = 0; i < input.length; i++) {
+        const ch = input[i];
+        if (ch === "%" && i + 2 < input.length) {
+          const hex = input.slice(i + 1, i + 3);
+          if (isHexPair(hex)) {
+            output += "%" + hex.toUpperCase();
+            i += 2;
+            continue;
+          }
+        }
+        if (isAllowed(ch)) {
+          output += ch;
+        } else {
+          const code = input.charCodeAt(i);
+          if (code < 128) {
+            output += BYTE_HEX[code];
+          } else if (code < 55296 || code > 57343) {
+            output += allowNonAscii ? ch : percentEncodeNonAscii(code);
+          } else if (code <= 56319 && i + 1 < input.length) {
+            const low = input.charCodeAt(i + 1);
+            if (low >= 56320 && low <= 57343) {
+              output += allowNonAscii ? ch + input[i + 1] : percentEncodeNonAscii(65536 + (code - 55296 << 10) + (low - 56320));
+              i++;
+            } else {
+              output += allowNonAscii ? "\uFFFD" : percentEncodeNonAscii(65533);
+            }
+          } else {
+            output += allowNonAscii ? "\uFFFD" : percentEncodeNonAscii(65533);
+          }
+        }
+      }
+      return output;
+    }
+    function encodeUserinfo(input) {
+      return encodeComponent(input, isUserinfoCharacter);
+    }
+    function encodeQuery(input) {
+      return encodeComponent(input, isQueryFragmentCharacter);
+    }
+    function encodeFragment(input) {
+      return encodeComponent(input, isQueryFragmentCharacter);
+    }
+    function escapePreservingEscapes(input) {
+      let output = "";
+      for (let i = 0; i < input.length; i++) {
+        const ch = input[i];
+        if (ch === "%" && i + 2 < input.length) {
+          const hex = input.slice(i + 1, i + 3);
+          if (isHexPair(hex)) {
+            output += "%" + hex.toUpperCase();
+            i += 2;
+            continue;
+          }
+        }
+        const code = input.charCodeAt(i);
+        if (code < 128) {
+          output += isEscapeSafe(code) ? ch : BYTE_HEX[code];
+        } else if (code < 55296 || code > 57343) {
+          output += percentEncodeNonAscii(code);
+        } else if (code <= 56319 && i + 1 < input.length) {
+          const low = input.charCodeAt(i + 1);
+          if (low >= 56320 && low <= 57343) {
+            output += percentEncodeNonAscii(65536 + (code - 55296 << 10) + (low - 56320));
+            i++;
+          } else {
+            output += percentEncodeNonAscii(65533);
+          }
+        } else {
+          output += percentEncodeNonAscii(65533);
+        }
+      }
+      return output;
+    }
+    function recomposeZonedIPv6Host(component) {
+      const zone = component.ipv6Zone;
+      if (zone === void 0) return void 0;
+      const host = component.host;
+      const separator = host.indexOf("%");
+      if (separator === -1) return void 0;
+      const address = host.slice(0, separator);
+      const escaped = address + "%25" + zone;
+      const derived = normalizeIPv6("[" + escaped + "]");
+      if (derived.isIPV6 === true && derived.host === host) {
+        return "[" + escaped + "]";
+      }
+      return void 0;
+    }
+    function recomposeAuthority(component, allowNonAscii = false) {
       const uriTokens = [];
       if (component.userinfo !== void 0) {
-        uriTokens.push(component.userinfo);
+        uriTokens.push(encodeUserinfo(component.userinfo));
         uriTokens.push("@");
       }
       if (component.host !== void 0) {
-        let host = unescape(component.host);
+        let host = component.host;
         if (!isIPv4(host)) {
-          const ipV6res = normalizeIPv6(host);
-          if (ipV6res.isIPV6 === true) {
-            host = `[${ipV6res.escapedHost}]`;
+          const zonedHost = recomposeZonedIPv6Host(component);
+          if (zonedHost !== void 0) {
+            host = zonedHost;
           } else {
-            host = component.host;
+            let ipV6res = normalizeIPv6(host);
+            if (ipV6res.isIPV6 !== true && ipV6res.isIPVFuture !== true) {
+              host = normalizePercentEncoding(host, true);
+              ipV6res = normalizeIPv6(host);
+            }
+            if (ipV6res.isIPV6 === true || ipV6res.isIPVFuture === true) {
+              host = `[${ipV6res.escapedHost}]`;
+            } else {
+              host = encodeHost(host, false, allowNonAscii);
+            }
           }
         }
         uriTokens.push(host);
       }
       if (typeof component.port === "number" || typeof component.port === "string") {
+        const port = String(component.port);
+        if (!isPort(port)) {
+          throw new TypeError("URI port is malformed.");
+        }
         uriTokens.push(":");
-        uriTokens.push(String(component.port));
+        uriTokens.push(port);
       }
       return uriTokens.length ? uriTokens.join("") : void 0;
     }
     module2.exports = {
+      BYTE_HEX,
+      percentEncodeNonAscii,
       nonSimpleDomain,
+      nonSimpleMailtoDomain,
       recomposeAuthority,
-      normalizeComponentEncoding,
+      encodeHost,
+      normalizePercentEncoding,
+      normalizePathEncoding,
+      serializePathEncoding,
+      normalizeQueryFragmentEncoding,
+      encodeUserinfo,
+      encodeQuery,
+      encodeFragment,
+      escapePreservingEscapes,
       removeDotSegments,
+      removeDotSegmentsRelative,
       isIPv4,
       isUUID,
       normalizeIPv6,
@@ -3352,12 +3676,12 @@ var require_utils = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/fast-uri@3.1.0/node_modules/fast-uri/lib/schemes.js
+// ../../../node_modules/.pnpm/fast-uri@4.2.3/node_modules/fast-uri/lib/schemes.js
 var require_schemes = __commonJS({
-  "../../../node_modules/.pnpm/fast-uri@3.1.0/node_modules/fast-uri/lib/schemes.js"(exports2, module2) {
+  "../../../node_modules/.pnpm/fast-uri@4.2.3/node_modules/fast-uri/lib/schemes.js"(exports2, module2) {
     "use strict";
-    var { isUUID } = require_utils();
-    var URN_REG = /([\da-z][\d\-a-z]{0,31}):((?:[\w!$'()*+,\-.:;=@]|%[\da-f]{2})+)/iu;
+    var { isUUID, BYTE_HEX, percentEncodeNonAscii, nonSimpleMailtoDomain } = require_utils();
+    var URN_REG = /^([\da-z][\d\-a-z]{0,31}):((?:[\w!$'()*+,\-./:;=@]|%[\da-f]{2})+)$/iu;
     var supportedSchemeNames = (
       /** @type {const} */
       [
@@ -3366,7 +3690,8 @@ var require_schemes = __commonJS({
         "ws",
         "wss",
         "urn",
-        "urn:uuid"
+        "urn:uuid",
+        "mailto"
       ]
     );
     function isValidSchemeName(name) {
@@ -3418,9 +3743,10 @@ var require_schemes = __commonJS({
         wsComponent.secure = void 0;
       }
       if (wsComponent.resourceName) {
-        const [path2, query] = wsComponent.resourceName.split("?");
+        const queryIndex = wsComponent.resourceName.indexOf("?");
+        const path2 = queryIndex === -1 ? wsComponent.resourceName : wsComponent.resourceName.slice(0, queryIndex);
         wsComponent.path = path2 && path2 !== "/" ? path2 : void 0;
-        wsComponent.query = query;
+        wsComponent.query = queryIndex === -1 ? void 0 : wsComponent.resourceName.slice(queryIndex + 1);
         wsComponent.resourceName = void 0;
       }
       wsComponent.fragment = void 0;
@@ -3432,7 +3758,7 @@ var require_schemes = __commonJS({
         return urnComponent;
       }
       const matches = urnComponent.path.match(URN_REG);
-      if (matches) {
+      if (matches && matches[0] === urnComponent.path) {
         const scheme = options.scheme || urnComponent.scheme || "urn";
         urnComponent.nid = matches[1].toLowerCase();
         urnComponent.nss = matches[2];
@@ -3520,7 +3846,10 @@ var require_schemes = __commonJS({
         scheme: "urn",
         parse: urnParse,
         serialize: urnSerialize,
-        skipNormalize: true
+        skipNormalize: true,
+        // The NSS is opaque to generic URI path processing. In particular, RFC 2141
+        // and RFC 8141 do not treat slash-delimited dot segments as equivalent.
+        absolutePath: true
       }
     );
     var urnuuid = (
@@ -3532,6 +3861,252 @@ var require_schemes = __commonJS({
         skipNormalize: true
       }
     );
+    var LOCAL_PART_ALLOWED = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~!$'()*+=";
+    var HFNAME_ALLOWED = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~!$'()*+,;:@";
+    var DTEXT_ALLOWED = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~!$'()*+;:";
+    function allowSet(chars, allowNonAscii = false) {
+      const table = new Uint8Array(128);
+      for (let i = 0; i < chars.length; i++) {
+        table[chars.charCodeAt(i)] = 1;
+      }
+      const escaped = chars.replace(/[\\\]^-]/gu, "\\$&");
+      const cls = allowNonAscii ? `[${escaped}]|[^\\0-\\x7F\\uD800-\\uDFFF]` : `[${escaped}]`;
+      return { all: new RegExp(`^(?:${cls})*$`, "u"), table, allowNonAscii };
+    }
+    var LOCAL_PART = allowSet(LOCAL_PART_ALLOWED);
+    var HFNAME = allowSet(HFNAME_ALLOWED);
+    var DTEXT = allowSet(DTEXT_ALLOWED);
+    var DTEXT_IRI = allowSet(DTEXT_ALLOWED, true);
+    var HEX_PAIR = /^[\da-f]{2}$/iu;
+    var MAILTO_DOMAIN_LITERAL = /^\[[\x21-\x5A\x5E-\x7E]*\]$/u;
+    var MAILTO_DOMAIN_ERROR = "URI mailto has an invalid recipient domain.";
+    var MAILTO_AUTHORITY_ERROR = "URI mailto must not have an authority component.";
+    var HAS_SURROGATE = /[\uD800-\uDFFF]/u;
+    function decodeHex(str) {
+      if (typeof str !== "string" || str.indexOf("%") === -1) {
+        return str;
+      }
+      try {
+        return decodeURIComponent(str);
+      } catch {
+        return str;
+      }
+    }
+    function replaceLoneSurrogates(input) {
+      let result = "";
+      for (let i = 0; i < input.length; i++) {
+        const code = input.charCodeAt(i);
+        if (code >= 55296 && code <= 56319 && i + 1 < input.length) {
+          const low = input.charCodeAt(i + 1);
+          if (low >= 56320 && low <= 57343) {
+            result += input[i] + input[i + 1];
+            i++;
+            continue;
+          }
+        }
+        result += code >= 55296 && code <= 57343 ? "\uFFFD" : input[i];
+      }
+      return result;
+    }
+    function encodeWithAllow(input, set) {
+      if (set.all.test(input)) {
+        return input;
+      }
+      const table = set.table;
+      let result = "";
+      for (let i = 0; i < input.length; i++) {
+        const code = input.charCodeAt(i);
+        if (code < 128) {
+          if (table[code] === 1) {
+            result += input[i];
+          } else if (code === 37 && i + 2 < input.length && HEX_PAIR.test(input.slice(i + 1, i + 3))) {
+            result += "%" + input.slice(i + 1, i + 3).toUpperCase();
+            i += 2;
+          } else {
+            result += BYTE_HEX[code];
+          }
+          continue;
+        }
+        if (code < 55296 || code > 57343) {
+          result += set.allowNonAscii ? input[i] : percentEncodeNonAscii(code);
+          continue;
+        }
+        if (code <= 56319 && i + 1 < input.length) {
+          const low = input.charCodeAt(i + 1);
+          if (low >= 56320 && low <= 57343) {
+            result += set.allowNonAscii ? input[i] + input[i + 1] : percentEncodeNonAscii(65536 + (code - 55296 << 10) + (low - 56320));
+            i++;
+            continue;
+          }
+        }
+        result += set.allowNonAscii ? "\uFFFD" : percentEncodeNonAscii(65533);
+      }
+      return result;
+    }
+    function mailtoNormalizeDomain(domain, options, component) {
+      const normalizedDomain = String(domain).toLowerCase();
+      if (MAILTO_DOMAIN_LITERAL.test(normalizedDomain)) {
+        return normalizedDomain;
+      }
+      if (normalizedDomain !== "" && !nonSimpleMailtoDomain(normalizedDomain)) {
+        return normalizedDomain;
+      }
+      try {
+        const parsedDomain = new URL("http://" + normalizedDomain);
+        if (parsedDomain.username || parsedDomain.password || parsedDomain.port || parsedDomain.pathname !== "/" || parsedDomain.search || parsedDomain.hash || !parsedDomain.hostname) {
+          throw new Error(MAILTO_DOMAIN_ERROR);
+        }
+        return options && options.unicodeSupport ? normalizedDomain : parsedDomain.hostname;
+      } catch {
+        if (component) {
+          component.error = component.error || MAILTO_DOMAIN_ERROR;
+        }
+        return normalizedDomain;
+      }
+    }
+    function mailtoEncodeDomain(domain, options) {
+      const set = options && options.unicodeSupport ? DTEXT_IRI : DTEXT;
+      if (domain.length > 1 && domain[0] === "[" && domain[domain.length - 1] === "]") {
+        return "[" + encodeWithAllow(domain.slice(1, -1), set) + "]";
+      }
+      return encodeWithAllow(domain, set);
+    }
+    function mailtoParse(component, options) {
+      const mailtoComponent = component;
+      let rawPath = mailtoComponent.path;
+      let rawQuery = mailtoComponent.query;
+      if (rawPath && HAS_SURROGATE.test(rawPath)) rawPath = replaceLoneSurrogates(rawPath);
+      if (rawQuery && HAS_SURROGATE.test(rawQuery)) rawQuery = replaceLoneSurrogates(rawQuery);
+      const to = rawPath ? rawPath.indexOf(",") === -1 ? [rawPath] : rawPath.split(",") : [];
+      mailtoComponent.path = void 0;
+      if (rawQuery) {
+        let headers = null;
+        let start = 0;
+        while (start <= rawQuery.length) {
+          let end = rawQuery.indexOf("&", start);
+          if (end === -1) end = rawQuery.length;
+          const token = rawQuery.slice(start, end);
+          start = end + 1;
+          const eqIdx = token.indexOf("=");
+          if (eqIdx !== token.lastIndexOf("=")) {
+            mailtoComponent.error = mailtoComponent.error || "URI mailto has malformed header fields.";
+            continue;
+          }
+          const name = decodeHex(eqIdx === -1 ? token : token.slice(0, eqIdx));
+          const normalizedName = name.toLowerCase();
+          const value = eqIdx === -1 ? "" : token.slice(eqIdx + 1);
+          if (normalizedName === "to") {
+            const addrs = value.split(",");
+            for (let j = 0; j < addrs.length; j++) to.push(addrs[j]);
+            continue;
+          }
+          if (normalizedName === "subject") {
+            mailtoComponent.subject = decodeHex(value);
+            continue;
+          }
+          if (normalizedName === "body") {
+            mailtoComponent.body = decodeHex(value);
+            continue;
+          }
+          if (headers === null) headers = /** @type {Record<string,string>} */
+          /* @__PURE__ */ Object.create(null);
+          headers[name] = decodeHex(value);
+        }
+        if (headers !== null) mailtoComponent.headers = headers;
+      }
+      mailtoComponent.query = void 0;
+      if (to.length > 0 && (mailtoComponent.userinfo !== void 0 || mailtoComponent.host !== void 0 || mailtoComponent.port !== void 0)) {
+        mailtoComponent.userinfo = void 0;
+        mailtoComponent.host = void 0;
+        mailtoComponent.port = void 0;
+        mailtoComponent.error = mailtoComponent.error || MAILTO_AUTHORITY_ERROR;
+      }
+      for (let i = 0; i < to.length; i++) {
+        const rawAddr = to[i];
+        const atIdx = rawAddr.lastIndexOf("@");
+        if (atIdx < 0) {
+          mailtoComponent.error = mailtoComponent.error || MAILTO_DOMAIN_ERROR;
+          to[i] = decodeHex(rawAddr);
+          continue;
+        }
+        const local = decodeHex(rawAddr.slice(0, atIdx));
+        const domain = mailtoNormalizeDomain(decodeHex(rawAddr.slice(atIdx + 1)), options, mailtoComponent);
+        to[i] = local + "@" + domain;
+      }
+      if (to.length) mailtoComponent.to = to;
+      return mailtoComponent;
+    }
+    function mailtoEncodeHeaderName(name) {
+      return encodeWithAllow(name.replace(/%/gu, "%25"), HFNAME);
+    }
+    function mailtoSerialize(component, options) {
+      const mailtoComponent = component;
+      const to = Array.isArray(mailtoComponent.to) ? mailtoComponent.to.slice() : [];
+      const sourceHeaders = mailtoComponent.headers && typeof mailtoComponent.headers === "object" ? Object.assign(/* @__PURE__ */ Object.create(null), mailtoComponent.headers) : /* @__PURE__ */ Object.create(null);
+      const headers = /* @__PURE__ */ Object.create(null);
+      for (const name in sourceHeaders) {
+        const normalizedName = name.toLowerCase();
+        if (normalizedName === "to") {
+          const addrs = String(sourceHeaders[name]).split(",");
+          for (let i = 0; i < addrs.length; i++) to.push(addrs[i]);
+        } else if (normalizedName === "subject" || normalizedName === "body") {
+          headers[normalizedName] = sourceHeaders[name];
+        } else {
+          headers[name] = sourceHeaders[name];
+        }
+      }
+      if (mailtoComponent.subject !== void 0) headers.subject = mailtoComponent.subject;
+      if (mailtoComponent.body !== void 0) headers.body = mailtoComponent.body;
+      mailtoComponent.headers = headers;
+      if (to.length) {
+        mailtoComponent.userinfo = void 0;
+        mailtoComponent.host = void 0;
+        mailtoComponent.port = void 0;
+        for (let i = 0; i < to.length; i++) {
+          const addr = String(to[i]);
+          const atIdx = addr.lastIndexOf("@");
+          const rawLocal = atIdx >= 0 ? addr.slice(0, atIdx) : addr;
+          const rawDomain = atIdx >= 0 ? addr.slice(atIdx + 1) : "";
+          const local = encodeWithAllow(rawLocal, LOCAL_PART);
+          const decodedDomain = decodeHex(rawDomain);
+          const normalizedDomain = mailtoNormalizeDomain(decodedDomain, options);
+          to[i] = local + "@" + mailtoEncodeDomain(normalizedDomain, options);
+        }
+        mailtoComponent.path = to.join(",");
+        options.skipEscape = true;
+      } else {
+        mailtoComponent.path = void 0;
+      }
+      let query = "";
+      let count = 0;
+      for (const name in headers) {
+        if (count++ !== 0) query += "&";
+        query += mailtoEncodeHeaderName(name) + "=" + encodeWithAllow(String(headers[name]), HFNAME);
+      }
+      if (count !== 0) {
+        mailtoComponent.query = query;
+      } else {
+        mailtoComponent.headers = void 0;
+      }
+      return mailtoComponent;
+    }
+    var mailto = (
+      /** @type {SchemeHandler} */
+      {
+        scheme: "mailto",
+        parse: mailtoParse,
+        serialize: mailtoSerialize,
+        domainHost: false,
+        unicodeSupport: true,
+        // `mailtoParse` re-derives every component from the raw path/query via
+        // `decodeHex`, which subsumes the generic normalizers, so running them first
+        // is wasted work (~28% of parsing a URI with header fields).
+        skipNormalize: true,
+        // A recipient list has no dot segments to remove, and `removeDotSegments`
+        // would rewrite a "./"-prefixed local part.
+        absolutePath: true
+      }
+    );
     var SCHEMES = (
       /** @type {Record<SchemeName, SchemeHandler>} */
       {
@@ -3540,7 +4115,8 @@ var require_schemes = __commonJS({
         ws,
         wss,
         urn,
-        "urn:uuid": urnuuid
+        "urn:uuid": urnuuid,
+        mailto
       }
     );
     Object.setPrototypeOf(SCHEMES, null);
@@ -3562,16 +4138,27 @@ var require_schemes = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/fast-uri@3.1.0/node_modules/fast-uri/index.js
+// ../../../node_modules/.pnpm/fast-uri@4.2.3/node_modules/fast-uri/index.js
 var require_fast_uri = __commonJS({
-  "../../../node_modules/.pnpm/fast-uri@3.1.0/node_modules/fast-uri/index.js"(exports2, module2) {
+  "../../../node_modules/.pnpm/fast-uri@4.2.3/node_modules/fast-uri/index.js"(exports2, module2) {
     "use strict";
-    var { normalizeIPv6, removeDotSegments, recomposeAuthority, normalizeComponentEncoding, isIPv4, nonSimpleDomain } = require_utils();
+    var { normalizeIPv6, removeDotSegments, removeDotSegmentsRelative, recomposeAuthority, normalizePercentEncoding, normalizePathEncoding, serializePathEncoding, normalizeQueryFragmentEncoding, encodeQuery, encodeFragment, encodeHost, isIPv4, nonSimpleDomain } = require_utils();
     var { SCHEMES, getSchemeHandler } = require_schemes();
+    var VALID_SCHEME = /^[A-Za-z][A-Za-z0-9+.-]*$/u;
+    var MALFORMED_SCHEME_ERROR = "URI scheme is malformed.";
+    var MALFORMED_HOST_ERROR = "URI host is malformed.";
+    var FORBIDDEN_DOMAIN_HOST_CHARACTER = /[\0-\x20"#/:<>?@[\\\]^`{|}\x7F]/u;
+    function validateScheme(scheme) {
+      const stringScheme = String(scheme);
+      if (!VALID_SCHEME.test(stringScheme)) {
+        throw new TypeError(MALFORMED_SCHEME_ERROR);
+      }
+      return stringScheme;
+    }
     function normalize(uri, options) {
       if (typeof uri === "string") {
         uri = /** @type {T} */
-        serialize(parse(uri, options), options);
+        normalizeString(uri, options);
       } else if (typeof uri === "object") {
         uri = /** @type {T} */
         parse(serialize(uri, options), options);
@@ -3580,9 +4167,53 @@ var require_fast_uri = __commonJS({
     }
     function resolve(baseURI, relativeURI, options) {
       const schemelessOptions = options ? Object.assign({ scheme: "null" }, options) : { scheme: "null" };
-      const resolved = resolveComponent(parse(baseURI, schemelessOptions), parse(relativeURI, schemelessOptions), schemelessOptions, true);
+      const {
+        parsed: baseParsed,
+        malformedAuthorityOrPort: baseMalformed,
+        malformedReferenceEdge: baseMalformedReferenceEdge,
+        malformedPercentEncoding: baseMalformedPercentEncoding,
+        malformedSchemeSpecific: baseMalformedSchemeSpecific,
+        malformedHost: baseMalformedHost,
+        malformedScheme: baseMalformedScheme
+      } = parseWithStatus(baseURI, schemelessOptions);
+      const {
+        parsed: relativeParsed,
+        malformedAuthorityOrPort: relativeMalformed,
+        malformedReferenceEdge: relativeMalformedReferenceEdge,
+        malformedPercentEncoding: relativeMalformedPercentEncoding,
+        malformedSchemeSpecific: relativeMalformedSchemeSpecific,
+        malformedHost: relativeMalformedHost,
+        malformedScheme: relativeMalformedScheme
+      } = parseWithStatus(relativeURI, schemelessOptions);
+      if (baseMalformed || relativeMalformed || baseMalformedReferenceEdge || relativeMalformedReferenceEdge || baseMalformedPercentEncoding || relativeMalformedPercentEncoding || baseMalformedSchemeSpecific || relativeMalformedSchemeSpecific || baseMalformedHost || relativeMalformedHost || baseMalformedScheme || relativeMalformedScheme) {
+        throw new Error(baseParsed.error || relativeParsed.error || "URI is malformed.");
+      }
+      const resolved = resolveComponent(baseParsed, relativeParsed, schemelessOptions, true);
+      const resolvedSchemeHandler = getSchemeHandler(options && options.scheme || resolved.scheme);
+      const resolvedHost = resolved.host;
+      if ((resolved.scheme === "http" || resolved.scheme === "https") && !resolvedHost) {
+        throw new Error("HTTP URIs must have a host.");
+      }
+      const resolvedHostIsIP = resolvedHost !== void 0 && resolvedHost !== "" && (isIPv4(resolvedHost) || normalizeIPv6(resolvedHost).isIPV6);
+      if (hasForbiddenDomainHost(resolved, options || {}, resolvedSchemeHandler, resolvedHostIsIP)) {
+        throw new Error(MALFORMED_HOST_ERROR);
+      }
+      canonicalizeHost(resolved, options || {}, resolvedSchemeHandler, resolvedHostIsIP);
+      const encodedASCIIHost = resolvedHost && resolvedHost.indexOf("%") !== -1 && !new RegExp("\\P{ASCII}", "u").test(resolvedHost);
+      if (resolved.error && !encodedASCIIHost) {
+        throw new Error(resolved.error);
+      }
       schemelessOptions.skipEscape = true;
+      if (resolvedSchemeHandler && resolvedSchemeHandler.absolutePath) {
+        schemelessOptions.absolutePath = true;
+      }
       return serialize(resolved, schemelessOptions);
+    }
+    function copyHost(target, source) {
+      target.host = source.host;
+      if (source.ipv6Zone !== void 0) {
+        target.ipv6Zone = source.ipv6Zone;
+      }
     }
     function resolveComponent(base, relative, options, skipNormalization) {
       const target = {};
@@ -3594,14 +4225,15 @@ var require_fast_uri = __commonJS({
       if (!options.tolerant && relative.scheme) {
         target.scheme = relative.scheme;
         target.userinfo = relative.userinfo;
-        target.host = relative.host;
+        copyHost(target, relative);
         target.port = relative.port;
-        target.path = removeDotSegments(relative.path || "");
+        const relativeSchemeHandler = getSchemeHandler(relative.scheme);
+        target.path = relativeSchemeHandler && relativeSchemeHandler.absolutePath ? relative.path || "" : removeDotSegments(relative.path || "");
         target.query = relative.query;
       } else {
         if (relative.userinfo !== void 0 || relative.host !== void 0 || relative.port !== void 0) {
           target.userinfo = relative.userinfo;
-          target.host = relative.host;
+          copyHost(target, relative);
           target.port = relative.port;
           target.path = removeDotSegments(relative.path || "");
           target.query = relative.query;
@@ -3617,19 +4249,20 @@ var require_fast_uri = __commonJS({
             if (relative.path[0] === "/") {
               target.path = removeDotSegments(relative.path);
             } else {
-              if ((base.userinfo !== void 0 || base.host !== void 0 || base.port !== void 0) && !base.path) {
+              const baseHasAuthority = base.userinfo !== void 0 || base.host !== void 0 || base.port !== void 0;
+              if (baseHasAuthority && !base.path) {
                 target.path = "/" + relative.path;
               } else if (!base.path) {
                 target.path = relative.path;
               } else {
                 target.path = base.path.slice(0, base.path.lastIndexOf("/") + 1) + relative.path;
               }
-              target.path = removeDotSegments(target.path);
+              target.path = base.scheme === void 0 && !baseHasAuthority && target.path[0] !== "/" ? removeDotSegmentsRelative(target.path) : removeDotSegments(target.path);
             }
             target.query = relative.query;
           }
           target.userinfo = base.userinfo;
-          target.host = base.host;
+          copyHost(target, base);
           target.port = base.port;
         }
         target.scheme = base.scheme;
@@ -3638,23 +4271,14 @@ var require_fast_uri = __commonJS({
       return target;
     }
     function equal(uriA, uriB, options) {
-      if (typeof uriA === "string") {
-        uriA = unescape(uriA);
-        uriA = serialize(normalizeComponentEncoding(parse(uriA, options), true), { ...options, skipEscape: true });
-      } else if (typeof uriA === "object") {
-        uriA = serialize(normalizeComponentEncoding(uriA, true), { ...options, skipEscape: true });
-      }
-      if (typeof uriB === "string") {
-        uriB = unescape(uriB);
-        uriB = serialize(normalizeComponentEncoding(parse(uriB, options), true), { ...options, skipEscape: true });
-      } else if (typeof uriB === "object") {
-        uriB = serialize(normalizeComponentEncoding(uriB, true), { ...options, skipEscape: true });
-      }
-      return uriA.toLowerCase() === uriB.toLowerCase();
+      const normalizedA = normalizeComparableURI(uriA, options);
+      const normalizedB = normalizeComparableURI(uriB, options);
+      return normalizedA !== void 0 && normalizedB !== void 0 && normalizedA === normalizedB;
     }
     function serialize(cmpts, opts) {
       const component = {
         host: cmpts.host,
+        ipv6Zone: cmpts.ipv6Zone,
         scheme: cmpts.scheme,
         userinfo: cmpts.userinfo,
         port: cmpts.port,
@@ -3667,26 +4291,35 @@ var require_fast_uri = __commonJS({
         reference: cmpts.reference,
         resourceName: cmpts.resourceName,
         secure: cmpts.secure,
+        to: cmpts.to,
+        subject: cmpts.subject,
+        body: cmpts.body,
+        headers: cmpts.headers,
         error: ""
       };
       const options = Object.assign({}, opts);
       const uriTokens = [];
+      if (component.scheme) {
+        component.scheme = validateScheme(component.scheme);
+      }
       const schemeHandler = getSchemeHandler(options.scheme || component.scheme);
       if (schemeHandler && schemeHandler.serialize) schemeHandler.serialize(component, options);
+      const hasAuthority = component.userinfo !== void 0 || component.host !== void 0 || component.port !== void 0;
+      const schemelessReference = (component.scheme === void 0 || options.reference === "suffix") && !hasAuthority;
+      const pathNoScheme = !options.skipEscape && schemelessReference;
       if (component.path !== void 0) {
         if (!options.skipEscape) {
-          component.path = escape(component.path);
-          if (component.scheme !== void 0) {
-            component.path = component.path.split("%3A").join(":");
-          }
+          component.path = serializePathEncoding(component.path, pathNoScheme);
         } else {
-          component.path = unescape(component.path);
+          component.path = normalizePercentEncoding(component.path);
         }
       }
       if (options.reference !== "suffix" && component.scheme) {
+        component.scheme = validateScheme(component.scheme);
         uriTokens.push(component.scheme, ":");
       }
-      const authority = recomposeAuthority(component);
+      const allowNonAsciiHost = options.unicodeSupport === true || Boolean(schemeHandler && schemeHandler.unicodeSupport);
+      const authority = recomposeAuthority(component, allowNonAsciiHost);
       if (authority !== void 0) {
         if (options.reference !== "suffix") {
           uriTokens.push("//");
@@ -3699,7 +4332,10 @@ var require_fast_uri = __commonJS({
       if (component.path !== void 0) {
         let s = component.path;
         if (!options.absolutePath && (!schemeHandler || !schemeHandler.absolutePath)) {
-          s = removeDotSegments(s);
+          s = schemelessReference && s[0] !== "/" ? removeDotSegmentsRelative(s) : removeDotSegments(s);
+        }
+        if (schemelessReference) {
+          s = serializePathEncoding(s, true);
         }
         if (authority === void 0 && s[0] === "/" && s[1] === "/") {
           s = "/%2F" + s.slice(2);
@@ -3707,15 +4343,74 @@ var require_fast_uri = __commonJS({
         uriTokens.push(s);
       }
       if (component.query !== void 0) {
-        uriTokens.push("?", component.query);
+        uriTokens.push("?", encodeQuery(component.query));
       }
       if (component.fragment !== void 0) {
-        uriTokens.push("#", component.fragment);
+        uriTokens.push("#", encodeFragment(component.fragment));
       }
       return uriTokens.join("");
     }
     var URI_PARSE = /^(?:([^#/:?]+):)?(?:\/\/((?:([^#/?@]*)@)?(\[[^#/?\]]+\]|[^#/:?]*)(?::(\d*))?))?([^#?]*)(?:\?([^#]*))?(?:#((?:.|[\n\r])*))?/u;
-    function parse(uri, opts) {
+    var AUTHORITY_PREFIX = /^(?:[^#/:?]+:)?\/\/([^/?#]*)/;
+    var AUTHORITY_INTRODUCER_REGION = /^(?:[^#/:?]+:)?([/\\\t\n\r]*)/;
+    function getParseError(parsed, matches) {
+      if (matches[2] !== void 0 && parsed.path && parsed.path[0] !== "/") {
+        return 'URI path must start with "/" when authority is present.';
+      }
+      if (typeof parsed.port === "number" && (parsed.port < 0 || parsed.port > 65535)) {
+        return "URI port is malformed.";
+      }
+      return void 0;
+    }
+    function hasMalformedPercentEncoding(component) {
+      if (component === void 0) return false;
+      let percent = component.indexOf("%");
+      while (percent !== -1) {
+        if (percent + 2 >= component.length || !/^[\da-f]{2}$/iu.test(component.slice(percent + 1, percent + 3))) {
+          return true;
+        }
+        percent = component.indexOf("%", percent + 3);
+      }
+      return false;
+    }
+    function isIPLiteral(host) {
+      return host[0] === "[" && host[host.length - 1] === "]";
+    }
+    function hasMalformedComponentPercentEncoding(matches) {
+      const host = matches[4];
+      return hasMalformedPercentEncoding(matches[3]) || host !== void 0 && !isIPLiteral(host) && hasMalformedPercentEncoding(host) || hasMalformedPercentEncoding(matches[6]) || hasMalformedPercentEncoding(matches[7]) || hasMalformedPercentEncoding(matches[8]);
+    }
+    function canonicalizeHost(parsed, options, schemeHandler, isIP) {
+      const bracketedIPLiteral = parsed.host && parsed.host[0] === "[" && parsed.host[parsed.host.length - 1] === "]";
+      if (hasForbiddenDomainHost(parsed, options, schemeHandler, isIP)) {
+        parsed.error = parsed.error || MALFORMED_HOST_ERROR;
+        return true;
+      }
+      if (!options.unicodeSupport && (!schemeHandler || !schemeHandler.unicodeSupport) && parsed.host && !isIPLiteral(parsed.host) && (options.domainHost || schemeHandler && schemeHandler.domainHost) && isIP === false && !bracketedIPLiteral && nonSimpleDomain(parsed.host)) {
+        let url;
+        try {
+          url = new URL("http://" + parsed.host);
+        } catch (e) {
+          parsed.error = parsed.error || "Host's domain name can not be converted to ASCII: " + e;
+          return true;
+        }
+        if (!isHostOnlyURL(url)) {
+          parsed.error = parsed.error || MALFORMED_HOST_ERROR;
+          return true;
+        }
+        parsed.host = url.hostname;
+      }
+      return false;
+    }
+    function hasForbiddenDomainHost(parsed, options, schemeHandler, isIP) {
+      return Boolean(
+        parsed.host && isIP === false && !isIPLiteral(parsed.host) && (options.domainHost || schemeHandler && schemeHandler.domainHost) && FORBIDDEN_DOMAIN_HOST_CHARACTER.test(parsed.host)
+      );
+    }
+    function isHostOnlyURL(url) {
+      return url.username === "" && url.password === "" && url.port === "" && url.pathname === "/" && url.search === "" && url.hash === "" && url.hostname !== "";
+    }
+    function parseWithStatus(uri, opts) {
       const options = Object.assign({}, opts);
       const parsed = {
         scheme: void 0,
@@ -3726,6 +4421,13 @@ var require_fast_uri = __commonJS({
         query: void 0,
         fragment: void 0
       };
+      let malformedAuthorityOrPort = false;
+      const malformedReferenceEdge = uri.length !== 0 && (uri.charCodeAt(0) <= 32 || uri.charCodeAt(uri.length - 1) <= 32);
+      let malformedPercentEncoding = false;
+      let malformedSchemeSpecific = false;
+      let malformedHost = false;
+      let malformedIPLiteral = false;
+      let malformedScheme = false;
       let isIP = false;
       if (options.reference === "suffix") {
         if (options.scheme) {
@@ -3733,6 +4435,28 @@ var require_fast_uri = __commonJS({
         } else {
           uri = "//" + uri;
         }
+      }
+      const authorityMatch = uri.match(AUTHORITY_PREFIX);
+      if (authorityMatch !== null && authorityMatch[1].indexOf("\\") !== -1) {
+        parsed.error = "URI authority must not contain a literal backslash.";
+        malformedAuthorityOrPort = true;
+      }
+      const introducerMatch = uri.match(AUTHORITY_INTRODUCER_REGION);
+      if (introducerMatch !== null) {
+        const region = introducerMatch[1];
+        const normalizedRegion = region.replace(/[\t\n\r]/g, "");
+        if (normalizedRegion.length >= 2) {
+          if (normalizedRegion.slice(0, 2) !== "//") {
+            parsed.error = parsed.error || "URI authority must not contain a literal backslash.";
+            malformedAuthorityOrPort = true;
+          } else if (region.length !== normalizedRegion.length) {
+            parsed.error = parsed.error || "URI authority introducer must not contain whitespace.";
+            malformedAuthorityOrPort = true;
+          }
+        }
+      }
+      if (malformedReferenceEdge) {
+        parsed.error = parsed.error || "URI must not contain leading or trailing C0 controls or spaces.";
       }
       const matches = uri.match(URI_PARSE);
       if (matches) {
@@ -3743,15 +4467,42 @@ var require_fast_uri = __commonJS({
         parsed.path = matches[6] || "";
         parsed.query = matches[7];
         parsed.fragment = matches[8];
+        if (parsed.scheme !== void 0) {
+          if (VALID_SCHEME.test(parsed.scheme)) {
+            parsed.scheme = parsed.scheme.toLowerCase();
+          } else {
+            parsed.error = parsed.error || MALFORMED_SCHEME_ERROR;
+            malformedScheme = true;
+          }
+        }
+        malformedPercentEncoding = hasMalformedComponentPercentEncoding(matches);
+        if (malformedPercentEncoding) {
+          parsed.error = parsed.error || "URI contains malformed percent-encoding.";
+        }
         if (isNaN(parsed.port)) {
           parsed.port = matches[5];
+        }
+        const parseError = getParseError(parsed, matches);
+        if (parseError !== void 0) {
+          parsed.error = parsed.error || parseError;
+          malformedAuthorityOrPort = true;
         }
         if (parsed.host) {
           const ipv4result = isIPv4(parsed.host);
           if (ipv4result === false) {
+            const bracketedIPLiteral = isIPLiteral(parsed.host);
+            const hasIPLiteralBracket = parsed.host.indexOf("[") !== -1 || parsed.host.indexOf("]") !== -1;
             const ipv6result = normalizeIPv6(parsed.host);
-            parsed.host = ipv6result.host.toLowerCase();
-            isIP = ipv6result.isIPV6;
+            isIP = ipv6result.isIPV6 || ipv6result.isIPVFuture === true;
+            malformedIPLiteral = hasIPLiteralBracket && (!bracketedIPLiteral || ipv6result.error === true);
+            parsed.host = isIP ? ipv6result.host : ipv6result.host.toLowerCase();
+            if (isIP && ipv6result.isIPV6 === true && parsed.host.indexOf("%") !== -1) {
+              parsed.ipv6Zone = parsed.host.slice(parsed.host.indexOf("%") + 1);
+            }
+            if (malformedIPLiteral) {
+              parsed.error = parsed.error || MALFORMED_HOST_ERROR;
+              malformedAuthorityOrPort = true;
+            }
           } else {
             isIP = true;
           }
@@ -3769,38 +4520,74 @@ var require_fast_uri = __commonJS({
           parsed.error = parsed.error || "URI is not a " + options.reference + " reference.";
         }
         const schemeHandler = getSchemeHandler(options.scheme || parsed.scheme);
-        if (!options.unicodeSupport && (!schemeHandler || !schemeHandler.unicodeSupport)) {
-          if (parsed.host && (options.domainHost || schemeHandler && schemeHandler.domainHost) && isIP === false && nonSimpleDomain(parsed.host)) {
-            try {
-              parsed.host = URL.domainToASCII(parsed.host.toLowerCase());
-            } catch (e) {
-              parsed.error = parsed.error || "Host's domain name can not be converted to ASCII: " + e;
-            }
+        if (!malformedIPLiteral) {
+          malformedHost = canonicalizeHost(parsed, options, schemeHandler, isIP);
+        }
+        if (parsed.host !== void 0 && !malformedIPLiteral) {
+          let host = parsed.host;
+          if (uri.indexOf("%") !== -1 && !isIP) {
+            host = normalizePercentEncoding(host, true);
+            host = normalizePercentEncoding(host.toLowerCase());
+          }
+          if (options.scheme !== "null") {
+            const allowNonAsciiHost = options.unicodeSupport === true || Boolean(schemeHandler && schemeHandler.unicodeSupport);
+            parsed.host = encodeHost(host, isIP, allowNonAsciiHost);
+          } else {
+            parsed.host = host;
           }
         }
         if (!schemeHandler || schemeHandler && !schemeHandler.skipNormalize) {
-          if (uri.indexOf("%") !== -1) {
-            if (parsed.scheme !== void 0) {
-              parsed.scheme = unescape(parsed.scheme);
-            }
-            if (parsed.host !== void 0) {
-              parsed.host = unescape(parsed.host);
-            }
-          }
           if (parsed.path) {
-            parsed.path = escape(unescape(parsed.path));
+            parsed.path = normalizePathEncoding(parsed.path);
+          }
+          if (parsed.query) {
+            parsed.query = normalizeQueryFragmentEncoding(parsed.query);
           }
           if (parsed.fragment) {
-            parsed.fragment = encodeURI(decodeURIComponent(parsed.fragment));
+            parsed.fragment = normalizeQueryFragmentEncoding(parsed.fragment);
           }
         }
         if (schemeHandler && schemeHandler.parse) {
           schemeHandler.parse(parsed, options);
+          if (schemeHandler === SCHEMES.urn && parsed.nid === void 0) {
+            malformedSchemeSpecific = true;
+          }
         }
       } else {
         parsed.error = parsed.error || "URI can not be parsed.";
       }
-      return parsed;
+      return { parsed, malformedAuthorityOrPort, malformedReferenceEdge, malformedPercentEncoding, malformedSchemeSpecific, malformedHost, malformedScheme };
+    }
+    function parse(uri, opts) {
+      return parseWithStatus(uri, opts).parsed;
+    }
+    function normalizeString(uri, opts) {
+      return normalizeStringWithStatus(uri, opts).normalized;
+    }
+    function normalizeStringWithStatus(uri, opts) {
+      const { parsed, malformedAuthorityOrPort, malformedReferenceEdge, malformedPercentEncoding, malformedSchemeSpecific, malformedHost, malformedScheme } = parseWithStatus(uri, opts);
+      return {
+        normalized: malformedAuthorityOrPort || malformedReferenceEdge || malformedPercentEncoding || malformedSchemeSpecific || malformedHost || malformedScheme ? uri : serialize(parsed, opts),
+        malformedAuthorityOrPort,
+        malformedReferenceEdge,
+        malformedPercentEncoding,
+        malformedSchemeSpecific,
+        malformedHost,
+        malformedScheme
+      };
+    }
+    function normalizeComparableURI(uri, opts) {
+      if (typeof uri !== "string" && typeof uri !== "object") {
+        return void 0;
+      }
+      let value;
+      try {
+        value = typeof uri === "string" ? uri : serialize(uri, opts);
+      } catch {
+        return void 0;
+      }
+      const { normalized, malformedAuthorityOrPort, malformedReferenceEdge, malformedPercentEncoding, malformedSchemeSpecific, malformedHost, malformedScheme } = normalizeStringWithStatus(value, opts);
+      return malformedAuthorityOrPort || malformedReferenceEdge || malformedPercentEncoding || malformedSchemeSpecific || malformedHost || malformedScheme ? void 0 : normalized;
     }
     var fastUri = {
       SCHEMES,
@@ -6862,6 +7649,9 @@ var Socket_io_message_default = {
         "compositeDeviceAdd",
         "compositeDeviceAddCompleted",
         "compositeDeviceAddError",
+        "compositeDeviceEdit",
+        "compositeDeviceEditCompleted",
+        "compositeDeviceEditError",
         "fwuImageGetList",
         "fwuImageList",
         "fwuImageAdd",
@@ -6894,6 +7684,20 @@ var Socket_io_message_default = {
         "alarmStarted",
         "alarmUpdated",
         "alarmStopped",
+        "poiAdd",
+        "poiAddCompleted",
+        "poiAddError",
+        "poiAdded",
+        "poiUpdate",
+        "poiUpdateCompleted",
+        "poiUpdateError",
+        "poiUpdated",
+        "poiRemove",
+        "poiRemoveCompleted",
+        "poiRemoveError",
+        "poiRemoved",
+        "poiGetList",
+        "poiList",
         "rfGeoThreatSimulationStart",
         "rfGeoThreatSimulationStartCompleted",
         "rfGeoThreatSimulationStartError",
@@ -6914,6 +7718,11 @@ var Socket_io_message_default = {
         "ptzSetVelocity",
         "ptzSetVelocityCompleted",
         "ptzSetVelocityError",
+        "ptzConfigure",
+        "ptzConfiguration",
+        "ptzConfigureCompleted",
+        "ptzConfigureError",
+        "ptzGetConfiguration",
         "ecmHistory",
         "ecmGetHistory",
         "threatTypeGetList",
@@ -6995,6 +7804,9 @@ var Socket_io_message_default = {
         "rfRecordSnapshotStart",
         "rfRecordSnapshotStartCompleted",
         "rfRecordSnapshotStartError",
+        "rfRecordAddComment",
+        "rfRecordAddCommentCompleted",
+        "rfRecordAddCommentError",
         "rfRecordList",
         "rfRecordGetList",
         "rfRecordClearList",
@@ -7288,6 +8100,18 @@ var Socket_io_message_default = {
       then: { properties: { message: { $ref: "./messages/Error.json#" } } }
     },
     {
+      if: { properties: { event: { const: "compositeDeviceEdit" } } },
+      then: { properties: { message: { $ref: "./messages/CompositeDeviceEdit.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "compositeDeviceEditCompleted" } } },
+      then: { properties: { message: { $ref: "./messages/DeviceId.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "compositeDeviceEditError" } } },
+      then: { properties: { message: { $ref: "./messages/Error.json#" } } }
+    },
+    {
       if: { properties: { event: { const: "fwuImageGetList" } } },
       then: { properties: { message: { $ref: "./messages/Empty.json#" } } }
     },
@@ -7416,6 +8240,62 @@ var Socket_io_message_default = {
       then: { properties: { message: { $ref: "./messages/Alarm.json#" } } }
     },
     {
+      if: { properties: { event: { const: "poiAdd" } } },
+      then: { properties: { message: { $ref: "./messages/PoiAdd.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "poiAddCompleted" } } },
+      then: { properties: { message: { $ref: "./messages/PoiId.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "poiAddError" } } },
+      then: { properties: { message: { $ref: "./messages/Error.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "poiAdded" } } },
+      then: { properties: { message: { $ref: "./messages/Poi.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "poiUpdate" } } },
+      then: { properties: { message: { $ref: "./messages/PoiUpdate.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "poiUpdateCompleted" } } },
+      then: { properties: { message: { $ref: "./messages/PoiId.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "poiUpdateError" } } },
+      then: { properties: { message: { $ref: "./messages/Error.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "poiUpdated" } } },
+      then: { properties: { message: { $ref: "./messages/Poi.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "poiRemove" } } },
+      then: { properties: { message: { $ref: "./messages/PoiId.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "poiRemoveCompleted" } } },
+      then: { properties: { message: { $ref: "./messages/PoiId.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "poiRemoveError" } } },
+      then: { properties: { message: { $ref: "./messages/Error.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "poiRemoved" } } },
+      then: { properties: { message: { $ref: "./messages/PoiId.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "poiGetList" } } },
+      then: { properties: { message: { $ref: "./messages/Empty.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "poiList" } } },
+      then: { properties: { message: { $ref: "./messages/PoiList.json#" } } }
+    },
+    {
       if: { properties: { event: { const: "rfGeoThreatSimulationStart" } } },
       then: { properties: { message: { $ref: "./messages/RfGeoThreatSimulationStart.json#" } } }
     },
@@ -7494,6 +8374,26 @@ var Socket_io_message_default = {
     {
       if: { properties: { event: { const: "ptzSetVelocityError" } } },
       then: { properties: { message: { $ref: "./messages/Error.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "ptzConfigure" } } },
+      then: { properties: { message: { $ref: "./messages/PtzConfigure.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "ptzConfiguration" } } },
+      then: { properties: { message: { $ref: "./messages/PtzConfig.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "ptzConfigureCompleted" } } },
+      then: { properties: { message: { $ref: "./messages/PtzConfig.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "ptzConfigureError" } } },
+      then: { properties: { message: { $ref: "./messages/Error.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "ptzGetConfiguration" } } },
+      then: { properties: { message: { $ref: "./messages/Empty.json#" } } }
     },
     {
       if: { properties: { event: { const: "ecmConfigure" } } },
@@ -7829,15 +8729,27 @@ var Socket_io_message_default = {
     },
     {
       if: { properties: { event: { const: "rfRecordSnapshotStart" } } },
-      then: { properties: { message: { $ref: "./messages/DeviceId.json#" } } }
+      then: { properties: { message: { $ref: "./messages/DeviceIds.json#" } } }
     },
     {
       if: { properties: { event: { const: "rfRecordSnapshotStartCompleted" } } },
-      then: { properties: { message: { $ref: "./messages/DeviceId.json#" } } }
+      then: { properties: { message: { $ref: "./messages/RfRecordSnapshotStartCompleted.json#" } } }
     },
     {
       if: { properties: { event: { const: "rfRecordSnapshotStartError" } } },
-      then: { properties: { message: { $ref: "./messages/DeviceDeviceIdError.json#" } } }
+      then: { properties: { message: { $ref: "./messages/Error.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "rfRecordAddComment" } } },
+      then: { properties: { message: { $ref: "./messages/RfRecordAddComment.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "rfRecordAddCommentCompleted" } } },
+      then: { properties: { message: { $ref: "./messages/Empty.json#" } } }
+    },
+    {
+      if: { properties: { event: { const: "rfRecordAddCommentError" } } },
+      then: { properties: { message: { $ref: "./messages/Error.json#" } } }
     },
     {
       if: { properties: { event: { const: "rfRecordList" } } },
